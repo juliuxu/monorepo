@@ -1,5 +1,11 @@
 # @vargtech/notion-utils
 
+## 0.0.3
+
+### Patch Changes
+
+- update types
+
 ## 0.0.2
 
 ### Patch Changes
