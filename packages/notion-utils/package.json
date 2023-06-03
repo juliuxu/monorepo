@@ -1,12 +1,15 @@
 {
   "name": "@vargtech/notion-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helper functions for the Notion API",
   "author": "Julian Jark",
   "license": "ISC",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --dts --treeshake --format cjs,esm",
