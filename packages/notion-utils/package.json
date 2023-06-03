@@ -1,0 +1,21 @@
+{
+  "name": "@vargtech/notion-utils",
+  "version": "0.0.0",
+  "description": "Helper functions for the Notion API",
+  "author": "Julian Jark",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.ts --dts --treeshake --format cjs,esm",
+    "dev": "tsup src/index.ts --watch --format esm"
+  },
+  "devDependencies": {
+    "tsup": "6.7.0"
+  },
+  "dependencies": {
+    "@notionhq/client": "2.2.5"
+  }
+}
