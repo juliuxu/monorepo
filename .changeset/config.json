@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@vargtech/tsconfig", "@vargtech/eslint-config-custom"]
+  "ignore": ["@vargtech/eslint-config-custom", "@vargtech/tsconfig"]
 }
