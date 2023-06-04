@@ -38,7 +38,7 @@ export const getDatabasePages =
     }: {
       sorts?: Sorts;
       filter?: Filter;
-    }
+    } = {}
   ) => {
     const response = await notion.databases.query({
       database_id: databaseId,
