@@ -1,6 +1,6 @@
 {
   "name": "@vargtech/notion-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Helper functions for the Notion API",
   "author": "Julian Jark",
   "license": "ISC",
@@ -19,6 +19,6 @@
     "tsup": "6.7.0"
   },
   "dependencies": {
-    "@notionhq/client": "2.2.5"
+    "@notionhq/client": "^2.2.5"
   }
 }

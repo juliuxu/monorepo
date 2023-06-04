@@ -1,0 +1,32 @@
+{
+  "name": "@vargtech/notion-render",
+  "version": "0.0.4",
+  "description": "React renderer for the official Notion API",
+  "author": "Julian Jark",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.tsx --dts --treeshake --format cjs,esm",
+    "dev": "tsup src/index.tsx --watch --format cjs,esm"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "tsup": "6.7.0"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.5",
+    "@vargtech/notion-utils": "*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

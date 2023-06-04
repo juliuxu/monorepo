@@ -1,4 +1,5 @@
 ---
+import NotionRender from "@vargtech/notion-render";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import {
@@ -8,10 +9,13 @@ import {
 } from "@vargtech/notion-utils";
 
 const databaseId = "c66e310f7a554c0382270e68a9444682";
+const pageId = "a109803d15b948b191ceabf2acf63200";
 
-const [database, databasePages] = await Promise.all([
+const [database, databasePages, page, pageBlocks] = await Promise.all([
   getClient(import.meta.env.NOTION_TOKEN).getDatabase(databaseId),
   getClient(import.meta.env.NOTION_TOKEN).getDatabasePages(databaseId),
+  getClient(import.meta.env.NOTION_TOKEN).getPage(pageId),
+  getClient(import.meta.env.NOTION_TOKEN).getBlocksWithChildren(pageId),
 ]);
 ---
 
@@ -25,6 +29,13 @@ const [database, databasePages] = await Promise.all([
         <Card title={getTitle(page)} body="TODO" href="#" />
       ))
     }
+
+    <section>
+      <h2>
+        Render <span class="text-gradient">{getTitle(page)}</span>
+      </h2>
+      <NotionRender blocks={pageBlocks} />
+    </section>
   </main>
 
   <style>
