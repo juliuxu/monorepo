@@ -67,7 +67,7 @@ interface NotionRenderProps {
  *
  * by default most blocks are rendered as pure html elements
  */
-export default function NotionRender({
+export function NotionRender({
   blocks,
   classes,
   components,

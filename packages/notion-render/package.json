@@ -1,6 +1,6 @@
 {
   "name": "@vargtech/notion-render",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React renderer for the official Notion API",
   "author": "Julian Jark",
   "license": "ISC",
