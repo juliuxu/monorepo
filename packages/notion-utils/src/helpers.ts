@@ -4,6 +4,9 @@ import type {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
+// Re-export
+export { BlockObjectResponse, DatabaseObjectResponse, PageObjectResponse };
+
 export const getTitle = (fromPage: PageObjectResponse) => {
   const title = Object.values(fromPage.properties).find(
     (property) => property.type === "title"
