@@ -86,6 +86,15 @@ export const getDate = (name: string, fromPage: PageObjectResponse) => {
   return undefined;
 };
 
+export const getCover = (fromPage: PageObjectResponse) => {
+  if (fromPage.cover?.type === "external") {
+    return fromPage.cover.external.url;
+  } else if (fromPage.cover?.type === "file") {
+    return fromPage.cover.file.url;
+  }
+  return undefined;
+};
+
 export const getImage = (name: string, fromPage: PageObjectResponse) => {
   const property = fromPage.properties[name];
   if (property?.type === "files") {
