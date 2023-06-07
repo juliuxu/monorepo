@@ -119,7 +119,7 @@ const isBlockObjectResponse = (
   block: PartialBlockObjectResponse | BlockObjectResponse
 ): block is BlockObjectResponse => "type" in block;
 
-type BlockWithChildren = BlockObjectResponse & {
+export type BlockWithChildren = BlockObjectResponse & {
   children?: BlockWithChildren;
 };
 

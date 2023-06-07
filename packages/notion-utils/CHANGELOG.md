@@ -1,5 +1,11 @@
 # @vargtech/notion-utils
 
+## 0.1.0
+
+### Minor Changes
+
+- export BlockWithChildren
+
 ## 0.0.6
 
 ### Patch Changes
