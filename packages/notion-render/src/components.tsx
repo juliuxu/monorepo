@@ -1,5 +1,5 @@
 import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { getTextFromRichText } from "@vargtech/notion-utils";
+import { getTextFromRichText } from "@julianjark/notion-utils";
 import { NotionRender } from ".";
 import { useNotionRenderContext as ctx } from "./context";
 import type { ListBlock, ListBlockType } from "./pseudo-components";

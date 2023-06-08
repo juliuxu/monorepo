@@ -1,4 +1,4 @@
-import type { RichTextItem } from "@vargtech/notion-utils";
+import type { RichTextItem } from "@julianjark/notion-utils";
 import type { DefaultComponents } from "./components";
 
 type ClassDefintion = {

@@ -1,6 +1,6 @@
 {
-  "name": "@vargtech/notion-render",
-  "version": "0.0.5",
+  "name": "@julianjark/notion-render",
+  "version": "0.1.0",
   "description": "React renderer for the official Notion API",
   "author": "Julian Jark",
   "license": "ISC",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.5",
-    "@vargtech/notion-utils": "*"
+    "@julianjark/notion-utils": "*"
   },
   "peerDependencies": {
     "react": "^18.2.0",

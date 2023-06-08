@@ -1,5 +1,5 @@
 {
-  "name": "@vargtech/eslint-config-custom",
+  "name": "@julianjark/eslint-config-custom",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",

@@ -1,4 +1,10 @@
-# @vargtech/notion-utils
+# @julianjark/notion-utils
+
+## 0.3.0
+
+### Minor Changes
+
+- rename @vargtech -> @julianjark
 
 ## 0.2.0
 

@@ -1,4 +1,15 @@
-# @vargtech/notion-render
+# @julianjark/notion-render
+
+## 0.1.0
+
+### Minor Changes
+
+- rename @vargtech -> @julianjark
+
+### Patch Changes
+
+- Updated dependencies
+  - @julianjark/notion-utils@0.3.0
 
 ## 0.0.5
 
@@ -12,4 +23,4 @@
 
 - setup notion-render
 - Updated dependencies
-  - @vargtech/notion-utils@0.0.4
+  - @julianjark/notion-utils@0.0.4

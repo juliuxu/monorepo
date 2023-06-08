@@ -8,8 +8,8 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@vargtech/eslint-config-custom",
-    "@vargtech/tsconfig",
-    "@vargtech/example-astro"
+    "@julianjark/eslint-config-custom",
+    "@julianjark/tsconfig",
+    "@julianjark/example-astro"
   ]
 }
