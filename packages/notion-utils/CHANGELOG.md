@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.3.1
+
+### Patch Changes
+
+- add getImageAssets to client
+
 ## 0.3.0
 
 ### Minor Changes

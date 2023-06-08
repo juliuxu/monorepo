@@ -1,6 +1,6 @@
 {
   "name": "@julianjark/notion-utils",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Helper functions for the Notion API",
   "author": "Julian Jark",
   "license": "ISC",

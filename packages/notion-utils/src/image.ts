@@ -6,22 +6,22 @@ export interface ImageAsset {
   src: string;
   alt: string;
 }
-interface FetchImageAssetsConfig {
+export interface GetImageAssetsConfig {
   titleProperty: string;
   srcProperty: string;
   altProperty: string;
   databaseId: string;
 }
-export const fetchImageAssets =
+export const getImageAssets =
   (client: NotionClient) =>
-  async <T extends string>(
-    names: T[],
+  async <ImageName extends string>(
+    names: ImageName[],
     {
       titleProperty,
       srcProperty,
       altProperty,
       databaseId,
-    }: FetchImageAssetsConfig
+    }: GetImageAssetsConfig
   ) => {
     const assets = await getDatabasePages(client)(databaseId, {
       filter: {
@@ -35,7 +35,7 @@ export const fetchImageAssets =
     });
 
     const images = assets.reduce((acc, asset) => {
-      const name = getTitle(asset) as T;
+      const name = getTitle(asset) as ImageName;
       const url = getFileUrl(srcProperty, asset);
       if (url === undefined)
         throw new Error(`no image resource for name ${name}`);
@@ -45,7 +45,7 @@ export const fetchImageAssets =
 
       acc[name] = { src: url, alt };
       return acc;
-    }, {} as Record<T, ImageAsset>);
+    }, {} as Record<ImageName, ImageAsset>);
     assertContainsItems(names, images);
 
     return images;

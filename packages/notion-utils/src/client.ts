@@ -7,6 +7,7 @@ import type {
   PartialDatabaseObjectResponse,
   PartialPageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { getImageAssets } from "./image";
 
 /**
  * Creates a simplified client for fetching data from Notion
@@ -23,6 +24,8 @@ export const getClient = (token: string) => {
     getDatabase: getDatabase(notionClient),
     getBlocks: getBlocks(notionClient),
     getBlocksWithChildren: getBlocksWithChildren(notionClient),
+
+    getImageAssets: getImageAssets(notionClient),
   };
 };
 
