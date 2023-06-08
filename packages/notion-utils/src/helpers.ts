@@ -33,21 +33,6 @@ export const getUrl = (name: string, fromPage: PageObjectResponse) => {
   return undefined;
 };
 
-export const getFileUrl = (name: string, fromPage: PageObjectResponse) => {
-  const property = fromPage.properties[name];
-  if (property?.type === "files") {
-    if (property.files.length === 0) return undefined;
-
-    const file = property.files[0];
-    if (file?.type === "external") {
-      return file.external.url;
-    } else if (file.type === "file") {
-      return file.file.url;
-    }
-  }
-  return undefined;
-};
-
 export const getRichText = (name: string, fromPage: PageObjectResponse) => {
   const property = fromPage.properties[name];
   if (property?.type === "rich_text") {
@@ -95,21 +80,36 @@ export const getCover = (fromPage: PageObjectResponse) => {
   return undefined;
 };
 
-export const getImage = (name: string, fromPage: PageObjectResponse) => {
+/**
+ * Get all files from a files property
+ * might be an empty array if no files are present
+ */
+export const getFileUrls = (name: string, fromPage: PageObjectResponse) => {
   const property = fromPage.properties[name];
   if (property?.type === "files") {
-    return property.files
-      .map((it) =>
-        it.type === "external"
-          ? it.external.url
-          : it.type === "file"
-          ? it.file.url
-          : undefined
-      )
-      .find((it) => !!it?.length);
+    if (property.files.length === 0) return undefined;
+
+    return property.files.map((file) => {
+      if (file?.type === "external") {
+        return file.external.url;
+      } else if (file.type === "file") {
+        return file.file.url;
+      }
+    });
   }
   return undefined;
 };
+
+/**
+ * Get the first file from a files property
+ */
+export const getFileUrl = (name: string, fromPage: PageObjectResponse) =>
+  getFileUrls(name, fromPage)?.[0];
+
+/**
+ * Alias for {@link getFileUrl}
+ */
+export const getImage = getFileUrl;
 
 export const getDateRange = (name: string, fromPage: PageObjectResponse) => {
   const property = fromPage.properties[name];
