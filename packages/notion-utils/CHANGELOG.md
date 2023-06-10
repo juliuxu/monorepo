@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.4.0
+
+### Minor Changes
+
+- added notion-image
+
 ## 0.3.1
 
 ### Patch Changes

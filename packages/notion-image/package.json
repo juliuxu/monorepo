@@ -1,5 +1,5 @@
 {
-  "name": "@julianjark/notion-utils",
+  "name": "@julianjark/notion-image",
   "version": "0.4.0",
   "description": "Helper functions for the Notion API",
   "author": "Julian Jark",
@@ -19,6 +19,7 @@
     "tsup": "6.7.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5"
+    "@notionhq/client": "^2.2.5",
+    "zod": "^3.21.4"
   }
 }
