@@ -344,6 +344,18 @@ export const ChildDatabase = ({ block }: BlockComponentProps) => {
   if (block.type !== "child_database") return null;
   return <div>{block.child_database.title}</div>;
 };
+export const Bookmark = ({ block }: BlockComponentProps) => {
+  if (block.type !== "bookmark") return null;
+  return (
+    <a
+      className={ctx().classes.bookmark.root}
+      href={block.bookmark.url}
+      title={getTextFromRichText(block.bookmark.caption)}
+    >
+      {block.bookmark.url}
+    </a>
+  );
+};
 
 export type ExtendedBlock = BlockObjectResponse | ListBlock;
 export interface BlockComponentProps {
@@ -383,7 +395,7 @@ export const DefaultComponents: Record<
   table: Table,
   table_row: TableRow,
   embed: Embed,
-  bookmark: undefined,
+  bookmark: Bookmark,
   image: Image,
   video: Video,
   pdf: undefined,
