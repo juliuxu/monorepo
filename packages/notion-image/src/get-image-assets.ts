@@ -23,10 +23,10 @@ export interface GetImageAssetsConfig {
 }
 export const createGetImageAssets =
   ({
-    apiPath,
+    imageUrlBuilder,
     notionTokenOrClient,
   }: {
-    apiPath: string;
+    imageUrlBuilder: ReturnType<typeof createImageUrlBuilder>;
     notionTokenOrClient: TokenOrClient;
   }) =>
   async <ImageName extends string>(
@@ -46,7 +46,6 @@ export const createGetImageAssets =
       },
     });
 
-    const imageUrlBuilder = createImageUrlBuilder(apiPath);
     const images = assets.reduce((acc, asset) => {
       const name = getTitle(asset) as ImageName;
 
