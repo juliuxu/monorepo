@@ -1,5 +1,11 @@
 # @julianjark/notion-render
 
+## 0.2.0
+
+### Minor Changes
+
+- export code
+
 ## 0.1.0
 
 ### Minor Changes
