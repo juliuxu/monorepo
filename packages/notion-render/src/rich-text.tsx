@@ -1,5 +1,6 @@
 import type { RichTextItem } from "@julianjark/notion-utils";
-import { useNotionRenderContext as ctx } from "./context";
+import type { NotionRenderContextProps } from "./context";
+import { NotionRenderContext, useNotionRenderContext as ctx } from "./context";
 
 interface RichTextProps {
   richText: RichTextItem;
@@ -63,3 +64,18 @@ export const RichTextList = ({ richTextList }: RichTextListProps) => {
     </>
   );
 };
+
+interface RichTextListRenderProps
+  extends Omit<NotionRenderContextProps, "children"> {
+  richTextList: RichTextItem[];
+}
+export function RichTextListRender({
+  richTextList,
+  ...contextProps
+}: RichTextListRenderProps) {
+  return (
+    <NotionRenderContext {...contextProps}>
+      <RichTextList richTextList={richTextList} />
+    </NotionRenderContext>
+  );
+}

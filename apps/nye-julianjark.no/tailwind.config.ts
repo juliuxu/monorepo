@@ -12,6 +12,7 @@ export default {
         mytheme: {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
           primary: "#ffb4b4",
+          secondary: "#E3673A",
         },
       },
     ],

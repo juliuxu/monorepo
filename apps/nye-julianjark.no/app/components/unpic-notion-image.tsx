@@ -19,6 +19,7 @@ export const UnpicNotionImage = ({ block }: BlockComponentProps) => {
       className={ctx.classes.image.root}
       alt={getTextFromRichText(block.image.caption)}
       src={url}
+      priority
       transformer={({ url }) => url}
     />
   );

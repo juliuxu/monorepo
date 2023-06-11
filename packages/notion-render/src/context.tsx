@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
-import type { Classes } from "./classes";
-import type { Components } from "./components";
+import { EmptyClasses, type Classes } from "./classes";
+import { DefaultComponents, type Components } from "./components";
 
 interface NotionRenderContext {
   components: Components;
@@ -18,4 +18,33 @@ export const useNotionRenderContext = () => {
   return context;
 };
 
-export default Context;
+export interface NotionRenderContextProps {
+  classes?: Partial<Classes>;
+  components?: Partial<Components>;
+  children: React.ReactNode;
+}
+export function NotionRenderContext({
+  classes,
+  components,
+  children,
+}: NotionRenderContextProps) {
+  const context = useContext(Context);
+
+  const finalClasses = { ...EmptyClasses, ...context?.classes, ...classes };
+  const finalComponents = {
+    ...DefaultComponents,
+    ...context?.components,
+    ...components,
+  };
+
+  if (context === undefined) {
+    return (
+      <Context.Provider
+        value={{ classes: finalClasses, components: finalComponents }}
+      >
+        {children}
+      </Context.Provider>
+    );
+  }
+  return <>{children}</>;
+}

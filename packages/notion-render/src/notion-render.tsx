@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
-import type { Classes } from "./classes";
-import { EmptyClasses } from "./classes";
 import type { Components, ExtendedBlock } from "./components";
-import { DefaultComponents } from "./components";
-import NotionRenderContext from "./context";
+import type { NotionRenderContextProps } from "./context";
+import { NotionRenderContext, useNotionRenderContext } from "./context";
 import type { ListBlock } from "./pseudo-components";
 
 const filterUnsupportedBlocks = (
@@ -55,10 +52,8 @@ const extendBlocks = (blocks: BlockObjectResponse[]): ExtendedBlock[] =>
     return acc;
   }, [] as ExtendedBlock[]);
 
-interface NotionRenderProps {
+interface NotionRenderProps extends Omit<NotionRenderContextProps, "children"> {
   blocks: BlockObjectResponse[];
-  classes?: Partial<Classes>;
-  components?: Partial<Components>;
 }
 
 /**
@@ -67,33 +62,23 @@ interface NotionRenderProps {
  *
  * by default most blocks are rendered as pure html elements
  */
-export function NotionRender({
+export function NotionRender({ blocks, ...contextProps }: NotionRenderProps) {
+  return (
+    <NotionRenderContext {...contextProps}>
+      <NotionRenderInner blocks={blocks} />
+    </NotionRenderContext>
+  );
+}
+
+export function NotionRenderInner({
   blocks,
-  classes,
-  components,
-}: NotionRenderProps) {
-  const context = useContext(NotionRenderContext);
+}: Pick<NotionRenderProps, "blocks">) {
+  const ctx = useNotionRenderContext();
 
-  const finalClasses = { ...EmptyClasses, ...context?.classes, ...classes };
-  const finalComponents = {
-    ...DefaultComponents,
-    ...context?.components,
-    ...components,
-  };
-
-  const supportedBlocks = filterUnsupportedBlocks(finalComponents, blocks);
+  const supportedBlocks = filterUnsupportedBlocks(ctx.components, blocks);
   const extendedBlocks = extendBlocks(supportedBlocks);
   const renderBlocks = extendedBlocks.map((block) =>
-    renderBlock(finalComponents, block)
+    renderBlock(ctx.components, block)
   );
-  if (context === undefined) {
-    return (
-      <NotionRenderContext.Provider
-        value={{ classes: finalClasses, components: finalComponents }}
-      >
-        {renderBlocks}
-      </NotionRenderContext.Provider>
-    );
-  }
   return <>{renderBlocks}</>;
 }

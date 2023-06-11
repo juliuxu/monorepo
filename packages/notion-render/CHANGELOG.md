@@ -1,5 +1,11 @@
 # @julianjark/notion-render
 
+## 0.5.0
+
+### Minor Changes
+
+- make possible to use richtext standalone
+
 ## 0.4.0
 
 ### Minor Changes
