@@ -1,9 +1,13 @@
-name: ci
+name: deploy-nye-julianjark.no
 
 on:
   push:
     branches:
       - "main"
+
+defaults:
+  run:
+    working-directory: apps/nye-julianjark.no
 
 jobs:
   build-and-deploy:
@@ -31,12 +35,12 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ github.repository_owner }}/nye-julianjark.no:latest
 
       - name: Deploy to unRaid server
         run: bash ./scripts/updateLatestDockerOnUnraid.bash
         env:
-          CONTAINER_NAME: ${{ github.event.repository.name }}
+          CONTAINER_NAME: nye-julianjark.no
           UNRAID_HTTP_USERNAME: ${{ secrets.UNRAID_HTTP_USERNAME }}
           UNRAID_HTTP_PASSWORD: ${{ secrets.UNRAID_HTTP_PASSWORD }}
           UNRAID_USERNAME: ${{ secrets.UNRAID_USERNAME }}
