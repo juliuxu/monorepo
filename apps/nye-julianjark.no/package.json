@@ -9,14 +9,15 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@julianjark/notion-client": "*",
     "@julianjark/notion-image": "*",
     "@julianjark/notion-render": "*",
     "@julianjark/notion-utils": "*",
-    "@julianjark/notion-client": "*",
     "@remix-run/css-bundle": "^1.17.0",
     "@remix-run/node": "^1.17.0",
     "@remix-run/react": "^1.17.0",
     "@remix-run/serve": "^1.17.0",
+    "@unpic/react": "0.0.28",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
