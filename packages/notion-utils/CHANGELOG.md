@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.5.0
+
+### Minor Changes
+
+- :sparkles: add cached client for better UX and DX
+
 ## 0.4.0
 
 ### Minor Changes

@@ -7,15 +7,14 @@ import type {
   PartialDatabaseObjectResponse,
   PartialPageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { TokenOrClient, tokenOrClientToClient } from "./utils";
 
 /**
  * Creates a simplified client for fetching data from Notion
- * @param token a notion api token
+ * @param tokenOrClient a NotionClient or a Notion API token
  */
-export const getClient = (token: string) => {
-  const notionClient = new NotionClient({
-    auth: token,
-  });
+export const getClient = (tokenOrClient: TokenOrClient) => {
+  const notionClient = tokenOrClientToClient(tokenOrClient);
 
   return {
     getDatabasePages: getDatabasePages(notionClient),

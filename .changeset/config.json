@@ -11,6 +11,6 @@
     "@julianjark/eslint-config-custom",
     "@julianjark/tsconfig",
     "@julianjark/example-astro",
-    "@julianjark/nye-julianjark.no"
+    "julianjark.no"
   ]
 }
