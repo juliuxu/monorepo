@@ -13,7 +13,11 @@ export const imageUrlBuilder = createImageUrlBuilder(
 );
 
 export const loader = async ({ request }: LoaderArgs) => {
-  return getNotionImage(config.notionToken)(
-    Object.fromEntries(new URL(request.url).searchParams)
-  );
+  const response = (
+    await getNotionImage(config.notionToken)(
+      Object.fromEntries(new URL(request.url).searchParams)
+    )
+  ).clone();
+  response.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  return response;
 };
