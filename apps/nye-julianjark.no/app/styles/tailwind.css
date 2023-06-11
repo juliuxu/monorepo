@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* https://scottspence.com/posts/change-text-highlight-colour-with-tailwind-css */
+::selection {
+  /* color: hsl(var(--pc)); */
+  background: hsl(var(--p));
+}

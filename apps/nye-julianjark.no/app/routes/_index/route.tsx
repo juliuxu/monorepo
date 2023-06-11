@@ -21,14 +21,16 @@ export const loader = async () => {
 
 export const classes: Partial<Classes> /*tw*/ = {
   heading_1: { root: "text-4xl font-bold" },
-  heading_2: { root: "text-2xl font-bold" },
-  column_list: { root: "flex flex-col sm:flex-row" },
+  heading_2: { root: "text-2xl underline" },
+  column_list: { root: "flex flex-col sm:flex-row gap-[2.5vw]" },
+  column: { root: "" },
+  divider: { root: "mt-[6vw] mb-[6vw]" },
 };
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   return (
-    <main>
+    <main className="pl-[7.5vw] pr-[7.5vw] text-2xl lg:text-[2.5vw]">
       <NotionRender blocks={data.blocks} classes={classes} />
     </main>
   );
