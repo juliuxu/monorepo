@@ -1,5 +1,5 @@
 {
   "extends": "@julianjark/tsconfig/base.json",
-  "include": ["src/", "../notion-client/src/utils.ts"],
+  "include": ["src/"],
   "exclude": ["dist", "build", "node_modules"]
 }

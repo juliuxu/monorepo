@@ -20,5 +20,8 @@
   },
   "peacock.color": "#71c2d5",
   "files.autoSave": "onFocusChange",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["/\\*tw\\*/ ([^;]*);", ":\\s*?[\"'`]([^\"'`]*).*?,"]
+  ]
 }

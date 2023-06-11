@@ -1,5 +1,5 @@
 import { config } from "~/config.server";
-import { getClientCached } from "@julianjark/notion-utils";
+import { getClientCached } from "@julianjark/notion-client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,

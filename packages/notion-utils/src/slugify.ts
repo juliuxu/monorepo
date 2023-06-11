@@ -1,4 +1,4 @@
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { getTitle } from "./helpers";
 
 export function slugify(text: string) {

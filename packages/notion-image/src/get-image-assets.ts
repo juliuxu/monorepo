@@ -1,6 +1,10 @@
 import { z } from "zod";
-import { getDatabasePages } from "../../notion-utils/src/client";
-import { getTitle, getFileUrl, getText } from "../../notion-utils/src/helpers";
+import {
+  getTitle,
+  getFileUrl,
+  getText,
+} from "@julianjark/notion-utils/src/helpers";
+import { getDatabasePages } from "../../notion-client/src/client";
 import { createImageUrlBuilder } from "./helpers";
 import { tokenOrClientToClient, type TokenOrClient } from "./utils";
 

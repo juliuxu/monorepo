@@ -1,7 +1,7 @@
 {
-  "name": "@julianjark/notion-utils",
+  "name": "@julianjark/notion-client",
   "version": "0.5.0",
-  "description": "Helper functions for the Notion API",
+  "description": "Helper client library Notion API",
   "author": "Julian Jark",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -19,6 +19,8 @@
     "tsup": "6.7.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5"
+    "@notionhq/client": "^2.2.5",
+    "lru-cache": "9.1.2",
+    "memoize-fs": "2.2.0"
   }
 }
