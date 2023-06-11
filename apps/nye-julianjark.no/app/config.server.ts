@@ -17,4 +17,5 @@ export const config = {
   notionToken: process.env.NOTION_TOKEN ?? "",
 
   landingPageId: "eb763c82093c48d1955de8cc4ea450cb",
+  todayILearnedDatabaseId: "2114376d77f34c0390d81fa606a43fbb",
 };
