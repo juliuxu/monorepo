@@ -31,7 +31,7 @@ export const H2 = ({ block }: BlockComponentProps) => {
   const element = (
     <h2
       className={`${ctx().classes[`color_${block.heading_2.color}`]} ${
-        ctx().classes.heading_1.root
+        ctx().classes.heading_2.root
       }`}
     >
       <RichTextList richTextList={block.heading_2.rich_text} />
@@ -51,7 +51,7 @@ export const H3 = ({ block }: BlockComponentProps) => {
   const element = (
     <h3
       className={`${ctx().classes[`color_${block.heading_3.color}`]} ${
-        ctx().classes.heading_1.root
+        ctx().classes.heading_3.root
       }`}
     >
       <RichTextList richTextList={block.heading_3.rich_text} />
