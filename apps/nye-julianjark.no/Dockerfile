@@ -13,7 +13,8 @@ ENV NODE_ENV=production
 FROM base as build
 
 # Install node modules
-COPY --link package.json package-lock.json ./
+COPY --link package.json ./
+# COPY --link package.json package-lock.json ./
 RUN npm install --production=false
 
 # Copy application code

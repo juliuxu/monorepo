@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.6.0
+
+### Minor Changes
+
+- bump
+
 ## 0.5.0
 
 ### Minor Changes

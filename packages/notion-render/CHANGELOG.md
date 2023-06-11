@@ -1,5 +1,16 @@
 # @julianjark/notion-render
 
+## 0.4.0
+
+### Minor Changes
+
+- bump
+
+### Patch Changes
+
+- Updated dependencies
+  - @julianjark/notion-utils@0.6.0
+
 ## 0.3.0
 
 ### Minor Changes
