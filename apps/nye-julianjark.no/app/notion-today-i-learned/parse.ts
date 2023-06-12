@@ -6,12 +6,12 @@ import {
   getTitle,
   type PageObjectResponse,
 } from "@julianjark/notion-utils";
-import type {
-  TodayILearnedEntry,
-  TodayILearnedEntryBody,
-  TodayILearnedEntryHead,
+import type { TodayILearnedEntryBody, TodayILearnedEntryHead } from "./schema";
+import {
+  todayILearnedEntryHeadSchema,
+  todayILearnedEntryBodySchema,
+  todayILearnedEntrySchema,
 } from "./schema";
-import { todayILearnedEntrySchema } from "./schema";
 import type { Relaxed } from "~/misc";
 
 // Head
@@ -25,7 +25,7 @@ export function mapTodayILearnedEntryHead(fromPage: PageObjectResponse) {
   } satisfies Relaxed<TodayILearnedEntryHead>;
 }
 export function safeParseTodayILearnedEntryHead(fromPage: PageObjectResponse) {
-  const result = todayILearnedEntrySchema.safeParse(
+  const result = todayILearnedEntryHeadSchema.safeParse(
     mapTodayILearnedEntryHead(fromPage)
   );
   if (!result.success) {
@@ -46,7 +46,9 @@ export function mapTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
   } satisfies Relaxed<TodayILearnedEntryBody>;
 }
 export function parseTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
-  return todayILearnedEntrySchema.parse(mapTodayILearnedEntryBody(fromBlocks));
+  return todayILearnedEntryBodySchema.parse(
+    mapTodayILearnedEntryBody(fromBlocks)
+  );
 }
 
 // Entry
