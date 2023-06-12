@@ -13,7 +13,7 @@ import { z } from "zod";
 import { notionClient } from "~/clients.server";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
 import { config } from "~/config.server";
-import { getTodayILearnedEntries } from "~/notion-today-i-learned/client";
+import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
 import { ClearCacheButton } from "~/routes/api.clear-cache";
 
@@ -42,7 +42,7 @@ export const loader = async () => {
   const [page, blocks, todayILearnedEntries] = await Promise.all([
     notionClient.getPage(config.landingPageId).then(parsePage),
     notionClient.getBlocksWithChildren(config.landingPageId),
-    getTodayILearnedEntries(),
+    getLatestTodayILearnedEntries(),
   ]);
 
   return json({

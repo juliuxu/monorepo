@@ -11,17 +11,30 @@ const tagSchema = z.object({
 });
 export type Tag = z.infer<typeof tagSchema>;
 
-export const todayILearnedEntrySchema = z.object({
+export const todayILearnedEntryHeadSchema = z.object({
   id: z.string(),
   title: z.string().nonempty(),
   created: z.string().datetime(),
   tags: z.array(tagSchema),
-  blocks: z.array(blockSchema),
-  summary: z.string(),
-  references: z.array(z.string().url()).optional(),
   published: z.preprocess(
     (val) => val || "PUBLISHED",
     z.enum(["PUBLISHED", "UNPUBLISHED", "DEV"])
   ),
 });
+export type TodayILearnedEntryHead = z.infer<
+  typeof todayILearnedEntryHeadSchema
+>;
+
+export const todayILearnedEntryBodySchema = z.object({
+  blocks: z.array(blockSchema),
+  summary: z.string(),
+  references: z.array(z.string().url()).optional(),
+});
+export type TodayILearnedEntryBody = z.infer<
+  typeof todayILearnedEntryBodySchema
+>;
+
+export const todayILearnedEntrySchema = todayILearnedEntryHeadSchema.and(
+  todayILearnedEntryBodySchema
+);
 export type TodayILearnedEntry = z.infer<typeof todayILearnedEntrySchema>;

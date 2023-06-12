@@ -1,10 +1,18 @@
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
-import { parseTodayILearnedEntry as safeParseTodayILearnedEntry } from "./parse";
+import {
+  parseTodayILearnedEntry,
+  parseTodayILearnedEntryBody,
+  safeParseTodayILearnedEntryHead,
+} from "./parse";
 import { chunked, typedBoolean } from "~/misc";
-import type { TodayILearnedEntry } from "./schema";
+import type { TodayILearnedEntry, TodayILearnedEntryHead } from "./schema";
 
-export async function getTodayILearnedEntries() {
+/**
+ * Get all head information from the today i learned database
+ * does not include the actual content
+ */
+export async function getTodayILearnedEntryHeads() {
   const pageEntries = await notionClient.getDatabasePages(
     config.todayILearnedDatabaseId,
     {
@@ -12,13 +20,26 @@ export async function getTodayILearnedEntries() {
     }
   );
 
+  return pageEntries
+    .map(safeParseTodayILearnedEntryHead)
+    .filter(typedBoolean)
+    .filter((entry) => entry.published === "PUBLISHED");
+}
+
+/**
+ * Fetch and build the complete today i learned entry based on the entry head
+ */
+export async function getTodayILearnedEntriesFromHeads(
+  entryHeads: TodayILearnedEntryHead[]
+) {
   const entries: Array<TodayILearnedEntry | undefined> = [];
-  for (const pages of chunked(pageEntries, 5)) {
+  for (const chunk of chunked(entryHeads, 5)) {
     const fetchedAndParsed = await Promise.all(
-      pages.map((page) =>
+      chunk.map((entryHead) =>
         notionClient
-          .getBlocksWithChildren(page.id)
-          .then((blocks) => safeParseTodayILearnedEntry(page, blocks))
+          .getBlocksWithChildren(entryHead.id)
+          .then((blocks) => parseTodayILearnedEntryBody(blocks))
+          .then((entryBody) => parseTodayILearnedEntry(entryHead, entryBody))
       )
     );
     entries.push(...fetchedAndParsed);
@@ -27,4 +48,9 @@ export async function getTodayILearnedEntries() {
   return entries
     .filter(typedBoolean)
     .filter((entry) => entry.published === "PUBLISHED");
+}
+
+export async function getLatestTodayILearnedEntries() {
+  const entryHeads = await getTodayILearnedEntryHeads();
+  return getTodayILearnedEntriesFromHeads(entryHeads.slice(0, 3));
 }

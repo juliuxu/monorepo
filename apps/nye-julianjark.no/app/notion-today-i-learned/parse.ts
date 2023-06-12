@@ -6,30 +6,27 @@ import {
   getTitle,
   type PageObjectResponse,
 } from "@julianjark/notion-utils";
-import type { TodayILearnedEntry } from "./schema";
+import type {
+  TodayILearnedEntry,
+  TodayILearnedEntryBody,
+  TodayILearnedEntryHead,
+} from "./schema";
 import { todayILearnedEntrySchema } from "./schema";
 import type { Relaxed } from "~/misc";
 
-export function mapTodayILearnedEntry(
-  fromPage: PageObjectResponse,
-  andBlocks: BlockObjectResponse[]
-) {
+// Head
+export function mapTodayILearnedEntryHead(fromPage: PageObjectResponse) {
   return {
     id: fromPage.id,
     created: fromPage.created_time,
     title: getTitle(fromPage),
-    blocks: andBlocks,
-    summary: getSummary(andBlocks),
     tags: getMultiSelectAndColor("Tags", fromPage),
     published: getSelect("Published", fromPage) as any,
-  } satisfies Relaxed<TodayILearnedEntry>;
+  } satisfies Relaxed<TodayILearnedEntryHead>;
 }
-export function parseTodayILearnedEntry(
-  fromPage: PageObjectResponse,
-  andBlocks: BlockObjectResponse[]
-) {
+export function safeParseTodayILearnedEntryHead(fromPage: PageObjectResponse) {
   const result = todayILearnedEntrySchema.safeParse(
-    mapTodayILearnedEntry(fromPage, andBlocks)
+    mapTodayILearnedEntryHead(fromPage)
   );
   if (!result.success) {
     console.warn(
@@ -39,6 +36,28 @@ export function parseTodayILearnedEntry(
     return undefined;
   }
   return result.data;
+}
+
+// Body
+export function mapTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
+  return {
+    blocks: fromBlocks,
+    summary: getSummary(fromBlocks),
+  } satisfies Relaxed<TodayILearnedEntryBody>;
+}
+export function parseTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
+  return todayILearnedEntrySchema.parse(mapTodayILearnedEntryBody(fromBlocks));
+}
+
+// Entry
+export function parseTodayILearnedEntry(
+  fromHead: TodayILearnedEntryHead,
+  andBody: TodayILearnedEntryBody
+) {
+  return todayILearnedEntrySchema.parse({
+    ...fromHead,
+    ...andBody,
+  });
 }
 
 /**
