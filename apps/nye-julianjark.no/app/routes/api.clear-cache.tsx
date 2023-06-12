@@ -9,6 +9,7 @@ export function ClearCacheButton() {
   const reloadWithoutCache = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
+    document.body.style.overflowY = "hidden";
     await fetch(`/api/clear-cache`, { method: "DELETE" });
     document.cookie = "no_cache=1;max-age=15";
     window.location.reload();
@@ -18,8 +19,11 @@ export function ClearCacheButton() {
     <>
       {isSubmitting && (
         <div className="fixed left-0 top-0 z-50 h-[100vh] w-[100vw]">
-          <div className="flex h-full w-full items-center justify-center bg-black bg-opacity-50">
-            <p className="text-white">Laster fersk data...</p>
+          <div className="flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-50">
+            <span className="loading loading-spinner w-12 text-primary"></span>
+            <p className="mt-2 bg-gradient-to-r from-white to-primary bg-clip-text text-lg text-transparent">
+              Laster fersk data...
+            </p>
           </div>
         </div>
       )}
