@@ -4,7 +4,7 @@ import { notionClient } from "~/clients.server";
 
 import { useShortcut } from "~/components/use-shortcut";
 
-export function ClearCacheButton() {
+export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const reloadWithoutCache = async () => {
     if (isSubmitting) return;
@@ -20,8 +20,9 @@ export function ClearCacheButton() {
       {isSubmitting && (
         <div className="fixed left-0 top-0 z-50 h-[100vh] w-[100vw]">
           <div className="flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-50">
-            <span className="loading loading-spinner w-12 text-primary"></span>
-            <p className="mt-2 bg-gradient-to-r from-white to-primary bg-clip-text text-lg text-transparent">
+            {/* <span className="loading loading-spinner w-12 text-primary"></span> */}
+            <div className="animate-bounce">{children}</div>
+            <p className="mt-2 bg-gradient-to-r from-white to-white bg-clip-text text-lg text-transparent">
               Laster fersk data...
             </p>
           </div>
@@ -29,13 +30,14 @@ export function ClearCacheButton() {
       )}
 
       <button
+        title="Hent fersk data"
         type="button"
         onClick={reloadWithoutCache}
-        className="text-3xl"
+        className={`text-3xl`}
         disabled={isSubmitting}
         aria-busy={isSubmitting}
       >
-        <div className="rotate-90">↻</div>
+        {children ? children : <div className="rotate-90">↻</div>}
       </button>
     </>
   );

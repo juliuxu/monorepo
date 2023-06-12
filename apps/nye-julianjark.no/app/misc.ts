@@ -18,3 +18,15 @@ export function chunked<T>(l: T[], chunkSize: number) {
 
   return result;
 }
+
+export function filterPublishedPredicate({
+  published,
+}: {
+  published: "PUBLISHED" | "UNPUBLISHED" | "DEV";
+}) {
+  // eslint-disable-next-line turbo/no-undeclared-env-vars
+  if (process.env.NODE_ENV === "development") {
+    return ["PUBLISHED", "DEV"].includes(published);
+  }
+  return published === "PUBLISHED";
+}

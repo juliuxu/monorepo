@@ -1,6 +1,7 @@
 import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
 import { getLatestTodayILearnedEntries } from "./notion-today-i-learned/client";
+import { getNotionDrivenPages } from "./routes/$notionPage/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
@@ -11,6 +12,7 @@ export const notionClient = getClientCached({
 export async function warmUpCache() {
   await notionClient.getBlocksWithChildren(config.landingPageId);
   await getLatestTodayILearnedEntries();
+  await getNotionDrivenPages();
 }
 
 // Warm the cache on startup

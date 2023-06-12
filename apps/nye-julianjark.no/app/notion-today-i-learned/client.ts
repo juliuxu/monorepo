@@ -5,7 +5,7 @@ import {
   parseTodayILearnedEntryBody,
   safeParseTodayILearnedEntryHead,
 } from "./parse";
-import { chunked, typedBoolean } from "~/misc";
+import { chunked, filterPublishedPredicate, typedBoolean } from "~/misc";
 import type { TodayILearnedEntry, TodayILearnedEntryHead } from "./schema";
 
 /**
@@ -23,7 +23,7 @@ export async function getTodayILearnedEntryHeads() {
   return pageEntries
     .map(safeParseTodayILearnedEntryHead)
     .filter(typedBoolean)
-    .filter((entry) => entry.published === "PUBLISHED");
+    .filter(filterPublishedPredicate);
 }
 
 /**
@@ -45,9 +45,7 @@ export async function getTodayILearnedEntriesFromHeads(
     entries.push(...fetchedAndParsed);
   }
 
-  return entries
-    .filter(typedBoolean)
-    .filter((entry) => entry.published === "PUBLISHED");
+  return entries.filter(typedBoolean).filter(filterPublishedPredicate);
 }
 
 export async function getLatestTodayILearnedEntries() {

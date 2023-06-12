@@ -1,4 +1,5 @@
-import { useLoaderData } from "@remix-run/react";
+import { slugify } from "@julianjark/notion-utils";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index/route";
 
 const dateFormatter = new Intl.DateTimeFormat("nb-NO", {
@@ -17,7 +18,14 @@ export function LatestTodayILearnedEntries() {
               <time className="text-lg">
                 {dateFormatter.format(new Date(entry.created))}
               </time>
-              <h3 className="card-title text-xl">{entry.title}</h3>
+              <h3 className="card-title text-xl">
+                <Link
+                  prefetch="intent"
+                  to={`/i-dag-lærte-jeg/${slugify(entry.title)}`}
+                >
+                  {entry.title}
+                </Link>
+              </h3>
               <p className="text-lg">{entry.summary}</p>
             </div>
           </article>
