@@ -65,12 +65,12 @@ interface NotionPageProps {
 export function NotionPage({ page, blocks }: NotionPageProps) {
   return (
     <div>
-      <header className="pt-[4vw]">
-        <h1 className="text-6xl font-bold">{page.title}</h1>
-        <div className="mt-4 text-3xl">
+      <Header
+        title={page.title}
+        description={
           <RichTextListRender richTextList={page.preamble} classes={classes} />
-        </div>
-      </header>
+        }
+      />
       {/* <details>
         <summary>Debug</summary>
         <pre>{JSON.stringify(data.latestTodayILearnedEntries, null, 2)}</pre>
@@ -83,5 +83,20 @@ export function NotionPage({ page, blocks }: NotionPageProps) {
         />
       </main>
     </div>
+  );
+}
+
+export function Header({
+  title,
+  description,
+}: {
+  title: React.ReactNode;
+  description: React.ReactNode;
+}) {
+  return (
+    <header className="pt-[4vw]">
+      <h1 className="text-6xl font-bold">{title}</h1>
+      <p className="mt-4 max-w-4xl text-3xl">{description}</p>
+    </header>
   );
 }

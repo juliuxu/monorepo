@@ -52,3 +52,8 @@ export async function getLatestTodayILearnedEntries() {
   const entryHeads = await getTodayILearnedEntryHeads();
   return getTodayILearnedEntriesFromHeads(entryHeads.slice(0, 3));
 }
+
+export async function getAllTodayILearnedEntries() {
+  const entryHeads = await getTodayILearnedEntryHeads();
+  return getTodayILearnedEntriesFromHeads(entryHeads);
+}
