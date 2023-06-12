@@ -1,6 +1,9 @@
 import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
-import { getLatestTodayILearnedEntries } from "./notion-today-i-learned/client";
+import {
+  getAllTodayILearnedEntries,
+  getLatestTodayILearnedEntries,
+} from "./notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
 
 export const notionClient = getClientCached({
@@ -10,8 +13,11 @@ export const notionClient = getClientCached({
 });
 
 export async function warmUpCache() {
-  await notionClient.getBlocksWithChildren(config.landingPageId);
-  await getLatestTodayILearnedEntries();
+  await Promise.all([
+    notionClient.getPage(config.landingPageId),
+    notionClient.getBlocksWithChildren(config.landingPageId),
+  ]);
+  await getAllTodayILearnedEntries();
   await getNotionDrivenPages();
 }
 
