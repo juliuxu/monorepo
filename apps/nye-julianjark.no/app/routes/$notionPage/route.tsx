@@ -1,8 +1,9 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenPageWithBlocks } from "./client";
+import { config } from "~/config.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -19,6 +20,7 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
 
   return json(result);
 };
+export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();

@@ -1,3 +1,4 @@
+import type { HeadersFunction } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { notionClient } from "~/clients.server";
@@ -26,6 +27,7 @@ export const loader = async () => {
     latestTodayILearnedEntries,
   });
 };
+export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();

@@ -1,7 +1,8 @@
 import { NotionRender } from "@julianjark/notion-render";
-import type { V2_MetaFunction } from "@remix-run/node";
+import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { config } from "~/config.server";
 import { getAllTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import {
   components,
@@ -20,6 +21,7 @@ export const loader = async () => {
   const entries = await getAllTodayILearnedEntries();
   return json({ entries });
 };
+export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();
