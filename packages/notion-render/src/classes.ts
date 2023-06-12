@@ -12,10 +12,14 @@ type RichTextAnnotationClass = `annotation_${RichTextAnnotation}`;
 type RichTextColorClass = `color_${RichTextColor}`;
 
 export type Classes = Record<keyof typeof DefaultComponents, ClassDefintion> &
-  Record<RichTextAnnotationClass | RichTextColorClass, string>;
+  Record<
+    RichTextAnnotationClass | RichTextColorClass | "rich_text_anchor",
+    string
+  >;
 
 // Classes
 export const EmptyClasses: Classes = {
+  rich_text_anchor: "",
   annotation_bold: "",
   annotation_code: "",
   annotation_italic: "",

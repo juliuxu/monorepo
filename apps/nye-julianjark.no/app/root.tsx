@@ -10,9 +10,25 @@ import {
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
+import manifest from "~/assets/manifest.webmanifest";
+import svgLogo from "~/assets/logo.svg";
+import pngLogo from "~/assets/logo.png";
+
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: tailwindCss },
+  {
+    rel: "icon",
+    href: svgLogo,
+  },
+  {
+    rel: "apple-touch-icon",
+    href: pngLogo,
+  },
+  {
+    rel: "manifest",
+    href: manifest,
+  },
 ];
 
 export default function App() {

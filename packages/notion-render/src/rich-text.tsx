@@ -48,7 +48,11 @@ export const RichText = ({ richText }: RichTextProps) => {
 
   // TODO: Link style
   if (richText.href !== null) {
-    element = <a href={richText.href}>{element}</a>;
+    element = (
+      <a href={richText.href} className={classes.rich_text_anchor}>
+        {element}
+      </a>
+    );
   }
   return element;
 };
