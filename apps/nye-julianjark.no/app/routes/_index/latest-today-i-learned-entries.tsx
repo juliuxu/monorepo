@@ -18,9 +18,7 @@ export function LatestTodayILearnedEntries() {
                 {dateFormatter.format(new Date(entry.created))}
               </time>
               <h3 className="card-title text-xl">{entry.title}</h3>
-              <p className="text-lg">
-                If a dog chews shoes whose shoes does he choose?
-              </p>
+              <p className="text-lg">{entry.summary}</p>
             </div>
           </article>
         </li>

@@ -70,7 +70,7 @@ export const classes: Partial<Classes> /*tw*/ = {
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus",
   column_list: {
-    root: "gap-x-[5vw] gap-y-[4vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
+    root: "gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
   },
   column: {
     root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-md",

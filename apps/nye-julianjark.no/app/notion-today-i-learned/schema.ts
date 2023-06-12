@@ -17,6 +17,7 @@ export const todayILearnedEntrySchema = z.object({
   created: z.string().datetime(),
   tags: z.array(tagSchema),
   blocks: z.array(blockSchema),
+  summary: z.string(),
   references: z.array(z.string().url()).optional(),
   published: z.preprocess(
     (val) => val || "PUBLISHED",
