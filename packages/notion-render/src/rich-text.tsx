@@ -2,13 +2,28 @@ import type { RichTextItem } from "@julianjark/notion-utils";
 import type { NotionRenderContextProps } from "./context";
 import { NotionRenderContext, useNotionRenderContext as ctx } from "./context";
 
+export interface RichTextAnchorProps {
+  richText: RichTextItem & { href: string };
+  children: React.ReactNode;
+}
+export const RichTextAnchor = ({ richText, children }: RichTextAnchorProps) => {
+  return (
+    <a href={richText.href} className={ctx().classes.rich_text_anchor}>
+      {children}
+    </a>
+  );
+};
+
 interface RichTextProps {
   richText: RichTextItem;
 }
 export const RichText = ({ richText }: RichTextProps) => {
   if (richText.type === "equation") return null;
 
-  const classes = ctx().classes;
+  const {
+    classes,
+    components: { rich_text_anchor: RichTextAnchorComponent },
+  } = ctx();
   const color = classes[`color_${richText.annotations.color}`];
 
   let element: JSX.Element;
@@ -46,12 +61,13 @@ export const RichText = ({ richText }: RichTextProps) => {
     );
   }
 
-  // TODO: Link style
-  if (richText.href !== null) {
+  if (richText.href !== null && RichTextAnchorComponent !== undefined) {
     element = (
-      <a href={richText.href} className={classes.rich_text_anchor}>
+      <RichTextAnchorComponent
+        richText={richText as RichTextItem & { href: string }}
+      >
         {element}
-      </a>
+      </RichTextAnchorComponent>
     );
   }
   return element;

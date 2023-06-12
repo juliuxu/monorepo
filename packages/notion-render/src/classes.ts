@@ -11,7 +11,10 @@ type RichTextColor = RichTextItem["annotations"]["color"];
 type RichTextAnnotationClass = `annotation_${RichTextAnnotation}`;
 type RichTextColorClass = `color_${RichTextColor}`;
 
-export type Classes = Record<keyof typeof DefaultComponents, ClassDefintion> &
+export type Classes = Omit<
+  Record<keyof typeof DefaultComponents, ClassDefintion>,
+  "rich_text_anchor"
+> &
   Record<
     RichTextAnnotationClass | RichTextColorClass | "rich_text_anchor",
     string

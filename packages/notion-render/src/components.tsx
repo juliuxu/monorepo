@@ -4,7 +4,7 @@ import { NotionRender } from ".";
 import { useNotionRenderContext as ctx } from "./context";
 import type { ListBlock, ListBlockType } from "./pseudo-components";
 import { BulletedList, NumberedList } from "./pseudo-components";
-import { RichTextList } from "./rich-text";
+import { RichTextAnchor, RichTextAnchorProps, RichTextList } from "./rich-text";
 
 export const H1 = ({ block }: BlockComponentProps) => {
   if (block.type !== "heading_1") return null;
@@ -364,44 +364,47 @@ export interface BlockComponentProps {
 export const DefaultComponents: Record<
   BlockObjectResponse["type"] | ListBlockType,
   React.ComponentType<BlockComponentProps> | undefined
-> = {
-  // These pseudo blocks are not part of the notion api
-  // but added here to make handling easier
-  bulleted_list: BulletedList,
-  numbered_list: NumberedList,
+> & { rich_text_anchor: React.ComponentType<RichTextAnchorProps> | undefined } =
+  {
+    // These pseudo blocks are not part of the notion api
+    // but added here to make handling easier
+    bulleted_list: BulletedList,
+    numbered_list: NumberedList,
 
-  bulleted_list_item: BulletedListItem,
-  numbered_list_item: NumberedListItem,
-  paragraph: Paragraph,
-  heading_1: H1,
-  heading_2: H2,
-  heading_3: H3,
-  quote: Quote,
-  to_do: Todo,
-  toggle: Toggle,
-  template: undefined,
-  synced_block: undefined,
-  child_page: undefined,
-  child_database: undefined,
-  equation: undefined,
-  code: Code,
-  callout: Callout,
-  divider: Divider,
-  breadcrumb: undefined,
-  table_of_contents: undefined,
-  column_list: ColumnList,
-  column: Column,
-  link_to_page: undefined,
-  table: Table,
-  table_row: TableRow,
-  embed: Embed,
-  bookmark: Bookmark,
-  image: Image,
-  video: Video,
-  pdf: undefined,
-  file: undefined,
-  audio: undefined,
-  link_preview: undefined,
-  unsupported: undefined,
-};
+    rich_text_anchor: RichTextAnchor,
+
+    bulleted_list_item: BulletedListItem,
+    numbered_list_item: NumberedListItem,
+    paragraph: Paragraph,
+    heading_1: H1,
+    heading_2: H2,
+    heading_3: H3,
+    quote: Quote,
+    to_do: Todo,
+    toggle: Toggle,
+    template: undefined,
+    synced_block: undefined,
+    child_page: undefined,
+    child_database: undefined,
+    equation: undefined,
+    code: Code,
+    callout: Callout,
+    divider: Divider,
+    breadcrumb: undefined,
+    table_of_contents: undefined,
+    column_list: ColumnList,
+    column: Column,
+    link_to_page: undefined,
+    table: Table,
+    table_row: TableRow,
+    embed: Embed,
+    bookmark: Bookmark,
+    image: Image,
+    video: Video,
+    pdf: undefined,
+    file: undefined,
+    audio: undefined,
+    link_preview: undefined,
+    unsupported: undefined,
+  };
 export type Components = typeof DefaultComponents;

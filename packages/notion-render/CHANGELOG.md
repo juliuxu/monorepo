@@ -1,5 +1,11 @@
 # @julianjark/notion-render
 
+## 0.7.0
+
+### Minor Changes
+
+- support adding custom render for links
+
 ## 0.6.0
 
 ### Minor Changes

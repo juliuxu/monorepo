@@ -1,5 +1,10 @@
 import type { Classes, Components } from "@julianjark/notion-render";
-import { NotionRender, RichTextListRender } from "@julianjark/notion-render";
+import {
+  NotionRender,
+  RichTextAnchor,
+  RichTextListRender,
+  useNotionRenderContext,
+} from "@julianjark/notion-render";
 import type { RichTextItem } from "@julianjark/notion-utils";
 import {
   getRichText,
@@ -8,7 +13,7 @@ import {
   type PageObjectResponse,
 } from "@julianjark/notion-utils";
 import { json, type V2_MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { z } from "zod";
 import { notionClient } from "~/clients.server";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
@@ -63,6 +68,23 @@ export const components: Partial<Components> = {
     }
     return null;
   },
+  rich_text_anchor: (props) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const ctx = useNotionRenderContext();
+    const url = new URL(props.richText.href);
+    if (url.hostname === "julianjark.no") {
+      return (
+        <Link
+          prefetch="intent"
+          to={url.pathname + url.search}
+          className={ctx.classes.rich_text_anchor}
+        >
+          {props.children}
+        </Link>
+      );
+    }
+    return <RichTextAnchor {...props} />;
+  },
 };
 
 export const classes: Partial<Classes> /*tw*/ = {
@@ -81,13 +103,13 @@ export const classes: Partial<Classes> /*tw*/ = {
   toggle: { root: "bg-primary" },
 };
 const sharedClasses /*tw*/ = {
-  text: "text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug",
+  typography: "text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug",
 };
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className={sharedClasses.text}>
+    <div className={sharedClasses.typography}>
       <header className="pl-[7.5vw] pr-[7.5vw] pt-[4vw]">
         <h1 className="text-6xl font-bold">{data.page.title}</h1>
         <div className="mt-4 text-3xl">
