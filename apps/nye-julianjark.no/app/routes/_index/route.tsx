@@ -15,6 +15,7 @@ import { UnpicNotionImage } from "~/components/unpic-notion-image";
 import { config } from "~/config.server";
 import { getTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
+import { ClearCacheButton } from "~/routes/api.clear-cache";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -107,6 +108,9 @@ export default function Index() {
           classes={classes}
         />
       </main>
+      <footer>
+        <ClearCacheButton />
+      </footer>
     </div>
   );
 }
