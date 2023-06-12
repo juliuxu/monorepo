@@ -50,10 +50,14 @@ export default function App() {
         <Links />
       </head>
       <body
-        className={`${sharedClasses.container} ${sharedClasses.typography}`}
+        className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col`}
       >
-        <Outlet />
-        <Footer />
+        <div>
+          <Outlet />
+        </div>
+        <div className="mt-auto">
+          <Footer />
+        </div>
 
         <ScrollRestoration />
         <Scripts />
@@ -65,7 +69,7 @@ export default function App() {
 
 function Footer() {
   return (
-    <>
+    <div className="mb-[6vw]">
       <hr className={classes.divider.root} />
 
       {/**
@@ -79,16 +83,28 @@ function Footer() {
         <ClearCacheButton>
           <img src={julianFace} alt="Illustrajon av fjeset til Julian" />
         </ClearCacheButton>
-        <nav className="flex flex-col">
-          <Link prefetch="intent" to="/kontakt">
+        <nav className="flex flex-col justify-center gap-2 text-xl">
+          <Link
+            prefetch="intent"
+            to="/kontakt"
+            className={classes.rich_text_anchor}
+          >
             Kontakt Julian Jark
           </Link>
-          <a href="https://www.linkedin.com/in/julianjark/">
+          <a
+            href="https://www.linkedin.com/in/julianjark/"
+            className={classes.rich_text_anchor}
+          >
             linkedin.julianjark
           </a>
-          <a href="https://github.com/juliuxu/">Github</a>
+          <a
+            href="https://github.com/juliuxu/"
+            className={classes.rich_text_anchor}
+          >
+            Github
+          </a>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }

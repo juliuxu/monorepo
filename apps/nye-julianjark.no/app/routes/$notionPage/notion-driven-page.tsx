@@ -43,7 +43,7 @@ export const components: Partial<Components> = {
 };
 
 export const classes /*tw*/ = {
-  heading_2: { root: "underline" },
+  heading_2: { root: "" },
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus",
   column_list: {
