@@ -16,9 +16,7 @@ export async function getNotionDrivenPages() {
 
 export async function getNotionDrivenPageWithBlocks(fromSlug: string) {
   const pages = await getNotionDrivenPages();
-  console.log("got pages", pages);
   const page = pages.find((page) => page.slug === fromSlug);
-  console.log("got page", page, fromSlug);
   if (!page) return undefined;
 
   const blocks = await notionClient.getBlocksWithChildren(page.id);
