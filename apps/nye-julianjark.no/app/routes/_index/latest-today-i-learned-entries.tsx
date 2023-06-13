@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index/route";
 import { classes } from "../$notionPage/notion-driven-page";
 
-const dateFormatter = new Intl.DateTimeFormat("nb-NO", {
+export const dateFormatter = new Intl.DateTimeFormat("nb-NO", {
   day: "numeric",
   month: "long",
   year: "numeric",

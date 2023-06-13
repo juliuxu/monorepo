@@ -22,7 +22,7 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
-const proseClasses /*tw*/ = {
+export const proseClasses /*tw*/ = {
   typography:
     "prose-headings:font-normal prose-headings:text-2xl prose-headings:md:text-3xl prose-headings:lg:text-[2.5vw] prose-headings:lg:leading-snug",
 };

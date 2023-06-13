@@ -45,7 +45,7 @@ export const components: Partial<Components> = {
 export const classes /*tw*/ = {
   heading_2: { root: "" },
   rich_text_anchor:
-    "underline focus:text-primary-focus hover:text-primary-focus",
+    "underline focus:text-primary-focus hover:text-primary-focus break-words",
   column_list: {
     root: "gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
   },

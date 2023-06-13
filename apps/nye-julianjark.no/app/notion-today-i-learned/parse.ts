@@ -5,6 +5,7 @@ import {
   getTextFromRichText,
   getTitle,
   type PageObjectResponse,
+  takeBlocksAfterHeader,
 } from "@julianjark/notion-utils";
 import type { TodayILearnedEntryBody, TodayILearnedEntryHead } from "./schema";
 import {
@@ -40,9 +41,32 @@ export function safeParseTodayILearnedEntryHead(fromPage: PageObjectResponse) {
 
 // Body
 export function mapTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
+  const [referenceBlocks, remainingBlocks] = takeBlocksAfterHeader(
+    "Referanser",
+    fromBlocks
+  );
+  const references = referenceBlocks
+    .map((x) => {
+      if (x.type === "bookmark") {
+        return x.bookmark.url;
+      }
+      if (x.type === "paragraph") {
+        const firstLink = x.paragraph.rich_text.find((r) => r.href !== null);
+        if (firstLink && firstLink.href !== null) {
+          return firstLink.href;
+        }
+      }
+
+      return undefined;
+    })
+    .filter(function <T>(x: T | undefined): x is T {
+      return x !== undefined;
+    });
+
   return {
-    blocks: fromBlocks,
-    summary: getSummary(fromBlocks),
+    blocks: remainingBlocks,
+    summary: getSummary(remainingBlocks),
+    references,
   } satisfies Relaxed<TodayILearnedEntryBody>;
 }
 export function parseTodayILearnedEntryBody(fromBlocks: BlockObjectResponse[]) {
