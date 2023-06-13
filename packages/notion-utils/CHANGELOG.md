@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.8.0
+
+### Minor Changes
+
+- add takeBlocksAfterHeader
+
 ## 0.7.0
 
 ### Minor Changes
