@@ -1,9 +1,11 @@
+import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
 import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntries } from "~/notion-today-i-learned/client";
+import { sharedClasses } from "~/root";
 import {
   components,
   classes,
@@ -23,6 +25,13 @@ export const loader = async () => {
 };
 export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
+const todayILearnedClasses /*tw*/ = {
+  ...classes,
+  column_list: {
+    root: "grid gap-0 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-flow-col sm:auto-cols-fr",
+  },
+} satisfies Partial<Classes>;
+
 export default function Component() {
   const data = useLoaderData<typeof loader>();
   return (
@@ -36,12 +45,10 @@ export default function Component() {
       <main className="mt-[12vw] flex flex-col gap-[12vw] md:mt-[6vw]">
         {data.entries.map((entry) => (
           <article key={entry.id}>
-            <h2 className="text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug">
-              {entry.title}
-            </h2>
+            <h2 className={sharedClasses.typography}>{entry.title}</h2>
             <div className="prose">
               <NotionRender
-                {...{ components, classes }}
+                {...{ components, classes: todayILearnedClasses }}
                 blocks={entry.blocks}
               />
             </div>

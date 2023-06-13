@@ -36,7 +36,7 @@ export const links: LinksFunction = () => [
 ];
 
 // TODO: This might belong in the tailwind config
-const sharedClasses /*tw*/ = {
+export const sharedClasses /*tw*/ = {
   container: "pl-[7.5vw] pr-[7.5vw]",
   typography: "text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug",
 };
