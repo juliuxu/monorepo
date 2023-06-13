@@ -2,7 +2,6 @@ import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
 import { getAllTodayILearnedEntries } from "./notion-today-i-learned/client";
 import {
-  getNotionDrivenPageWithBlocks,
   getNotionDrivenPages,
   getNotionDrivenPagesWithBlocks,
 } from "./routes/$notionPage/client";
