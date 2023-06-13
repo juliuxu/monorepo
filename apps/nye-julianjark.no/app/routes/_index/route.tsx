@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
 import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
-import { parseNotionDrivenPage } from "~/routes/$notionPage/schema";
+import { parseNotionDrivenPage } from "../$notionPage/parse";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
