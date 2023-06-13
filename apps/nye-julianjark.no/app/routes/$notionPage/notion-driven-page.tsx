@@ -61,8 +61,16 @@ export const classes /*tw*/ = {
 interface NotionPageProps {
   page: NotionDrivenPage;
   blocks: BlockObjectResponse[];
+
+  headerClassName?: string;
+  mainClassName?: string;
 }
-export function NotionPage({ page, blocks }: NotionPageProps) {
+export function NotionPage({
+  page,
+  blocks,
+  headerClassName,
+  mainClassName,
+}: NotionPageProps) {
   return (
     <div>
       <Header
@@ -70,12 +78,17 @@ export function NotionPage({ page, blocks }: NotionPageProps) {
         description={
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
+        className={headerClassName}
       />
       {/* <details>
         <summary>Debug</summary>
         <pre>{JSON.stringify(data.latestTodayILearnedEntries, null, 2)}</pre>
       </details> */}
-      <main className="mt-[12vw] md:mt-[6vw]">
+      <main
+        className={`mt-[12vw] md:mt-[6vw] ${
+          mainClassName ? mainClassName : ""
+        }`}
+      >
         <NotionRender
           blocks={blocks}
           components={components}
@@ -89,12 +102,14 @@ export function NotionPage({ page, blocks }: NotionPageProps) {
 export function Header({
   title,
   description,
+  className,
 }: {
   title: React.ReactNode;
   description: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <header className="pt-[4vw]">
+    <header className={`pt-[4vw] ${className ? className : ""}`}>
       <h1 className="text-6xl font-bold">{title}</h1>
       <p className="mt-4 max-w-4xl text-3xl">{description}</p>
     </header>

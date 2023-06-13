@@ -23,16 +23,11 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
 export const headers: HeadersFunction = () => config.cacheControlHeaders;
 
 export const proseClasses /*tw*/ = {
+  prose: "prose-lg prose max-w-full [&_p]:max-w-prose",
   typography:
     "prose-headings:font-normal prose-headings:text-2xl prose-headings:md:text-3xl prose-headings:lg:text-[2.5vw] prose-headings:lg:leading-snug",
 };
 export default function Component() {
   const data = useLoaderData<typeof loader>();
-  return (
-    <div
-      className={`prose-lg prose max-w-full [&_p]:max-w-prose ${proseClasses.typography}`}
-    >
-      <NotionPage {...data} />
-    </div>
-  );
+  return <NotionPage {...data} />;
 }
