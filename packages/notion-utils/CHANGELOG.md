@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.7.0
+
+### Minor Changes
+
+- export takeItemsIfHeaderMatches helper function
+
 ## 0.6.0
 
 ### Minor Changes
