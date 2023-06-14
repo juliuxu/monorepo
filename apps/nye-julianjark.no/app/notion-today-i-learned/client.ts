@@ -1,3 +1,4 @@
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
 import {
@@ -38,6 +39,7 @@ export async function getTodayILearnedEntriesFromHeads(
       chunk.map((entryHead) =>
         notionClient
           .getBlocksWithChildren(entryHead.id)
+          .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" }))
           .then((blocks) => parseTodayILearnedEntryBody(blocks))
           .then((entryBody) => parseTodayILearnedEntry(entryHead, entryBody))
       )

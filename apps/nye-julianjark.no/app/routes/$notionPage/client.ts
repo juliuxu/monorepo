@@ -3,6 +3,7 @@ import { config } from "~/config.server";
 import type { NotionDrivenPage, NotionDrivenPageAndBlocks } from "./schema";
 import { safeParseNotionDrivenPage } from "./parse";
 import { chunked, filterPublishedPredicate, typedBoolean } from "~/misc";
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
 
 export async function getNotionDrivenPages() {
   const pages = await notionClient.getDatabasePages(
@@ -21,6 +22,8 @@ export async function getNotionDrivenPageWithBlocks(fromSlug: string) {
   if (!page) return undefined;
 
   const blocks = await notionClient.getBlocksWithChildren(page.id);
+  await shikifyNotionBlocks(blocks, { theme: "dark-plus" });
+
   return { page, blocks };
 }
 
@@ -33,6 +36,7 @@ export async function getNotionDrivenPagesWithBlocks(
       chunk.map((page) =>
         notionClient
           .getBlocksWithChildren(page.id)
+          .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" }))
           .then(
             (blocks) => ({ page, blocks } satisfies NotionDrivenPageAndBlocks)
           )

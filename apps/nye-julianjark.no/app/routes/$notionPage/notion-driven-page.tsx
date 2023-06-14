@@ -11,9 +11,11 @@ import { Link } from "@remix-run/react";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
 import { LatestTodayILearnedEntries } from "../_index/latest-today-i-learned-entries";
 import type { NotionDrivenPage } from "./schema";
+import { NotionShikiCode } from "@julianjark/notion-shiki-code";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
+  code: NotionShikiCode,
   callout: ({ block }) => {
     if (block.type !== "callout") return null;
     const name = getTextFromRichText(block.callout.rich_text).trim();

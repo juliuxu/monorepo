@@ -6,6 +6,7 @@ import { config } from "~/config.server";
 import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import { parseNotionDrivenPage } from "../$notionPage/parse";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -17,7 +18,9 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 export const loader = async () => {
   const [page, blocks, latestTodayILearnedEntries] = await Promise.all([
     notionClient.getPage(config.landingPageId).then(parseNotionDrivenPage),
-    notionClient.getBlocksWithChildren(config.landingPageId),
+    notionClient
+      .getBlocksWithChildren(config.landingPageId)
+      .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" })),
     getLatestTodayILearnedEntries(),
   ]);
 
