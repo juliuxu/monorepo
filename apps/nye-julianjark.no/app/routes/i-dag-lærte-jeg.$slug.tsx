@@ -20,7 +20,6 @@ export default function Component() {
       behavior: "auto",
     });
   }, [key, slug]);
-  console.log("slug", slug);
   return (
     <script
       // Add an inline script to make sure the scroll happens immediately
