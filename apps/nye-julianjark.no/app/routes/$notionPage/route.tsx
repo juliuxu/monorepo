@@ -18,9 +18,9 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
   const result = await getNotionDrivenPageWithBlocks(notionPage);
   if (!result) throw new Response(null, { status: 404 });
 
-  return json(result);
+  return json(result, { headers: config.loaderCacheControlHeaders });
 };
-export const headers: HeadersFunction = () => config.cacheControlHeaders;
+export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 export const proseClasses /*tw*/ = {
   prose: "prose-lg prose max-w-full [&_p]:max-w-prose",

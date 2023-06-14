@@ -24,13 +24,16 @@ export const loader = async () => {
     getLatestTodayILearnedEntries(),
   ]);
 
-  return json({
-    page,
-    blocks,
-    latestTodayILearnedEntries,
-  });
+  return json(
+    {
+      page,
+      blocks,
+      latestTodayILearnedEntries,
+    },
+    { headers: config.loaderCacheControlHeaders }
+  );
 };
-export const headers: HeadersFunction = () => config.cacheControlHeaders;
+export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();
