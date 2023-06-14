@@ -2,7 +2,7 @@ import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
 import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import { sharedClasses } from "~/root";
@@ -39,6 +39,7 @@ export default function Component() {
         }
       />
       <main className="mt-[12vw] md:mt-[6vw]">
+        <Outlet />
         <div className="mx-auto flex w-full max-w-6xl flex-col space-y-[6vw] divide-y-2 divide-black [&>*:not(:first-child)]:pt-[6vw]">
           {data.entries.map((entry) => (
             <TodayILearnedArticle key={entry.id} entry={entry} />
