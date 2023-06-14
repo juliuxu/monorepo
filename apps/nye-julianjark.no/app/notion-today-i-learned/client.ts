@@ -39,7 +39,9 @@ export async function getTodayILearnedEntriesFromHeads(
       chunk.map((entryHead) =>
         notionClient
           .getBlocksWithChildren(entryHead.id)
-          .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" }))
+          .then((blocks) =>
+            shikifyNotionBlocks(blocks, { theme: config.shikiTheme })
+          )
           .then((blocks) => parseTodayILearnedEntryBody(blocks))
           .then((entryBody) => parseTodayILearnedEntry(entryHead, entryBody))
       )

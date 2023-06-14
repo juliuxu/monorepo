@@ -20,7 +20,9 @@ export const loader = async () => {
     notionClient.getPage(config.landingPageId).then(parseNotionDrivenPage),
     notionClient
       .getBlocksWithChildren(config.landingPageId)
-      .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" })),
+      .then((blocks) =>
+        shikifyNotionBlocks(blocks, { theme: config.shikiTheme })
+      ),
     getLatestTodayILearnedEntries(),
   ]);
 

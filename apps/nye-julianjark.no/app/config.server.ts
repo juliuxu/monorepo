@@ -1,3 +1,4 @@
+import type { Theme as ShikiTheme } from "shiki";
 import { z } from "zod";
 
 // ENV
@@ -40,4 +41,6 @@ export const config = {
   htmlCacheControlHeaders: {
     "Cache-Control": `public, max-age=${60}, must-revalidate, s-maxage=${1}, stale-while-revalidate=${WEEK_IN_SECONDS}`,
   },
-};
+
+  shikiTheme: "dark-plus" satisfies ShikiTheme,
+} as const;

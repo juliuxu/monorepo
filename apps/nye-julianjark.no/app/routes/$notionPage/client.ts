@@ -22,7 +22,7 @@ export async function getNotionDrivenPageWithBlocks(fromSlug: string) {
   if (!page) return undefined;
 
   const blocks = await notionClient.getBlocksWithChildren(page.id);
-  await shikifyNotionBlocks(blocks, { theme: "dark-plus" });
+  await shikifyNotionBlocks(blocks, { theme: config.shikiTheme });
 
   return { page, blocks };
 }
@@ -36,7 +36,9 @@ export async function getNotionDrivenPagesWithBlocks(
       chunk.map((page) =>
         notionClient
           .getBlocksWithChildren(page.id)
-          .then((blocks) => shikifyNotionBlocks(blocks, { theme: "dark-plus" }))
+          .then((blocks) =>
+            shikifyNotionBlocks(blocks, { theme: config.shikiTheme })
+          )
           .then(
             (blocks) => ({ page, blocks } satisfies NotionDrivenPageAndBlocks)
           )

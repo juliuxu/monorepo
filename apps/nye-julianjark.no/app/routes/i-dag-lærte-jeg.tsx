@@ -71,7 +71,7 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       >
         {entry.title}
       </h2>
-      <div className="prose-xl prose mt-4 max-w-6xl">
+      <div className={`prose-xl prose mt-4 max-w-6xl prose-code:rounded-md`}>
         <NotionRender
           {...{ components, classes: todayILearnedClasses }}
           blocks={entry.blocks}
