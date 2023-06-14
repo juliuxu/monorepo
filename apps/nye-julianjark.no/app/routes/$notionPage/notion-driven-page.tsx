@@ -50,7 +50,7 @@ export const classes /*tw*/ = {
     root: "gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
   },
   column: {
-    root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-md",
+    root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-lg",
   },
   divider: { root: "mt-[6vw] mb-[6vw] border-t-2 border-black" },
   color_orange: "text-secondary",

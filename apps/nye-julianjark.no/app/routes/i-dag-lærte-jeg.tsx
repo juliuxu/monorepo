@@ -13,6 +13,7 @@ import {
 } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/notion-today-i-learned/schema";
+import { slugify } from "@julianjark/notion-utils";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -63,7 +64,12 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       <time className="text-lg text-gray-700 sm:text-xl md:text-2xl">
         {dateFormatter.format(new Date(entry.created))}
       </time>
-      <h2 className={`mt-2 ${sharedClasses.typography}`}>{entry.title}</h2>
+      <h2
+        id={slugify(entry.title)}
+        className={`mt-2 ${sharedClasses.typography}`}
+      >
+        {entry.title}
+      </h2>
       <div className="prose-xl prose mt-4 max-w-6xl">
         <NotionRender
           {...{ components, classes: todayILearnedClasses }}
