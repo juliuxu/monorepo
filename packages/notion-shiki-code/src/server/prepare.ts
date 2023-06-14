@@ -2,6 +2,7 @@ import type { Lang, Theme } from "shiki";
 import {
   getTextFromRichText,
   type BlockObjectResponse,
+  RichTextItem,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import { shikiTransform } from "./shiki";
@@ -12,7 +13,7 @@ const optionsSchema = z.object({
 
   filename: z.string().optional(),
   highlightLines: z.array(z.number()).optional(),
-  copyable: z.boolean().default(true),
+  copyable: z.boolean().default(true).optional(),
 });
 export type Options = z.infer<typeof optionsSchema>;
 
@@ -26,6 +27,12 @@ export type ShikifiedCodeBlock = Extract<
     foregroundColor: string;
     backgroundColor: string;
   };
+};
+
+export type ShikifiedRichTextItem = RichTextItem & {
+  foregroundColor: string;
+  backgroundColor: string;
+  codeHtml: string;
 };
 
 /**
@@ -65,10 +72,20 @@ export async function shikifyNotionBlock(
  */
 export async function shikifyNotionBlocks(
   blocks: BlockObjectResponse[],
-  providedOptions: Partial<Options>
+  providedOptions: Partial<Options>,
+  includeRichText = true
 ) {
   for (const block of blocks) {
     await shikifyNotionBlock(block, providedOptions);
+
+    // Shikify rich text as well
+    if (includeRichText && "rich_text" in (block as any)[block.type]) {
+      await shikifyRichTextList(
+        (block as any)[block.type].rich_text,
+        providedOptions
+      );
+    }
+
     if (block.has_children) {
       await shikifyNotionBlocks(
         (block as any)[block.type]?.children ?? [],
@@ -77,4 +94,23 @@ export async function shikifyNotionBlocks(
     }
   }
   return blocks;
+}
+
+export async function shikifyRichTextList(
+  richTextList: RichTextItem[],
+  providedOptions: Options
+) {
+  for (const richText of richTextList) {
+    if (richText.type === "equation") continue;
+
+    if (richText.annotations.code) {
+      const { codeHtml, foregroundColor, backgroundColor } =
+        await shikiTransform(richText.plain_text, providedOptions, "inlined");
+      (richText as unknown as ShikifiedRichTextItem).codeHtml = codeHtml;
+      (richText as unknown as ShikifiedRichTextItem).foregroundColor =
+        foregroundColor;
+      (richText as unknown as ShikifiedRichTextItem).backgroundColor =
+        backgroundColor;
+    }
+  }
 }

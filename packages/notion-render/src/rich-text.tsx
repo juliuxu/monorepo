@@ -14,6 +14,20 @@ export const RichTextAnchor = ({ richText, children }: RichTextAnchorProps) => {
   );
 };
 
+export interface RichTextCodeProps {
+  richText: RichTextItem;
+}
+export const RichTextCode = ({ richText }: RichTextCodeProps) => {
+  const { classes } = ctx();
+  const color = classes[`color_${richText.annotations.color}`];
+
+  return (
+    <code className={color + " " + classes.annotation_code}>
+      {richText.plain_text}
+    </code>
+  );
+};
+
 interface RichTextProps {
   richText: RichTextItem;
 }
@@ -22,7 +36,10 @@ export const RichText = ({ richText }: RichTextProps) => {
 
   const {
     classes,
-    components: { rich_text_anchor: RichTextAnchorComponent },
+    components: {
+      rich_text_code: RichTextCodeComponent,
+      rich_text_anchor: RichTextAnchorComponent,
+    },
   } = ctx();
   const color = classes[`color_${richText.annotations.color}`];
 
@@ -35,12 +52,8 @@ export const RichText = ({ richText }: RichTextProps) => {
         {richText.plain_text}
       </strong>
     );
-  } else if (richText.annotations.code) {
-    element = (
-      <code className={color + " " + classes.annotation_code}>
-        {richText.plain_text}
-      </code>
-    );
+  } else if (richText.annotations.code && RichTextCodeComponent !== undefined) {
+    element = <RichTextCodeComponent richText={richText} />;
   } else if (richText.annotations.italic) {
     element = (
       <em className={color + " " + classes.annotation_italic}>

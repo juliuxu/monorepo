@@ -13,15 +13,19 @@ type RichTextColorClass = `color_${RichTextColor}`;
 
 export type Classes = Omit<
   Record<keyof typeof DefaultComponents, ClassDefintion>,
-  "rich_text_anchor"
+  "rich_text_code" | "rich_text_anchor"
 > &
   Record<
-    RichTextAnnotationClass | RichTextColorClass | "rich_text_anchor",
+    | RichTextAnnotationClass
+    | RichTextColorClass
+    | "rich_text_anchor"
+    | "rich_text_code",
     string
   >;
 
 // Classes
 export const EmptyClasses: Classes = {
+  rich_text_code: "",
   rich_text_anchor: "",
   annotation_bold: "",
   annotation_code: "",

@@ -19,7 +19,11 @@ const defaultTheme: Theme = "nord";
 /**
  * Transform text into HTML using shiki
  */
-export async function shikiTransform(codeText: string, options: Options) {
+export async function shikiTransform(
+  codeText: string,
+  options: Options,
+  type: "block" | "inlined" = "block"
+) {
   if (!highlighter) {
     highlighter = await shiki.getHighlighter({ theme: defaultTheme });
   }
@@ -29,17 +33,35 @@ export async function shikiTransform(codeText: string, options: Options) {
     await highlighter.loadTheme(theme);
   }
 
-  if (!highlighter.getLoadedLanguages().includes(options.language as Lang)) {
+  if (
+    options.language &&
+    !highlighter.getLoadedLanguages().includes(options.language as Lang)
+  ) {
     await highlighter.loadLanguage(options.language as Lang);
   }
 
+  const foregroundColor = highlighter.getForegroundColor(theme);
+  const backgroundColor = highlighter.getBackgroundColor(theme);
+  let codeHtml = highlighter.codeToHtml(codeText, {
+    ...options,
+    lang: options.language,
+    theme,
+  });
+
+  // Mutate the result.
+  // A better solution would be to use `codeToThemedTokens` and render the tokens ourselves
+  // For now, this is good enough
+  if (type === "inlined") {
+    codeHtml = codeHtml.replace(
+      /<pre.+<code>/g,
+      `<code style="background-color: ${backgroundColor}">`
+    );
+    codeHtml = codeHtml.replace(/<\/code><\/pre>/g, `</code>`);
+  }
+
   return {
-    codeHtml: highlighter.codeToHtml(codeText, {
-      ...options,
-      lang: options.language,
-      theme,
-    }),
-    foregroundColor: highlighter.getForegroundColor(theme),
-    backgroundColor: highlighter.getBackgroundColor(theme),
+    codeHtml,
+    foregroundColor,
+    backgroundColor,
   };
 }
