@@ -13,6 +13,7 @@ import type { Options } from "./prepare";
  * https://kentcdodds.com/blog/fixing-a-memory-leak-in-a-production-node-js-app#shiki-fix
  */
 let highlighter: Highlighter;
+const loaderPromises: Record<string, Promise<void> | undefined> = {};
 
 const defaultTheme: Theme = "nord";
 
@@ -30,14 +31,28 @@ export async function shikiTransform(
 
   const theme = options.theme ?? defaultTheme;
   if (theme && !highlighter.getLoadedThemes().includes(theme as Theme)) {
-    await highlighter.loadTheme(theme);
+    // Handle race conditions
+    const promise =
+      loaderPromises[theme] ??
+      highlighter
+        .loadTheme(theme)
+        // Fix: handle bug where multiple consumers try to load/access the theme,
+        // but it's for some reason not loaded yet
+        .then(() => new Promise((r) => setTimeout(r, 20)));
+    await promise;
   }
 
   if (
     options.language &&
     !highlighter.getLoadedLanguages().includes(options.language as Lang)
   ) {
-    await highlighter.loadLanguage(options.language as Lang);
+    // Handle race conditions
+    if (!loaderPromises[options.language]) {
+      loaderPromises[options.language] = highlighter.loadLanguage(
+        options.language as Lang
+      );
+    }
+    await loaderPromises[options.language];
   }
 
   const foregroundColor = highlighter.getForegroundColor(theme);

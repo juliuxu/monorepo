@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.13.0
+
+### Minor Changes
+
+- fix: loading bug
+
 ## 0.12.0
 
 ### Minor Changes
