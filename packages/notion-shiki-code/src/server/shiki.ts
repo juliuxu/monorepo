@@ -46,17 +46,49 @@ export async function shikiTransform(
     ...options,
     lang: options.language,
     theme,
+    lineOptions: options.highlight?.map((line) => ({
+      line,
+      classes: ["highlight"],
+    })),
   });
 
   // Mutate the result.
   // A better solution would be to use `codeToThemedTokens` and render the tokens ourselves
   // For now, this is good enough
+
+  // Inlined code
   if (type === "inlined") {
     codeHtml = codeHtml.replace(
       /<pre.+<code>/g,
       `<code style="background-color: ${backgroundColor}">`
     );
     codeHtml = codeHtml.replace(/<\/code><\/pre>/g, `</code>`);
+  }
+
+  // Filename
+  if (options.filename) {
+    codeHtml = codeHtml.replace(
+      `<pre`,
+      `<pre data-filename="${options.filename}"`
+    );
+  }
+
+  // Linenumbers
+  if (options.linenumbers) {
+    codeHtml = codeHtml.replace(`<pre`, `<pre data-line-numbers="true"`);
+  }
+
+  // Copyable
+  if (options.copyable) {
+    codeHtml = codeHtml.replace(`<pre`, `<pre data-copyable="true"`);
+  }
+
+  // Caption
+  if (options.caption) {
+    codeHtml = codeHtml.replace(
+      `<pre`,
+      `<pre data-caption="${options.caption}"`
+    );
   }
 
   return {

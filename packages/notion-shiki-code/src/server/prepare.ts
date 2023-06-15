@@ -7,13 +7,44 @@ import {
 import { z } from "zod";
 import { shikiTransform } from "./shiki";
 
+const stringBoolean = z.preprocess((val) => {
+  if (typeof val === "string") {
+    return val === "true";
+  }
+  return val;
+}, z.boolean());
+
 const optionsSchema = z.object({
   language: z.custom<Lang>((value) => typeof value === "string").optional(),
   theme: z.custom<Theme>((value) => typeof value === "string").optional(),
 
+  caption: z.string().optional(),
   filename: z.string().optional(),
-  highlightLines: z.array(z.number()).optional(),
-  copyable: z.boolean().default(true).optional(),
+  linenumbers: stringBoolean.default(false).optional(),
+  highlight: z
+    .preprocess((val) => {
+      if (typeof val === "string") {
+        return val
+          .split(",")
+          .flatMap((section) => {
+            const split = section.split("-");
+            // case 1: single number
+            if (split.length === 1) return Number.parseInt(split[0]);
+
+            // case 2: range
+            const first = Number.parseInt(split[0]);
+            const second = Number.parseInt(split[1]);
+            if (!Number.isInteger(first) || !Number.isInteger(second))
+              return NaN;
+
+            return [...Array(second - first + 1).keys()].map((x) => x + first);
+          })
+          .filter(Number.isInteger);
+      }
+      return val;
+    }, z.array(z.number()))
+    .optional(),
+  copyable: stringBoolean.default(true).optional(),
 });
 export type Options = z.infer<typeof optionsSchema>;
 
@@ -44,11 +75,15 @@ export async function shikifyNotionBlock(
 ) {
   if (block.type !== "code") return;
 
-  const blockOptions = optionsSchema.parse(
-    Object.fromEntries(
-      new URLSearchParams(getTextFromRichText(block.code.caption))
-    )
+  const captionOptions = Object.fromEntries(
+    new URLSearchParams(getTextFromRichText(block.code.caption))
   );
+  const blockOptions = optionsSchema.parse({
+    ...captionOptions,
+
+    // Backwards compatibility
+    copyable: captionOptions.copyable ?? captionOptions.copy,
+  });
   const options = {
     ...providedOptions,
     ...blockOptions,
@@ -65,6 +100,7 @@ export async function shikifyNotionBlock(
     foregroundColor;
   (block as unknown as ShikifiedCodeBlock).code.backgroundColor =
     backgroundColor;
+  (block as unknown as ShikifiedCodeBlock).code.options = options;
 }
 
 /**

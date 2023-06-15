@@ -1,5 +1,17 @@
 # @julianjark/notion-shiki-code
 
+## 0.11.0
+
+### Minor Changes
+
+- support copy
+
+## 0.10.0
+
+### Minor Changes
+
+- support filename, linenumbers, highlightning, and copyable
+
 ## 0.9.0
 
 ### Minor Changes
