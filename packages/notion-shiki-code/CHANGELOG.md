@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.12.0
+
+### Minor Changes
+
+- improve styling
+
 ## 0.11.0
 
 ### Minor Changes

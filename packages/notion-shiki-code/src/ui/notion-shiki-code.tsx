@@ -42,16 +42,15 @@ export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
   }
 
   return (
-    <figure style={{ position: "relative" }}>
+    <figure className={className} style={{ position: "relative" }}>
       <div
         style={{ display: "contents" }}
-        className={className}
         dangerouslySetInnerHTML={{ __html: block.code.codeHtml }}
       />
 
       {/* Copyable */}
       {block.code.options.copyable && (
-        <button
+        <div
           style={{
             position: "absolute",
             top: 12,
@@ -59,24 +58,31 @@ export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
             color: block.code.foregroundColor,
             display: "flex",
             gap: 6,
+            alignItems: "center",
           }}
           lang="en"
-          title="Copy to clipboard"
-          onClick={copyToClipboard}
           aria-live="polite"
         >
           {isCopied ? <span style={{ fontSize: 14 }}>Copied!</span> : null}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            width="24"
-            height="24"
-            aria-hidden="true"
+          <button
+            title="Copy to clipboard"
+            onClick={copyToClipboard}
+            style={{
+              opacity: isCopied ? 1 : undefined,
+            }}
           >
-            <path d="M7.5 18.98q-.63 0-1.06-.44T6 17.48v-14q0-.63.44-1.07t1.06-.44h11q.63 0 1.06.44T20 3.47v14q0 .63-.44 1.07t-1.06.44Zm0-1.5h11v-14h-11v14Zm-3 4.5q-.63 0-1.06-.44T3 20.48V6.15q0-.33.21-.54.21-.21.54-.21.33 0 .54.21.21.21.21.54v14.32h11.1q.33 0 .54.22.21.21.21.53 0 .33-.21.54-.22.22-.54.22Zm3-18.5v14-14Z" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <path d="M7.5 18.98q-.63 0-1.06-.44T6 17.48v-14q0-.63.44-1.07t1.06-.44h11q.63 0 1.06.44T20 3.47v14q0 .63-.44 1.07t-1.06.44Zm0-1.5h11v-14h-11v14Zm-3 4.5q-.63 0-1.06-.44T3 20.48V6.15q0-.33.21-.54.21-.21.54-.21.33 0 .54.21.21.21.21.54v14.32h11.1q.33 0 .54.22.21.21.21.53 0 .33-.21.54-.22.22-.54.22Zm3-18.5v14-14Z" />
+            </svg>
+          </button>
+        </div>
       )}
     </figure>
   );

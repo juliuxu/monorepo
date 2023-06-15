@@ -15,11 +15,31 @@ import {
   NotionShikiCode,
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
+import { classNames } from "~/misc";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
 
-  code: NotionShikiCode,
+  code: ({ block }) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const ctx = useNotionRenderContext();
+    return (
+      <NotionShikiCode
+        block={block}
+        className={classNames(
+          ctx.classes.code.root,
+          // Copy button border
+          "[&_button:hover]:border-white [&_button]:rounded-md [&_button]:border [&_button]:p-1.5",
+
+          // Copy button opacity on hover
+          "[&:active_button]:opacity-100 [&:hover_button]:opacity-100 [&_button]:opacity-0 [&_button]:transition-opacity",
+
+          // Line highlightning
+          "[&_.highlight]:after:absolute [&_.highlight]:after:left-0 [&_.highlight]:after:h-[2rem] [&_.highlight]:after:w-full [&_.highlight]:after:bg-teal-500 [&_.highlight]:after:opacity-20 [&_.highlight]:after:content-['_']"
+        )}
+      />
+    );
+  },
   rich_text_code: NotionShikiCodeRichText,
 
   callout: ({ block }) => {
