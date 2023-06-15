@@ -13,7 +13,7 @@ export default function Component() {
   const { key } = useLocation();
 
   useEffect(() => {
-    const element = document.getElementById(slug ?? "");
+    const element = document.getElementById(slug?.toLowerCase() ?? "");
     if (!element) return;
     element.scrollIntoView({
       block: "start",
