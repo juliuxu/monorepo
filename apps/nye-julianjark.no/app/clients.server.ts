@@ -8,7 +8,6 @@ import {
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   saveToDisk: process.env.NODE_ENV !== "production",
 });
 
@@ -23,7 +22,6 @@ export async function warmUpCache() {
 }
 
 // Warm the cache on startup
-// eslint-disable-next-line turbo/no-undeclared-env-vars
 if (process.env.NODE_ENV === "production") {
   (async () => {
     console.log("🛢️ Warming up cache...");

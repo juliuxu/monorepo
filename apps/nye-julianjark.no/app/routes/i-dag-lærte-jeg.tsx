@@ -12,7 +12,7 @@ import {
   Header,
 } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
-import type { TodayILearnedEntry } from "~/notion-today-i-learned/schema";
+import type { TodayILearnedEntry } from "~/notion-today-i-learned/schema-and-mapper";
 import { slugify } from "@julianjark/notion-utils";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
