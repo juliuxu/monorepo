@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.9.0
+
+### Minor Changes
+
+- update exports
+
 ## 0.8.0
 
 ### Minor Changes

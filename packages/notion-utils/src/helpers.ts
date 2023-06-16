@@ -186,6 +186,22 @@ export const getDatabasePropertySelectOptions = (
   return undefined;
 };
 
+export const getDatabasePropertyMultiSelectOptions = (
+  name: string,
+  fromDatabase: DatabaseObjectResponse
+) => {
+  const property = fromDatabase.properties[name];
+  if (property?.type === "multi_select") {
+    return property.multi_select.options.map((x) => ({
+      id: x.id,
+      color: x.color,
+      title: x.name,
+    }));
+  }
+
+  return undefined;
+};
+
 // Some typescript magic to extract the correct types
 export type RichText = Extract<
   BlockObjectResponse,

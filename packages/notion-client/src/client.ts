@@ -25,19 +25,21 @@ export const getClient = (tokenOrClient: TokenOrClient) => {
   };
 };
 
-type Sorts = Parameters<NotionClient["databases"]["query"]>[number]["sorts"];
-type Filter = Parameters<NotionClient["databases"]["query"]>[number]["filter"];
+export type Sorts = Parameters<
+  NotionClient["databases"]["query"]
+>[number]["sorts"];
+export type Filter = Parameters<
+  NotionClient["databases"]["query"]
+>[number]["filter"];
+export interface GetDatabasePagesOptions {
+  sorts?: Sorts;
+  filter?: Filter;
+}
 export const getDatabasePages =
   (notion: NotionClient) =>
   async (
     databaseId: string,
-    {
-      sorts,
-      filter,
-    }: {
-      sorts?: Sorts;
-      filter?: Filter;
-    } = {}
+    { sorts, filter }: GetDatabasePagesOptions = {}
   ) => {
     const response = await notion.databases.query({
       database_id: databaseId,
