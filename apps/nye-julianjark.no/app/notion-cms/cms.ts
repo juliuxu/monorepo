@@ -7,7 +7,7 @@ import type {
 import { z } from "zod";
 import { notionClient } from "~/clients.server";
 import { chunked, type Relaxed } from "~/misc";
-import { safeParseList } from "./parse";
+import { safeParseList } from "./safe-parse";
 
 // TODO: Find an ergonomic way to pass this to the abstraction
 
