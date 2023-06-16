@@ -30,7 +30,7 @@ export async function getNotionDrivenPageWithBlocks(fromSlug: string) {
 export async function getNotionDrivenPagesWithBlocks(
   fromPages: NotionDrivenPage[]
 ) {
-  const entries: Array<NotionDrivenPageAndBlocks | undefined> = [];
+  const entries: Array<NotionDrivenPageAndBlocks> = [];
   for (const chunk of chunked(fromPages, 5)) {
     const fetchedAndParsed = await Promise.all(
       chunk.map((page) =>
