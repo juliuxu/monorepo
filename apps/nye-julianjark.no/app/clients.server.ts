@@ -40,6 +40,14 @@ export async function warmUpCache() {
   await getAllTodayILearnedEntriesAndMetainfo();
   await getAllProjectsAndMetainfo();
   console.log("◈ warmed up cache for project pages");
+
+  // Hit the most important pages to rebuild the cdn/nginx cache
+  await Promise.all([
+    fetch("https://nye.julianjark.no"),
+    fetch("https://nye.julianjark.no/i-dag-lærte-jeg"),
+    fetch("https://nye.julianjark.no/prosjekter"),
+    fetch("https://nye.julianjark.no/om-julian"),
+  ]);
 }
 
 // Warm the cache on startup
