@@ -20,7 +20,7 @@ export const todayILearnedEntryHeadSchema = z.object({
   title: z.string().nonempty(),
   created: z.string().datetime(),
   tags: multiSelectSchema,
-  published: publishedStateSchema("DRAFT"),
+  published: publishedStateSchema("PUBLISHED"),
 });
 type TodayILearnedEntryHead = z.infer<typeof todayILearnedEntryHeadSchema>;
 
