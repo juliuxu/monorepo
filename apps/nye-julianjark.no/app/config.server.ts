@@ -24,6 +24,7 @@ export const config = {
   notionDrivenPagesDatabaseId: "f61d11c80e4b40e2a4329cde350bb31a",
   todayILearnedDatabaseId: "2114376d77f34c0390d81fa606a43fbb",
   projectsDatabaseId: "dfaf2149fb924749a37a6ba893758f5c",
+  featuredProject: "52d812e6cc344fea8b8884793507e261",
 
   /**
    * Cache loader in the client to support prefetching

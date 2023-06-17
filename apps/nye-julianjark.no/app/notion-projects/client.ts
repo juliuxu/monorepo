@@ -1,6 +1,6 @@
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
-import { getMetainfo, getPages } from "./schema-and-mapper";
+import { getMetainfo, getPage, getPages } from "./schema-and-mapper";
 import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
 async function getAllProjects() {
@@ -28,4 +28,8 @@ export async function getAllProjectsAndMetainfo() {
     getAllProjects(),
   ]);
   return { metainfo, projects };
+}
+
+export async function getFeaturedProject() {
+  return await getPage(notionClient)(config.featuredProject);
 }

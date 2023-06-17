@@ -57,7 +57,7 @@ interface ProjectComponentProps {
   project: Project;
   index: number;
 }
-function ProjectComponent({ project, index }: ProjectComponentProps) {
+export function ProjectComponent({ project, index }: ProjectComponentProps) {
   const coverImage =
     project.imageUrls[0] ?? `https://picsum.photos/1200/800?index=${index}`;
   const even = index % 2 === 0;

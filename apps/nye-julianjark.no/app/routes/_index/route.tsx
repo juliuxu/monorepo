@@ -5,6 +5,7 @@ import { config } from "~/config.server";
 import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
+import { getFeaturedProject } from "~/notion-projects/client";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -14,14 +15,18 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export const loader = async () => {
-  const [page, latestTodayILearnedEntries] = await Promise.all([
-    getNotionDrivenLandingPage(),
-    getLatestTodayILearnedEntries(),
-  ]);
+  const [page, featuredProject, latestTodayILearnedEntries] = await Promise.all(
+    [
+      getNotionDrivenLandingPage(),
+      getFeaturedProject(),
+      getLatestTodayILearnedEntries(),
+    ]
+  );
 
   return json(
     {
       page,
+      featuredProject,
       latestTodayILearnedEntries,
     },
     { headers: config.loaderCacheControlHeaders }

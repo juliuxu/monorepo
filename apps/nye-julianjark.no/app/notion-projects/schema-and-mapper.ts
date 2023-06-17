@@ -56,7 +56,7 @@ export const projectSchema = z.object({
 });
 export type Project = z.infer<typeof projectSchema>;
 
-export const { getPages } = cmsPage(projectSchema, (page) => {
+export const { getPage, getPages } = cmsPage(projectSchema, (page) => {
   return {
     id: page.id,
     title: getTitle(page),

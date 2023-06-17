@@ -5,28 +5,41 @@ import {
   getLatestTodayILearnedEntries,
 } from "./notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
-import { getAllProjectsAndMetainfo } from "./notion-projects/client";
+import {
+  getAllProjectsAndMetainfo,
+  getFeaturedProject,
+} from "./notion-projects/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
   saveToDisk: process.env.NODE_ENV !== "production",
 });
 
+/**
+ * Warm up the cache
+ * Since the cache is in-memory it needs to be repopulated on restarts and redeploys
+ */
 export async function warmUpCache() {
+  // The landing page
   await Promise.all([
     notionClient.getPage(config.landingPageId),
     notionClient.getBlocksWithChildren(config.landingPageId),
   ]);
-
+  await getFeaturedProject();
   await getLatestTodayILearnedEntries();
+  console.log("◈ warmed up cache for landing page");
 
+  // The notion driven pages
   const notionDrivenPages = await getNotionDrivenPages();
   for (const page of notionDrivenPages) {
     await notionClient.getBlocksWithChildren(page.id);
   }
+  console.log("◈ warmed up cache for notion driven pages");
 
+  // The project pages
   await getAllTodayILearnedEntriesAndMetainfo();
   await getAllProjectsAndMetainfo();
+  console.log("◈ warmed up cache for project pages");
 }
 
 // Warm the cache on startup

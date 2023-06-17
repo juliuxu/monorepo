@@ -15,6 +15,7 @@ import {
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
 import { classNames } from "~/misc";
+import { FeaturedProject } from "../_index/featured-project";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
@@ -43,11 +44,15 @@ export const components: Partial<Components> = {
 
   callout: ({ block }) => {
     if (block.type !== "callout") return null;
-    const name = getTextFromRichText(block.callout.rich_text).trim();
+    const text = getTextFromRichText(block.callout.rich_text);
 
-    if (name === "BLOCK_REPLACE_TODAY_I_LEARNED_LATEST") {
+    if (text.includes("BLOCK_REPLACE_LATEST_TODAY_I_LEARNED")) {
       return <LatestTodayILearnedEntries />;
     }
+    if (text.includes("BLOCK_REPLACE_FEATURED_PROJECT")) {
+      return <FeaturedProject />;
+    }
+
     return null;
   },
   rich_text_anchor: (props) => {
