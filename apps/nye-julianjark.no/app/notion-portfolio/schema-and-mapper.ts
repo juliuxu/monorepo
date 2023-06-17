@@ -1,12 +1,10 @@
 import {
   getDate,
   getUrl,
-  getImage,
   getMultiSelectAndColor,
   getSelectAndColor,
   getSelect,
   getTitle,
-  getDatabasePropertySelectOptions,
   getFileUrls,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
@@ -18,19 +16,19 @@ import {
   publishedStateSchema,
 } from "@julianjark/notion-cms";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
-import { cmsPage, cmsMetainfo } from "@julianjark/notion-cms";
+import { cmsPage } from "@julianjark/notion-cms";
 
-export const portfolioMetainfoSchema = z.object({
-  categories: z.array(selectSchema),
-  tags: multiSelectSchema,
-});
-export type PortfolioMetainfo = z.infer<typeof portfolioMetainfoSchema>;
-const {} = cmsMetainfo(portfolioMetainfoSchema, (database) => {
-  return {
-    categories: getDatabasePropertySelectOptions("Category", database),
-    tags: getDatabasePropertySelectOptions("Tags", database),
-  };
-});
+// export const portfolioMetainfoSchema = z.object({
+//   categories: z.array(selectSchema),
+//   tags: multiSelectSchema,
+// });
+// export type PortfolioMetainfo = z.infer<typeof portfolioMetainfoSchema>;
+// const {} = cmsMetainfo(portfolioMetainfoSchema, (database) => {
+//   return {
+//     categories: getDatabasePropertySelectOptions("Category", database),
+//     tags: getDatabasePropertySelectOptions("Tags", database),
+//   };
+// });
 
 export const portfolioSchema = z.object({
   id: z.string(),
