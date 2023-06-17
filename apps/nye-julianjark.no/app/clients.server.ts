@@ -5,6 +5,7 @@ import {
   getLatestTodayILearnedEntries,
 } from "./notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
+import { getAllPortfolioItems } from "./notion-portfolio/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
@@ -18,12 +19,14 @@ export async function warmUpCache() {
   ]);
 
   await getLatestTodayILearnedEntries();
-  await getAllTodayILearnedEntries();
 
   const notionDrivenPages = await getNotionDrivenPages();
   for (const page of notionDrivenPages) {
     await notionClient.getBlocksWithChildren(page.id);
   }
+
+  await getAllTodayILearnedEntries();
+  await getAllPortfolioItems();
 }
 
 // Warm the cache on startup

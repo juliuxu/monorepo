@@ -6,8 +6,8 @@ import {
   getSelectAndColor,
   getSelect,
   getTitle,
-  getCover,
   getDatabasePropertySelectOptions,
+  getFileUrls,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 
@@ -35,32 +35,33 @@ const {} = cmsMetainfo(portfolioMetainfoSchema, (database) => {
 export const portfolioSchema = z.object({
   id: z.string(),
   title: z.string(),
-  date: z.string().datetime(),
-  imageUrl: z.string().url(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  imageUrls: z.array(z.string().url()),
   codeLink: z.string().url().optional(),
   demoLink: z.string().url().optional(),
-  category: selectSchema,
+  forWhom: selectSchema,
   tags: multiSelectSchema,
-  published: publishedStateSchema("DRAFT"),
+  published: publishedStateSchema("PUBLISHED"),
 });
 export type Portfolio = z.infer<typeof portfolioSchema>;
 
-const {} = cmsPage(portfolioSchema, (page) => {
+export const { getPages } = cmsPage(portfolioSchema, (page) => {
   return {
     id: page.id,
     title: getTitle(page),
-    imageUrl:
-      getCover(page) &&
+    imageUrls: getFileUrls("Bilder", page)?.map((_, index) =>
       imageUrlBuilder({
-        type: "page-cover",
+        type: "page-property",
         pageId: page.id,
-      }),
-    date: getDate("Date", page),
-    image: getImage("Image", page),
-    codeLink: getUrl("Code", page),
-    demoLink: getUrl("Url", page),
+        property: "Bilder",
+        index,
+      })
+    ),
+    date: getDate("Dato", page),
+    codeLink: getUrl("Kode", page),
+    demoLink: getUrl("Link", page),
     tags: getMultiSelectAndColor("Tags", page),
-    category: getSelectAndColor("Category", page),
+    forWhom: getSelectAndColor("For hvem", page),
     published: getSelect("Published", page) as PublishedState | undefined,
   };
 });
