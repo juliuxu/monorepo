@@ -48,10 +48,9 @@ export const getNotionImageUrl =
         if (
           property &&
           property.type === "files" &&
-          property.files.length > 0 &&
-          property.files[0].type !== undefined
+          property.files[imageRequest.index ?? 0].type !== undefined
         ) {
-          const file = property.files[0];
+          const file = property.files[imageRequest.index ?? 0];
           if (file.type === "external") return file.external.url;
           else if (file.type === "file") return file.file.url;
         }

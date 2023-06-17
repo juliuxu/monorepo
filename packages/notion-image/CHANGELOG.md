@@ -1,5 +1,11 @@
 # @julianjark/notion-image
 
+## 0.8.0
+
+### Minor Changes
+
+- support indexes on image properties
+
 ## 0.7.0
 
 ### Minor Changes
