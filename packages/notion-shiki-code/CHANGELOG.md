@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.13.1
+
+### Patch Changes
+
+- fix defaults
+
 ## 0.13.0
 
 ### Minor Changes
