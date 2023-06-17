@@ -20,7 +20,8 @@ const optionsSchema = z.object({
 
   caption: z.string().optional(),
   filename: z.string().optional(),
-  linenumbers: stringBoolean.default(false).optional(),
+  linenumbers: stringBoolean.default(false),
+  copyable: stringBoolean.default(true),
   highlight: z
     .preprocess((val) => {
       if (typeof val === "string") {
@@ -44,7 +45,6 @@ const optionsSchema = z.object({
       return val;
     }, z.array(z.number()))
     .optional(),
-  copyable: stringBoolean.default(true).optional(),
 });
 export type Options = z.infer<typeof optionsSchema>;
 
@@ -84,10 +84,12 @@ export async function shikifyNotionBlock(
     // Backwards compatibility
     copyable: captionOptions.copyable ?? captionOptions.copy,
   });
+
   const options = {
     ...providedOptions,
     ...blockOptions,
   };
+
   const language = options.language ?? (block.code.language as Lang);
   const { codeHtml, foregroundColor, backgroundColor } = await shikiTransform(
     getTextFromRichText(block.code.rich_text),
