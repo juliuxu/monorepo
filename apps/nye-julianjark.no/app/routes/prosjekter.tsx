@@ -9,6 +9,7 @@ import { RichTextListRender } from "@julianjark/notion-render";
 import { Image } from "@unpic/react";
 import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
+import githubIcon from "~/assets/github-mark.svg";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -62,27 +63,65 @@ export function ProjectComponent({ project, index }: ProjectComponentProps) {
     project.imageUrls[0] ?? `https://picsum.photos/1200/800?index=${index}`;
   const even = index % 2 === 0;
   return (
-    <article>
-      <div className={classNames(classes.column_list.root, "")}>
-        <div className={`order-2 ${even ? "sm:order-1" : "sm:order-2"}`}>
-          <h2>{project.title}</h2>
-          <p className="mt-2">
-            <RichTextListRender
-              richTextList={project.description}
-              classes={classes}
-            />
-          </p>
-        </div>
-        <div className={`order-1 ${even ? "sm:order-2" : "sm:order-1"}`}>
-          <Image
-            aspectRatio={1200 / 800}
-            layout="fullWidth"
-            alt=""
-            src={coverImage}
-            priority={index < 2}
-            transformer={({ url }) => url}
+    <article className={classNames(classes.column_list.root, "group")}>
+      <div
+        className={`order-2 ${
+          even ? "sm:order-1" : "sm:order-2"
+        } flex flex-col`}
+      >
+        <h2 className="text-[1.1em] font-semibold">{project.title}</h2>
+        <p className="mt-2">
+          <RichTextListRender
+            richTextList={project.description}
+            classes={classes}
           />
-        </div>
+        </p>
+        {/* <div className="mt-auto" /> */}
+        <footer className="mt-2 flex flex-wrap gap-6 text-lg transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 md:text-2xl lg:text-[1.75vw] lg:opacity-0 [&_a:hover]:underline">
+          {project.demoLink && (
+            <a
+              title="Link til applikasjonen kjørende i produksjon"
+              href={project.demoLink}
+              className="flex items-center gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-[1em] w-[1em]"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                />
+              </svg>
+              Link
+            </a>
+          )}
+          {project.codeLink && (
+            <a
+              title="Se kildekoden på GitHub"
+              href={project.codeLink}
+              className="flex items-center gap-2"
+            >
+              <img alt="" className="h-[1em] w-[1em]" src={githubIcon} />
+              Github
+            </a>
+          )}
+        </footer>
+      </div>
+      <div className={`order-1 ${even ? "sm:order-2" : "sm:order-1"}`}>
+        <Image
+          aspectRatio={1200 / 800}
+          layout="fullWidth"
+          alt=""
+          src={coverImage}
+          priority={index < 2}
+          transformer={({ url }) => url}
+        />
       </div>
     </article>
   );
