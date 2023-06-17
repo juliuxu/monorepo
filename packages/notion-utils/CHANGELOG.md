@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.10.1
+
+### Patch Changes
+
+- fix typing
+
 ## 0.10.0
 
 ### Minor Changes

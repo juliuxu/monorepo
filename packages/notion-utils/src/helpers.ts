@@ -90,10 +90,15 @@ export const getFileUrls = (name: string, fromPage: PageObjectResponse) => {
     if (property.files.length === 0) return undefined;
 
     return property.files.map((file) => {
-      if (file?.type === "external") {
+      if (file.type === "external") {
         return file.external.url;
       } else if (file.type === "file") {
         return file.file.url;
+      }
+
+      // In practice this really should not happen
+      if (!file.type) {
+        throw new Error("File type is undefined");
       }
     });
   }
