@@ -71,15 +71,6 @@ export async function shikiTransform(
   // A better solution would be to use `codeToThemedTokens` and render the tokens ourselves
   // For now, this is good enough
 
-  // Inlined code
-  if (type === "inlined") {
-    codeHtml = codeHtml.replace(
-      /<pre.+<code>/g,
-      `<code style="background-color: ${backgroundColor}">`
-    );
-    codeHtml = codeHtml.replace(/<\/code><\/pre>/g, `</code>`);
-  }
-
   // Filename
   if (options.filename) {
     codeHtml = codeHtml.replace(
@@ -104,6 +95,15 @@ export async function shikiTransform(
       `<pre`,
       `<pre data-caption="${options.caption}"`
     );
+  }
+
+  // Inlined code
+  if (type === "inlined") {
+    codeHtml = codeHtml.replace(
+      /<pre.+<code>/g,
+      `<code style="background-color: ${backgroundColor}">`
+    );
+    codeHtml = codeHtml.replace(/<\/code><\/pre>/g, `</code>`);
   }
 
   return {

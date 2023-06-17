@@ -20,8 +20,8 @@ const optionsSchema = z.object({
 
   caption: z.string().optional(),
   filename: z.string().optional(),
-  linenumbers: stringBoolean.default(false),
-  copyable: stringBoolean.default(true),
+  linenumbers: stringBoolean.optional(),
+  copyable: stringBoolean.optional(),
   highlight: z
     .preprocess((val) => {
       if (typeof val === "string") {
@@ -81,8 +81,8 @@ export async function shikifyNotionBlock(
   const blockOptions = optionsSchema.parse({
     ...captionOptions,
 
-    // Backwards compatibility
-    copyable: captionOptions.copyable ?? captionOptions.copy,
+    linenumbers: captionOptions.linenumbers ?? "false",
+    copyable: captionOptions.copyable ?? captionOptions.copy ?? "true",
   });
 
   const options = {
