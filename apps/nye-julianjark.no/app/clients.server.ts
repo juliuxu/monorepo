@@ -1,11 +1,11 @@
 import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
 import {
-  getAllTodayILearnedEntries,
+  getAllTodayILearnedEntriesAndMetainfo,
   getLatestTodayILearnedEntries,
 } from "./notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
-import { getAllProjects } from "./notion-projects/client";
+import { getAllProjectsAndMetainfo } from "./notion-projects/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
@@ -25,8 +25,8 @@ export async function warmUpCache() {
     await notionClient.getBlocksWithChildren(page.id);
   }
 
-  await getAllTodayILearnedEntries();
-  await getAllProjects();
+  await getAllTodayILearnedEntriesAndMetainfo();
+  await getAllProjectsAndMetainfo();
 }
 
 // Warm the cache on startup

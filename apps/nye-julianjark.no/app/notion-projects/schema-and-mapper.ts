@@ -6,6 +6,10 @@ import {
   getSelect,
   getTitle,
   getFileUrls,
+  getRichText,
+  getDatabasePropertySelectOptions,
+  getTextFromRichText,
+  getDatabasePropertyMultiSelectOptions,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 
@@ -14,25 +18,34 @@ import {
   selectSchema,
   multiSelectSchema,
   publishedStateSchema,
+  richTextSchema,
 } from "@julianjark/notion-cms";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
-import { cmsPage } from "@julianjark/notion-cms";
+import { cmsPage, cmsMetainfo } from "@julianjark/notion-cms";
 
-// export const projectsMetainfoSchema = z.object({
-//   categories: z.array(selectSchema),
-//   tags: multiSelectSchema,
-// });
-// export type ProjectsMetainfo = z.infer<typeof projectsMetainfoSchema>;
-// const {} = cmsMetainfo(projectsMetainfoSchema, (database) => {
-//   return {
-//     categories: getDatabasePropertySelectOptions("Category", database),
-//     tags: getDatabasePropertySelectOptions("Tags", database),
-//   };
-// });
+export const projectsMetainfoSchema = z.object({
+  title: z.string(),
+  description: richTextSchema,
+  forWhom: z.array(selectSchema),
+  tags: multiSelectSchema,
+});
+export type ProjectsMetainfo = z.infer<typeof projectsMetainfoSchema>;
+export const { getMetainfo } = cmsMetainfo(
+  projectsMetainfoSchema,
+  (database) => {
+    return {
+      title: getTextFromRichText(database.title),
+      description: database.description,
+      forWhom: getDatabasePropertySelectOptions("For hvem", database),
+      tags: getDatabasePropertyMultiSelectOptions("Tags", database),
+    };
+  }
+);
 
 export const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
+  description: richTextSchema,
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   imageUrls: z.array(z.string().url()),
   codeLink: z.string().url().optional(),
@@ -47,6 +60,7 @@ export const { getPages } = cmsPage(projectSchema, (page) => {
   return {
     id: page.id,
     title: getTitle(page),
+    description: getRichText("Beskrivelse", page),
     imageUrls: getFileUrls("Bilder", page)?.map((_, index) =>
       imageUrlBuilder({
         type: "page-property",

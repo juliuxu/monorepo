@@ -4,7 +4,7 @@ import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
-import { getAllTodayILearnedEntries } from "~/notion-today-i-learned/client";
+import { getAllTodayILearnedEntriesAndMetainfo } from "~/notion-today-i-learned/client";
 import { sharedClasses } from "~/root";
 import {
   components,
@@ -14,17 +14,23 @@ import {
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/notion-today-i-learned/schema-and-mapper";
 import { slugify } from "@julianjark/notion-utils";
+import { getTextFromRichText } from "@julianjark/notion-utils";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: "I dag lærte jeg" },
-    { name: "description", content: "Her publiserer jeg småting jeg lærer" },
+    { title: data?.metainfo.title },
+    {
+      name: "description",
+      content: getTextFromRichText(data?.metainfo.description ?? []),
+    },
   ];
 };
-
 export const loader = async () => {
-  const entries = await getAllTodayILearnedEntries();
-  return json({ entries }, { headers: config.loaderCacheControlHeaders });
+  const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo();
+  return json(
+    { metainfo, entries },
+    { headers: config.loaderCacheControlHeaders }
+  );
 };
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
@@ -33,10 +39,8 @@ export default function Component() {
   return (
     <>
       <Header
-        title={"I dag lærte jeg"}
-        description={
-          "Her publiserer jeg småting jeg lærer. Jeg har en tendens til å glemme ting jeg har lært, så jeg skriver det ned her."
-        }
+        title={data.metainfo.title}
+        description={getTextFromRichText(data.metainfo.description)}
       />
       <main className="mt-[12vw] md:mt-[6vw]">
         <Outlet />

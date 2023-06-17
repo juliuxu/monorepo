@@ -1,9 +1,9 @@
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
-import { getPages } from "./schema-and-mapper";
+import { getMetainfo, getPages } from "./schema-and-mapper";
 import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
-export async function getAllProjects() {
+async function getAllProjects() {
   const pages = await getPages(notionClient)(config.projectsDatabaseId, {
     sorts: [
       {
@@ -19,8 +19,13 @@ export async function getAllProjects() {
     },
   });
 
-  return {
-    success: pages.success.filter(filterPublishedPredicate),
-    failed: pages.failed,
-  };
+  return pages.success.filter(filterPublishedPredicate);
+}
+
+export async function getAllProjectsAndMetainfo() {
+  const [metainfo, projects] = await Promise.all([
+    getMetainfo(notionClient)(config.projectsDatabaseId),
+    getAllProjects(),
+  ]);
+  return { metainfo, projects };
 }

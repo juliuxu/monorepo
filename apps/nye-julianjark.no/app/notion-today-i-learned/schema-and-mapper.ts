@@ -3,17 +3,35 @@ import {
   getMultiSelectAndColor,
   getSelect,
   takeBlocksAfterHeader,
+  getTextFromRichText,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import {
   blocksSchema,
+  cmsMetainfo,
   multiSelectSchema,
   publishedStateSchema,
+  richTextSchema,
 } from "@julianjark/notion-cms";
 import { cmsBlocks, cmsPage } from "@julianjark/notion-cms";
 import { getSummary } from "./get-summary";
 import { config } from "~/config.server";
 import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
+
+export const todayILearnedMetainfoSchema = z.object({
+  title: z.string(),
+  description: richTextSchema,
+});
+export type TodayILearnedMetainfo = z.infer<typeof todayILearnedMetainfoSchema>;
+export const { getMetainfo } = cmsMetainfo(
+  todayILearnedMetainfoSchema,
+  (database) => {
+    return {
+      title: getTextFromRichText(database.title),
+      description: database.description,
+    };
+  }
+);
 
 export const todayILearnedEntryHeadSchema = z.object({
   id: z.string(),

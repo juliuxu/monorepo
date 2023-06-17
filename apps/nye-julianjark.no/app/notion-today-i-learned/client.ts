@@ -1,7 +1,11 @@
 import { config } from "~/config.server";
 
 import { filterPublishedPredicate } from "~/misc";
-import { getHeadAndBodyListFromHeads, getPages } from "./schema-and-mapper";
+import {
+  getHeadAndBodyListFromHeads,
+  getMetainfo,
+  getPages,
+} from "./schema-and-mapper";
 import { notionClient } from "~/clients.server";
 
 export async function getTodayILearnedEntryHeads() {
@@ -21,7 +25,12 @@ export async function getLatestTodayILearnedEntries() {
   ).success;
 }
 
-export async function getAllTodayILearnedEntries() {
-  const entryHeads = await getTodayILearnedEntryHeads();
-  return (await getHeadAndBodyListFromHeads(notionClient)(entryHeads)).success;
+export async function getAllTodayILearnedEntriesAndMetainfo() {
+  const [metainfo, entryHeads] = await Promise.all([
+    getMetainfo(notionClient)(config.todayILearnedDatabaseId),
+    getTodayILearnedEntryHeads(),
+  ]);
+  const entries = (await getHeadAndBodyListFromHeads(notionClient)(entryHeads))
+    .success;
+  return { metainfo, entries };
 }
