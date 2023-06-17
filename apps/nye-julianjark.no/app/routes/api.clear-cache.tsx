@@ -3,6 +3,7 @@ import type { ActionFunction } from "@remix-run/node";
 import { notionClient } from "~/clients.server";
 
 import { useShortcut } from "~/components/use-shortcut";
+import julianFace from "~/assets/julian-face.svg";
 
 export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,8 +21,27 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
       {isSubmitting && (
         <div className="fixed left-0 top-0 z-50 h-[100vh] w-[100vw]">
           <div className="flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-50">
-            {/* <span className="loading loading-spinner w-12 text-primary"></span> */}
-            <div className="animate-bounce">{children}</div>
+            <div className="animate-bounce">
+              <span
+                className="text-white"
+                style={
+                  {
+                    height: 134,
+                    width: 80,
+                    display: "inline-block",
+                    backgroundColor: "currentColor",
+                    "-webkit-mask-size": "100%",
+                    "mask-size": "100%",
+                    "-webkit-mask-repeat": "no-repeat",
+                    "mask-repeat": "no-repeat",
+                    "-webkit-mask-position": "center",
+                    "mask-position": "center",
+                    "-webkit-mask-image": `url(${julianFace})`,
+                    maskImage: `url(${julianFace})`,
+                  } as any
+                }
+              />
+            </div>
             <p className="mt-2 bg-gradient-to-r from-white to-white bg-clip-text text-lg text-transparent">
               Laster fersk data...
             </p>
