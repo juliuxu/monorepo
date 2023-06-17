@@ -28,7 +28,7 @@ export const components: Partial<Components> = {
         className={classNames(
           ctx.classes.code.root,
           // Copy button border
-          "[&_button:hover]:border-white [&_button]:rounded-md [&_button]:border [&_button]:p-1.5",
+          "[&_button:hover]:border-white [&_button]:rounded-md [&_button]:border [&_button]:border-gray-400 [&_button]:bg-[--shiki-background] [&_button]:p-1.5",
 
           // Copy button opacity on hover
           "[&:active_button]:opacity-100 [&:hover_button]:opacity-100 [&_button]:opacity-0 [&_button]:transition-opacity",

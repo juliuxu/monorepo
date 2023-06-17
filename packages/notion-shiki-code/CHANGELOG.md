@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.13.3
+
+### Patch Changes
+
+- add css variables
+
 ## 0.13.2
 
 ### Patch Changes

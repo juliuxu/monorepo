@@ -42,7 +42,16 @@ export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
   }
 
   return (
-    <figure className={className} style={{ position: "relative" }}>
+    <figure
+      className={className}
+      style={
+        {
+          position: "relative",
+          "--shiki-foreground": block.code.foregroundColor,
+          "--shiki-background": block.code.backgroundColor,
+        } as any
+      }
+    >
       <div
         style={{ display: "contents" }}
         dangerouslySetInnerHTML={{ __html: block.code.codeHtml }}
