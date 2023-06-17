@@ -17,15 +17,13 @@ declare global {
 const WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
 export const config = {
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   notionToken: process.env.NOTION_TOKEN ?? "",
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   previewSecret: process.env.PREVIEW_SECRET ?? "",
 
   landingPageId: "eb763c82093c48d1955de8cc4ea450cb",
   notionDrivenPagesDatabaseId: "f61d11c80e4b40e2a4329cde350bb31a",
   todayILearnedDatabaseId: "2114376d77f34c0390d81fa606a43fbb",
-  portfolioDatabaseId: "dfaf2149fb924749a37a6ba893758f5c",
+  projectsDatabaseId: "dfaf2149fb924749a37a6ba893758f5c",
 
   /**
    * Cache loader in the client to support prefetching

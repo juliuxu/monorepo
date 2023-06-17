@@ -3,8 +3,8 @@ import { config } from "~/config.server";
 import { getPages } from "./schema-and-mapper";
 import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
-export async function getAllPortfolioItems() {
-  const pages = await getPages(notionClient)(config.portfolioDatabaseId, {
+export async function getAllProjects() {
+  const pages = await getPages(notionClient)(config.projectsDatabaseId, {
     sorts: [
       {
         property: "Dato",

@@ -5,7 +5,7 @@ import {
   getLatestTodayILearnedEntries,
 } from "./notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
-import { getAllPortfolioItems } from "./notion-portfolio/client";
+import { getAllProjects } from "./notion-projects/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
@@ -26,7 +26,7 @@ export async function warmUpCache() {
   }
 
   await getAllTodayILearnedEntries();
-  await getAllPortfolioItems();
+  await getAllProjects();
 }
 
 // Warm the cache on startup

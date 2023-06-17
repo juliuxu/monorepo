@@ -1,9 +1,9 @@
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { getAllPortfolioItems } from "~/notion-portfolio/client";
+import { getAllProjects } from "~/notion-projects/client";
 
 export const loader = async () => {
-  const items = await getAllPortfolioItems();
+  const items = await getAllProjects();
   return json({ items });
 };
 export const Component = () => {

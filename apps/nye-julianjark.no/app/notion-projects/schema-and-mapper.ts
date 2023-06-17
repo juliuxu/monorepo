@@ -18,19 +18,19 @@ import {
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 import { cmsPage } from "@julianjark/notion-cms";
 
-// export const portfolioMetainfoSchema = z.object({
+// export const projectsMetainfoSchema = z.object({
 //   categories: z.array(selectSchema),
 //   tags: multiSelectSchema,
 // });
-// export type PortfolioMetainfo = z.infer<typeof portfolioMetainfoSchema>;
-// const {} = cmsMetainfo(portfolioMetainfoSchema, (database) => {
+// export type ProjectsMetainfo = z.infer<typeof projectsMetainfoSchema>;
+// const {} = cmsMetainfo(projectsMetainfoSchema, (database) => {
 //   return {
 //     categories: getDatabasePropertySelectOptions("Category", database),
 //     tags: getDatabasePropertySelectOptions("Tags", database),
 //   };
 // });
 
-export const portfolioSchema = z.object({
+export const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -41,9 +41,9 @@ export const portfolioSchema = z.object({
   tags: multiSelectSchema,
   published: publishedStateSchema("PUBLISHED"),
 });
-export type Portfolio = z.infer<typeof portfolioSchema>;
+export type Project = z.infer<typeof projectSchema>;
 
-export const { getPages } = cmsPage(portfolioSchema, (page) => {
+export const { getPages } = cmsPage(projectSchema, (page) => {
   return {
     id: page.id,
     title: getTitle(page),
