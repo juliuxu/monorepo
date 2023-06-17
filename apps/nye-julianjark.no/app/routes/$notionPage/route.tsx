@@ -15,10 +15,10 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
   if (!notionPage) throw new Response("param not given", { status: 500 });
 
-  const result = await getNotionDrivenPageWithBlocks(notionPage);
-  if (!result) throw new Response(null, { status: 404 });
+  const page = await getNotionDrivenPageWithBlocks(notionPage);
+  if (!page) throw new Response(null, { status: 404 });
 
-  return json(result, { headers: config.loaderCacheControlHeaders });
+  return json({ page }, { headers: config.loaderCacheControlHeaders });
 };
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 

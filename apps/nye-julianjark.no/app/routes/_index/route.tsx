@@ -1,12 +1,10 @@
 import type { HeadersFunction } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
 import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
-import { parseNotionDrivenPage } from "../$notionPage/parse";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
-import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
+import { getNotionDrivenLandingPage } from "../$notionPage/client";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -16,20 +14,14 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export const loader = async () => {
-  const [page, blocks, latestTodayILearnedEntries] = await Promise.all([
-    notionClient.getPage(config.landingPageId).then(parseNotionDrivenPage),
-    notionClient
-      .getBlocksWithChildren(config.landingPageId)
-      .then((blocks) =>
-        shikifyNotionBlocks(blocks, { theme: config.shikiTheme })
-      ),
+  const [page, latestTodayILearnedEntries] = await Promise.all([
+    getNotionDrivenLandingPage(),
     getLatestTodayILearnedEntries(),
   ]);
 
   return json(
     {
       page,
-      blocks,
       latestTodayILearnedEntries,
     },
     { headers: config.loaderCacheControlHeaders }

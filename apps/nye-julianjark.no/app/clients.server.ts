@@ -1,10 +1,10 @@
 import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
-import { getAllTodayILearnedEntries } from "./notion-today-i-learned/client";
 import {
-  getNotionDrivenPages,
-  getNotionDrivenPagesWithBlocks,
-} from "./routes/$notionPage/client";
+  getAllTodayILearnedEntries,
+  getLatestTodayILearnedEntries,
+} from "./notion-today-i-learned/client";
+import { getNotionDrivenPages } from "./routes/$notionPage/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
@@ -16,9 +16,14 @@ export async function warmUpCache() {
     notionClient.getPage(config.landingPageId),
     notionClient.getBlocksWithChildren(config.landingPageId),
   ]);
+
+  await getLatestTodayILearnedEntries();
   await getAllTodayILearnedEntries();
+
   const notionDrivenPages = await getNotionDrivenPages();
-  await getNotionDrivenPagesWithBlocks(notionDrivenPages);
+  for (const page of notionDrivenPages) {
+    await notionClient.getBlocksWithChildren(page.id);
+  }
 }
 
 // Warm the cache on startup

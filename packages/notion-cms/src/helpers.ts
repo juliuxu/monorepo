@@ -38,6 +38,7 @@ export const blocksSchema = z.array(blockSchema);
 export const richTextItemSchema = z.custom<RichTextItem>((val) => {
   return val && typeof val === "object" && "type" in val && "text" in val;
 });
+export const richTextSchema = z.array(richTextItemSchema);
 
 export const publishedStateValues = [
   "PUBLISHED",

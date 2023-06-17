@@ -24,7 +24,6 @@ export function filterPublishedPredicate({
 }: {
   published: "PUBLISHED" | "UNPUBLISHED" | "DRAFT";
 }) {
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   if (process.env.NODE_ENV === "development") {
     return ["PUBLISHED", "DRAFT"].includes(published);
   }

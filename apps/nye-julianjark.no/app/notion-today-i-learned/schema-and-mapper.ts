@@ -9,8 +9,8 @@ import {
   blocksSchema,
   multiSelectSchema,
   publishedStateSchema,
-} from "~/notion-cms/helpers";
-import { cmsBlocks, cmsPage } from "~/notion-cms/cms";
+} from "@julianjark/notion-cms";
+import { cmsBlocks, cmsPage } from "@julianjark/notion-cms";
 import { getSummary } from "./get-summary";
 import { config } from "~/config.server";
 import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";

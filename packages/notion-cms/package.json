@@ -1,7 +1,7 @@
 {
-  "name": "@julianjark/notion-client",
-  "version": "0.8.0",
-  "description": "Helper client library Notion API",
+  "name": "@julianjark/notion-cms",
+  "version": "0.10.0",
+  "description": "CMS abstraction for Notion",
   "author": "Julian Jark",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -19,8 +19,7 @@
     "tsup": "6.7.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5",
-    "lru-cache": "9.1.2",
-    "memoize-fs": "2.2.0"
+    "@julianjark/notion-client": "*",
+    "@julianjark/notion-utils": "*"
   }
 }

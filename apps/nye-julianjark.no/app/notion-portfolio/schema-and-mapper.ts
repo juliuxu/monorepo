@@ -11,20 +11,15 @@ import {
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 
-import type { PublishedState } from "../notion-cms/helpers";
+import type { PublishedState } from "@julianjark/notion-cms";
 import {
   selectSchema,
   multiSelectSchema,
   publishedStateSchema,
-} from "../notion-cms/helpers";
+} from "@julianjark/notion-cms";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
-import { cmsPage, cmsMetainfo } from "../notion-cms/cms";
+import { cmsPage, cmsMetainfo } from "@julianjark/notion-cms";
 
-// Usage
-// We need to fetch three things
-// 1. Database / Metainformation
-// 2. Page / Head
-// 3. PageBlocks / Body
 export const portfolioMetainfoSchema = z.object({
   categories: z.array(selectSchema),
   tags: multiSelectSchema,

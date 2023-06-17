@@ -5,12 +5,11 @@ import {
   RichTextListRender,
   NotionRender,
 } from "@julianjark/notion-render";
-import type { BlockObjectResponse } from "@julianjark/notion-utils";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { Link } from "@remix-run/react";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
 import { LatestTodayILearnedEntries } from "../_index/latest-today-i-learned-entries";
-import type { NotionDrivenPage } from "./schema";
+import type { NotionDrivenPage } from "./schema-and-mapper";
 import {
   NotionShikiCode,
   NotionShikiCodeRichText,
@@ -88,14 +87,12 @@ export const classes /*tw*/ = {
 
 interface NotionPageProps {
   page: NotionDrivenPage;
-  blocks: BlockObjectResponse[];
 
   headerClassName?: string;
   mainClassName?: string;
 }
 export function NotionPage({
   page,
-  blocks,
   headerClassName,
   mainClassName,
 }: NotionPageProps) {
@@ -118,7 +115,7 @@ export function NotionPage({
         }`}
       >
         <NotionRender
-          blocks={blocks}
+          blocks={page.blocks}
           components={components}
           classes={classes}
         />

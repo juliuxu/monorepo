@@ -24,6 +24,7 @@ export const getClient = (tokenOrClient: TokenOrClient) => {
     getBlocksWithChildren: getBlocksWithChildren(notionClient),
   };
 };
+export type Client = ReturnType<typeof getClient>;
 
 export type Sorts = Parameters<
   NotionClient["databases"]["query"]

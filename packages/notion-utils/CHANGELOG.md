@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.10.0
+
+### Minor Changes
+
+- add notion-cms
+
 ## 0.9.0
 
 ### Minor Changes

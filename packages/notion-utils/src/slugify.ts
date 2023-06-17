@@ -28,4 +28,5 @@ export function slugify(text: string) {
  */
 export const findPageBySlugPredicate =
   (slug: string) => (page: PageObjectResponse) =>
-    slugify(getTitle(page) ?? "") === slug;
+    slugify(getTitle(page) ?? "").toLocaleLowerCase() ===
+    slug.toLocaleLowerCase();

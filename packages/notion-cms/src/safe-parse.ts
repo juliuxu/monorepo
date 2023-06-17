@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { Relaxed } from "~/misc";
+import type { Relaxed } from "./misc";
 
 /**
  * Safe parse a list of elements according to a schema
