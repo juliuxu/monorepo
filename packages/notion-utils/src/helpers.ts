@@ -87,8 +87,6 @@ export const getCover = (fromPage: PageObjectResponse) => {
 export const getFileUrls = (name: string, fromPage: PageObjectResponse) => {
   const property = fromPage.properties[name];
   if (property?.type === "files") {
-    if (property.files.length === 0) return undefined;
-
     return property.files.map((file) => {
       if (file.type === "external") {
         return file.external.url;

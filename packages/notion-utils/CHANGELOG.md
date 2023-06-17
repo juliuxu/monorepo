@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.10.2
+
+### Patch Changes
+
+- allow empty file urls
+
 ## 0.10.1
 
 ### Patch Changes
