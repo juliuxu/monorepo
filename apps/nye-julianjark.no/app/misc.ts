@@ -31,6 +31,7 @@ export function filterPublishedPredicate({
 }
 
 type ClassName =
+  | false
   | undefined
   | string
   | number
@@ -57,4 +58,29 @@ export function classNames(...args: ClassName[]): string {
     }
   }
   return resolved.filter(typedBoolean).join(" ");
+}
+
+/**
+ * Shuffle an array
+ *
+ * @param arr - The array to shuffle
+ * @returns a new shuffled array
+ */
+export function shuffled<T>(arr: ReadonlyArray<T> | T[]): T[] {
+  const _arr = arr.slice();
+
+  let currentIndex = _arr.length;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    const tmp = _arr[currentIndex];
+    _arr[currentIndex] = _arr[randomIndex];
+    _arr[randomIndex] = tmp;
+  }
+  return _arr;
 }
