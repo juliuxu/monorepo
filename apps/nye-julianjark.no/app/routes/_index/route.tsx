@@ -2,10 +2,10 @@ import type { HeadersFunction } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
-import { getLatestTodayILearnedEntries } from "~/notion-today-i-learned/client";
+import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/client";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
-import { getFeaturedProject } from "~/notion-projects/client";
+import { getFeaturedProject } from "~/service/notion-projects/client";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

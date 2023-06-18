@@ -3,12 +3,12 @@ import { getClientCached } from "@julianjark/notion-client";
 import {
   getAllTodayILearnedEntriesAndMetainfo,
   getLatestTodayILearnedEntries,
-} from "./notion-today-i-learned/client";
+} from "~/service/notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./routes/$notionPage/client";
 import {
   getAllProjectsAndMetainfo,
   getFeaturedProject,
-} from "./notion-projects/client";
+} from "~/service/notion-projects/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,

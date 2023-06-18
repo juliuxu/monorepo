@@ -4,7 +4,7 @@ import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
-import { getAllTodayILearnedEntriesAndMetainfo } from "~/notion-today-i-learned/client";
+import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
 import { sharedClasses } from "~/root";
 import {
   components,
@@ -12,7 +12,7 @@ import {
   Header,
 } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
-import type { TodayILearnedEntry } from "~/notion-today-i-learned/schema-and-mapper";
+import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { slugify } from "@julianjark/notion-utils";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 
