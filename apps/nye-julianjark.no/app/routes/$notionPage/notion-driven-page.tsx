@@ -5,17 +5,15 @@ import {
   RichTextListRender,
   NotionRender,
 } from "@julianjark/notion-render";
-import { getTextFromRichText } from "@julianjark/notion-utils";
 import { Link } from "@remix-run/react";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
-import { LatestTodayILearnedEntries } from "../_index/latest-today-i-learned-entries";
 import type { NotionDrivenPage } from "./schema-and-mapper";
 import {
   NotionShikiCode,
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
 import { classNames } from "~/misc";
-import { FeaturedProject } from "../_index/featured-project";
+import { CustomBlock } from "./custom-blocks";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
@@ -42,19 +40,8 @@ export const components: Partial<Components> = {
   },
   rich_text_code: NotionShikiCodeRichText,
 
-  callout: ({ block }) => {
-    if (block.type !== "callout") return null;
-    const text = getTextFromRichText(block.callout.rich_text);
+  callout: CustomBlock,
 
-    if (text.includes("BLOCK_REPLACE_LATEST_TODAY_I_LEARNED")) {
-      return <LatestTodayILearnedEntries />;
-    }
-    if (text.includes("BLOCK_REPLACE_FEATURED_PROJECT")) {
-      return <FeaturedProject />;
-    }
-
-    return null;
-  },
   rich_text_anchor: (props) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const ctx = useNotionRenderContext();

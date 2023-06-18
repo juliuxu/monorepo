@@ -36,20 +36,20 @@ export const detteKanJegSchema = z
     title: z.string(),
     type: selectSchema,
     tags: multiSelectSchema,
-    knowledge: z
+    competence: z
       .enum([
         "Kan men ønsker ikke å jobbe med",
         "Ønsker å lære mer om",
-        "Known",
+        "known",
       ])
-      .default("Known")
+      .default("known")
       .transform(
         (v) =>
           ((
             {
-              Known: "Known",
-              "Kan men ønsker ikke å jobbe med": "Known",
-              "Ønsker å lære mer om": "WantToLearnMore",
+              known: "known",
+              "Kan men ønsker ikke å jobbe med": "known",
+              "Ønsker å lære mer om": "want-to-learn-more",
             } as const
           )[v])
       ),
@@ -66,7 +66,7 @@ export const { getPages } = cmsPage(detteKanJegSchema, (page) => {
     title: getTitle(page),
     type: getSelectAndColor("Type", page),
     tags: getMultiSelectAndColor("Tags", page),
-    knowledge: getSelect("Ferdighet og Motivasjon", page) as any,
+    competence: getSelect("Ferdighet og Motivasjon", page) as any,
 
     // To keep typescript happy, the added options needs to be defined here
     // The alternative is to not have any type safety here at all

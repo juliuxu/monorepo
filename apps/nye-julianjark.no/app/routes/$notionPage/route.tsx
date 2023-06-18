@@ -4,6 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenPageWithBlocks } from "./client";
 import { config } from "~/config.server";
+import { getCustomBlocksData } from "./custom-blocks.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -18,7 +19,12 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
   const page = await getNotionDrivenPageWithBlocks(notionPage);
   if (!page) throw new Response(null, { status: 404 });
 
-  return json({ page }, { headers: config.loaderCacheControlHeaders });
+  const customBlocksData = await getCustomBlocksData(page.blocks);
+
+  return json(
+    { ...customBlocksData, page },
+    { headers: config.loaderCacheControlHeaders }
+  );
 };
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
