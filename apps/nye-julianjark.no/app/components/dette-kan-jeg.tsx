@@ -23,7 +23,6 @@ export function DetteKanJegWantToLearnMoreBlock() {
   const { detteKanJeg } = useLoaderData() as Awaited<
     ReturnType<typeof getDetteKanJegData>
   >;
-
   return (
     <KnowledgeList
       knowledge={detteKanJeg.filter(

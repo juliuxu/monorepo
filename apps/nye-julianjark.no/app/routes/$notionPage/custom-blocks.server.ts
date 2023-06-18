@@ -11,11 +11,13 @@ const dataFunctions: Record<
   () => Promise<Record<string, unknown>>
 > = {
   BLOCK_REPLACE_DETTE_KAN_JEG: getDetteKanJegData,
-  BLOCK_REPLACE_LATEST_TODAY_I_LEARNED: getDetteKanJegData,
-  BLOCK_REPLACE_FEATURED_PROJECT: () => {
+  BLOCK_REPLACE_DETTE_KAN_JEG_WANT_TO_LEARN_MORE: getDetteKanJegData,
+
+  // TODO
+  BLOCK_REPLACE_LATEST_TODAY_I_LEARNED: () => {
     throw new Error("Function not implemented.");
   },
-  BLOCK_REPLACE_DETTE_KAN_JEG_WANT_TO_LEARN_MORE: () => {
+  BLOCK_REPLACE_FEATURED_PROJECT: () => {
     throw new Error("Function not implemented.");
   },
 };
@@ -43,8 +45,8 @@ function findCustomBlocksDataFunctions(
         .flatMap((block) => {
           if (block.type === "callout") {
             const text = getTextFromRichText(block.callout.rich_text);
-            return Object.entries(dataFunctions).find(([key]) =>
-              text.includes(key)
+            return Object.entries(dataFunctions).find(
+              ([key]) => key === text
             )?.[1];
           }
           if (block.has_children) {

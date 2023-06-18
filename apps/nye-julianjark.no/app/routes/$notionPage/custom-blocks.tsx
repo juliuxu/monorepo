@@ -22,8 +22,8 @@ export function CustomBlock({ block }: BlockComponentProps) {
   const text = getTextFromRichText(block.callout.rich_text);
 
   return (
-    Object.entries(customBlocksToComponents).find(([key]) =>
-      text.includes(key)
+    Object.entries(customBlocksToComponents).find(
+      ([key]) => key === text
     )?.[1] ?? null
   );
 }
