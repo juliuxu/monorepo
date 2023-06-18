@@ -15,6 +15,7 @@ import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { slugify } from "@julianjark/notion-utils";
 import { getTextFromRichText } from "@julianjark/notion-utils";
+import { classNames } from "~/misc";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -57,7 +58,11 @@ export default function Component() {
 const todayILearnedClasses /*tw*/ = {
   ...classes,
   column_list: {
-    root: "grid gap-0 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-flow-col sm:auto-cols-fr",
+    root: classNames(
+      "grid gap-0 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-flow-col sm:auto-cols-fr",
+      "[&>div>*]:mt-0 [&>div>*]:mb-0",
+      "[&>div>*_pre]:mb-0"
+    ),
   },
   column: {
     root: "",
@@ -75,14 +80,16 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       >
         {entry.title}
       </h2>
-      <div className={`prose-xl prose mt-4 max-w-6xl prose-code:rounded-md`}>
+      <div
+        className={`prose-xl prose mt-4 max-w-6xl prose-code:rounded-md [&_pre]:text-base`}
+      >
         <NotionRender
           {...{ components, classes: todayILearnedClasses }}
           blocks={entry.blocks}
         />
       </div>
       {(entry.references?.length ?? 0) > 0 && (
-        <div>
+        <div className="mt-8 lg:mt-12">
           <h3 className="text-xl font-semibold md:text-2xl">Referanser</h3>
           <ul className="mt-3 flex flex-col gap-2">
             {entry.references?.map((reference, i) => (
