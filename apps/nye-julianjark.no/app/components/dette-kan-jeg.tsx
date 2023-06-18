@@ -43,7 +43,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
               "transition-all duration-700",
               "group-hover:scale-150",
               "group-hover:z-50",
-              item.isFeatured && "badge-lg font-semibold"
+              item.isFeatured && "badge-lg font-bold"
             )}
           >
             {item.title}
