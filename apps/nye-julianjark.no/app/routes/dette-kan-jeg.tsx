@@ -44,23 +44,24 @@ export default function Component() {
         </h1>
       </header>
       <main className="mt-[12vw] md:mt-[6vw]">
-        <section>
-          <h2 className="mb-4 md:mb-2">Dette kan jeg</h2>
-          <KnowledgeList
-            knowledge={data.detteKanJeg.filter(
-              ({ knowledge }) => knowledge === "Known"
-            )}
-          />
-        </section>
-        <hr className={classes.divider.root} />
-        <section>
-          <h2 className="mb-4 md:mb-2">Dette ønsker jeg å lære mer om</h2>
-          <KnowledgeList
-            knowledge={data.detteKanJeg.filter(
-              ({ knowledge }) => knowledge === "WantToLearnMore"
-            )}
-          />
-        </section>
+        <div className="mx-auto flex w-full flex-col space-y-[6vw] divide-y-2 divide-black [&>*:not(:first-child)]:pt-[6vw]">
+          <section>
+            <h2 className="mb-4 md:mb-2">Dette kan jeg</h2>
+            <KnowledgeList
+              knowledge={data.detteKanJeg.filter(
+                ({ knowledge }) => knowledge === "Known"
+              )}
+            />
+          </section>
+          <section>
+            <h2 className="mb-4 md:mb-2">Dette ønsker jeg å lære mer om</h2>
+            <KnowledgeList
+              knowledge={data.detteKanJeg.filter(
+                ({ knowledge }) => knowledge === "WantToLearnMore"
+              )}
+            />
+          </section>
+        </div>
       </main>
     </>
   );
@@ -68,18 +69,20 @@ export default function Component() {
 
 function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
   return (
-    <ul>
+    <ul className="flex flex-wrap">
       {knowledge.map((item) => (
-        <li
-          className={classNames(
-            "badge cursor-default hover:badge-info",
-            "transition-all duration-500",
-            "hover:scale-150",
-            item.isFeatured && "badge-lg font-semibold"
-          )}
-          key={item.id}
-        >
-          {item.title}
+        <li key={item.id} className="group">
+          <span
+            className={classNames(
+              "badge cursor-default group-hover:badge-info",
+              "transition-all duration-700",
+              "group-hover:scale-150",
+              "group-hover:z-50",
+              item.isFeatured && "badge-lg font-semibold"
+            )}
+          >
+            {item.title}
+          </span>
         </li>
       ))}
     </ul>
