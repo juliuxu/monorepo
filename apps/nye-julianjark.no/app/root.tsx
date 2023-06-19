@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import { type LinksFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -8,15 +8,18 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
 import manifest from "~/assets/manifest.webmanifest";
 import svgLogo from "~/assets/logo.svg";
 import pngLogo from "~/assets/logo.png";
+import backSvg from "~/assets/back.svg";
 import julianFace from "~/assets/julian-face.svg";
 import { ClearCacheButton } from "./routes/api.clear-cache";
-import { classes } from "./routes/$notionPage/notion-driven-page";
+import { classes } from "~/routes/$notionPage/notion-driven-page";
+import { classNames } from "./misc";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -41,6 +44,8 @@ export const sharedClasses /*tw*/ = {
   typography: "text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug",
 };
 export default function App() {
+  const location = useLocation();
+  const isLanding = location.pathname === "/";
   return (
     <html lang="no" className="scroll-smooth">
       <head>
@@ -52,6 +57,20 @@ export default function App() {
       <body
         className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col`}
       >
+        <header
+          className={classNames(
+            isLanding ? "mb-[4vw]" : "mb-[8vw] pt-[4vw] md:mb-[4vw]"
+          )}
+        >
+          <nav
+            className={classNames(isLanding && "hidden", "grid grid-cols-12")}
+          >
+            <Link to="/" className="">
+              <p className="sr-only">Til hovedside</p>
+              <img src={backSvg} alt="" />
+            </Link>
+          </nav>
+        </header>
         <div>
           <Outlet />
         </div>

@@ -89,7 +89,7 @@ export function NotionPage({
   mainClassName,
 }: NotionPageProps) {
   return (
-    <div>
+    <main className={`${mainClassName ? mainClassName : ""}`}>
       <Header
         title={page.title}
         description={
@@ -97,22 +97,14 @@ export function NotionPage({
         }
         className={headerClassName}
       />
-      {/* <details>
-        <summary>Debug</summary>
-        <pre>{JSON.stringify(data.latestTodayILearnedEntries, null, 2)}</pre>
-      </details> */}
-      <main
-        className={`mt-[12vw] md:mt-[6vw] ${
-          mainClassName ? mainClassName : ""
-        }`}
-      >
+      <div className="mt-[12vw] md:mt-[6vw]">
         <NotionRender
           blocks={page.blocks}
           components={components}
           classes={classes}
         />
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
 
@@ -126,7 +118,7 @@ export function Header({
   className?: string;
 }) {
   return (
-    <header className={`pt-[4vw] ${className ? className : ""}`}>
+    <header className={`${className ? className : ""}`}>
       <h1 className="text-6xl font-bold">{title}</h1>
       <p className="mt-4 max-w-4xl text-3xl">{description}</p>
     </header>

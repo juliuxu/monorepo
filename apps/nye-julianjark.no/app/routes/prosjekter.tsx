@@ -33,24 +33,18 @@ export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 export default function Component() {
   const data = useLoaderData<typeof loader>();
   return (
-    <>
-      <header className={`pt-[4vw]`}>
+    <main>
+      <header>
         <h1 className="mt-8 max-w-4xl text-4xl">
           <RichTextListRender richTextList={data.metainfo.description} />
         </h1>
       </header>
-      <main className="mt-[12vw] md:mt-[6vw]">
-        <div className="mx-auto flex w-full max-w-4xl flex-col space-y-[6vw] divide-y-2 divide-black [&>*:not(:first-child)]:pt-[6vw]">
-          {data.projects.map((project, index) => (
-            <ProjectComponent
-              key={project.id}
-              project={project}
-              index={index}
-            />
-          ))}
-        </div>
-      </main>
-    </>
+      <div className="mx-auto mt-[12vw] flex w-full max-w-4xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
+        {data.projects.map((project, index) => (
+          <ProjectComponent key={project.id} project={project} index={index} />
+        ))}
+      </div>
+    </main>
   );
 }
 

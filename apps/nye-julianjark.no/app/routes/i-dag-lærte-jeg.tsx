@@ -38,20 +38,18 @@ export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 export default function Component() {
   const data = useLoaderData<typeof loader>();
   return (
-    <>
+    <main>
       <Header
         title={data.metainfo.title}
         description={getTextFromRichText(data.metainfo.description)}
       />
-      <main className="mt-[12vw] md:mt-[6vw]">
-        <Outlet />
-        <div className="mx-auto flex w-full max-w-4xl flex-col space-y-[6vw] divide-y-2 divide-black [&>*:not(:first-child)]:pt-[6vw]">
-          {data.entries.map((entry) => (
-            <TodayILearnedArticle key={entry.id} entry={entry} />
-          ))}
-        </div>
-      </main>
-    </>
+      <Outlet />
+      <div className="mx-auto mt-[12vw] flex w-full max-w-4xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
+        {data.entries.map((entry) => (
+          <TodayILearnedArticle key={entry.id} entry={entry} />
+        ))}
+      </div>
+    </main>
   );
 }
 
