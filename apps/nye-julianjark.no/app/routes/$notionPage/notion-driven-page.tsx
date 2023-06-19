@@ -62,11 +62,11 @@ export const components: Partial<Components> = {
 };
 
 export const classes /*tw*/ = {
-  heading_2: { root: "mb-8" },
+  heading_2: { root: "" },
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
   column_list: {
-    root: "gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
+    root: "mt-6 lg:mt-6 gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
   },
   column: {
     root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-lg",
