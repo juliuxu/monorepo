@@ -62,7 +62,7 @@ export const components: Partial<Components> = {
 };
 
 export const classes /*tw*/ = {
-  heading_2: { root: "" },
+  heading_2: { root: "mb-8" },
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
   column_list: {
