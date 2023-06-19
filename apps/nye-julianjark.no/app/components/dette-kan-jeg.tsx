@@ -35,21 +35,33 @@ export function DetteKanJegWantToLearnMoreBlock() {
 function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
   return (
     <ul className="flex flex-wrap">
-      {knowledge.map((item) => (
-        <li key={item.id} className="group">
+      {knowledge.map((item) => {
+        const element = (
           <span
             className={classNames(
-              "badge cursor-default group-hover:badge-info",
-              "transition-all duration-700",
+              "badge group-hover:badge-info",
+              "transition-all duration-500",
               "group-hover:scale-150",
               "group-hover:z-50",
-              item.isFeatured && "badge-lg font-bold"
+              item.isFeatured && "badge-lg font-bold",
+              item.link ? "cursor-pointer" : "cursor-default"
             )}
           >
             {item.title}
           </span>
-        </li>
-      ))}
+        );
+        return (
+          <li key={item.id} className="group">
+            {item.link ? (
+              <a href={item.link} target="_blank" rel="noreferrer">
+                {element}
+              </a>
+            ) : (
+              element
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

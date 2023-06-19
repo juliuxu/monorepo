@@ -4,6 +4,7 @@ import {
   getSelectAndColor,
   getTextFromRichText,
   getTitle,
+  getUrl,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 
@@ -34,6 +35,7 @@ export const detteKanJegSchema = z
   .object({
     id: z.string(),
     title: z.string(),
+    link: z.string().url().optional(),
     type: selectSchema,
     tags: multiSelectSchema,
     competence: z
@@ -64,6 +66,7 @@ export const { getPages } = cmsPage(detteKanJegSchema, (page) => {
   return {
     id: page.id,
     title: getTitle(page),
+    link: getUrl("Link", page),
     type: getSelectAndColor("Type", page),
     tags: getMultiSelectAndColor("Tags", page),
     competence: getSelect("Ferdighet og Motivasjon", page) as any,
