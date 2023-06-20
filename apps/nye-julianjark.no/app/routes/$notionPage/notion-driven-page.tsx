@@ -14,6 +14,7 @@ import {
 } from "@julianjark/notion-shiki-code";
 import { classNames } from "~/misc";
 import { CustomBlock } from "./custom-blocks";
+import { demotedHeadings } from "./demoted-headings";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
@@ -88,6 +89,8 @@ export function NotionPage({
   headerClassName,
   mainClassName,
 }: NotionPageProps) {
+  const shouldDemote = page.blocks.some((block) => block.type === "heading_1");
+
   return (
     <main className={`${mainClassName ? mainClassName : ""}`}>
       <Header
@@ -100,7 +103,10 @@ export function NotionPage({
       <div className="mt-[12vw] md:mt-[6vw]">
         <NotionRender
           blocks={page.blocks}
-          components={components}
+          components={{
+            ...components,
+            ...(shouldDemote ? demotedHeadings : {}),
+          }}
           classes={classes}
         />
       </div>

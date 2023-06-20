@@ -12,16 +12,24 @@ import {
   RichTextList,
 } from "./rich-text";
 
-export const H1 = ({ block }: BlockComponentProps) => {
+interface ExtendedableProps {
+  as?: keyof JSX.IntrinsicElements;
+}
+export const H1 = ({
+  block,
+  as: Component = "h1",
+  ...rest
+}: BlockComponentProps & ExtendedableProps) => {
   if (block.type !== "heading_1") return null;
   const element = (
-    <h1
+    <Component
       className={`${ctx().classes[`color_${block.heading_1.color}`]} ${
         ctx().classes.heading_1.root
       }`}
+      {...rest}
     >
       <RichTextList richTextList={block.heading_1.rich_text} />
-    </h1>
+    </Component>
   );
   if (block.has_children) {
     return (
@@ -32,16 +40,21 @@ export const H1 = ({ block }: BlockComponentProps) => {
   }
   return element;
 };
-export const H2 = ({ block }: BlockComponentProps) => {
+export const H2 = ({
+  block,
+  as: Component = "h2",
+  ...rest
+}: BlockComponentProps & ExtendedableProps) => {
   if (block.type !== "heading_2") return null;
   const element = (
-    <h2
+    <Component
       className={`${ctx().classes[`color_${block.heading_2.color}`]} ${
         ctx().classes.heading_2.root
       }`}
+      {...rest}
     >
       <RichTextList richTextList={block.heading_2.rich_text} />
-    </h2>
+    </Component>
   );
   if (block.has_children) {
     return (
@@ -52,16 +65,21 @@ export const H2 = ({ block }: BlockComponentProps) => {
   }
   return element;
 };
-export const H3 = ({ block }: BlockComponentProps) => {
+export const H3 = ({
+  block,
+  as: Component = "h2",
+  ...rest
+}: BlockComponentProps & ExtendedableProps) => {
   if (block.type !== "heading_3") return null;
   const element = (
-    <h3
+    <Component
       className={`${ctx().classes[`color_${block.heading_3.color}`]} ${
         ctx().classes.heading_3.root
       }`}
+      {...rest}
     >
       <RichTextList richTextList={block.heading_3.rich_text} />
-    </h3>
+    </Component>
   );
   if (block.has_children) {
     return (

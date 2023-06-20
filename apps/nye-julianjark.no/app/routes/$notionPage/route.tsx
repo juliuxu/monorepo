@@ -5,6 +5,10 @@ import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenPageWithBlocks } from "./client";
 import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
+import { useHydrated } from "~/components/use-hydrated";
+import { slugify } from "@julianjark/notion-utils";
+import { useMemo } from "react";
+import { TableOfConents } from "~/components/table-of-contents";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -22,7 +26,7 @@ export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
   const customBlocksData = await getCustomBlocksData(page.blocks);
 
   return json(
-    { ...customBlocksData, page },
+    { ...customBlocksData, page, featureTableOfContents: false },
     { headers: config.loaderCacheControlHeaders }
   );
 };
@@ -35,5 +39,21 @@ export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 // };
 export default function Component() {
   const data = useLoaderData<typeof loader>();
-  return <NotionPage {...data} />;
+  if (data.featureTableOfContents) {
+    return (
+      <div className="grid grid-cols-12">
+        <div className="col-span-2">
+          <TableOfConents />
+        </div>
+        <div className="col-span-10">
+          <NotionPage {...data} />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <>
+      <NotionPage {...data} />
+    </>
+  );
 }
