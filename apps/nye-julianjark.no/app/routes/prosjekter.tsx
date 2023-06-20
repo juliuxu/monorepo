@@ -35,7 +35,7 @@ export default function Component() {
   return (
     <main>
       <header>
-        <h1 className="mt-8 max-w-4xl text-4xl">
+        <h1 className="mt-8 text-4xl">
           <RichTextListRender richTextList={data.metainfo.description} />
         </h1>
       </header>
