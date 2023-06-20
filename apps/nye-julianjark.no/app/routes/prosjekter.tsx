@@ -35,7 +35,7 @@ export default function Component() {
   return (
     <main>
       <header>
-        <h1 className="mt-8 max-w-4xl text-4xl">
+        <h1 className="mt-8 max-w-4xl text-4xl lg:text-[3.5vw] lg:leading-snug">
           <RichTextListRender richTextList={data.metainfo.description} />
         </h1>
       </header>
