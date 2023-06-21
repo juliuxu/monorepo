@@ -1,4 +1,4 @@
-import type { Lang, Theme } from "shiki";
+import { BUNDLED_LANGUAGES, type Lang, type Theme } from "shiki";
 import {
   getTextFromRichText,
   type BlockObjectResponse,
@@ -90,7 +90,14 @@ export async function shikifyNotionBlock(
     ...blockOptions,
   };
 
-  const language = options.language ?? (block.code.language as Lang);
+  let language = options.language ?? (block.code.language as Lang);
+  if (
+    !BUNDLED_LANGUAGES.some(
+      (bundledLanguage) => bundledLanguage.id === language
+    )
+  )
+    (language as string) = "";
+
   const { codeHtml, foregroundColor, backgroundColor } = await shikiTransform(
     getTextFromRichText(block.code.rich_text),
     { ...options, language }
