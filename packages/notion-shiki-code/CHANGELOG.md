@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.13.4
+
+### Patch Changes
+
+- fix crash when language is not known
+
 ## 0.13.3
 
 ### Patch Changes
