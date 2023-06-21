@@ -161,10 +161,11 @@ export const Toggle = ({ block }: BlockComponentProps) => {
   );
 };
 export const Code = ({ block }: BlockComponentProps) => {
+  const { classes } = ctx();
   if (block.type !== "code") return null;
   return (
-    <pre className={ctx().classes.code.root}>
-      <code className={`language-${block.code.language}`}>
+    <pre className={classes.code.root}>
+      <code className={`language-${block.code.language} ${classes.code}`}>
         <RichTextList richTextList={block.code.rich_text} />
       </code>
     </pre>

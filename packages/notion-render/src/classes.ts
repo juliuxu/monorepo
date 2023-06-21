@@ -97,6 +97,7 @@ export const EmptyClasses: Classes = {
   },
   code: {
     root: "",
+    code: "",
   },
   callout: {
     root: "",

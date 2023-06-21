@@ -67,6 +67,15 @@ const todayILearnedClasses /*tw*/ = {
   column: {
     root: "",
   },
+  code: {
+    // Full bleed on mobile
+    root: classNames(
+      "relative left-[50%] ml-[-50vw] right-[50%] mr-[-50vw] w-screen md:left-0 md:ml-0 md:w-full",
+      "[&_pre]:pl-[7.5vw] [&_pre]:pr-[7.5vw] md:[&_pre]:pl-5 md:[&_pre]:pr-5",
+      "[&_pre]:pt-6 [&_pre]:pb-6 md:[&_pre]:pt-4 md:[&_pre]:pb-4",
+      "[&_pre]:rounded-none md:[&_pre]:rounded-lg"
+    ),
+  },
 } satisfies Partial<Classes>;
 export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
   return (
@@ -82,8 +91,11 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       </h2>
       <div
         className={classNames(
-          `prose-xl prose mt-8 max-w-6xl`,
-          "prose-code:rounded-md [&_pre]:text-base"
+          "mt-8",
+          `prose-xl prose max-w-6xl`,
+          "prose-pre:text-base",
+          "prose-code:rounded-md",
+          "prose-p:overflow-scroll"
         )}
       >
         <NotionRender
