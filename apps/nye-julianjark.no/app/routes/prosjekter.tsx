@@ -1,4 +1,8 @@
-import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
@@ -10,6 +14,7 @@ import { Image } from "@unpic/react";
 import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
+import { isPreviewMode } from "~/is-preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -21,8 +26,10 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async () => {
-  const { metainfo, projects } = await getAllProjectsAndMetainfo();
+export const loader = async ({ request }: LoaderArgs) => {
+  const { metainfo, projects } = await getAllProjectsAndMetainfo(
+    isPreviewMode(request)
+  );
   return json(
     { metainfo, projects },
     { headers: config.loaderCacheControlHeaders }

@@ -50,13 +50,11 @@ export const publishedStateSchema = (
 ) => z.preprocess((val) => val || defaultValue, z.enum(publishedStateValues));
 export type PublishedState = z.infer<ReturnType<typeof publishedStateSchema>>;
 
-export function filterPublishedPredicate({
-  published,
-}: {
-  published: PublishedState;
-}) {
-  if (process.env.NODE_ENV === "development") {
-    return ["PUBLISHED", "DRAFT"].includes(published);
-  }
-  return published === "PUBLISHED";
-}
+export const filterPublishedPredicate =
+  (isPreviewMode: boolean) =>
+  ({ published }: { published: PublishedState }) => {
+    if (isPreviewMode) {
+      return ["PUBLISHED", "DRAFT"].includes(published);
+    }
+    return published === "PUBLISHED";
+  };

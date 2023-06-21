@@ -1,4 +1,4 @@
-import type { HeadersFunction } from "@remix-run/node";
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
@@ -6,6 +6,7 @@ import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
+import { isPreviewMode } from "~/is-preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -14,12 +15,12 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderArgs) => {
   const [page, featuredProject, latestTodayILearnedEntries] = await Promise.all(
     [
       getNotionDrivenLandingPage(),
       getFeaturedProject(),
-      getLatestTodayILearnedEntries(),
+      getLatestTodayILearnedEntries(isPreviewMode(request)),
     ]
   );
 

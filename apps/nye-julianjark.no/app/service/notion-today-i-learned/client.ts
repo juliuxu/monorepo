@@ -1,34 +1,36 @@
 import { config } from "~/config.server";
 
-import { filterPublishedPredicate } from "~/misc";
 import {
   getHeadAndBodyListFromHeads,
   getMetainfo,
   getPages,
 } from "./schema-and-mapper";
 import { notionClient } from "~/clients.server";
+import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
-export async function getTodayILearnedEntryHeads() {
+export async function getTodayILearnedEntryHeads(isPreview: boolean) {
   const entryHeads = await getPages(notionClient)(
     config.todayILearnedDatabaseId,
     {
       sorts: [{ timestamp: "created_time", direction: "descending" }],
     }
   );
-  return entryHeads.success.filter(filterPublishedPredicate);
+  return entryHeads.success.filter(filterPublishedPredicate(isPreview));
 }
 
-export async function getLatestTodayILearnedEntries() {
-  const entryHeads = await getTodayILearnedEntryHeads();
+export async function getLatestTodayILearnedEntries(isPreview: boolean) {
+  const entryHeads = await getTodayILearnedEntryHeads(isPreview);
   return (
     await getHeadAndBodyListFromHeads(notionClient)(entryHeads.slice(0, 3))
   ).success;
 }
 
-export async function getAllTodayILearnedEntriesAndMetainfo() {
+export async function getAllTodayILearnedEntriesAndMetainfo(
+  isPreview: boolean
+) {
   const [metainfo, entryHeads] = await Promise.all([
     getMetainfo(notionClient)(config.todayILearnedDatabaseId),
-    getTodayILearnedEntryHeads(),
+    getTodayILearnedEntryHeads(isPreview),
   ]);
   const entries = (await getHeadAndBodyListFromHeads(notionClient)(entryHeads))
     .success;

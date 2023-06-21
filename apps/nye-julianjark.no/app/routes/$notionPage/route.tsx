@@ -9,6 +9,7 @@ import { useHydrated } from "~/components/use-hydrated";
 import { slugify } from "@julianjark/notion-utils";
 import { useMemo } from "react";
 import { TableOfConents } from "~/components/table-of-contents";
+import { isPreviewMode } from "~/is-preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -17,10 +18,16 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async ({ params: { notionPage } }: LoaderArgs) => {
+export const loader = async ({
+  params: { notionPage },
+  request,
+}: LoaderArgs) => {
   if (!notionPage) throw new Response("param not given", { status: 500 });
 
-  const page = await getNotionDrivenPageWithBlocks(notionPage);
+  const page = await getNotionDrivenPageWithBlocks(
+    notionPage,
+    isPreviewMode(request)
+  );
   if (!page) throw new Response(null, { status: 404 });
 
   const customBlocksData = await getCustomBlocksData(page.blocks);

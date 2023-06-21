@@ -26,19 +26,19 @@ export async function warmUpCache() {
     notionClient.getBlocksWithChildren(config.landingPageId),
   ]);
   await getFeaturedProject();
-  await getLatestTodayILearnedEntries();
+  await getLatestTodayILearnedEntries(false);
   console.log("◈ warmed up cache for landing page");
 
   // The notion driven pages
-  const notionDrivenPages = await getNotionDrivenPages();
+  const notionDrivenPages = await getNotionDrivenPages(false);
   for (const page of notionDrivenPages) {
     await notionClient.getBlocksWithChildren(page.id);
   }
   console.log("◈ warmed up cache for notion driven pages");
 
   // The project pages
-  await getAllTodayILearnedEntriesAndMetainfo();
-  await getAllProjectsAndMetainfo();
+  await getAllTodayILearnedEntriesAndMetainfo(false);
+  await getAllProjectsAndMetainfo(false);
   console.log("◈ warmed up cache for project pages");
 
   // Hit the most important pages to rebuild the cdn/nginx cache

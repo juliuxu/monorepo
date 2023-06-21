@@ -3,6 +3,7 @@ import { z } from "zod";
 
 // ENV
 const envVariables = z.object({
+  NODE_ENV: z.enum(["development", "production"]).default("production"),
   NOTION_TOKEN: z.string().nonempty(),
   PREVIEW_SECRET: z.string().nonempty(),
 });
@@ -17,6 +18,7 @@ declare global {
 const WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
 export const config = {
+  nodeEnv: process.env.NODE_ENV ?? "production",
   notionToken: process.env.NOTION_TOKEN ?? "",
   previewSecret: process.env.PREVIEW_SECRET ?? "",
 

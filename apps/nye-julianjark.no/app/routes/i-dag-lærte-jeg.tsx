@@ -1,6 +1,10 @@
 import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
-import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
@@ -16,6 +20,7 @@ import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema
 import { slugify } from "@julianjark/notion-utils";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
+import { isPreviewMode } from "~/is-preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -26,8 +31,11 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
     },
   ];
 };
-export const loader = async () => {
-  const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo();
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo(
+    isPreviewMode(request)
+  );
   return json(
     { metainfo, entries },
     { headers: config.loaderCacheControlHeaders }

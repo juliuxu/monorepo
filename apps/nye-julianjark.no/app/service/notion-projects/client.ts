@@ -3,7 +3,7 @@ import { config } from "~/config.server";
 import { getMetainfo, getPage, getPages } from "./schema-and-mapper";
 import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
-async function getAllProjects() {
+async function getAllProjects(isPreview: boolean) {
   const pages = await getPages(notionClient)(config.projectsDatabaseId, {
     sorts: [
       {
@@ -19,13 +19,13 @@ async function getAllProjects() {
     },
   });
 
-  return pages.success.filter(filterPublishedPredicate);
+  return pages.success.filter(filterPublishedPredicate(isPreview));
 }
 
-export async function getAllProjectsAndMetainfo() {
+export async function getAllProjectsAndMetainfo(isPreview: boolean) {
   const [metainfo, projects] = await Promise.all([
     getMetainfo(notionClient)(config.projectsDatabaseId),
-    getAllProjects(),
+    getAllProjects(isPreview),
   ]);
   return { metainfo, projects };
 }

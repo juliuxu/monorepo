@@ -19,17 +19,6 @@ export function chunked<T>(l: T[], chunkSize: number) {
   return result;
 }
 
-export function filterPublishedPredicate({
-  published,
-}: {
-  published: "PUBLISHED" | "UNPUBLISHED" | "DRAFT";
-}) {
-  if (process.env.NODE_ENV === "development") {
-    return ["PUBLISHED", "DRAFT"].includes(published);
-  }
-  return published === "PUBLISHED";
-}
-
 type ClassName =
   | false
   | undefined

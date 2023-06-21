@@ -1,5 +1,11 @@
 # @julianjark/notion-cms
 
+## 0.11.0
+
+### Minor Changes
+
+- update filterPublishedPredicate
+
 ## 0.10.0
 
 ### Minor Changes
