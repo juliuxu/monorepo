@@ -24,22 +24,20 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
             <div className="animate-bounce">
               <span
                 className="text-white"
-                style={
-                  {
-                    height: 134,
-                    width: 80,
-                    display: "inline-block",
-                    backgroundColor: "currentColor",
-                    "-webkit-mask-size": "100%",
-                    "mask-size": "100%",
-                    "-webkit-mask-repeat": "no-repeat",
-                    "mask-repeat": "no-repeat",
-                    "-webkit-mask-position": "center",
-                    "mask-position": "center",
-                    "-webkit-mask-image": `url(${julianFace})`,
-                    maskImage: `url(${julianFace})`,
-                  } as any
-                }
+                style={{
+                  height: 134,
+                  width: 80,
+                  display: "inline-block",
+                  backgroundColor: "currentColor",
+                  WebkitMaskSize: "100%",
+                  maskSize: "100%",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskImage: `url(${julianFace})`,
+                  maskImage: `url(${julianFace})`,
+                }}
               />
             </div>
             <p className="mt-2 bg-gradient-to-r from-white to-white bg-clip-text text-lg text-transparent">

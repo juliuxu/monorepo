@@ -45,7 +45,7 @@ export const sharedClasses /*tw*/ = {
 };
 export default function App() {
   const location = useLocation();
-  const isLanding = location.pathname === "/";
+  const isLandingPage = location.pathname === "/";
   return (
     <html lang="no" className="scroll-smooth">
       <head>
@@ -59,11 +59,14 @@ export default function App() {
       >
         <header
           className={classNames(
-            isLanding ? "mb-[4vw]" : "mb-[8vw] pt-[4vw] md:mb-[4vw]"
+            isLandingPage ? "mb-[4vw]" : "mb-[8vw] pt-[4vw] md:mb-[4vw]"
           )}
         >
           <nav
-            className={classNames(isLanding && "hidden", "grid grid-cols-12")}
+            className={classNames(
+              isLandingPage && "hidden",
+              "grid grid-cols-12"
+            )}
           >
             <Link to="/" className="">
               <p className="sr-only">Til hovedside</p>

@@ -76,12 +76,15 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       </time>
       <h2
         id={slugify(entry.title)}
-        className={`mt-2 ${sharedClasses.typography}`}
+        className={`mt-2 ${sharedClasses.typography} scroll-mt-[calc(6vw+2.5rem)]`}
       >
         {entry.title}
       </h2>
       <div
-        className={`prose-xl prose mt-4 max-w-6xl prose-code:rounded-md [&_pre]:text-base`}
+        className={classNames(
+          `prose-xl prose mt-8 max-w-6xl`,
+          "prose-code:rounded-md [&_pre]:text-base"
+        )}
       >
         <NotionRender
           {...{ components, classes: todayILearnedClasses }}
