@@ -1,9 +1,10 @@
-import { ActionArgs, SerializeFrom, createCookie } from "@remix-run/node";
+import type { ActionArgs, SerializeFrom } from "@remix-run/node";
+import { createCookie } from "@remix-run/node";
 import { useRouteLoaderData } from "@remix-run/react";
 import { z } from "zod";
 import { useShortcut } from "~/components/use-shortcut";
 import { config } from "~/config.server";
-import { loader } from "~/root";
+import type { loader } from "~/root";
 
 // Schema
 const preivewModeSchema = z.object({
@@ -65,7 +66,7 @@ export const action = async ({ request }: ActionArgs) => {
   return new Response("OK", { status: 200, headers });
 };
 
-export function PreviewMode() {
+export function PreviewModeToggle() {
   const { previewMode } = useRouteLoaderData("root") as SerializeFrom<
     typeof loader
   >;

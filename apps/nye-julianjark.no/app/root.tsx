@@ -23,7 +23,7 @@ import { classes } from "~/routes/$notionPage/notion-driven-page";
 import { classNames } from "~/misc";
 import {
   getPreviewMode,
-  PreviewMode,
+  PreviewModeToggle,
   serializePreviewModeToCookie,
 } from "~/routes/api.preview-mode";
 
@@ -124,7 +124,7 @@ function Footer() {
        * Had this been a bigger site, with more people involved I could put the content in CMS/Notion instead
        * */}
       <footer className="flex flex-row gap-6">
-        <PreviewMode />
+        <PreviewModeToggle />
         <ClearCacheButton>
           <img src={julianFace} alt="Illustrajon av fjeset til Julian" />
         </ClearCacheButton>
