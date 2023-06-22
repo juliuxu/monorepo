@@ -20,7 +20,7 @@ import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema
 import { slugify } from "@julianjark/notion-utils";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
-import { isPreviewMode } from "~/is-preview-mode.server";
+import { isPreviewMode } from "~/routes/api.preview-mode";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -34,7 +34,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo(
-    isPreviewMode(request)
+    await isPreviewMode(request)
   );
   return json(
     { metainfo, entries },

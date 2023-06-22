@@ -14,7 +14,7 @@ import { Image } from "@unpic/react";
 import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
-import { isPreviewMode } from "~/is-preview-mode.server";
+import { isPreviewMode } from "~/routes/api.preview-mode";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -28,7 +28,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, projects } = await getAllProjectsAndMetainfo(
-    isPreviewMode(request)
+    await isPreviewMode(request)
   );
   return json(
     { metainfo, projects },

@@ -5,11 +5,8 @@ import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenPageWithBlocks } from "./client";
 import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
-import { useHydrated } from "~/components/use-hydrated";
-import { slugify } from "@julianjark/notion-utils";
-import { useMemo } from "react";
 import { TableOfConents } from "~/components/table-of-contents";
-import { isPreviewMode } from "~/is-preview-mode.server";
+import { isPreviewMode } from "~/routes/api.preview-mode";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -26,7 +23,7 @@ export const loader = async ({
 
   const page = await getNotionDrivenPageWithBlocks(
     notionPage,
-    isPreviewMode(request)
+    await isPreviewMode(request)
   );
   if (!page) throw new Response(null, { status: 404 });
 

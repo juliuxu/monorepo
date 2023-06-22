@@ -1,5 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { type LinksFunction } from "@remix-run/node";
+import type { LoaderArgs } from "@remix-run/node";
+import { json, type LinksFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -19,7 +20,12 @@ import backSvg from "~/assets/back.svg";
 import julianFace from "~/assets/julian-face.svg";
 import { ClearCacheButton } from "./routes/api.clear-cache";
 import { classes } from "~/routes/$notionPage/notion-driven-page";
-import { classNames } from "./misc";
+import { classNames } from "~/misc";
+import {
+  getPreviewMode,
+  PreviewMode,
+  serializePreviewModeToCookie,
+} from "~/routes/api.preview-mode";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -37,6 +43,22 @@ export const links: LinksFunction = () => [
     href: manifest,
   },
 ];
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const previewMode = await getPreviewMode(request);
+  const headers = previewMode
+    ? { "Set-Cookie": await serializePreviewModeToCookie(previewMode) }
+    : { "Set-Cookie": "" };
+
+  return json(
+    {
+      previewMode,
+    },
+    {
+      headers,
+    }
+  );
+};
 
 // TODO: This might belong in the tailwind config
 export const sharedClasses /*tw*/ = {
@@ -102,6 +124,7 @@ function Footer() {
        * Had this been a bigger site, with more people involved I could put the content in CMS/Notion instead
        * */}
       <footer className="flex flex-row gap-6">
+        <PreviewMode />
         <ClearCacheButton>
           <img src={julianFace} alt="Illustrajon av fjeset til Julian" />
         </ClearCacheButton>

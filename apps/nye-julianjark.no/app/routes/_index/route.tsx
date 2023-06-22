@@ -6,7 +6,7 @@ import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
-import { isPreviewMode } from "~/is-preview-mode.server";
+import { isPreviewMode } from "~/routes/api.preview-mode";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -20,7 +20,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     [
       getNotionDrivenLandingPage(),
       getFeaturedProject(),
-      getLatestTodayILearnedEntries(isPreviewMode(request)),
+      getLatestTodayILearnedEntries(await isPreviewMode(request)),
     ]
   );
 
