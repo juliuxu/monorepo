@@ -1,5 +1,11 @@
 # @julianjark/notion-utils
 
+## 0.11.0
+
+### Minor Changes
+
+- add getFormulaDate
+
 ## 0.10.2
 
 ### Patch Changes

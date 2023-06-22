@@ -12,7 +12,7 @@ export async function getTodayILearnedEntryHeads(isPreview: boolean) {
   const entryHeads = await getPages(notionClient)(
     config.todayILearnedDatabaseId,
     {
-      sorts: [{ timestamp: "created_time", direction: "descending" }],
+      sorts: [{ property: "Published Date", direction: "descending" }],
     }
   );
   return entryHeads.success.filter(filterPublishedPredicate(isPreview));

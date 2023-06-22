@@ -16,7 +16,7 @@ export function LatestTodayILearnedEntries() {
         <li key={entry.id}>
           <article>
             <time className="text-lg sm:text-xl md:text-2xl">
-              {dateFormatter.format(new Date(entry.created))}
+              {dateFormatter.format(new Date(entry.publishedDate))}
             </time>
             <h3 className="">
               <Link

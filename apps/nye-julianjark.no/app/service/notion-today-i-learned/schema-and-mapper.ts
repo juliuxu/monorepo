@@ -4,6 +4,7 @@ import {
   getSelect,
   takeBlocksAfterHeader,
   getTextFromRichText,
+  getFormulaDate,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import {
@@ -36,16 +37,16 @@ export const { getMetainfo } = cmsMetainfo(
 export const todayILearnedEntryHeadSchema = z.object({
   id: z.string(),
   title: z.string().nonempty(),
-  created: z.string().datetime(),
-  tags: multiSelectSchema,
   published: publishedStateSchema("PUBLISHED"),
+  publishedDate: z.string(),
+  tags: multiSelectSchema,
 });
 type TodayILearnedEntryHead = z.infer<typeof todayILearnedEntryHeadSchema>;
 
 export const { getPages } = cmsPage(todayILearnedEntryHeadSchema, (page) => {
   return {
     id: page.id,
-    created: page.created_time,
+    publishedDate: getFormulaDate("Published Date", page),
     title: getTitle(page),
     tags: getMultiSelectAndColor("Tags", page),
     published: getSelect("Published", page) as any,

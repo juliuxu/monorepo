@@ -71,6 +71,16 @@ export const getDate = (name: string, fromPage: PageObjectResponse) => {
   return undefined;
 };
 
+export const getFormulaDate = (name: string, fromPage: PageObjectResponse) => {
+  const property = fromPage.properties[name];
+  if (property?.type === "formula") {
+    if (property.formula.type === "date") {
+      return property.formula.date?.start;
+    }
+  }
+  return undefined;
+};
+
 export const getCover = (fromPage: PageObjectResponse) => {
   if (fromPage.cover?.type === "external") {
     return fromPage.cover.external.url;

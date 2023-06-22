@@ -89,7 +89,7 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
   return (
     <article key={entry.id}>
       <time className="text-lg text-gray-700 sm:text-xl md:text-2xl">
-        {dateFormatter.format(new Date(entry.created))}
+        {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
       <h2
         id={slugify(entry.title)}
