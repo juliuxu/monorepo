@@ -87,5 +87,9 @@ export function PreviewModeToggle() {
     }
   }
   useShortcut("pp", togglePreviewMode);
-  return null;
+  if (!previewMode) return null;
+  if (!previewMode.enabled) return null;
+  return (
+    <div className="absolute right-2 top-2 text-secondary">👀 Preview</div>
+  );
 }
