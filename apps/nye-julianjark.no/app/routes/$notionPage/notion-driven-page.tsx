@@ -74,7 +74,7 @@ export const classes /*tw*/ = {
   },
   divider: { root: "mt-[6vw] mb-[6vw] border-t-2 border-black" },
   color_orange: "text-secondary",
-  paragraph: { root: "max-w-4xl" },
+  paragraph: { root: "max-w-4xl whitespace-pre-wrap" },
   toggle: { root: "bg-primary" },
 } satisfies Partial<Classes>;
 
