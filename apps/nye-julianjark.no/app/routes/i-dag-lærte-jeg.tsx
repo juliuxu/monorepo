@@ -125,6 +125,8 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
                 className={`${classes.rich_text_anchor} text-lg`}
                 key={i}
                 href={reference}
+                target="_blank"
+                rel="noreferrer"
               >
                 {reference}
               </a>
