@@ -103,7 +103,9 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
           "prose-code:rounded-md",
-          "prose-p:overflow-scroll"
+          "prose-p:overflow-scroll",
+          "[&_figure_pre]:mb-0",
+          "prose-figcaption:text-black/70"
         )}
       >
         <NotionRender

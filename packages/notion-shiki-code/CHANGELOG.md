@@ -1,5 +1,11 @@
 # @julianjark/notion-shiki-code
 
+## 0.14.0
+
+### Minor Changes
+
+- support captions on code blocks
+
 ## 0.13.4
 
 ### Patch Changes

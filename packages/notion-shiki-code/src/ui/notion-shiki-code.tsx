@@ -56,6 +56,9 @@ export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
         style={{ display: "contents" }}
         dangerouslySetInnerHTML={{ __html: block.code.codeHtml }}
       />
+      {block.code.textCaption && (
+        <figcaption>{block.code.textCaption}</figcaption>
+      )}
 
       {/* Copyable */}
       {block.code.options.copyable && (

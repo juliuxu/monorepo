@@ -53,6 +53,7 @@ export type ShikifiedCodeBlock = Extract<
   { type: "code" }
 > & {
   code: Extract<BlockObjectResponse, { type: "code" }>["code"] & {
+    textCaption?: string;
     codeHtml: string;
     options: Options;
     foregroundColor: string;
@@ -104,6 +105,8 @@ export async function shikifyNotionBlock(
   );
 
   // Mutate the block to include our new properties
+  (block as unknown as ShikifiedCodeBlock).code.textCaption =
+    captionOptions.caption;
   (block as unknown as ShikifiedCodeBlock).code.codeHtml = codeHtml;
   (block as unknown as ShikifiedCodeBlock).code.foregroundColor =
     foregroundColor;
