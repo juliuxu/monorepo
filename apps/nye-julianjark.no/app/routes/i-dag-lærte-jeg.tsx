@@ -104,6 +104,9 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
           "prose-pre:text-base",
           "prose-code:rounded-md",
           "prose-p:overflow-scroll",
+
+          "[&_figure:has(pre)]:mt-0",
+          "[&_figure:has(pre)]:mb-0",
           "[&_figure_pre]:mb-0",
           "prose-figcaption:text-black/70"
         )}
