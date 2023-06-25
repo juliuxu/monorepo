@@ -41,7 +41,7 @@ export async function warmUpCache() {
   await getAllProjectsAndMetainfo(false);
   console.log("◈ warmed up cache for project pages");
 
-  // Hit the most important pages to rebuild the cdn/nginx cache
+  // Hit the most important pages to rebuild the cdn/nginx http response cache
   await Promise.all([
     fetch("https://nye.julianjark.no"),
     fetch("https://nye.julianjark.no/i-dag-lærte-jeg"),

@@ -8,7 +8,7 @@ import {
 import { notionClient } from "~/clients.server";
 import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
-export async function getTodayILearnedEntryHeads(isPreview: boolean) {
+async function getTodayILearnedEntryHeads(isPreview: boolean) {
   const entryHeads = await getPages(notionClient)(
     config.todayILearnedDatabaseId,
     {
@@ -34,5 +34,14 @@ export async function getAllTodayILearnedEntriesAndMetainfo(
   ]);
   const entries = (await getHeadAndBodyListFromHeads(notionClient)(entryHeads))
     .success;
+
+  // Ensure only tags that are used in entries are included
+  // Would be pretty stupid to show tags that is not visible on the website
+  metainfo.tags = metainfo.tags.filter((tag) =>
+    entries.some((entry) =>
+      entry.tags.some((entryTag) => entryTag.id === tag.id)
+    )
+  );
+
   return { metainfo, entries };
 }

@@ -5,6 +5,7 @@ import {
   takeBlocksAfterHeader,
   getTextFromRichText,
   getFormulaDate,
+  getDatabasePropertyMultiSelectOptions,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import {
@@ -22,6 +23,7 @@ import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.se
 export const todayILearnedMetainfoSchema = z.object({
   title: z.string(),
   description: richTextSchema,
+  tags: multiSelectSchema,
 });
 export type TodayILearnedMetainfo = z.infer<typeof todayILearnedMetainfoSchema>;
 export const { getMetainfo } = cmsMetainfo(
@@ -30,6 +32,7 @@ export const { getMetainfo } = cmsMetainfo(
     return {
       title: getTextFromRichText(database.title),
       description: database.description,
+      tags: getDatabasePropertyMultiSelectOptions("Tags", database),
     };
   }
 );
