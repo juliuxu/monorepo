@@ -20,6 +20,7 @@ import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
+import { OramaSearch } from "~/service/orama-search/search";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -36,7 +37,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     await isPreviewMode(request)
   );
   return json(
-    { metainfo, entries },
+    { metainfo, entries, isPreview: await isPreviewMode(request) },
     { headers: config.loaderCacheControlHeaders }
   );
 };
@@ -63,6 +64,8 @@ export default function Component() {
           </span>
         ))}
       </div> */}
+
+      {data.isPreview && <OramaSearch />}
 
       <div className="mx-auto mt-[12vw] flex w-full max-w-3xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
         {data.entries.map((entry) => (
