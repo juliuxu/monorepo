@@ -1,6 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LoaderArgs } from "@remix-run/node";
-import { json, type LinksFunction } from "@remix-run/node";
+import { type LoaderArgs, type LinksFunction, json } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -21,11 +20,11 @@ import julianFace from "~/assets/julian-face.svg";
 import { ClearCacheButton } from "./routes/api.clear-cache";
 import { classes } from "~/routes/$notionPage/notion-driven-page";
 import { classNames } from "~/misc";
+import { PreviewModeToggle } from "~/routes/api.preview-mode/route";
 import {
   getPreviewMode,
-  PreviewModeToggle,
   serializePreviewModeToCookie,
-} from "~/routes/api.preview-mode";
+} from "./routes/api.preview-mode/preview-mode.server";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),

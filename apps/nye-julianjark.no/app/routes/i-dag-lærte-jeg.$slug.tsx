@@ -11,6 +11,7 @@ export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 export default function Component() {
   const { slug } = useParams();
   const { key } = useLocation();
+  return null;
 
   useEffect(() => {
     const element = document.getElementById(slug?.toLowerCase() ?? "");

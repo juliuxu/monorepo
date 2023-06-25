@@ -14,7 +14,7 @@ import { Image } from "@unpic/react";
 import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
-import { isPreviewMode } from "~/routes/api.preview-mode";
+import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

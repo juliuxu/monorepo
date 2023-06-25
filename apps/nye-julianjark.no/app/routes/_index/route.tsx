@@ -6,7 +6,7 @@ import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
-import { isPreviewMode } from "~/routes/api.preview-mode";
+import { isPreviewMode } from "../api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

@@ -6,7 +6,7 @@ import { getNotionDrivenPageWithBlocks } from "./client";
 import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
 import { TableOfConents } from "~/components/table-of-contents";
-import { isPreviewMode } from "~/routes/api.preview-mode";
+import { isPreviewMode } from "../api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

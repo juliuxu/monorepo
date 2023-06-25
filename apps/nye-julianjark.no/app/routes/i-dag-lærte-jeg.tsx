@@ -6,7 +6,7 @@ import type {
   V2_MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
 import { sharedClasses } from "~/root";
@@ -17,10 +17,9 @@ import {
 } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
-import { slugify } from "@julianjark/notion-utils";
-import { getTextFromRichText } from "@julianjark/notion-utils";
+import { slugify, getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
-import { isPreviewMode } from "~/routes/api.preview-mode";
+import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -109,7 +108,13 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
         id={slugify(entry.title)}
         className={`mt-2 ${sharedClasses.typography} scroll-mt-[calc(6vw+2.5rem)]`}
       >
-        {entry.title}
+        <Link
+          to={`/i-dag-lærte-jeg/${slugify(entry.title)}`}
+          preventScrollReset
+          className="hover:underline"
+        >
+          {entry.title}
+        </Link>
       </h2>
       <div
         className={classNames(
