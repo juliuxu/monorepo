@@ -47,11 +47,24 @@ export default function Component() {
   const data = useLoaderData<typeof loader>();
   return (
     <main>
+      <Outlet />
       <Header
         title={data.metainfo.title}
         description={getTextFromRichText(data.metainfo.description)}
       />
-      <Outlet />
+
+      {/* WIP */}
+      {/* <div className="mt-[4vw] flex flex-wrap gap-[1vw]">
+        {data.metainfo.tags.map((tag) => (
+          <span
+            className="transtion-all badge badge-info badge-lg"
+            key={tag.id}
+          >
+            {tag.title}
+          </span>
+        ))}
+      </div> */}
+
       <div className="mx-auto mt-[12vw] flex w-full max-w-3xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
         {data.entries.map((entry) => (
           <TodayILearnedArticle key={entry.id} entry={entry} />
@@ -65,6 +78,7 @@ const todayILearnedClasses /*tw*/ = {
   ...classes,
   column_list: {
     root: classNames(
+      "mt-[1.2em]",
       "grid gap-0 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-flow-col sm:auto-cols-fr",
       "[&>div:first-child>*:first-child]:mt-0 [&>div>*:last-child]:mb-0",
       "sm:[&>div>*:first-child]:mt-0 sm:[&>div>*:last-child]:mb-0",
@@ -103,6 +117,7 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
           "prose-code:rounded-md",
+          "prose-code:font-normal",
           "prose-p:overflow-scroll",
 
           "[&_figure:has(pre)]:mt-0",
