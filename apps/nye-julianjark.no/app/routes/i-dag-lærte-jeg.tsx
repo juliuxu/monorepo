@@ -52,7 +52,7 @@ export default function Component() {
         description={getTextFromRichText(data.metainfo.description)}
       />
       <Outlet />
-      <div className="mx-auto mt-[12vw] flex w-full max-w-4xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
+      <div className="mx-auto mt-[12vw] flex w-full max-w-3xl flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
         {data.entries.map((entry) => (
           <TodayILearnedArticle key={entry.id} entry={entry} />
         ))}
