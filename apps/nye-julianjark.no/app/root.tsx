@@ -92,7 +92,7 @@ export default function App() {
           >
             <Link to="/" className="">
               <p className="sr-only">Til hovedside</p>
-              <img src={backSvg} alt="" />
+              <img src={backSvg} alt="" width={33} height={24} />
             </Link>
           </nav>
         </header>
