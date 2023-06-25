@@ -1,4 +1,3 @@
-import { slugify } from "@julianjark/notion-utils";
 import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index/route";
 import { classes } from "../$notionPage/notion-driven-page";
@@ -22,7 +21,7 @@ export function LatestTodayILearnedEntries() {
               <Link
                 className={classes.rich_text_anchor}
                 prefetch="intent"
-                to={`/i-dag-lærte-jeg/${slugify(entry.title)}`}
+                to={`/i-dag-lærte-jeg/${entry.slug}`}
               >
                 {entry.title}
               </Link>

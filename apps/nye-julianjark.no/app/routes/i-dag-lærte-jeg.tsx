@@ -17,7 +17,7 @@ import {
 } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
-import { slugify, getTextFromRichText } from "@julianjark/notion-utils";
+import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 
@@ -105,11 +105,11 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
         {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
       <h2
-        id={slugify(entry.title)}
+        id={entry.slug}
         className={`mt-2 ${sharedClasses.typography} scroll-mt-[calc(6vw+2.5rem)]`}
       >
         <Link
-          to={`/i-dag-lærte-jeg/${slugify(entry.title)}`}
+          to={`/i-dag-lærte-jeg/${entry.slug}`}
           preventScrollReset
           className="hover:underline"
         >

@@ -7,8 +7,9 @@ import {
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import { config } from "~/config.server";
-import { cmsBlocks, cmsPage } from "@julianjark/notion-cms";
 import {
+  cmsBlocks,
+  cmsPage,
   blocksSchema,
   publishedStateSchema,
   richTextSchema,

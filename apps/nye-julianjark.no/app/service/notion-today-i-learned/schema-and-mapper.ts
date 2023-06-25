@@ -6,6 +6,7 @@ import {
   getTextFromRichText,
   getFormulaDate,
   getDatabasePropertyMultiSelectOptions,
+  slugify,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import {
@@ -14,8 +15,9 @@ import {
   multiSelectSchema,
   publishedStateSchema,
   richTextSchema,
+  cmsBlocks,
+  cmsPage,
 } from "@julianjark/notion-cms";
-import { cmsBlocks, cmsPage } from "@julianjark/notion-cms";
 import { getSummary } from "./get-summary";
 import { config } from "~/config.server";
 import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
@@ -40,6 +42,7 @@ export const { getMetainfo } = cmsMetainfo(
 export const todayILearnedEntryHeadSchema = z.object({
   id: z.string(),
   title: z.string().nonempty(),
+  slug: z.string().nonempty(),
   published: publishedStateSchema("PUBLISHED"),
   publishedDate: z.string(),
   tags: multiSelectSchema,
@@ -51,6 +54,7 @@ export const { getPages } = cmsPage(todayILearnedEntryHeadSchema, (page) => {
     id: page.id,
     publishedDate: getFormulaDate("Published Date", page),
     title: getTitle(page),
+    slug: slugify(getTitle(page) ?? ""),
     tags: getMultiSelectAndColor("Tags", page),
     published: getSelect("Published", page) as any,
   };
