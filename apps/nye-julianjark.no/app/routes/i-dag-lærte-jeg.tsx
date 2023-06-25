@@ -116,9 +116,12 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
           "mt-8",
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
-          "prose-code:rounded-md",
-          "prose-code:font-normal",
           "prose-p:overflow-scroll",
+
+          "prose-code:text-base",
+          "prose-code:rounded",
+          "prose-code:font-medium",
+          "prose-code:py-1",
 
           "[&_figure:has(pre)]:mt-0",
           "[&_figure:has(pre)]:mb-0",
