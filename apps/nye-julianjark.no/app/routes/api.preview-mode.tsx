@@ -90,6 +90,13 @@ export function PreviewModeToggle() {
   if (!previewMode) return null;
   if (!previewMode.enabled) return null;
   return (
-    <div className="absolute right-2 top-2 text-secondary">👀 Preview</div>
+    <div
+      lang="en"
+      className="fixed right-0 top-0 rounded-bl-lg border-secondary bg-secondary/20 p-2 text-secondary backdrop-blur"
+    >
+      <button onClick={togglePreviewMode} title="Toggle preview mode">
+        👀 Preview
+      </button>
+    </div>
   );
 }
