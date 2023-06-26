@@ -1,4 +1,3 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
@@ -34,7 +33,6 @@ export const loader = async ({
     { headers: config.loaderCacheControlHeaders }
   );
 };
-export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 // export const proseClasses /*tw*/ = {
 //   prose: "prose-lg prose max-w-full [&_p]:max-w-prose",

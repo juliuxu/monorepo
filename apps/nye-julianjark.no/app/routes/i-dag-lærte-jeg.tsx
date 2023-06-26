@@ -1,10 +1,6 @@
 import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
-import type {
-  HeadersFunction,
-  LoaderArgs,
-  V2_MetaFunction,
-} from "@remix-run/node";
+import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
@@ -41,7 +37,6 @@ export const loader = async ({ request }: LoaderArgs) => {
     { headers: config.loaderCacheControlHeaders }
   );
 };
-export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();

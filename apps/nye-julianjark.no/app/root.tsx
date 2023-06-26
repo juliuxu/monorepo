@@ -1,5 +1,10 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { type LoaderArgs, type LinksFunction, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  LinksFunction,
+} from "@remix-run/node";
 import {
   Link,
   Links,
@@ -25,6 +30,7 @@ import {
   getPreviewMode,
   serializePreviewModeToCookie,
 } from "./routes/api.preview-mode/preview-mode.server";
+import { config } from "./config.server";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -58,6 +64,8 @@ export const loader = async ({ request }: LoaderArgs) => {
     }
   );
 };
+
+export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 // TODO: This might belong in the tailwind config
 export const sharedClasses /*tw*/ = {

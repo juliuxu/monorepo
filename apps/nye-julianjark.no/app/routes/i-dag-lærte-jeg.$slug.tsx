@@ -1,9 +1,5 @@
-import type { HeadersFunction } from "@remix-run/node";
 import { useParams, useLocation } from "@remix-run/react";
 import { useEffect } from "react";
-import { config } from "~/config.server";
-
-export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 /**
  * Make sure the linked Entry is selected when first loading the page
