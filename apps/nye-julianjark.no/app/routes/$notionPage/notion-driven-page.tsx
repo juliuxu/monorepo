@@ -64,7 +64,9 @@ export const components: Partial<Components> = {
 };
 
 export const classes /*tw*/ = {
-  heading_2: { root: "" },
+  heading_1: { root: "text-h1 lg:text-h1-lg" },
+  heading_2: { root: "text-h2 lg:text-h2-lg" },
+  heading_3: { root: "text-h3 lg:text-h3-lg" },
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
   column_list: {
@@ -126,8 +128,8 @@ export function Header({
 }) {
   return (
     <header className={`${className ? className : ""}`}>
-      <h1 className="text-6xl font-bold">{title}</h1>
-      <p className="mt-4 max-w-4xl text-3xl">{description}</p>
+      <h1 className="text-h1 lg:text-h1-lg">{title}</h1>
+      <p className="mt-4 max-w-4xl text-lead lg:text-lead-lg">{description}</p>
     </header>
   );
 }

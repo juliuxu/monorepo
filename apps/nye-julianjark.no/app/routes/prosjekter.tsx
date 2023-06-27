@@ -37,15 +37,17 @@ export default function Component() {
   return (
     <main>
       <header>
-        <h1 className="mt-8 max-w-4xl text-4xl lg:text-[3.5vw] lg:leading-snug">
+        <h1 className="mt-8 max-w-4xl text-h1 lg:text-h1-lg">
           <RichTextListRender richTextList={data.metainfo.description} />
         </h1>
       </header>
-      <div className="mx-auto mt-[12vw] flex w-full flex-col space-y-[6vw] divide-y-2 divide-black md:mt-[6vw] [&>*:not(:first-child)]:pt-[6vw]">
+      {/* mt-[12vw] md:mt-[6vw] */}
+      <hr className={classes.divider.root} />
+      <section className="mx-auto flex w-full flex-col gap-[6vw]">
         {data.projects.map((project, index) => (
           <ProjectComponent key={project.id} project={project} index={index} />
         ))}
-      </div>
+      </section>
     </main>
   );
 }
@@ -66,14 +68,14 @@ export function ProjectComponent({ project, index }: ProjectComponentProps) {
         } flex flex-col`}
       >
         <h2 className="text-[1.1em] font-semibold">{project.title}</h2>
-        <p className="mt-2">
+        <p className="mt-2 text-h2 lg:text-h2-lg">
           <RichTextListRender
             richTextList={project.description}
             classes={classes}
           />
         </p>
         {/* <div className="mt-auto" /> */}
-        <footer className="mt-2 flex flex-wrap gap-6 text-lg transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 md:text-2xl lg:text-[1.75vw] lg:opacity-0 [&_a:hover]:underline">
+        <footer className="mt-2 flex flex-wrap gap-6 text-body transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 lg:text-body-lg lg:opacity-0 [&_a:hover]:underline">
           {project.demoLink && (
             <a
               title="Link til applikasjonen kjørende i produksjon"

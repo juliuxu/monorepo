@@ -1,4 +1,4 @@
-import { json, type V2_MetaFunction } from "@remix-run/node";
+import { json, type V2_MetaFunction, type LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenPageWithBlocks } from "./client";

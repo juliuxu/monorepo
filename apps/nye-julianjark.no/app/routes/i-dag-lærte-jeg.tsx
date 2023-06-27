@@ -5,7 +5,6 @@ import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import { sharedClasses } from "~/root";
 import {
   components,
   classes,
@@ -92,19 +91,20 @@ const todayILearnedClasses /*tw*/ = {
       "relative left-[50%] ml-[-50vw] right-[50%] mr-[-50vw] w-screen sm:left-0 sm:ml-0 sm:right-0 sm:mr-0 sm:w-full",
       "[&_pre]:pl-[7.5vw] [&_pre]:pr-[7.5vw] sm:[&_pre]:pl-5 sm:[&_pre]:pr-5",
       "[&_pre]:pt-6 [&_pre]:pb-6 sm:[&_pre]:pt-4 sm:[&_pre]:pb-4",
-      "[&_pre]:rounded-none sm:[&_pre]:rounded-lg"
+      "[&_pre]:rounded-none sm:[&_pre]:rounded-lg",
+      "[&_figcaption]:pl-[7.5vw] sm:[&_figcaption]:pl-0"
     ),
   },
 } satisfies Partial<Classes>;
 export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
   return (
     <article key={entry.id}>
-      <time className="text-lg text-gray-700 sm:text-xl md:text-2xl">
+      <time className="text-body text-gray-700 lg:text-body">
         {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
       <h2
         id={entry.slug}
-        className={`mt-2 ${sharedClasses.typography} scroll-mt-[calc(6vw+2.5rem)]`}
+        className={`mt-2 scroll-mt-[calc(6vw+2.5rem)] text-h2 lg:text-h2-lg`}
       >
         <Link
           to={`/i-dag-lærte-jeg/${entry.slug}`}

@@ -14,19 +14,19 @@ export function LatestTodayILearnedEntries() {
       {latestTodayILearnedEntries.map((entry) => (
         <li key={entry.id}>
           <article>
-            <time className="text-lg sm:text-xl md:text-2xl">
+            <time className="text-body lg:text-body-lg">
               {dateFormatter.format(new Date(entry.publishedDate))}
             </time>
-            <h3 className="">
+            <h3 className="text-h2 lg:text-h2-lg">
               <Link
                 className={classes.rich_text_anchor}
-                prefetch="intent"
+                prefetch="viewport"
                 to={`/i-dag-lærte-jeg/${entry.slug}`}
               >
                 {entry.title}
               </Link>
             </h3>
-            <p className="mt-3 text-lg">{entry.summary}</p>
+            <p className="mt-3 text-body lg:text-body-lg">{entry.summary}</p>
           </article>
         </li>
       ))}

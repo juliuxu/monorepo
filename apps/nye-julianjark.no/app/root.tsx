@@ -70,7 +70,7 @@ export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 // TODO: This might belong in the tailwind config
 export const sharedClasses /*tw*/ = {
   container: "pl-[7.5vw] pr-[7.5vw]",
-  typography: "text-2xl md:text-3xl lg:text-[2.5vw] lg:leading-snug",
+  typography: "antialiased text-h2 lg:text-h2-lg",
 };
 export default function App() {
   const location = useLocation();
@@ -135,9 +135,9 @@ function Footer() {
         <ClearCacheButton>
           <img src={julianFace} alt="Illustrajon av fjeset til Julian" />
         </ClearCacheButton>
-        <nav className="flex flex-col justify-center gap-2 text-xl">
+        <nav className="flex flex-col justify-center gap-2 text-body lg:text-body-lg">
           <Link
-            prefetch="intent"
+            prefetch="viewport"
             to="/kontakt"
             className={classes.rich_text_anchor}
           >
