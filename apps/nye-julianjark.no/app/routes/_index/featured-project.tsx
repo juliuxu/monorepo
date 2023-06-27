@@ -4,5 +4,5 @@ import { ProjectComponent } from "../prosjekter";
 
 export function FeaturedProject() {
   const { featuredProject } = useLoaderData<typeof loader>();
-  return <ProjectComponent project={featuredProject} index={8} />;
+  return <ProjectComponent project={featuredProject} index={1} />;
 }

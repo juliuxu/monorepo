@@ -5,15 +5,18 @@ interface HeaderProps {
   title: React.ReactNode;
   description?: React.ReactNode;
   className?: string;
+  addDivderUnderneath?: boolean;
 }
-export function Header({ title, description, className }: HeaderProps) {
+export function Header({
+  title,
+  description,
+  className,
+  addDivderUnderneath,
+}: HeaderProps) {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const landingPageMessage = isLandingPage ? (
-    <>
-      <br />
-      {"🚧 Under utvikling 🚧"}
-    </>
+    <>{"🚧 Under utvikling 🚧"}</>
   ) : null;
   return (
     <>
@@ -24,7 +27,7 @@ export function Header({ title, description, className }: HeaderProps) {
           {landingPageMessage}
         </p>
       </header>
-      {!isLandingPage && <hr className={classes.divider.root} />}
+      {addDivderUnderneath && <hr className={classes.divider.root} />}
     </>
   );
 }

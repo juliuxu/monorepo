@@ -39,12 +39,12 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
         const element = (
           <span
             className={classNames(
-              "badge group-hover:badge-info",
-              "transition-all duration-500",
+              "badge badge-lg group-hover:badge-info",
+              "transition-all duration-500 ease-out",
               "group-hover:scale-150",
               "group-hover:z-50",
               "grouo-hover:border border-none",
-              item.isFeatured && "badge-lg font-bold",
+              item.isFeatured && "font-bold",
               item.link ? "cursor-pointer" : "cursor-default"
             )}
           >

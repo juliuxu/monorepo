@@ -8,7 +8,7 @@ export default {
         body: ["18px", "1.4"],
         "body-lg": "1.6vw",
 
-        lead: ["26px", "1.4"],
+        lead: ["26px", "1.3"],
         "lead-lg": "2.5vw",
 
         h1: [

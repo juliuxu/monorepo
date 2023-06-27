@@ -42,6 +42,7 @@ export default function Component() {
       <Header
         title={data.metainfo.title}
         description={getTextFromRichText(data.metainfo.description)}
+        addDivderUnderneath
       />
 
       {/* WIP */}
