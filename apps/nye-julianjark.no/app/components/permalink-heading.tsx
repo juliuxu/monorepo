@@ -17,7 +17,7 @@ export const PermalinkHeading = ({
 }: PermalinkHeadingProps) => {
   return (
     <Component className={`${className}`} id={id} {...rest}>
-      <NavLink to={id} prefetch="intent">
+      <NavLink to={id} prefetch="viewport">
         {children}
       </NavLink>
     </Component>

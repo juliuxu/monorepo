@@ -5,17 +5,14 @@ import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import {
-  components,
-  classes,
-  Header,
-} from "~/routes/$notionPage/notion-driven-page";
+import { components, classes } from "~/routes/$notionPage/notion-driven-page";
 import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 import { OramaSearch } from "~/service/orama-search/search";
+import { Header } from "~/components/header";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

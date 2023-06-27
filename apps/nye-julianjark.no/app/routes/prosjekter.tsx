@@ -11,6 +11,7 @@ import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
+import { Header } from "~/components/header";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -36,13 +37,9 @@ export default function Component() {
   const data = useLoaderData<typeof loader>();
   return (
     <main>
-      <header>
-        <h1 className="mt-8 max-w-4xl text-h1 lg:text-h1-lg">
-          <RichTextListRender richTextList={data.metainfo.description} />
-        </h1>
-      </header>
-      {/* mt-[12vw] md:mt-[6vw] */}
-      <hr className={classes.divider.root} />
+      <Header
+        title={<RichTextListRender richTextList={data.metainfo.description} />}
+      />
       <section className="mx-auto flex w-full flex-col gap-[6vw]">
         {data.projects.map((project, index) => (
           <ProjectComponent key={project.id} project={project} index={index} />

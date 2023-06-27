@@ -15,6 +15,7 @@ import {
 import { classNames } from "~/misc";
 import { CustomBlock } from "./custom-blocks";
 import { demotedHeadings } from "./demoted-headings";
+import { Header } from "~/components/header";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
@@ -51,7 +52,7 @@ export const components: Partial<Components> = {
     if (url.hostname === "julianjark.no") {
       return (
         <Link
-          prefetch="intent"
+          prefetch="viewport"
           to={url.pathname + url.search}
           className={ctx.classes.rich_text_anchor}
         >
@@ -83,25 +84,17 @@ export const classes /*tw*/ = {
 
 interface NotionPageProps {
   page: NotionDrivenPage;
-
-  headerClassName?: string;
-  mainClassName?: string;
 }
-export function NotionPage({
-  page,
-  headerClassName,
-  mainClassName,
-}: NotionPageProps) {
+export function NotionPage({ page }: NotionPageProps) {
   const shouldDemote = page.blocks.some((block) => block.type === "heading_1");
 
   return (
-    <main className={`${mainClassName ? mainClassName : ""}`}>
+    <main>
       <Header
         title={page.title}
         description={
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
-        className={headerClassName}
       />
       <div className="mt-[12vw] md:mt-[6vw]">
         <NotionRender
@@ -114,22 +107,5 @@ export function NotionPage({
         />
       </div>
     </main>
-  );
-}
-
-export function Header({
-  title,
-  description,
-  className,
-}: {
-  title: React.ReactNode;
-  description: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <header className={`${className ? className : ""}`}>
-      <h1 className="text-h1 lg:text-h1-lg">{title}</h1>
-      <p className="mt-4 max-w-4xl text-lead lg:text-lead-lg">{description}</p>
-    </header>
   );
 }
