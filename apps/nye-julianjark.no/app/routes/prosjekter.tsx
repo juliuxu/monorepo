@@ -38,12 +38,8 @@ export default function Component() {
   return (
     <main>
       <Header
-        title={
-          <RichTextListRender
-            richTextList={data.metainfo.description}
-            addDivderUnderneath
-          />
-        }
+        title={<RichTextListRender richTextList={data.metainfo.description} />}
+        addDivderUnderneath
       />
       <section className="mx-auto flex w-full flex-col gap-[6vw]">
         {data.projects.map((project, index) => (
