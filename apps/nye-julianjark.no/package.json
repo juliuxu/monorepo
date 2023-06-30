@@ -17,10 +17,10 @@
     "@julianjark/notion-utils": "*",
     "@orama/orama": "1.0.8",
     "@orama/plugin-match-highlight": "1.0.8",
-    "@remix-run/css-bundle": "1.18.0",
-    "@remix-run/node": "1.18.0",
-    "@remix-run/react": "1.18.0",
-    "@remix-run/serve": "1.18.0",
+    "@remix-run/css-bundle": "1.18.1",
+    "@remix-run/node": "1.18.1",
+    "@remix-run/react": "1.18.1",
+    "@remix-run/serve": "1.18.1",
     "@unpic/react": "0.0.29",
     "isbot": "3.6.12",
     "react": "^18.2.0",
@@ -28,18 +28,18 @@
     "zod": "3.21.4"
   },
   "devDependencies": {
-    "@remix-run/dev": "1.18.0",
-    "@remix-run/eslint-config": "1.18.0",
+    "@remix-run/dev": "1.18.1",
+    "@remix-run/eslint-config": "1.18.1",
     "@tailwindcss/typography": "0.5.9",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
-    "daisyui": "3.1.6",
+    "daisyui": "3.1.7",
     "eslint": "^8.38.0",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.3.0",
     "tailwindcss": "3.3.2",
-    "typescript": "^5.0.4"
+    "typescript": "5.1.6"
   },
   "engines": {
     "node": ">=18.0.0"
