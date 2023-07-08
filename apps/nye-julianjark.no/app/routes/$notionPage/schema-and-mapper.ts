@@ -4,6 +4,7 @@ import {
   slugify,
   getRichText,
   getSelect,
+  getMultiSelect,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import { config } from "~/config.server";
@@ -21,6 +22,7 @@ export const notionDrivenPageSchema = z.object({
   slug: z.string().nonempty(),
   preamble: richTextSchema.nonempty(),
   published: publishedStateSchema("DRAFT"),
+  options: z.array(z.string()),
 });
 export type NotionDrivenPageHead = z.infer<typeof notionDrivenPageSchema>;
 
@@ -31,6 +33,7 @@ export const { getPage, getPages } = cmsPage(notionDrivenPageSchema, (page) => {
     slug: slugify(getTitle(page) ?? ""),
     preamble: getRichText("Ingress", page) as any,
     published: getSelect("Published", page) as any,
+    options: getMultiSelect("Options", page),
   };
 });
 

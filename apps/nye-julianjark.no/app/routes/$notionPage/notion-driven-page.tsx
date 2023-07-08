@@ -71,7 +71,17 @@ export const classes /*tw*/ = {
   rich_text_anchor:
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
   column_list: {
-    root: "mt-6 lg:mt-6 gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12 [&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
+    root: classNames(
+      "mt-6 gap-x-[5vw] gap-y-[5vw] grid sm:grid-cols-12",
+      "[&>*:first-child]:col-span-5 [&>*:nth-child(2)]:col-span-7",
+      "[.column-layout-7-5_&>*:first-child]:col-span-7 [.column-layout-7-5_&>*:nth-child(2)]:col-span-5",
+      "[.column-layout-6-6_&>*:first-child]:col-span-6 [.column-layout-6-6_&>*:nth-child(2)]:col-span-6",
+
+      // Reverse even column lists
+      "ndp-column-list",
+      "[.column-layout-reverse-even_&:nth-child(even_of_.ndp-column-list)>*:first-child]:order-2",
+      "[.column-layout-reverse-even_&:nth-child(even_of_.ndp-column-list)>*:nth-child(2)]:order-1"
+    ),
   },
   column: {
     root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-lg",
@@ -96,7 +106,7 @@ export function NotionPage({ page }: NotionPageProps) {
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
       />
-      <div className="mt-[12vw] md:mt-[6vw]">
+      <div className={`mt-[12vw] md:mt-[6vw] ${page.options.join(" ")}`}>
         <NotionRender
           blocks={page.blocks}
           components={{

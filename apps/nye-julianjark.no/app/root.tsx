@@ -99,7 +99,7 @@ export default function App() {
               "grid grid-cols-12"
             )}
           >
-            <Link to="/" className="">
+            <Link to="/" className="" prefetch="render">
               <p className="sr-only">Til hovedside</p>
               <img src={backSvg} alt="" width={33} height={24} />
             </Link>
