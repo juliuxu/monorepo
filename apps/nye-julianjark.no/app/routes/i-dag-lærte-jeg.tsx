@@ -13,6 +13,11 @@ import { classNames } from "~/misc";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 import { OramaSearch } from "~/service/orama-search/search";
 import { Header } from "~/components/header";
+import type { JulianHandle } from "~/handle";
+
+export const handle: JulianHandle = {
+  scrollBehaviorSmooth: true,
+};
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -26,11 +31,11 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo(
-    await isPreviewMode(request),
+    await isPreviewMode(request)
   );
   return json(
     { metainfo, entries, isPreview: await isPreviewMode(request) },
-    { headers: config.loaderCacheControlHeaders },
+    { headers: config.loaderCacheControlHeaders }
   );
 };
 
@@ -76,7 +81,7 @@ const todayILearnedClasses /*tw*/ = {
       "[&>div:first-child>*:first-child]:mt-0 [&>div>*:last-child]:mb-0",
       "sm:[&>div>*:first-child]:mt-0 sm:[&>div>*:last-child]:mb-0",
       "sm:[&>div>*_pre]:mb-0",
-      "[&_figure]:mt-0 [&_figure]:mb-0 [&_figure_pre]:mt-0 [&_figure_pre]:mb-0",
+      "[&_figure]:mt-0 [&_figure]:mb-0 [&_figure_pre]:mt-0 [&_figure_pre]:mb-0"
     ),
   },
   column: {
@@ -89,7 +94,7 @@ const todayILearnedClasses /*tw*/ = {
       "[&_pre]:pl-[7.5vw] [&_pre]:pr-[7.5vw] sm:[&_pre]:pl-5 sm:[&_pre]:pr-5",
       "[&_pre]:pt-6 [&_pre]:pb-6 sm:[&_pre]:pt-4 sm:[&_pre]:pb-4",
       "[&_pre]:rounded-none sm:[&_pre]:rounded-lg",
-      "[&_figcaption]:pl-[7.5vw] sm:[&_figcaption]:pl-0",
+      "[&_figcaption]:pl-[7.5vw] sm:[&_figcaption]:pl-0"
     ),
   },
 } satisfies Partial<Classes>;
@@ -126,7 +131,7 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
           "[&_figure:has(pre)]:mt-0",
           "[&_figure:has(pre)]:mb-0",
           "[&_figure_pre]:mb-0",
-          "prose-figcaption:text-black/70",
+          "prose-figcaption:text-black/70"
         )}
       >
         <NotionRender

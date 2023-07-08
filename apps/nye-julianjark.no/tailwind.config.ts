@@ -40,7 +40,7 @@ export default {
     themes: [
       {
         mytheme: {
-          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          ...require("daisyui/src/theming/themes")["[data-theme=bumblebee]"],
           primary: "#FFB4B4",
           secondary: "#E3673A",
         },

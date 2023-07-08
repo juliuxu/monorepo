@@ -31,6 +31,7 @@ import {
   serializePreviewModeToCookie,
 } from "./routes/api.preview-mode/preview-mode.server";
 import { config } from "./config.server";
+import { useScrollBehaviorSmooth } from "./handle";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -75,8 +76,9 @@ export const sharedClasses /*tw*/ = {
 export default function App() {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const scrollBehaviorSmooth = useScrollBehaviorSmooth();
   return (
-    <html lang="no" className="scroll-smooth">
+    <html lang="no" className={scrollBehaviorSmooth ? "scroll-smooth" : ""}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -84,7 +86,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col`}
+        className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col bg-base-100`}
       >
         <header
           className={classNames(
