@@ -142,17 +142,18 @@ export function TodayILearnedArticle({ entry }: { entry: TodayILearnedEntry }) {
       {(entry.references?.length ?? 0) > 0 && (
         <div className="mt-8 lg:mt-12">
           <h3 className="text-xl font-semibold md:text-2xl">Referanser</h3>
-          <ul className="mt-3 flex flex-col gap-2">
+          <ul className="mt-3">
             {entry.references?.map((reference, i) => (
-              <a
-                className={`${classes.rich_text_anchor} text-lg`}
-                key={i}
-                href={reference}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {reference}
-              </a>
+              <li key={i}>
+                <a
+                  className={`${classes.rich_text_anchor} text-lg`}
+                  href={reference}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {reference}
+                </a>
+              </li>
             ))}
           </ul>
         </div>
