@@ -19,9 +19,10 @@ import {
   multiSelectSchema,
   publishedStateSchema,
   richTextSchema,
+  cmsPage,
+  cmsMetainfo,
 } from "@julianjark/notion-cms";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
-import { cmsPage, cmsMetainfo } from "@julianjark/notion-cms";
 
 export const projectsMetainfoSchema = z.object({
   title: z.string(),
@@ -67,6 +68,7 @@ export const { getPage, getPages } = cmsPage(projectSchema, (page) => {
         pageId: page.id,
         property: "Bilder",
         index,
+        lastEditedTime: page.last_edited_time,
       })
     ),
     date: getDate("Dato", page),
