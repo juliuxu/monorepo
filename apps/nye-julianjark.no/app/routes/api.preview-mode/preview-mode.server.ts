@@ -9,7 +9,7 @@ export const preivewModeSchema = z.object({
 });
 export type PreviewMode = z.infer<typeof preivewModeSchema>;
 // Cookie
-const cookie = createCookie("preview-mode");
+const cookie = createCookie("preview_mode");
 export async function serializePreviewModeToCookie(previewMode: PreviewMode) {
   return await cookie.serialize(previewMode);
 }
