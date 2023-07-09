@@ -4,6 +4,24 @@ import { getTextFromRichText } from "@julianjark/notion-utils";
 import { Image } from "@unpic/react";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 
+const optimizedImageBaseUrl = "http://localhost:3000/api/optimized-image";
+export const optimzedImageTransformer = ({
+  url,
+  width,
+  height,
+}: {
+  url: string | URL;
+  width?: number;
+  height?: number;
+}) => {
+  let options = "f_webp";
+  if (width) options += `,w_${width}`;
+  if (height) options += `,h_${height}`;
+  return `${optimizedImageBaseUrl}/${options}/${encodeURIComponent(
+    new URL(url).toString()
+  )}`;
+};
+
 export const UnpicNotionImage = ({ block }: BlockComponentProps) => {
   const ctx = useNotionRenderContext();
   if (block.type !== "image") return null;
@@ -20,7 +38,7 @@ export const UnpicNotionImage = ({ block }: BlockComponentProps) => {
       alt={getTextFromRichText(block.image.caption)}
       src={url}
       priority
-      transformer={({ url }) => url}
+      transformer={optimzedImageTransformer}
     />
   );
 };

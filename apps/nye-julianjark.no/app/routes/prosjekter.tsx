@@ -12,6 +12,7 @@ import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 import { Header } from "~/components/header";
+import { optimzedImageTransformer } from "~/components/unpic-notion-image";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -116,7 +117,7 @@ export function ProjectComponent({ project, index }: ProjectComponentProps) {
           alt=""
           src={coverImage}
           priority={index < 2}
-          transformer={({ url }) => url}
+          transformer={optimzedImageTransformer}
         />
       </div>
     </article>
