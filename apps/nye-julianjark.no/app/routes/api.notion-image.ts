@@ -17,7 +17,11 @@ export const loader = async ({ request }: LoaderArgs) => {
     Object.fromEntries(new URL(request.url).searchParams)
   );
 
+  const contentType = imageResponse.headers.get("content-type");
+
   const response = new Response(imageResponse.body);
   response.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  contentType && response.headers.set("Content-Type", contentType);
+
   return response;
 };

@@ -8,6 +8,7 @@ export const preivewModeSchema = z.object({
   secret: z.string(),
 });
 export type PreviewMode = z.infer<typeof preivewModeSchema>;
+
 // Cookie
 const cookie = createCookie("preview_mode");
 export async function serializePreviewModeToCookie(previewMode: PreviewMode) {
@@ -19,7 +20,6 @@ async function safeParsePreviewModeCookie(cookieHeader: string | null) {
   if (parsed.success) return parsed.data;
   else return undefined;
 }
-// Getter
 
 export async function isPreviewMode(fromRequest: Request) {
   return (await getPreviewMode(fromRequest))?.enabled ?? false;
