@@ -4,7 +4,7 @@ import { getTextFromRichText } from "@julianjark/notion-utils";
 import { Image } from "@unpic/react";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 
-const optimizedImageBaseUrl = "http://localhost:3000/api/optimized-image";
+const optimizedImageBaseUrl = "http://nye.julianjark.no/api/optimized-image";
 export const optimzedImageTransformer = ({
   url,
   width,
