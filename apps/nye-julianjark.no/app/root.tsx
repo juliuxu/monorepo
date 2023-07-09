@@ -135,7 +135,12 @@ function Footer() {
       <footer className="flex flex-row gap-6">
         <PreviewModeToggle />
         <ClearCacheButton>
-          <img src={julianFace} alt="Illustrajon av fjeset til Julian" />
+          <img
+            width={80}
+            height={134}
+            src={julianFace}
+            alt="Illustrajon av fjeset til Julian"
+          />
         </ClearCacheButton>
         <nav className="flex flex-col justify-center gap-2 text-body lg:text-body-lg">
           <Link
