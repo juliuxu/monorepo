@@ -6,6 +6,7 @@ import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
 import { getNotionDrivenLandingPage } from "../$notionPage/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
 import { isPreviewMode } from "../api.preview-mode/preview-mode.server";
+import { useEditNotionPage } from "../$notionPage/route";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -35,5 +36,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();
+  useEditNotionPage({ pageId: data.page.id });
   return <NotionPage {...data} />;
 }

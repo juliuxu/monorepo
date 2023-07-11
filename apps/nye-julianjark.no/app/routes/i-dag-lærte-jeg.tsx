@@ -14,6 +14,7 @@ import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 import { OramaSearch } from "~/service/orama-search/search";
 import { Header } from "~/components/header";
 import type { JulianHandle } from "~/handle";
+import { useEditNotionPage } from "./$notionPage/route";
 
 export const handle: JulianHandle = {
   scrollBehaviorSmooth: true,
@@ -34,13 +35,19 @@ export const loader = async ({ request }: LoaderArgs) => {
     await isPreviewMode(request)
   );
   return json(
-    { metainfo, entries, isPreview: await isPreviewMode(request) },
+    {
+      metainfo,
+      entries,
+      isPreview: await isPreviewMode(request),
+      todayILearnedDatabaseId: config.todayILearnedDatabaseId,
+    },
     { headers: config.loaderCacheControlHeaders }
   );
 };
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();
+  useEditNotionPage({ pageId: data.todayILearnedDatabaseId });
   return (
     <main>
       <Outlet />

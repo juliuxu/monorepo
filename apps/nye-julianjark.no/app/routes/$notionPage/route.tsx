@@ -6,6 +6,7 @@ import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
 import { TableOfConents } from "~/components/table-of-contents";
 import { isPreviewMode } from "../api.preview-mode/preview-mode.server";
+import { useShortcut } from "~/components/use-shortcut";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -41,6 +42,8 @@ export const loader = async ({
 // };
 export default function Component() {
   const data = useLoaderData<typeof loader>();
+  useEditNotionPage({ pageId: data.page.id });
+
   if (data.featureTableOfContents) {
     return (
       <div className="grid grid-cols-12">
@@ -58,4 +61,14 @@ export default function Component() {
       <NotionPage {...data} />
     </>
   );
+}
+
+/**
+ * Let's the author quickly edit the page in Notion
+ */
+export function useEditNotionPage({ pageId }: { pageId: string }) {
+  useShortcut("ee", () => {
+    // As of 11. july 2023 Notion figures out which page this belongs to and opens it correctly
+    window.open(`https://notion.so/${pageId.replaceAll("-", "")}`, "_blank");
+  });
 }

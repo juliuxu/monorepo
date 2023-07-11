@@ -13,6 +13,7 @@ import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
 import { Header } from "~/components/header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
+import { useEditNotionPage } from "./$notionPage/route";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -29,13 +30,14 @@ export const loader = async ({ request }: LoaderArgs) => {
     await isPreviewMode(request)
   );
   return json(
-    { metainfo, projects },
+    { metainfo, projects, projectsDatabaseId: config.projectsDatabaseId },
     { headers: config.loaderCacheControlHeaders }
   );
 };
 
 export default function Component() {
   const data = useLoaderData<typeof loader>();
+  useEditNotionPage({ pageId: data.projectsDatabaseId });
   return (
     <main>
       <Header
