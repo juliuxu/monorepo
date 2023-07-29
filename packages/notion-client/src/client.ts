@@ -126,7 +126,11 @@ export type BlockWithChildren = BlockObjectResponse & {
 };
 
 const isPageObjectResponse = (
-  page: PageObjectResponse | PartialPageObjectResponse
+  page:
+    | PageObjectResponse
+    | PartialPageObjectResponse
+    | DatabaseObjectResponse
+    | PartialDatabaseObjectResponse
 ): page is PageObjectResponse => "properties" in page;
 
 const assertPageObjectResponse = (

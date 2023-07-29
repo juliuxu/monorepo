@@ -11,7 +11,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "6.6.2",
     "@astrojs/node": "5.3.0",
     "@astrojs/react": "2.2.1",
     "@julianjark/notion-client": "*",
@@ -19,11 +18,8 @@
     "@julianjark/notion-utils": "*",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "astro": "2.9.0",
+    "astro": "2.9.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
-  },
-  "devDependencies": {
-    "wrangler": "3.3.0"
   }
 }
