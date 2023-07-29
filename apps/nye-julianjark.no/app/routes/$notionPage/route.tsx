@@ -6,7 +6,7 @@ import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
 import { TableOfConents } from "~/components/table-of-contents";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
-import { useShortcut } from "~/components/use-shortcut";
+import { useShortcut } from "@julianjark/dev-tools";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

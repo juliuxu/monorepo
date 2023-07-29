@@ -2,8 +2,14 @@ import { useState } from "react";
 import type { ActionFunction } from "@remix-run/node";
 import { notionClient } from "~/clients.server";
 
-import { useShortcut } from "~/components/use-shortcut";
 import julianFace from "~/assets/julian-face.svg";
+import { useShortcut } from "@julianjark/dev-tools";
+
+export const action: ActionFunction = async ({ request }) => {
+  if (request.method !== "DELETE") throw new Error("only DELETE allowed");
+  notionClient.clearCache();
+  return new Response("", { status: 204 });
+};
 
 export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -60,9 +66,3 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
     </>
   );
 }
-
-export const action: ActionFunction = async ({ request }) => {
-  if (request.method !== "DELETE") throw new Error("only DELETE allowed");
-  await notionClient.clearCache();
-  return new Response("", { status: 204 });
-};
