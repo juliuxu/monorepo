@@ -9,6 +9,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@julianjark/dev-tools": "*",
     "@julianjark/notion-client": "*",
     "@julianjark/notion-cms": "*",
     "@julianjark/notion-image": "*",
