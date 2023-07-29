@@ -10,7 +10,7 @@ import { Image } from "@unpic/react";
 import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
-import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { Header } from "~/components/header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
 import { useEditNotionPage } from "./$notionPage/route";
@@ -27,7 +27,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, projects } = await getAllProjectsAndMetainfo(
-    await isPreviewMode(request)
+    isPreviewModeFromRequest(request)
   );
   return json(
     { metainfo, projects, projectsDatabaseId: config.projectsDatabaseId },

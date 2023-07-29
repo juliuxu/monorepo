@@ -12,10 +12,11 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --dts --treeshake --format cjs,esm",
-    "dev": "tsup src/index.ts --watch --format cjs,esm"
+    "build": "tsup --entry src/index.ts --entry src/index.server.ts --dts --treeshake --format cjs,esm",
+    "dev": "tsup --entry src/index.ts --entry src/index.server.ts --watch --format cjs,esm"
   },
   "devDependencies": {
+    "@types/cookie": "0.5.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "react": "^18.2.0",
@@ -24,5 +25,9 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "cookie": "^0.5.0",
+    "zod": "^3.21.4"
   }
 }

@@ -27,8 +27,8 @@ import { classes } from "~/routes/$notionPage/notion-driven-page";
 import { classNames } from "~/misc";
 import { PreviewModeToggle } from "~/routes/api.preview-mode/route";
 import {
-  getPreviewMode,
-  serializePreviewModeToCookie,
+  getPreivewModeSetCookieHeader,
+  getPreviewModeFromRequest,
 } from "./routes/api.preview-mode/preview-mode.server";
 import { config } from "./config.server";
 import { useScrollBehaviorSmooth } from "./handle";
@@ -51,13 +51,12 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const previewMode = await getPreviewMode(request);
-  const headers = previewMode
-    ? { "Set-Cookie": await serializePreviewModeToCookie(previewMode) }
-    : { "Set-Cookie": "" };
+  const previewMode = getPreviewModeFromRequest(request);
+  const headers = getPreivewModeSetCookieHeader(previewMode);
 
   return json(
     {
+      abc: 123,
       previewMode,
     },
     {

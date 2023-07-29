@@ -10,7 +10,7 @@ import { dateFormatter } from "./_index/latest-today-i-learned-entries";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { classNames } from "~/misc";
-import { isPreviewMode } from "./api.preview-mode/preview-mode.server";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { OramaSearch } from "~/service/orama-search/search";
 import { Header } from "~/components/header";
 import type { JulianHandle } from "~/handle";
@@ -32,13 +32,13 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo(
-    await isPreviewMode(request)
+    isPreviewModeFromRequest(request)
   );
   return json(
     {
       metainfo,
       entries,
-      isPreview: await isPreviewMode(request),
+      isPreview: isPreviewModeFromRequest(request),
       todayILearnedDatabaseId: config.todayILearnedDatabaseId,
     },
     { headers: config.loaderCacheControlHeaders }

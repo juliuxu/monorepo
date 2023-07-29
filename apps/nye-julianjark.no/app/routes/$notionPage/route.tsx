@@ -5,7 +5,7 @@ import { getNotionDrivenPageWithBlocks } from "./client";
 import { config } from "~/config.server";
 import { getCustomBlocksData } from "./custom-blocks.server";
 import { TableOfConents } from "~/components/table-of-contents";
-import { isPreviewMode } from "../api.preview-mode/preview-mode.server";
+import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { useShortcut } from "~/components/use-shortcut";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
@@ -23,7 +23,7 @@ export const loader = async ({
 
   const page = await getNotionDrivenPageWithBlocks(
     notionPage,
-    await isPreviewMode(request)
+    isPreviewModeFromRequest(request)
   );
   if (!page) throw new Response(null, { status: 404 });
 

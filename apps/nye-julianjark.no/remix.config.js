@@ -6,6 +6,7 @@ module.exports = {
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
   watchPaths: [
+    require.resolve("@julianjark/dev-tools"),
     require.resolve("@julianjark/notion-client"),
     require.resolve("@julianjark/notion-image"),
     require.resolve("@julianjark/notion-render"),
