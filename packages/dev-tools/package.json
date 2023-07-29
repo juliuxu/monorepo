@@ -1,7 +1,7 @@
 {
   "name": "@julianjark/dev-tools",
   "version": "0.12.0",
-  "description": "Helper functions for the Notion API",
+  "description": "Helper tools for development",
   "author": "Julian Jark",
   "license": "ISC",
   "main": "./dist/index.js",
