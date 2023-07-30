@@ -3,6 +3,15 @@ import { useCallback, useEffect, useRef } from "react";
 export const useShortcut = (keys: string, onTrigger: () => unknown) => {
   const pressedKeysRef = useRef("");
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    const target = (event.target || {}) as HTMLElement;
+    if (
+      target.isContentEditable ||
+      target.nodeName === "INPUT" ||
+      target.nodeName === "TEXTAREA"
+    ) {
+      return;
+    }
+
     pressedKeysRef.current += event.key;
     if (pressedKeysRef.current === keys) {
       pressedKeysRef.current = "";
