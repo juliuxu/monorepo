@@ -8,7 +8,7 @@ import { pick } from "~/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { Header } from "~/components/header";
 import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
-import { dateFormatter } from "./$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { dateFormatterShort } from "./$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { classes } from "./$notionPage/notion-driven-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
@@ -52,11 +52,11 @@ export default function Component() {
 
       <hr className={classes.divider.root} />
 
-      <ul className="space-y-8">
+      <ul className="space-y-12 md:space-y-16">
         {data.entries.map((entry) => (
-          <li className="flex flex-col" key={entry.id}>
-            <time className="text-body lg:text-body-lg">
-              {dateFormatter.format(new Date(entry.publishedDate))}
+          <li className="flex flex-col md:flex-row" key={entry.id}>
+            <time className="md:basis-[24vw] text-body md:text-h2-lg">
+              {dateFormatterShort.format(new Date(entry.publishedDate))}
             </time>
             <Link
               className={classes.rich_text_anchor}

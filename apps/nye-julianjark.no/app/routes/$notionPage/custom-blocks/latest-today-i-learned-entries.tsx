@@ -2,11 +2,17 @@ import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index";
 import { classes } from "~/routes/$notionPage/notion-driven-page";
 
+export const dateFormatterShort = new Intl.DateTimeFormat("nb-NO", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
 export const dateFormatter = new Intl.DateTimeFormat("nb-NO", {
   day: "numeric",
   month: "long",
   year: "numeric",
 });
+
 export function LatestTodayILearnedEntries() {
   const { latestTodayILearnedEntries } = useLoaderData<typeof loader>();
   return (
