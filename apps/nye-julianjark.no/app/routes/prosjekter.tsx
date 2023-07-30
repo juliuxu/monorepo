@@ -46,7 +46,7 @@ export default function Component() {
       />
       <section className="mx-auto flex w-full flex-col gap-[6vw]">
         {data.projects.map((project, index) => (
-          <ProjectComponent key={project.id} project={project} index={index} />
+          <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </section>
     </main>
@@ -57,7 +57,7 @@ interface ProjectComponentProps {
   project: Project;
   index: number;
 }
-export function ProjectComponent({ project, index }: ProjectComponentProps) {
+export function ProjectCard({ project, index }: ProjectComponentProps) {
   const coverImage =
     project.imageUrls[0] ?? `https://picsum.photos/1200/800?index=${index}`;
   const even = index % 2 === 0;
@@ -68,7 +68,9 @@ export function ProjectComponent({ project, index }: ProjectComponentProps) {
           even ? "sm:order-1" : "sm:order-2"
         } flex flex-col`}
       >
-        <h2 className="text-[1.1em] font-semibold">{project.title}</h2>
+        <h2 className="text-[1.1em] font-semibold break-words">
+          {project.title}
+        </h2>
         <p className="mt-2 text-h2 lg:text-h2-lg">
           <RichTextListRender
             richTextList={project.description}

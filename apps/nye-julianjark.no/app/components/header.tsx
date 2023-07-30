@@ -16,7 +16,7 @@ export function Header({
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const landingPageMessage = isLandingPage ? (
-    <>{"🚧 Under utvikling 🚧"}</>
+    <>&nbsp;{"🚧 Under utvikling 🚧"}</>
   ) : null;
   return (
     <>

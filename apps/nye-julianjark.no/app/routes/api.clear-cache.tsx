@@ -53,7 +53,7 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
         </div>
       )}
 
-      <button
+      {/* <button
         title="Hent fersk data"
         type="button"
         onClick={reloadWithoutCache}
@@ -62,7 +62,7 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
         aria-busy={isSubmitting}
       >
         {children ? children : <div className="rotate-90">↻</div>}
-      </button>
+      </button> */}
     </>
   );
 }
