@@ -18,6 +18,7 @@
     "@julianjark/notion-utils": "*",
     "@orama/orama": "1.1.1",
     "@orama/plugin-match-highlight": "1.1.1",
+    "@radix-ui/react-hover-card": "1.0.6",
     "@remix-run/css-bundle": "1.19.1",
     "@remix-run/node": "1.19.1",
     "@remix-run/react": "1.19.1",

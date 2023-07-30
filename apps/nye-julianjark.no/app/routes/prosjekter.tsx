@@ -78,12 +78,12 @@ export function ProjectCard({ project, index }: ProjectComponentProps) {
           />
         </p>
         {/* <div className="mt-auto" /> */}
-        <footer className="mt-2 flex flex-wrap gap-6 text-body transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 lg:text-body-lg lg:opacity-0 [&_a:hover]:underline">
+        <footer className="mt-2 flex flex-wrap gap-6 text-body transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 lg:text-body-lg lg:opacity-0">
           {project.demoLink && (
             <a
               title="Link til applikasjonen kjørende i produksjon"
               href={project.demoLink}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:underline"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ export function ProjectCard({ project, index }: ProjectComponentProps) {
             <a
               title="Se kildekoden på GitHub"
               href={project.codeLink}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:underline"
             >
               <img alt="" className="h-[1em] w-[1em]" src={githubIcon} />
               Github

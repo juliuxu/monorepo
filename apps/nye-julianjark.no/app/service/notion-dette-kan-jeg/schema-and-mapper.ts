@@ -1,5 +1,7 @@
 import {
+  getFileUrls,
   getMultiSelectAndColor,
+  getRichText,
   getSelect,
   getSelectAndColor,
   getTextFromRichText,
@@ -13,8 +15,9 @@ import {
   multiSelectSchema,
   richTextSchema,
   cmsMetainfo,
+  cmsPage,
 } from "@julianjark/notion-cms";
-import { cmsPage } from "@julianjark/notion-cms";
+import { imageUrlBuilder } from "~/routes/api.notion-image";
 
 export const detteKanJegMetainfoSchema = z.object({
   title: z.string(),
@@ -38,6 +41,8 @@ export const detteKanJegSchema = z
     link: z.string().url().optional(),
     type: selectSchema,
     tags: multiSelectSchema,
+    description: richTextSchema.optional(),
+    logo: z.string().url().optional(),
     competence: z
       .enum([
         "Kan men ønsker ikke å jobbe med",
@@ -69,6 +74,16 @@ export const { getPages } = cmsPage(detteKanJegSchema, (page) => {
     link: getUrl("Link", page),
     type: getSelectAndColor("Type", page),
     tags: getMultiSelectAndColor("Tags", page),
+    description: getRichText("Beskrivelse", page),
+    logo: getFileUrls("Logo", page)?.map((_, index) =>
+      imageUrlBuilder({
+        type: "page-property",
+        pageId: page.id,
+        property: "Logo",
+        index,
+        lastEditedTime: page.last_edited_time,
+      })
+    )[0],
     competence: getSelect("Ferdighet og Motivasjon", page) as any,
 
     // To keep typescript happy, the added options needs to be defined here
