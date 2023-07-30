@@ -52,7 +52,7 @@ export default function Component() {
 
       <hr className={classes.divider.root} />
 
-      <ul className="space-y-12 md:space-y-16">
+      <ul className="space-y-8 md:space-y-16">
         {data.entries.map((entry) => (
           <li className="flex flex-col md:flex-row" key={entry.id}>
             <time className="md:basis-[24vw] text-body md:text-h2-lg">
