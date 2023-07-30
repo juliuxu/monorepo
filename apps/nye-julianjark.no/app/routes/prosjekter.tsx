@@ -13,7 +13,7 @@ import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { Header } from "~/components/header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
-import { useEditNotionPage } from "./$notionPage/route";
+import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

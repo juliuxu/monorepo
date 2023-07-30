@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import type { loader } from "~/routes/_index/route";
-import { classes } from "../$notionPage/notion-driven-page";
+import type { loader } from "~/routes/_index";
+import { classes } from "~/routes/$notionPage/notion-driven-page";
 
 export const dateFormatter = new Intl.DateTimeFormat("nb-NO", {
   day: "numeric",
@@ -26,7 +26,9 @@ export function LatestTodayILearnedEntries() {
                 {entry.title}
               </Link>
             </h3>
-            <p className="mt-3 text-body lg:text-body-lg">{entry.summary}</p>
+            <p className="break-words mt-3 text-body lg:text-body-lg">
+              {entry.summary}
+            </p>
           </article>
         </li>
       ))}

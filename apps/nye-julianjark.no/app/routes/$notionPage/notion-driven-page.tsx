@@ -7,7 +7,7 @@ import {
 } from "@julianjark/notion-render";
 import { Link } from "@remix-run/react";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
-import type { NotionDrivenPage } from "./schema-and-mapper";
+import type { NotionDrivenPage } from "../../service/notion-driven-page/schema-and-mapper";
 import {
   NotionShikiCode,
   NotionShikiCodeRichText,

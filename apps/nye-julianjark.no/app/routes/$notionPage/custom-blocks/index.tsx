@@ -4,8 +4,8 @@ import {
   DetteKanJegBlock,
   DetteKanJegWantToLearnMoreBlock,
 } from "~/components/dette-kan-jeg";
-import { FeaturedProject } from "~/routes/_index/featured-project";
-import { LatestTodayILearnedEntries } from "~/routes/_index/latest-today-i-learned-entries";
+import { FeaturedProject } from "~/routes/$notionPage/custom-blocks/featured-project";
+import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
 
 export const customBlocksToComponents = {
   BLOCK_REPLACE_LATEST_TODAY_I_LEARNED: <LatestTodayILearnedEntries />,

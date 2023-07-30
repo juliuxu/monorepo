@@ -2,7 +2,7 @@ import {
   getTextFromRichText,
   type BlockObjectResponse,
 } from "@julianjark/notion-utils";
-import type { CustomBlockKeys } from "./custom-blocks";
+import type { CustomBlockKeys } from ".";
 import { getDetteKanJegData } from "~/components/dette-kan-jeg";
 import { typedBoolean } from "~/misc";
 

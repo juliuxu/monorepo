@@ -9,7 +9,7 @@ import { HighlightedDocument } from "./highlighted-document";
 import { groupDocumentsBy } from "./utils";
 import { createTodayILearnedOramaIndex } from "./create-today-i-learned-index";
 import { Link, useLoaderData, useLocation } from "@remix-run/react";
-import type { loader } from "~/routes/i-dag-lærte-jeg";
+import type { loader } from "~/routes/i-dag-lærte-jeg._index";
 
 export type OramaSearchProps = {
   limitResults: number;

@@ -3,10 +3,10 @@ import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/client";
 import { NotionPage } from "~/routes/$notionPage/notion-driven-page";
-import { getNotionDrivenLandingPage } from "../$notionPage/client";
+import { getNotionDrivenLandingPage } from "../service/notion-driven-page/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
-import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
-import { useEditNotionPage } from "../$notionPage/route";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
+import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

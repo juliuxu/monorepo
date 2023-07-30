@@ -73,3 +73,21 @@ export function shuffled<T>(arr: ReadonlyArray<T> | T[]): T[] {
   }
   return _arr;
 }
+
+export function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+  const result: any = {};
+  for (const key of keys) {
+    result[key] = obj[key];
+  }
+  return result;
+}
+
+/**
+ * Helper to assert that an item is found, and throw a 404 if not
+ */
+export function assertItemFound<T>(item: T | undefined): asserts item is T {
+  if (item === undefined)
+    throw new Response("Not Found", {
+      status: 404,
+    });
+}

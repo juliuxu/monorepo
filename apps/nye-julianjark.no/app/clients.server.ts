@@ -4,7 +4,7 @@ import {
   getAllTodayILearnedEntriesAndMetainfo,
   getLatestTodayILearnedEntries,
 } from "~/service/notion-today-i-learned/client";
-import { getNotionDrivenPages } from "./routes/$notionPage/client";
+import { getNotionDrivenPages } from "./service/notion-driven-page/client";
 import {
   getAllProjectsAndMetainfo,
   getFeaturedProject,
