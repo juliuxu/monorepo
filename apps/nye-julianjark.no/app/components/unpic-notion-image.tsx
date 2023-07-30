@@ -31,12 +31,22 @@ export const UnpicNotionImage = ({ block }: BlockComponentProps) => {
     blockId: block.id,
     lastEditedTime: block.last_edited_time,
   });
+
+  const captionOptions = Object.fromEntries(
+    new URLSearchParams(getTextFromRichText(block.image.caption))
+  );
+  const aspectRatio =
+    Number(captionOptions.aspectRatio) > 0
+      ? Number(captionOptions.aspectRatio)
+      : undefined;
+
   return (
     <Image
       layout="fullWidth"
       className={ctx.classes.image.root}
-      alt={getTextFromRichText(block.image.caption)}
+      alt={captionOptions.alt ?? ""}
       src={url}
+      aspectRatio={aspectRatio}
       priority
       transformer={optimzedImageTransformer}
     />

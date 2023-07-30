@@ -14,6 +14,7 @@ const imageAssetSchema = z.object({
 
   width: z.coerce.number().optional(),
   height: z.coerce.number().optional(),
+  aspectRatio: z.coerce.number().optional(),
 });
 type ImageAsset = z.infer<typeof imageAssetSchema>;
 
@@ -24,6 +25,7 @@ export interface GetImageAssetsConfig {
   altProperty: string;
   widthProperty?: string;
   heightProperty?: string;
+  aspectRatioProperty?: string;
 }
 export const createGetImageAssets =
   ({
@@ -70,6 +72,9 @@ export const createGetImageAssets =
           : undefined,
         height: config.heightProperty
           ? getText(config.heightProperty, asset)
+          : undefined,
+        aspectRatio: config.aspectRatioProperty
+          ? getText(config.aspectRatioProperty, asset)
           : undefined,
       });
       return acc;
