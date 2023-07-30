@@ -39,11 +39,11 @@ export const config = {
    * Having a week as stale-while-revalidate time I think is a good tradeoff for this app.
    */
   loaderCacheControlHeaders: {
-    "Cache-Control": `public, max-age=${60}, s-maxage=${1}, stale-if-error=${YEAR_IN_SECONDS}`,
+    "Cache-Control": `public, max-age=${60}, s-maxage=${1}, stale-if-error=${WEEK_IN_SECONDS}`,
   },
   htmlCacheControlHeaders: {
-    "Cache-Control": `public, max-age=${60}, must-revalidate, s-maxage=${1}, stale-while-revalidate=${WEEK_IN_SECONDS}`,
+    "Cache-Control": `public, max-age=${60}, must-revalidate, s-maxage=${1}, stale-while-revalidate=${YEAR_IN_SECONDS}`,
   },
 
-  shikiTheme: "dark-plus" satisfies ShikiTheme,
+  shikiTheme: "dracula-soft" satisfies ShikiTheme,
 } as const;

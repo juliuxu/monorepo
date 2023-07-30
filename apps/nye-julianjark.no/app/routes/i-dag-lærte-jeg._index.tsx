@@ -58,7 +58,11 @@ export default function Component() {
             <time className="text-body lg:text-body-lg">
               {dateFormatter.format(new Date(entry.publishedDate))}
             </time>
-            <Link className={classes.rich_text_anchor} to={entry.slug}>
+            <Link
+              className={classes.rich_text_anchor}
+              to={entry.slug}
+              prefetch="intent"
+            >
               {entry.title}
             </Link>
           </li>

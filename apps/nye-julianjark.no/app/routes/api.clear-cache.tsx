@@ -52,17 +52,6 @@ export function ClearCacheButton({ children }: { children?: React.ReactNode }) {
           </div>
         </div>
       )}
-
-      {/* <button
-        title="Hent fersk data"
-        type="button"
-        onClick={reloadWithoutCache}
-        className={`text-3xl`}
-        disabled={isSubmitting}
-        aria-busy={isSubmitting}
-      >
-        {children ? children : <div className="rotate-90">↻</div>}
-      </button> */}
     </>
   );
 }

@@ -48,15 +48,8 @@ export function TodayILearnedArticle({
       <time className="text-body text-gray-700 lg:text-body">
         {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
-      <TitleComponent
-        id={entry.slug}
-        className={`mt-2 scroll-mt-[calc(6vw+2.5rem)] text-h2 lg:text-h2-lg`}
-      >
-        <Link
-          to={`/i-dag-lærte-jeg/${entry.slug}`}
-          preventScrollReset
-          className="hover:underline"
-        >
+      <TitleComponent id={entry.slug} className={`mt-2  text-h2 lg:text-h2-lg`}>
+        <Link to={`/i-dag-lærte-jeg/${entry.slug}`} className="hover:underline">
           {entry.title}
         </Link>
       </TitleComponent>
@@ -75,7 +68,9 @@ export function TodayILearnedArticle({
           "[&_figure:has(pre)]:mt-0",
           "[&_figure:has(pre)]:mb-0",
           "[&_figure_pre]:mb-0",
-          "prose-figcaption:text-black/70"
+          "prose-figcaption:text-black/70",
+          "prose-figcaption:mt-[0.8em]",
+          "prose-figcaption:text-[0.9rem]"
         )}
       >
         <NotionRender

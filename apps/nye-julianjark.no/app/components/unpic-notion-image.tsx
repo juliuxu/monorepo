@@ -41,14 +41,21 @@ export const UnpicNotionImage = ({ block }: BlockComponentProps) => {
       : undefined;
 
   return (
-    <Image
-      layout="fullWidth"
-      className={ctx.classes.image.root}
-      alt={captionOptions.alt ?? ""}
-      src={url}
-      aspectRatio={aspectRatio}
-      priority
-      transformer={optimzedImageTransformer}
-    />
+    <>
+      <figure>
+        <Image
+          layout="fullWidth"
+          className={ctx.classes.image.root}
+          alt={captionOptions.alt ?? ""}
+          src={url}
+          aspectRatio={aspectRatio}
+          priority
+          transformer={optimzedImageTransformer}
+        />
+        {captionOptions.caption && (
+          <figcaption>{captionOptions.caption}</figcaption>
+        )}
+      </figure>
+    </>
   );
 };
