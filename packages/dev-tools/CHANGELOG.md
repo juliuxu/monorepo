@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.17.0
+
+### Minor Changes
+
+- make it smaller
+
 ## 0.16.0
 
 ### Minor Changes

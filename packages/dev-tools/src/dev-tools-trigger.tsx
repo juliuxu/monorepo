@@ -31,8 +31,8 @@ export function DevToolsTrigger({ onTrigger }: DevToolsTriggerProps) {
         aria-label="Trigger dev tools"
         onClick={onClick}
         style={{
-          height: 160,
-          width: 160,
+          height: 64,
+          width: 64,
           position: "absolute",
           bottom: 0,
           right: 0,
