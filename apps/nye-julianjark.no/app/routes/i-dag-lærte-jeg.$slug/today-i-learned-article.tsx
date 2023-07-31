@@ -1,6 +1,5 @@
 import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
-import { Link } from "@remix-run/react";
 import { classes, components } from "~/routes/$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { classNames } from "~/misc";
@@ -45,17 +44,15 @@ export function TodayILearnedArticle({
     TitleComponent === "h1" ? "h2" : TitleComponent === "h2" ? "h3" : "h4";
   return (
     <article key={entry.id}>
-      <time className="text-body text-gray-700 lg:text-body">
+      <TitleComponent id={entry.slug} className={`text-h1`}>
+        {entry.title}
+      </TitleComponent>
+      <time className="block mt-2 text-body lg:text-body">
         {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
-      <TitleComponent id={entry.slug} className={`mt-2  text-h2 lg:text-h2-lg`}>
-        <Link to={`/i-dag-lærte-jeg/${entry.slug}`} className="hover:underline">
-          {entry.title}
-        </Link>
-      </TitleComponent>
       <div
         className={classNames(
-          "mt-8",
+          "mt-6",
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
           "prose-p:overflow-scroll",
