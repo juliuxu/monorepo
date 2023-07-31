@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.15.0
+
+### Minor Changes
+
+- aria-hidden on dev-tools-trigger
+
 ## 0.14.0
 
 ### Minor Changes
