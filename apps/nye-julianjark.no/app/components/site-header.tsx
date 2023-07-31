@@ -24,8 +24,12 @@ export function SiteHeader() {
           <img src={backSvg} alt="" width={33} height={24} />
         </Link>
         {headerMenu && (
-          <div className="col-span-10 text-center text-h2 hover:text-secondary underline font-medium underline-offset-4">
-            <Link to={headerMenu.href} prefetch="render">
+          <div className="col-span-10 text-center">
+            <Link
+              className="text-h2 hover:text-secondary underline font-medium underline-offset-4"
+              to={headerMenu.href}
+              prefetch="render"
+            >
               {headerMenu.title}
             </Link>
           </div>
