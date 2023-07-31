@@ -27,9 +27,8 @@ export function DevToolsTrigger({ onTrigger }: DevToolsTriggerProps) {
   return (
     <div style={{ position: "relative" }}>
       <button
-        // Disable for screen readers
-        // Mainly so this does not drag down the accessibility score
-        aria-hidden
+        lang="en"
+        aria-label="Trigger dev tools"
         onClick={onClick}
         style={{
           height: 160,
