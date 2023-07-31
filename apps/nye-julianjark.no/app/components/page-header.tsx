@@ -7,7 +7,7 @@ interface HeaderProps {
   className?: string;
   addDivderUnderneath?: boolean;
 }
-export function Header({
+export function PageHeader({
   title,
   description,
   className,

@@ -15,7 +15,7 @@ import {
 import { classNames } from "~/misc";
 import { CustomBlock } from "./custom-blocks";
 import { demotedHeadings } from "./demoted-headings";
-import { Header } from "~/components/header";
+import { PageHeader } from "~/components/page-header";
 
 export const components: Partial<Components> = {
   image: UnpicNotionImage,
@@ -105,7 +105,7 @@ export function NotionPage({ page }: NotionPageProps) {
 
   return (
     <main>
-      <Header
+      <PageHeader
         title={page.title}
         description={
           <RichTextListRender richTextList={page.preamble} classes={classes} />

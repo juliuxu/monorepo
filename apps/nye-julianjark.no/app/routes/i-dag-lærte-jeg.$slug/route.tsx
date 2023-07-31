@@ -7,6 +7,7 @@ import { assertItemFound } from "~/misc";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { useEditNotionPage } from "../$notionPage/use-edit-notion-page";
 import { TodayILearnedArticle } from "./today-i-learned-article";
+import type { JulianHandle } from "~/handle";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -33,6 +34,13 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     },
     { headers: config.loaderCacheControlHeaders }
   );
+};
+
+export const handle: JulianHandle = {
+  headerMenu: {
+    title: "I dag lærte jeg",
+    href: "/i-dag-lærte-jeg",
+  },
 };
 
 export default function Component() {

@@ -11,7 +11,7 @@ import { classNames } from "~/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
-import { Header } from "~/components/header";
+import { PageHeader } from "~/components/page-header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
 import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
 
@@ -40,7 +40,7 @@ export default function Component() {
   useEditNotionPage({ pageId: data.projectsDatabaseId });
   return (
     <main>
-      <Header
+      <PageHeader
         title={<RichTextListRender richTextList={data.metainfo.description} />}
         addDivderUnderneath
       />

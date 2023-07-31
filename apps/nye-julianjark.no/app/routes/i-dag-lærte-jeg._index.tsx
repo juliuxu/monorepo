@@ -6,7 +6,7 @@ import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import { pick } from "~/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
-import { Header } from "~/components/header";
+import { PageHeader } from "~/components/page-header";
 import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
 import { dateFormatterShort } from "./$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { classes } from "./$notionPage/notion-driven-page";
@@ -45,7 +45,7 @@ export default function Component() {
   useEditNotionPage({ pageId: data.todayILearnedDatabaseId });
   return (
     <main>
-      <Header
+      <PageHeader
         title={data.metainfo.title}
         description={getTextFromRichText(data.metainfo.description)}
       />
