@@ -12,6 +12,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useSearchParams,
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
@@ -69,6 +70,9 @@ export const sharedClasses /*tw*/ = {
 };
 export default function App() {
   const scrollBehaviorSmooth = useScrollBehaviorSmooth();
+  const [search] = useSearchParams();
+  const isIframe = search.get("content-only") === "true";
+
   return (
     <html lang="no" className={scrollBehaviorSmooth ? "scroll-smooth" : ""}>
       <head>
@@ -80,13 +84,15 @@ export default function App() {
       <body
         className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col bg-base-100`}
       >
-        <SiteHeader />
+        {!isIframe && <SiteHeader />}
         <div>
           <Outlet />
         </div>
-        <div className="mt-auto">
-          <Footer />
-        </div>
+        {!isIframe && (
+          <div className="mt-auto">
+            <Footer />
+          </div>
+        )}
 
         <DevTools />
         <ScrollRestoration />
