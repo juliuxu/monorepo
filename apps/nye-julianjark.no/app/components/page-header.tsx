@@ -1,4 +1,4 @@
-import { useLocation } from "@remix-run/react";
+// import { useLocation } from "@remix-run/react";
 import { classes } from "~/routes/$notionPage/notion-driven-page";
 
 interface HeaderProps {
@@ -13,8 +13,8 @@ export function PageHeader({
   className,
   addDivderUnderneath,
 }: HeaderProps) {
-  const location = useLocation();
-  const isLandingPage = location.pathname === "/";
+  // const location = useLocation();
+  // const isLandingPage = location.pathname === "/";
   // const landingPageMessage = isLandingPage ? (
   //   <>&nbsp;{"🚧 Under utvikling 🚧"}</>
   // ) : null;
