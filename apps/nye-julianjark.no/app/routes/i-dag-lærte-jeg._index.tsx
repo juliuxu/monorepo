@@ -52,10 +52,10 @@ export default function Component() {
 
       <hr className={classes.divider.root} />
 
-      <ul className="space-y-8 md:space-y-16">
+      <ul className="space-y-8 md:space-y-8 text-h2">
         {data.entries.map((entry) => (
           <li className="flex flex-col md:flex-row" key={entry.id}>
-            <time className="md:basis-[24vw] text-body md:text-h2-lg">
+            <time className="md:basis-[24vw] text-body md:text-h2">
               {dateFormatterShort.format(new Date(entry.publishedDate))}
             </time>
             <Link
