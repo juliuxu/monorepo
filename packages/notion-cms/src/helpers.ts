@@ -30,7 +30,7 @@ export const multiSelectSchema = z.array(selectSchema);
 export const blockSchema = z.custom<BlockObjectResponse>((val) => {
   if (typeof val !== "object" || !val) return false;
   if (!("type" in val)) return false;
-  if ((val as BlockObjectResponse)?.type === "unsupported") return false;
+  if ((val as BlockObjectResponse)?.type === "unsupported") return true;
   return true;
 });
 export const blocksSchema = z.array(blockSchema);

@@ -1,5 +1,11 @@
 # @julianjark/notion-cms
 
+## 0.11.1
+
+### Patch Changes
+
+- include unsupported blocks in parsing
+
 ## 0.11.0
 
 ### Minor Changes
