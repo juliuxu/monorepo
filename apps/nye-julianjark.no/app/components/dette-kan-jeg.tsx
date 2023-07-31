@@ -36,12 +36,12 @@ export function DetteKanJegWantToLearnMoreBlock() {
 
 function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
   return (
-    <ul className="flex flex-wrap gap-x-4 gap-y-1">
+    <ul className="flex flex-wrap gap-x-4 gap-y-4">
       {knowledge.map((item) => {
         let element = (
           <span
             className={classNames(
-              "text-[1rem]"
+              "text-h2"
               // "hover:underline focus:underline"
               // "badge badge-lg group-hover:badge-info",
               // "transition-all duration-500 ease-out",
@@ -63,15 +63,15 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
           );
         }
         return (
-          <li key={item.id} className="group">
+          <li key={item.id} className="group text-base">
             {item.link ? (
               <HoverCard>
                 <HoverCardTrigger asChild className="font-bold">
                   {element}
                 </HoverCardTrigger>
-                <HoverCardContent className="p-4 w-72 flex space-x-4 justify-between">
+                <HoverCardContent className="p-6 w-96 flex space-x-6 justify-between">
                   {item.logo && (
-                    <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                    <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">
                       <img
                         className="aspect-square h-full w-full"
                         src={item.logo}
@@ -80,15 +80,15 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                     </span>
                   )}
                   <div>
-                    <h3 className="text-body font-bold">{item.title}</h3>
+                    <h3 className="text-h2 font-bold">{item.title}</h3>
                     {item.description && (
-                      <p className="mt-1 text-sm">
+                      <p className="mt-4 text-body">
                         <RichTextListRender richTextList={item.description} />
                       </p>
                     )}
                     <a
                       href={item.link}
-                      className="mt-2 text-sm flex items-center gap-2 hover:underline"
+                      className="mt-4 text-body inline-flex items-center gap-2 hover:underline"
                       target="_blank"
                       rel="noreferrer"
                     >
