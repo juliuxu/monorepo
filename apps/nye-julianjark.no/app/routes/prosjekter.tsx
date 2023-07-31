@@ -78,7 +78,7 @@ export function ProjectCard({ project, index }: ProjectComponentProps) {
           />
         </p>
         {/* <div className="mt-auto" /> */}
-        <footer className="mt-2 flex flex-wrap gap-6 text-body transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 lg:text-body-lg lg:opacity-0">
+        <footer className="mt-4 flex flex-wrap gap-6 text-body transition-opacity group-focus-within:opacity-90 group-hover:opacity-90 lg:text-body-lg lg:opacity-0">
           {project.demoLink && (
             <a
               title="Link til applikasjonen kjørende i produksjon"

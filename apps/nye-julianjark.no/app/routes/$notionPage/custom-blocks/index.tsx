@@ -6,6 +6,7 @@ import {
 } from "~/components/dette-kan-jeg";
 import { FeaturedProject } from "~/routes/$notionPage/custom-blocks/featured-project";
 import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
+import { Spacer } from "./spacer";
 
 export const customBlocksToComponents = {
   BLOCK_REPLACE_LATEST_TODAY_I_LEARNED: <LatestTodayILearnedEntries />,
@@ -14,6 +15,7 @@ export const customBlocksToComponents = {
   BLOCK_REPLACE_DETTE_KAN_JEG_WANT_TO_LEARN_MORE: (
     <DetteKanJegWantToLearnMoreBlock />
   ),
+  BLOCK_REPLACE_SPACER: <Spacer />,
 } as const satisfies Record<string, JSX.Element>;
 export type CustomBlockKeys = keyof typeof customBlocksToComponents;
 

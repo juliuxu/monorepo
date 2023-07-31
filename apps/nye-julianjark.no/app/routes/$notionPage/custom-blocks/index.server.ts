@@ -20,6 +20,7 @@ const dataFunctions: Record<
   BLOCK_REPLACE_FEATURED_PROJECT: () => {
     throw new Error("Function not implemented.");
   },
+  BLOCK_REPLACE_SPACER: async () => ({}),
 };
 
 /**
