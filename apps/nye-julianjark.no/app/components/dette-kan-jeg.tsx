@@ -82,7 +82,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                   <div>
                     <h3 className="text-body font-bold">{item.title}</h3>
                     {item.description && (
-                      <p className="mt-0 text-sm">
+                      <p className="mt-1 text-sm">
                         <RichTextListRender richTextList={item.description} />
                       </p>
                     )}
