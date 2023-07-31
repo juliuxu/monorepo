@@ -85,7 +85,7 @@ export default function App() {
         className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col bg-base-100`}
       >
         {!isIframe && <SiteHeader />}
-        <div>
+        <div className={isIframe ? "py-8" : ""}>
           <Outlet />
         </div>
         {!isIframe && (

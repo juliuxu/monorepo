@@ -66,10 +66,10 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
           <li key={item.id} className="group">
             {item.link ? (
               <HoverCard>
-                <HoverCardTrigger className="font-bold">
+                <HoverCardTrigger asChild className="font-bold">
                   {element}
                 </HoverCardTrigger>
-                <HoverCardContent className="flex space-x-4 justify-between">
+                <HoverCardContent className="p-4 w-72 flex space-x-4 justify-between">
                   {item.logo && (
                     <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
                       <img

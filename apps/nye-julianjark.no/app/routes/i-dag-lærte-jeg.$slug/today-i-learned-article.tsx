@@ -44,7 +44,10 @@ export function TodayILearnedArticle({
     TitleComponent === "h1" ? "h2" : TitleComponent === "h2" ? "h3" : "h4";
   return (
     <article key={entry.id}>
-      <TitleComponent id={entry.slug} className={`text-h1`}>
+      <TitleComponent
+        id={entry.slug}
+        className={`text-[32px] font-normal leading-tight md:text-h1`}
+      >
         {entry.title}
       </TitleComponent>
       <time className="block mt-2 text-body lg:text-body">
@@ -53,6 +56,7 @@ export function TodayILearnedArticle({
       <div
         className={classNames(
           "mt-6",
+          "text-black/90",
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
           "prose-p:overflow-scroll",

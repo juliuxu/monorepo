@@ -10,6 +10,11 @@ import { PageHeader } from "~/components/page-header";
 import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
 import { dateFormatterShort } from "./$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { classes } from "./$notionPage/notion-driven-page";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "~/components/hover-card";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -55,16 +60,29 @@ export default function Component() {
       <ul className="space-y-8 text-h2">
         {data.entries.map((entry) => (
           <li className="flex flex-col md:flex-row" key={entry.id}>
-            <time className="md:basis-[24vw] text-body md:text-h2">
+            <time className="text-body md:text-h2 md:shrink-0 md:basis-1/4 xl:basis-1/5">
               {dateFormatterShort.format(new Date(entry.publishedDate))}
             </time>
-            <Link
-              className={classes.rich_text_anchor}
-              to={entry.slug}
-              prefetch="intent"
-            >
-              {entry.title}
-            </Link>
+
+            <HoverCard openDelay={300}>
+              <HoverCardTrigger asChild>
+                <Link
+                  className={classes.rich_text_anchor}
+                  to={entry.slug}
+                  prefetch="intent"
+                >
+                  {entry.title}
+                </Link>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-[600px] h-[420px] overflow-hidden">
+                <iframe
+                  width={600}
+                  height={420}
+                  title={entry.title}
+                  src={`/i-dag-lærte-jeg/${entry.slug}?content-only=true`}
+                />
+              </HoverCardContent>
+            </HoverCard>
           </li>
         ))}
       </ul>
