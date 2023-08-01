@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index";
-import { classes } from "~/routes/$notionPage/notion-driven-page";
+import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
 
 export const dateFormatterShort = new Intl.DateTimeFormat("nb-NO", {
   day: "numeric",

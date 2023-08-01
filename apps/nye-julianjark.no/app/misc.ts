@@ -91,3 +91,19 @@ export function assertItemFound<T>(item: T | undefined): asserts item is T {
       status: 404,
     });
 }
+
+/**
+ * Convert a slug back into human readable text
+ * om-julian -> Om Julian
+ */
+export function deSlugify(slug: string) {
+  // Replace all dashes with spaces
+  let text = slug.replaceAll("-", " ");
+
+  // Capitalize every first letter of every word
+  text = text.replace(/\w\S*/g, (w) =>
+    w.replace(/^\w/, (c) => c.toUpperCase())
+  );
+
+  return text;
+}

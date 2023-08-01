@@ -1,5 +1,5 @@
 // import { useLocation } from "@remix-run/react";
-import { classes } from "~/routes/$notionPage/notion-driven-page";
+import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
 
 interface HeaderProps {
   title: React.ReactNode;

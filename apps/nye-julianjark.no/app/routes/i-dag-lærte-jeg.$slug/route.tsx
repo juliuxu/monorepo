@@ -5,9 +5,9 @@ import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
 import { assertItemFound } from "~/misc";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
-import { useEditNotionPage } from "../$notionPage/use-edit-notion-page";
+import { useEditNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 import { TodayILearnedArticle } from "./today-i-learned-article";
-import type { JulianHandle } from "~/handle";
+import { buildSiteHeaderMetaInfo } from "~/components/site-header";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -31,16 +31,15 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     {
       metainfo,
       entry,
+      ...buildSiteHeaderMetaInfo({
+        headerMenu: {
+          title: "I dag lærte jeg",
+          href: "/i-dag-lærte-jeg",
+        },
+      }),
     },
     { headers: config.loaderCacheControlHeaders }
   );
-};
-
-export const handle: JulianHandle = {
-  headerMenu: {
-    title: "I dag lærte jeg",
-    href: "/i-dag-lærte-jeg",
-  },
 };
 
 export default function Component() {

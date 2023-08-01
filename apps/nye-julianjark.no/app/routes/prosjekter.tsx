@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllProjectsAndMetainfo } from "~/service/notion-projects/client";
-import { classes } from "./$notionPage/notion-driven-page";
+import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import type { Project } from "~/service/notion-projects/schema-and-mapper";
 import { RichTextListRender } from "@julianjark/notion-render";
 import { Image } from "@unpic/react";
@@ -13,7 +13,7 @@ import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
-import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
+import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

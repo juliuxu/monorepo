@@ -1,9 +1,12 @@
 import type { Classes } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
-import { classes, components } from "~/routes/$notionPage/notion-driven-page";
+import {
+  classes,
+  components,
+} from "~/routes/($prefix).$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { classNames } from "~/misc";
-import { dateFormatter } from "~/routes/$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { dateFormatter } from "~/routes/($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { useContentOnlyMode } from "~/content-only-mode";
 
 const todayILearnedClasses /*tw*/ = {

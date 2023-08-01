@@ -4,7 +4,7 @@ import {
   DetteKanJegBlock,
   DetteKanJegWantToLearnMoreBlock,
 } from "~/components/dette-kan-jeg";
-import { FeaturedProject } from "~/routes/$notionPage/custom-blocks/featured-project";
+import { FeaturedProject } from "~/routes/($prefix).$notionPage/custom-blocks/featured-project";
 import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
 import { Spacer } from "./spacer";
 

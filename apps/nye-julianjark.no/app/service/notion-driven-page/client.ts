@@ -16,13 +16,20 @@ export async function getNotionDrivenPages(isPreview: boolean) {
   return pages.success.filter(filterPublishedPredicate(isPreview));
 }
 
-export async function getNotionDrivenPageWithBlocks(
-  fromSlug: string,
-  isPreview: boolean
-) {
+export async function getNotionDrivenPageWithBlocks({
+  prefix = "",
+  slug,
+  isPreview,
+}: {
+  prefix?: string;
+  slug: string;
+  isPreview: boolean;
+}) {
   const pages = await getNotionDrivenPages(isPreview);
   const page = pages.find(
-    (page) => page.slug.toLowerCase() === fromSlug.toLowerCase()
+    (page) =>
+      page.prefix?.toLowerCase() === prefix?.toLowerCase() &&
+      page.slug.toLowerCase() === slug.toLowerCase()
   );
   if (!page) return undefined;
 

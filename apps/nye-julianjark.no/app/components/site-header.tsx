@@ -1,12 +1,29 @@
-import { useLocation, Link } from "@remix-run/react";
-import { useHeaderMenu } from "~/handle";
+import { useLocation, Link, useMatches } from "@remix-run/react";
 import { classNames } from "~/misc";
 import backSvg from "~/assets/back.svg";
+
+interface SiteHeaderInfo {
+  headerMenu?: {
+    title: string;
+    href: string;
+  };
+}
+export function buildSiteHeaderMetaInfo(siteHeaderInfo: SiteHeaderInfo) {
+  return { siteHeaderInfo };
+}
+
+export function useHeaderMenu() {
+  const matches = useMatches();
+  return matches
+    .map((it) => it.data?.siteHeaderInfo as SiteHeaderInfo)
+    .filter((it) => it?.headerMenu)[0]?.headerMenu;
+}
 
 export function SiteHeader() {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const headerMenu = useHeaderMenu();
+
   return (
     <header
       className={classNames(

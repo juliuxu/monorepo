@@ -5,6 +5,7 @@ import {
   getRichText,
   getSelect,
   getMultiSelect,
+  getText,
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 import { config } from "~/config.server";
@@ -20,6 +21,7 @@ export const notionDrivenPageSchema = z.object({
   id: z.string().nonempty(),
   title: z.string().nonempty(),
   slug: z.string().nonempty(),
+  prefix: z.string().optional(),
   preamble: richTextSchema.nonempty(),
   published: publishedStateSchema("DRAFT"),
   options: z.array(z.string()),
@@ -31,6 +33,7 @@ export const { getPage, getPages } = cmsPage(notionDrivenPageSchema, (page) => {
     id: page.id,
     title: getTitle(page),
     slug: slugify(getTitle(page) ?? ""),
+    prefix: getText("Prefiks", page),
     preamble: getRichText("Ingress", page) as any,
     published: getSelect("Published", page) as any,
     options: getMultiSelect("Options", page),

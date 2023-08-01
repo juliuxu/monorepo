@@ -7,9 +7,9 @@ import { getTextFromRichText } from "@julianjark/notion-utils";
 import { pick } from "~/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
-import { useEditNotionPage } from "./$notionPage/use-edit-notion-page";
-import { dateFormatterShort } from "./$notionPage/custom-blocks/latest-today-i-learned-entries";
-import { classes } from "./$notionPage/notion-driven-page";
+import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
+import { dateFormatterShort } from "./($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import {
   HoverCard,
   HoverCardContent,
