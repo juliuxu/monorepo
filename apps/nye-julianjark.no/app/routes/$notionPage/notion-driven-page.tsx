@@ -111,7 +111,15 @@ export function NotionPage({ page }: NotionPageProps) {
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
       />
-      <div className={`mt-[12vw] md:mt-[6vw] ${page.options.join(" ")}`}>
+      <div
+        className={classNames(
+          `mt-[12vw] md:mt-[6vw]`,
+          "[&_figcaption]:mt-2",
+          "[&_figcaption]:text-body",
+          "[&_p]:mt-4 md:[&_p]:mt-6",
+          ...page.options
+        )}
+      >
         <NotionRender
           blocks={page.blocks}
           components={{
