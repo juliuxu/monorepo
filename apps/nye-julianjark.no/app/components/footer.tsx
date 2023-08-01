@@ -27,7 +27,7 @@ export function Footer() {
             to="/kontakt"
             className={classes.rich_text_anchor}
           >
-            Kontakt Julian Jark
+            Kontakt
           </Link>
           <a
             href="https://www.linkedin.com/in/julianjark/"
