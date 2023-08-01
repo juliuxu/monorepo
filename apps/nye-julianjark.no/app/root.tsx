@@ -12,7 +12,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useSearchParams,
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
@@ -28,6 +27,7 @@ import { useScrollBehaviorSmooth } from "./handle";
 import { Footer } from "./components/footer";
 import { DevTools } from "./components/dev-tools";
 import { SiteHeader } from "./components/site-header";
+import { useContentOnlyMode } from "./content-only-mode";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -70,8 +70,7 @@ export const sharedClasses /*tw*/ = {
 };
 export default function App() {
   const scrollBehaviorSmooth = useScrollBehaviorSmooth();
-  const [search] = useSearchParams();
-  const isIframe = search.get("content-only") === "true";
+  const isContentOnlyMode = useContentOnlyMode();
 
   return (
     <html lang="no" className={scrollBehaviorSmooth ? "scroll-smooth" : ""}>
@@ -84,11 +83,11 @@ export default function App() {
       <body
         className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col bg-base-100`}
       >
-        {!isIframe && <SiteHeader />}
-        <div className={isIframe ? "py-8" : ""}>
+        {!isContentOnlyMode && <SiteHeader />}
+        <div className={isContentOnlyMode ? "py-8" : ""}>
           <Outlet />
         </div>
-        {!isIframe && (
+        {!isContentOnlyMode && (
           <div className="mt-auto">
             <Footer />
           </div>

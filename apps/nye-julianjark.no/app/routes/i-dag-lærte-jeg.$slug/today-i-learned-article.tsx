@@ -4,6 +4,7 @@ import { classes, components } from "~/routes/$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { classNames } from "~/misc";
 import { dateFormatter } from "~/routes/$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { useContentOnlyMode } from "~/content-only-mode";
 
 const todayILearnedClasses /*tw*/ = {
   ...classes,
@@ -40,22 +41,27 @@ export function TodayILearnedArticle({
   entry,
   titleAs: TitleComponent,
 }: TodayILearnedArticleProps) {
+  const isContentOnlyMode = useContentOnlyMode();
   const ReferencesTitleCompnent =
     TitleComponent === "h1" ? "h2" : TitleComponent === "h2" ? "h3" : "h4";
   return (
     <article key={entry.id}>
-      <TitleComponent
-        id={entry.slug}
-        className={`text-[32px] font-normal leading-tight md:text-h1`}
-      >
-        {entry.title}
-      </TitleComponent>
-      <time className="block mt-2 text-body lg:text-body">
-        {dateFormatter.format(new Date(entry.publishedDate))}
-      </time>
+      {!isContentOnlyMode && (
+        <>
+          <TitleComponent
+            id={entry.slug}
+            className={`text-[32px] font-normal leading-tight md:text-h1`}
+          >
+            {entry.title}
+          </TitleComponent>
+          <time className="block mt-2 text-body lg:text-body">
+            {dateFormatter.format(new Date(entry.publishedDate))}
+          </time>
+        </>
+      )}
       <div
         className={classNames(
-          "mt-6",
+          !isContentOnlyMode && "mt-6",
           "text-black/90",
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
