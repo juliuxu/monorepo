@@ -1,6 +1,5 @@
 import { useLocation, Link, useMatches } from "@remix-run/react";
 import { classNames } from "~/misc";
-import backSvg from "~/assets/back.svg";
 
 interface SiteHeaderInfo {
   headerMenu?: {
@@ -33,17 +32,38 @@ export function SiteHeader() {
       <nav
         className={classNames(
           isLandingPage && "hidden",
-          "grid grid-cols-12 items-center"
+          "grid grid-cols-12 items-center",
+          "text-h2 lg:text-h2-lg"
         )}
       >
-        <Link to="/" className="col-span-1" prefetch="render">
-          <p className="sr-only">Til hovedside</p>
+        <p className="tracking-wider font-semibold max-h-[1.3em]">
+          <Link
+            to="/"
+            className="hover:text-secondary hover:text-h1 lg:hover:text-h1-lg transition-all duration-300"
+            prefetch="render"
+          >
+            <span className="sr-only">Tilbake til hovedsiden</span>
+            <span aria-hidden>JJ</span>
+          </Link>
+        </p>
+
+        {/* <p className="sr-only">Til hovedside</p>
           <img src={backSvg} alt="" width={33} height={24} />
-        </Link>
+          */}
+
+        {/* <p className="text-h2 font-semibold">
+            <span aria-hidden className="tracking-wider">
+              JJ
+            </span>
+            <span className="sr-only lg:not-sr-only">Julian Jark</span>
+            <span aria-hidden className="tracking-wider lg:hidden">
+              JJ
+            </span>
+          </p> */}
         {headerMenu && (
-          <div className="col-span-10 text-center text-base">
+          <div className="col-span-10 text-center">
             <Link
-              className="text-h2 hover:text-secondary underline font-medium underline-offset-4"
+              className="hover:text-secondary underline font-medium underline-offset-4"
               to={headerMenu.href}
               prefetch="render"
             >
