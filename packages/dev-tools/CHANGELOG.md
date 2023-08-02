@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.19.0
+
+### Minor Changes
+
+- update key
+
 ## 0.18.0
 
 ### Minor Changes

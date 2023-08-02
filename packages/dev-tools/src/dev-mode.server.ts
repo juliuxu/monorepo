@@ -2,7 +2,7 @@ import { z } from "zod";
 import cookie from "cookie";
 import { safeCompare } from "./safe-compare";
 
-const DEV_MODE_KEY = "dev-mode";
+const DEV_MODE_KEY = "dev_mode";
 
 // Schema
 const devModeSchema = z.object({

@@ -2,7 +2,7 @@ import { z } from "zod";
 import cookie from "cookie";
 import { safeCompare } from "./safe-compare";
 
-const PREVIEW_KEY = "preview";
+const PREVIEW_KEY = "preview_mode";
 
 // Schema
 const preivewModeSchema = z.object({
