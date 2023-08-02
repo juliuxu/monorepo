@@ -21,6 +21,7 @@ export const loader = async ({ params }: LoaderArgs) => {
     return new Response(await imageResponse.body, {
       headers: {
         "content-type": "image/svg+xml",
+        "cache-control": "max-age=31536000, public, s-maxage=31536000",
       },
       status: imageResponse.status,
       statusText: imageResponse.statusText,
