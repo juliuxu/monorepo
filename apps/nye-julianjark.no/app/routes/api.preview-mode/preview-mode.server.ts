@@ -5,5 +5,5 @@ export const {
   getPreviewModeFromJson,
   getPreviewModeFromRequest,
   isPreviewModeFromRequest,
-  getPreivewModeSetCookieHeader,
+  getPreviewModeSetCookieHeader,
 } = createPreviewMode(config.previewSecret);

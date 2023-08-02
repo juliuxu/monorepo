@@ -12,6 +12,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
@@ -19,15 +20,19 @@ import manifest from "~/assets/manifest.webmanifest";
 import svgLogo from "~/assets/logo.svg";
 import pngLogo from "~/assets/logo.png";
 import {
-  getPreivewModeSetCookieHeader,
   getPreviewModeFromRequest,
-} from "./routes/api.preview-mode/preview-mode.server";
+  getPreviewModeSetCookieHeader,
+} from "~/routes/api.preview-mode/preview-mode.server";
 import { config } from "./config.server";
 import { useScrollBehaviorSmooth } from "./handle";
 import { Footer } from "./components/footer";
-import { DevTools } from "./components/dev-tools";
+import { DevTools } from "./routes/api.dev-mode/dev-tools";
 import { SiteHeader } from "./components/site-header";
 import { useContentOnlyMode } from "./content-only-mode";
+import {
+  getDevModeFromRequest,
+  getDevModeSetCookieHeader,
+} from "./routes/api.dev-mode/dev-mode.server";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -47,12 +52,24 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderArgs) => {
+  const headers = new Headers();
   const previewMode = getPreviewModeFromRequest(request);
-  const headers = getPreivewModeSetCookieHeader(previewMode);
+  const devMode = getDevModeFromRequest(request);
+
+  previewMode &&
+    headers.append(
+      "Set-Cookie",
+      getPreviewModeSetCookieHeader(previewMode)["Set-Cookie"]
+    );
+  devMode &&
+    headers.append(
+      "Set-Cookie",
+      getDevModeSetCookieHeader(devMode)["Set-Cookie"]
+    );
 
   return json(
     {
-      abc: 123,
+      devMode,
       previewMode,
     },
     {
@@ -69,6 +86,7 @@ export const sharedClasses /*tw*/ = {
   typography: "antialiased text-h2 lg:text-h2-lg",
 };
 export default function App() {
+  const { previewMode, devMode } = useLoaderData();
   const scrollBehaviorSmooth = useScrollBehaviorSmooth();
   const isContentOnlyMode = useContentOnlyMode();
 
@@ -93,7 +111,7 @@ export default function App() {
           </div>
         )}
 
-        <DevTools />
+        <DevTools {...{ previewMode, devMode }} />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
