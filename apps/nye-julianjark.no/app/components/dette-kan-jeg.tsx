@@ -69,7 +69,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                 <HoverCardTrigger asChild className="font-bold">
                   {element}
                 </HoverCardTrigger>
-                <HoverCardContent className="p-6 w-96 flex space-x-6 justify-between">
+                <HoverCardContent className="p-6 w-96 flex space-x-6">
                   {item.logo && (
                     <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">
                       <img
