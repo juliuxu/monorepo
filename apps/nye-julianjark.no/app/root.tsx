@@ -13,6 +13,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useRouteLoaderData,
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
@@ -77,6 +78,10 @@ export const loader = async ({ request }: LoaderArgs) => {
     }
   );
 };
+
+export function useDevMode() {
+  return useRouteLoaderData<typeof loader>("root")?.devMode;
+}
 
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 

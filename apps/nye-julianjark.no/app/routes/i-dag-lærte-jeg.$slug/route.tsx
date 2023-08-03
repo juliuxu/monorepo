@@ -8,6 +8,7 @@ import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.serve
 import { useEditNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 import { TodayILearnedArticle } from "./today-i-learned-article";
 import { buildSiteHeaderMetaInfo } from "~/components/site-header";
+import { useDevMode } from "~/root";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -16,6 +17,16 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
       name: "description",
       content: data?.entry.summary,
     },
+
+    // OG image
+    { property: "og:title", content: data?.entry.title },
+    { property: "twitter:title", content: data?.entry.title },
+    {
+      property: "og:image",
+      content: `https://nye.julianjark.no/i-dag-lærte-jeg/${data?.entry.slug}/og`,
+    },
+    { property: "og:type", content: "summary_large_image" },
+    { property: "twitter:card", content: "summary_large_image" },
   ];
 };
 
@@ -45,8 +56,12 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 export default function Component() {
   const { entry } = useLoaderData<typeof loader>();
   useEditNotionPage({ pageId: entry.id });
+  const devMode = useDevMode();
   return (
     <main className="max-w-3xl mx-auto">
+      {devMode?.enabled && (
+        <img className="mb-8 lg:mb-12" src={entry.slug + "/og"} alt="" />
+      )}
       <TodayILearnedArticle entry={entry} titleAs="h1" />
     </main>
   );
