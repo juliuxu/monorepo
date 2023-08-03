@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.20.0
+
+### Minor Changes
+
+- fix safari
+
 ## 0.19.0
 
 ### Minor Changes
