@@ -22,8 +22,10 @@ export function PreviewModeIndicator({
           font-size: 26px;
           line-height: 1.3;
 
-          --webkit-font-smoothing: antialiased;
+          font-smoothing: antialiased;
+          -webkit-font-smoothing: antialiased;
           backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
 
           color: rgb(227, 104, 59);
           background-color: rgba(227, 104, 59, 0.2);

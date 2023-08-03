@@ -22,8 +22,10 @@ export function DevBox({ children }: DevBoxProps) {
       font-size: 26px;
       line-height: 1.3;
 
-      --webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
 
       color: rgb(188, 59, 227);
       background-color: rgba(188, 59, 227, 0.2);
