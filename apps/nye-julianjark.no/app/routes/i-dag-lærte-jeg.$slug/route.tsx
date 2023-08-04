@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import { assertItemFound } from "~/misc";
+import { assertItemFound, classNames } from "~/misc";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { useEditNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 import { TodayILearnedArticle } from "./today-i-learned-article";
@@ -60,7 +60,14 @@ export default function Component() {
   return (
     <main className="max-w-3xl mx-auto">
       {devMode?.enabled && (
-        <img className="mb-8 lg:mb-12" src={entry.slug + "/og"} alt="" />
+        <img
+          className={classNames(
+            "mb-8 lg:mb-12",
+            "relative left-[50%] mx-[-50vw] right-[50%] w-screen max-w-fit sm:left-0 sm:mx-0 sm:right-0 sm:w-full"
+          )}
+          src={entry.slug + "/og"}
+          alt=""
+        />
       )}
       <TodayILearnedArticle entry={entry} titleAs="h1" />
     </main>
