@@ -37,7 +37,7 @@ export function CustomBlockOrCallout({ block }: BlockComponentProps) {
   if (block.type !== "callout") return null;
   const text = getTextFromRichText(block.callout.rich_text);
   if (text.startsWith("BLOCK_REPLACE")) {
-    <CustomBlock block={block} />;
+    return <CustomBlock block={block} />;
   } else {
     return <Callout block={block} />;
   }
