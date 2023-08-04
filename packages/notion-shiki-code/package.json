@@ -1,6 +1,6 @@
 {
   "name": "@julianjark/notion-shiki-code",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Shiki renderer for notion blocks",
   "author": "Julian Jark",
   "license": "ISC",
