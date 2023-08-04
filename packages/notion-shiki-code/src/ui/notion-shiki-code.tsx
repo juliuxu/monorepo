@@ -20,8 +20,13 @@ function isShikifiedCodeBlock(
 interface NotionShikiCodeProps {
   block: any | BlockObjectResponse;
   className?: string;
+  style?: React.CSSProperties;
 }
-export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
+export function NotionShikiCode({
+  block,
+  className,
+  style,
+}: NotionShikiCodeProps) {
   if (!isShikifiedCodeBlock(block)) {
     console.warn("non-sikiified code block passed to NotionShikiCode");
     return null;
@@ -49,6 +54,7 @@ export function NotionShikiCode({ block, className }: NotionShikiCodeProps) {
           position: "relative",
           "--shiki-foreground": block.code.foregroundColor,
           "--shiki-background": block.code.backgroundColor,
+          ...style,
         } as any
       }
     >
