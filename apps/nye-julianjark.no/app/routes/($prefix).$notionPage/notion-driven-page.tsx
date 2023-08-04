@@ -134,7 +134,6 @@ export function NotionPage({ page }: NotionPageProps) {
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
       />
-      <span className="bg-gray-50 " />
       <div
         className={classNames(
           `mt-[12vw] md:mt-[6vw]`,
