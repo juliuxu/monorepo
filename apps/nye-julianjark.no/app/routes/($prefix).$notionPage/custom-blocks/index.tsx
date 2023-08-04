@@ -1,4 +1,4 @@
-import type { BlockComponentProps } from "@julianjark/notion-render";
+import { Callout, type BlockComponentProps } from "@julianjark/notion-render";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import {
   DetteKanJegBlock,
@@ -28,4 +28,17 @@ export function CustomBlock({ block }: BlockComponentProps) {
       ([key]) => key === text
     )?.[1] ?? null
   );
+}
+
+/**
+ * Only render custom block if the text starts with `BLOCK_REPLACE` prefix
+ */
+export function CustomBlockOrCallout({ block }: BlockComponentProps) {
+  if (block.type !== "callout") return null;
+  const text = getTextFromRichText(block.callout.rich_text);
+  if (text.startsWith("BLOCK_REPLACE")) {
+    <CustomBlock block={block} />;
+  } else {
+    return <Callout block={block} />;
+  }
 }

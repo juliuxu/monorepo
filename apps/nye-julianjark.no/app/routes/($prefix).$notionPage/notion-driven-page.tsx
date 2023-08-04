@@ -13,7 +13,7 @@ import {
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
 import { classNames } from "~/misc";
-import { CustomBlock } from "./custom-blocks";
+import { CustomBlockOrCallout } from "./custom-blocks";
 import { demotedHeadings } from "./demoted-headings";
 import { PageHeader } from "~/components/page-header";
 
@@ -51,7 +51,7 @@ export const components: Partial<Components> = {
   },
   rich_text_code: NotionShikiCodeRichText,
 
-  callout: CustomBlock,
+  callout: CustomBlockOrCallout,
 
   rich_text_anchor: (props) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -103,6 +103,21 @@ export const classes /*tw*/ = {
   color_orange: "text-secondary",
   paragraph: { root: "max-w-4xl whitespace-pre-wrap" },
   toggle: { root: "bg-primary" },
+  callout: {
+    root: classNames(
+      "flex flex-col sm:flex-row gap-2 sm:gap-4 border-2",
+
+      // Bg
+      "bg-gradient-to-b from-gray-50 via-white to-gray-50",
+
+      // Full bleed on mobile
+      "rounded-none sm:rounded-lg",
+      "pt-4 pb-6 sm:pb-4 px-[7.5vw] sm:px-4",
+      "relative left-[50%] mx-[-50vw] right-[50%] w-screen sm:left-0 sm:mx-0 sm:right-0 sm:w-full"
+    ),
+    icon: "text-h2",
+    content: "w-full",
+  },
 } satisfies Partial<Classes>;
 
 interface NotionPageProps {
@@ -119,6 +134,7 @@ export function NotionPage({ page }: NotionPageProps) {
           <RichTextListRender richTextList={page.preamble} classes={classes} />
         }
       />
+      <span className="bg-gray-50 " />
       <div
         className={classNames(
           `mt-[12vw] md:mt-[6vw]`,

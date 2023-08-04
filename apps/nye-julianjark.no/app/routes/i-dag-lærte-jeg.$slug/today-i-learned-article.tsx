@@ -28,10 +28,10 @@ const todayILearnedClasses /*tw*/ = {
     // Full bleed on mobile
     root: classNames(
       "relative left-[50%] ml-[-50vw] right-[50%] mr-[-50vw] w-screen sm:left-0 sm:ml-0 sm:right-0 sm:mr-0 sm:w-full",
-      "[&_pre]:pl-[7.5vw] [&_pre]:pr-[7.5vw] sm:[&_pre]:pl-5 sm:[&_pre]:pr-5",
-      "[&_pre]:pt-6 [&_pre]:pb-6 sm:[&_pre]:pt-4 sm:[&_pre]:pb-4",
+      "[&_pre]:px-[7.5vw] sm:[&_pre]:px-5",
+      "[&_pre]:py-6",
       "[&_pre]:rounded-none sm:[&_pre]:rounded-lg",
-      "[&_figcaption]:pl-[7.5vw] sm:[&_figcaption]:pl-0"
+      "[&_figcaption]:px-[7.5vw] sm:[&_figcaption]:px-0"
     ),
   },
 } satisfies Partial<Classes>;
