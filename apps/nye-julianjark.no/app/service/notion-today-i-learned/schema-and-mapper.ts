@@ -20,7 +20,7 @@ import {
 } from "@julianjark/notion-cms";
 import { getSummary } from "./get-summary";
 import { config } from "~/config.server";
-import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server.js";
 
 export const todayILearnedMetainfoSchema = z.object({
   title: z.string(),

@@ -13,7 +13,7 @@ module.exports = {
     require.resolve("@julianjark/notion-utils"),
     require.resolve("@julianjark/notion-shiki-code"),
   ],
-  serverModuleFormat: "cjs",
+  serverModuleFormat: "esm",
   tailwind: true,
   postcss: true,
   future: {

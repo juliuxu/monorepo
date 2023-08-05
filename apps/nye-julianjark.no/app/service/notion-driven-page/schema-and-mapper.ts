@@ -1,4 +1,4 @@
-import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server";
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server.js";
 import {
   getTitle,
   slugify,

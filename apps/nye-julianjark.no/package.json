@@ -2,13 +2,15 @@
   "name": "julianjark.no",
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev",
-    "start": "remix-serve build",
+    "dev": "remix dev -c \"julian-remix-serve build\"",
+    "start": "julian-remix-serve build",
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@julianjark/remix-serve": "*",
     "@julianjark/dev-tools": "*",
     "@julianjark/notion-client": "*",
     "@julianjark/notion-cms": "*",

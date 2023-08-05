@@ -10,7 +10,7 @@ import {
 import type {
   DevMode,
   PreviewMode,
-} from "@julianjark/dev-tools/dist/index.server";
+} from "@julianjark/dev-tools/dist/index.server.js";
 import { openCurrentNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 
 interface DevToolsProps {
