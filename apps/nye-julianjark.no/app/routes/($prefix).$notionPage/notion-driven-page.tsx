@@ -42,7 +42,7 @@ export const components: Partial<Components> = {
         // Notion adds tabs instead of spaces with tab key
         // Most code I write uses 2 spaces, so we mitagate this here
         // Preferably the code should just use spaces, or all tabs if you're into that, but never both!
-        // Tailwind have built-in utility for `tab-size`
+        // Tailwind don't have built-in utility for `tab-size`
         style={{
           tabSize: 2,
         }}
