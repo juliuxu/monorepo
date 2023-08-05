@@ -13,7 +13,7 @@ const todayILearnedClasses /*tw*/ = {
   ...classes,
   column_list: {
     root: classNames(
-      "mt-[1.2em]",
+      "mt-[2em]",
       "grid gap-0 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-flow-col sm:auto-cols-fr",
       "[&>div:first-child>*:first-child]:mt-0 [&>div>*:last-child]:mb-0",
       "sm:[&>div>*:first-child]:mt-0 sm:[&>div>*:last-child]:mb-0",
