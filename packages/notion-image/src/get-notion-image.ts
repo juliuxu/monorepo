@@ -68,6 +68,6 @@ export const getNotionImage =
     const imageUrl = await getNotionImageUrl(notionTokenOrNotionClient)(
       imageRequest
     );
-
+    // @ts-ignore
     return await fetch(imageUrl);
   };
