@@ -18,7 +18,7 @@ const todayILearnedClasses /*tw*/ = {
       "[&>div:first-child>*:first-child]:mt-0 [&>div>*:last-child]:mb-0",
       "sm:[&>div>*:first-child]:mt-0 sm:[&>div>*:last-child]:mb-0",
       "sm:[&>div>*_pre]:mb-0",
-      "[&_figure]:mt-0 [&_figure]:mb-0 [&_figure_pre]:mt-0 [&_figure_pre]:mb-0"
+      "[&_figure_pre]:mt-0 [&_figure_pre]:mb-0"
     ),
   },
   column: {
