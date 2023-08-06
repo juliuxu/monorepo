@@ -64,7 +64,7 @@ export default function Component() {
               {dateFormatterShort.format(new Date(entry.publishedDate))}
             </time>
 
-            <div className="group flex gap-2">
+            <div className="group">
               <Link
                 className={classes.rich_text_anchor}
                 to={entry.slug}
@@ -74,7 +74,7 @@ export default function Component() {
               </Link>
               <HoverCard openDelay={300}>
                 <HoverCardTrigger asChild>
-                  <span className="cursor-default opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="ml-2 cursor-default opacity-0 group-hover:opacity-100 transition-opacity">
                     👀
                   </span>
                 </HoverCardTrigger>
