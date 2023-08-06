@@ -42,13 +42,6 @@ export const getDatabasePages =
     databaseId: string,
     { sorts, filter }: GetDatabasePagesOptions = {}
   ) => {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      sorts,
-      filter,
-      page_size: 100,
-    });
-
     const results: Awaited<
       ReturnType<typeof notion.databases.query>
     >["results"] = [];
@@ -70,7 +63,7 @@ export const getDatabasePages =
       cursor = response.next_cursor;
     }
 
-    return response.results.filter(isPageObjectResponse);
+    return results.filter(isPageObjectResponse);
   };
 
 export const getPage = (notion: NotionClient) => async (pageId: string) => {

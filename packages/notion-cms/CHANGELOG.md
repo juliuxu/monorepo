@@ -1,5 +1,13 @@
 # @julianjark/notion-cms
 
+## 0.12.1
+
+### Patch Changes
+
+- whops
+- Updated dependencies
+  - @julianjark/notion-client@0.9.1
+
 ## 0.12.0
 
 ### Minor Changes

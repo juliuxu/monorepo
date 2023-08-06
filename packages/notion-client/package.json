@@ -1,6 +1,6 @@
 {
   "name": "@julianjark/notion-client",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Helper client library Notion API",
   "author": "Julian Jark",
   "license": "ISC",

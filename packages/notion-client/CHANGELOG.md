@@ -1,5 +1,11 @@
 # @julianjark/notion-client
 
+## 0.9.1
+
+### Patch Changes
+
+- whops
+
 ## 0.9.0
 
 ### Minor Changes

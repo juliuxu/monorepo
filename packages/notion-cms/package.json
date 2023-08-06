@@ -1,6 +1,6 @@
 {
   "name": "@julianjark/notion-cms",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "CMS abstraction for Notion",
   "author": "Julian Jark",
   "license": "ISC",
