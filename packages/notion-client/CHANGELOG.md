@@ -1,5 +1,11 @@
 # @julianjark/notion-client
 
+## 0.9.2
+
+### Patch Changes
+
+- whops again
+
 ## 0.9.1
 
 ### Patch Changes

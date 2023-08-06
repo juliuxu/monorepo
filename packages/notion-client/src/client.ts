@@ -56,13 +56,18 @@ export const getDatabasePages =
         page_size: 100,
         start_cursor: cursor,
       });
-      results.push(...results);
+      results.push(...response.results);
       if (!response.next_cursor) {
         break;
       }
       cursor = response.next_cursor;
     }
 
+    console.log("returning results", results.length);
+    console.log(
+      "returning results filtered",
+      results.filter(isPageObjectResponse).length
+    );
     return results.filter(isPageObjectResponse);
   };
 
