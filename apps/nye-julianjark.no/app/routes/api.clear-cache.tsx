@@ -64,7 +64,12 @@ export function ClearCacheButton({
                   }}
                 />
               </div>
-              <p className="mt-2 bg-gradient-to-r from-white to-white bg-clip-text text-lg text-transparent">
+              <p
+                className="mt-2 bg-gradient-to-r from-white to-white bg-clip-text text-lg text-transparent"
+                style={{
+                  WebkitBackgroundClip: "text",
+                }}
+              >
                 Laster fersk data...
               </p>
             </div>
