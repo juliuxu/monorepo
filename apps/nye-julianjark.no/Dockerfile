@@ -13,6 +13,7 @@ ENV NODE_ENV=production
 FROM base as deps
 
 COPY --link package.json ./
+COPY --link copy-vercel-og-files-to-build.sh ./
 RUN npm install --include=dev
 
 # Setup production node_modules
