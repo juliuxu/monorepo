@@ -34,6 +34,7 @@ COPY --link . .
 
 # Build application
 RUN npm run build
+RUN npm run postinstall
 
 # Final stage for app image
 FROM gcr.io/distroless/nodejs${NODE_VERSION}-debian11
@@ -42,6 +43,7 @@ FROM gcr.io/distroless/nodejs${NODE_VERSION}-debian11
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
+COPY --from=build /app/package.json /app/package.json
 
 WORKDIR /app
 
