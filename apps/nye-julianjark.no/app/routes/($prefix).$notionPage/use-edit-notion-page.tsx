@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 // This lets the notion editing be triggered from anywhere in the app
-// Although not not ideal, it works
 let currentNotionPageId: string | undefined;
 export function openCurrentNotionPage() {
   if (!currentNotionPageId) return;
@@ -19,6 +18,20 @@ export function openCurrentNotionPage() {
  */
 export function useEditNotionPage({ pageId }: { pageId: string }) {
   useEffect(() => {
+    const previousNotionPageId = currentNotionPageId;
     currentNotionPageId = pageId;
+
+    // Use the previous pageId when this unmounts
+    // This allows us to use this in dialogs and other places temporary components
+    return () => {
+      if (currentNotionPageId === pageId) {
+        currentNotionPageId = previousNotionPageId;
+      }
+    };
   }, [pageId]);
+}
+
+export function RegisterEditNotionPage({ pageId }: { pageId: string }) {
+  useEditNotionPage({ pageId });
+  return null;
 }

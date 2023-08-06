@@ -5,6 +5,7 @@ import { classNames, shuffled } from "~/utils/misc";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { RichTextListRender } from "@julianjark/notion-render";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
+import { RegisterEditNotionPage } from "~/routes/($prefix).$notionPage/use-edit-notion-page";
 
 export const getDetteKanJegData = async () => {
   const detteKanJeg = await getAllDetteKanJeg();
@@ -75,6 +76,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                   sideOffset={14}
                   className="p-6 w-96 flex space-x-6"
                 >
+                  <RegisterEditNotionPage pageId={item.id} />
                   {item.logo && (
                     <span className="relative flex h-12 w-12 shrink-0 overflow-hidden">
                       <img
