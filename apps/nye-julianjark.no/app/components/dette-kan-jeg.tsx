@@ -4,6 +4,7 @@ import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapp
 import { classNames, shuffled } from "~/utils/misc";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { RichTextListRender } from "@julianjark/notion-render";
+import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
 
 export const getDetteKanJegData = async () => {
   const detteKanJeg = await getAllDetteKanJeg();
@@ -55,23 +56,27 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
             {item.title}
           </span>
         );
-        if (item.link) {
-          element = (
-            <a href={item.link} target="_blank" rel="noreferrer">
-              {element}
-            </a>
-          );
-        }
+
         return (
           <li key={item.id} className="group text-base">
             {item.link ? (
-              <HoverCard>
-                <HoverCardTrigger asChild className="font-bold">
+              <Popover>
+                <PopoverTrigger
+                  className={classNames(
+                    "font-bold cursor-help",
+                    "outline-black outline-2 outline-offset-4",
+                    "data-[state=open]:ring ring-current ring-offset-4"
+                  )}
+                >
                   {element}
-                </HoverCardTrigger>
-                <HoverCardContent className="p-6 w-96 flex space-x-6">
+                </PopoverTrigger>
+                <PopoverContent
+                  side="top"
+                  sideOffset={14}
+                  className="p-6 w-96 flex space-x-6"
+                >
                   {item.logo && (
-                    <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">
+                    <span className="relative flex h-12 w-12 shrink-0 overflow-hidden">
                       <img
                         className="aspect-square h-full w-full"
                         src={item.logo}
@@ -109,8 +114,8 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                       Link
                     </a>
                   </div>
-                </HoverCardContent>
-              </HoverCard>
+                </PopoverContent>
+              </Popover>
             ) : (
               element
             )}
