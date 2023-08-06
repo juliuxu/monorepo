@@ -63,11 +63,6 @@ export const getDatabasePages =
       cursor = response.next_cursor;
     }
 
-    console.log("returning results", results.length);
-    console.log(
-      "returning results filtered",
-      results.filter(isPageObjectResponse).length
-    );
     return results.filter(isPageObjectResponse);
   };
 
