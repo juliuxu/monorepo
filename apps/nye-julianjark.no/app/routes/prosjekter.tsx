@@ -7,7 +7,7 @@ import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import type { Project } from "~/service/notion-projects/schema-and-mapper";
 import { RichTextListRender } from "@julianjark/notion-render";
 import { Image } from "@unpic/react";
-import { classNames } from "~/misc";
+import { classNames } from "~/utils/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 import githubIcon from "~/assets/github-mark.svg";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";

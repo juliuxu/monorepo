@@ -1,5 +1,5 @@
 import { useLocation, Link, useMatches } from "@remix-run/react";
-import { classNames } from "~/misc";
+import { classNames } from "~/utils/misc";
 
 interface SiteHeaderInfo {
   headerMenu?: {

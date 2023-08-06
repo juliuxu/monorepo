@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { getAllDetteKanJeg } from "~/service/notion-dette-kan-jeg/client";
 import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapper";
-import { classNames, shuffled } from "~/misc";
+import { classNames, shuffled } from "~/utils/misc";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { RichTextListRender } from "@julianjark/notion-render";
 

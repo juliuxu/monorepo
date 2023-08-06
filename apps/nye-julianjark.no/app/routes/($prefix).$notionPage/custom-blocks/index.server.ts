@@ -4,7 +4,7 @@ import {
 } from "@julianjark/notion-utils";
 import type { CustomBlockKeys } from ".";
 import { getDetteKanJegData } from "~/components/dette-kan-jeg";
-import { typedBoolean } from "~/misc";
+import { typedBoolean } from "~/utils/misc";
 
 const dataFunctions: Record<
   CustomBlockKeys,

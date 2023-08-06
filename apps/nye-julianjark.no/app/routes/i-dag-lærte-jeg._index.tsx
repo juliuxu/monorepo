@@ -4,7 +4,7 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
 import { getTextFromRichText } from "@julianjark/notion-utils";
-import { pick } from "~/misc";
+import { pick } from "~/utils/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";

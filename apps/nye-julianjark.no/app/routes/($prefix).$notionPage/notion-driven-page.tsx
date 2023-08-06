@@ -12,7 +12,7 @@ import {
   NotionShikiCode,
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
-import { classNames } from "~/misc";
+import { classNames } from "~/utils/misc";
 import { CustomBlockOrCallout } from "./custom-blocks";
 import { demotedHeadings } from "./demoted-headings";
 import { PageHeader } from "~/components/page-header";

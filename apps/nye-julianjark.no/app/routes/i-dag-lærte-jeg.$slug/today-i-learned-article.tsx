@@ -9,7 +9,7 @@ import {
   components,
 } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
-import { classNames } from "~/misc";
+import { classNames } from "~/utils/misc";
 import { dateFormatter } from "~/routes/($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { useContentOnlyMode } from "~/content-only-mode";
 import { PhotoSwipeImage } from "~/components/photoswipe-image";

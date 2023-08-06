@@ -8,7 +8,7 @@ import { TableOfConents } from "~/components/table-of-contents";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { useEditNotionPage } from "./use-edit-notion-page";
 import { buildSiteHeaderMetaInfo } from "~/components/site-header";
-import { deSlugify } from "~/misc";
+import { deSlugify } from "~/utils/misc";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [

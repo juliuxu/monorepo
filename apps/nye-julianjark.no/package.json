@@ -26,13 +26,12 @@
     "@remix-run/react": "1.19.2",
     "@remix-run/serve": "1.19.2",
     "@unpic/react": "0.0.34",
+    "@vercel/og": "0.5.10",
     "ipx": "1.2.0",
     "isbot": "3.6.13",
     "photoswipe": "5.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "satori": "0.10.2",
-    "svg2img": "1.0.0-beta.2",
     "zod": "3.21.4"
   },
   "devDependencies": {

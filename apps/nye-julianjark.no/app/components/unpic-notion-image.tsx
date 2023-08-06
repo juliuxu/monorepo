@@ -3,7 +3,7 @@ import { useNotionRenderContext } from "@julianjark/notion-render";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 // import { Image } from "@unpic/react";
 import { forwardRef } from "react";
-import { classNames } from "~/misc";
+import { classNames } from "~/utils/misc";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 
 const optimizedImageBaseUrl = "https://nye.julianjark.no/api/optimized-image";

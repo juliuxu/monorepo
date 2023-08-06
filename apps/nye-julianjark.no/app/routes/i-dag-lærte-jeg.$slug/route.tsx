@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import { assertItemFound, classNames } from "~/misc";
+import { assertItemFound, classNames } from "~/utils/misc";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { useEditNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 import { TodayILearnedArticle } from "./today-i-learned-article";
