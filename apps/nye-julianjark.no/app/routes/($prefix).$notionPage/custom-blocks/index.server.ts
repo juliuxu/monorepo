@@ -8,7 +8,7 @@ import { typedBoolean } from "~/utils/misc";
 
 const dataFunctions: Record<
   CustomBlockKeys,
-  () => Promise<Record<string, unknown>>
+  (request: Request) => Promise<Record<string, unknown>>
 > = {
   BLOCK_REPLACE_DETTE_KAN_JEG: getDetteKanJegData,
   BLOCK_REPLACE_DETTE_KAN_JEG_WANT_TO_LEARN_MORE: getDetteKanJegData,
@@ -29,9 +29,12 @@ const dataFunctions: Record<
  *
  * TODO: When the datastructure above gets bigger, add code to chunk the requests
  */
-export async function getCustomBlocksData(fromBlocks: BlockObjectResponse[]) {
+export async function getCustomBlocksData(
+  fromBlocks: BlockObjectResponse[],
+  andRequest: Request
+) {
   const dataFunctions = findCustomBlocksDataFunctions(fromBlocks);
-  const data = await Promise.all(dataFunctions.map((fn) => fn()));
+  const data = await Promise.all(dataFunctions.map((fn) => fn(andRequest)));
 
   // Finally merge
   return data.reduce((r, c) => Object.assign(r, c), {});

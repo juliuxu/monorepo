@@ -12,7 +12,15 @@ export async function getAllDetteKanJeg() {
     ],
   });
 
-  return pages.success;
+  // Debug
+  // console.log(
+  //   pages.failed.map((failed) => ({
+  //     unparsed: failed.unparsed,
+  //     error: failed.errors.map((e) => JSON.stringify(e, null, 2)).join("\n"),
+  //   }))
+  // );
+
+  return pages;
 }
 
 export async function getDetteKanJegMetainfo() {
@@ -20,6 +28,6 @@ export async function getDetteKanJegMetainfo() {
 }
 
 export async function getFeaturedDetteKanJeg() {
-  const detteKanJeg = await getAllDetteKanJeg();
-  return detteKanJeg.filter((v) => v.isFeatured);
+  const { success } = await getAllDetteKanJeg();
+  return success.filter((v) => v.isFeatured);
 }

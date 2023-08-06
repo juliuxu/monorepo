@@ -2,14 +2,13 @@ import { useLoaderData } from "@remix-run/react";
 import { getAllDetteKanJeg } from "~/service/notion-dette-kan-jeg/client";
 import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapper";
 import { classNames, shuffled } from "~/utils/misc";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { RichTextListRender } from "@julianjark/notion-render";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
 import { RegisterEditNotionPage } from "~/routes/($prefix).$notionPage/use-edit-notion-page";
 
-export const getDetteKanJegData = async () => {
-  const detteKanJeg = await getAllDetteKanJeg();
-  return { detteKanJeg: shuffled(detteKanJeg) };
+export const getDetteKanJegData = async (request: Request) => {
+  const { success } = await getAllDetteKanJeg();
+  return { detteKanJeg: shuffled(success) };
 };
 
 export function DetteKanJegBlock() {

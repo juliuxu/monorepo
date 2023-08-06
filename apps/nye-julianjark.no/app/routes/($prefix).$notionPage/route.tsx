@@ -30,7 +30,7 @@ export const loader = async ({
   });
   if (!page) throw new Response(null, { status: 404 });
 
-  const customBlocksData = await getCustomBlocksData(page.blocks);
+  const customBlocksData = await getCustomBlocksData(page.blocks, request);
 
   return json(
     {
