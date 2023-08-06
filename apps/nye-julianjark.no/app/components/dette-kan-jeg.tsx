@@ -63,9 +63,9 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
               <Popover>
                 <PopoverTrigger
                   className={classNames(
-                    "font-bold cursor-help",
+                    "font-bold cursor-pointer",
                     "outline-black outline-2 outline-offset-4",
-                    "data-[state=open]:ring ring-current ring-offset-4"
+                    "data-[state=open]:ring ring-current ring-offset-4 active:ring"
                   )}
                 >
                   {element}
