@@ -7,7 +7,8 @@
     "build": "remix build",
     "dev": "remix dev -c \"julian-remix-serve build\"",
     "start": "julian-remix-serve build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "postinstall": "./copy-vercel-og-files-to-build.sh"
   },
   "dependencies": {
     "@julianjark/dev-tools": "*",
