@@ -1,4 +1,8 @@
-import type { Classes } from "@julianjark/notion-render";
+import type {
+  BlockComponentProps,
+  Classes,
+  Components,
+} from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
 import {
   classes,
@@ -8,7 +12,26 @@ import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema
 import { classNames } from "~/misc";
 import { dateFormatter } from "~/routes/($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
 import { useContentOnlyMode } from "~/content-only-mode";
+import { PhotoSwipeImage } from "~/components/photoswipe-image";
+import { UnpicNotionImage } from "~/components/unpic-notion-image";
 
+const todayILearnedComponents: Partial<Components> = {
+  ...components,
+  image: ({ block }: BlockComponentProps) => {
+    return (
+      <PhotoSwipeImage>
+        {({ ref, onClick }) => (
+          <UnpicNotionImage
+            block={block}
+            ref={ref}
+            onClick={onClick}
+            className="cursor-pointer"
+          />
+        )}
+      </PhotoSwipeImage>
+    );
+  },
+};
 const todayILearnedClasses /*tw*/ = {
   ...classes,
   column_list: {
@@ -84,7 +107,8 @@ export function TodayILearnedArticle({
         )}
       >
         <NotionRender
-          {...{ components, classes: todayILearnedClasses }}
+          components={todayILearnedComponents}
+          classes={todayILearnedClasses}
           blocks={entry.blocks}
         />
       </div>

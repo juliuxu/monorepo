@@ -14,6 +14,7 @@ module.exports = {
     require.resolve("@julianjark/notion-shiki-code"),
   ],
   serverModuleFormat: "esm",
+  serverDependenciesToBundle: ["photoswipe"],
   tailwind: true,
   postcss: true,
   future: {
