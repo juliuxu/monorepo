@@ -64,25 +64,30 @@ export default function Component() {
               {dateFormatterShort.format(new Date(entry.publishedDate))}
             </time>
 
-            <HoverCard openDelay={300}>
-              <HoverCardTrigger asChild>
-                <Link
-                  className={classes.rich_text_anchor}
-                  to={entry.slug}
-                  prefetch="intent"
-                >
-                  {entry.title}
-                </Link>
-              </HoverCardTrigger>
-              <HoverCardContent className="w-[600px] h-[420px] overflow-hidden">
-                <iframe
-                  width={600}
-                  height={420}
-                  title={entry.title}
-                  src={`/i-dag-lærte-jeg/${entry.slug}?content-only=true`}
-                />
-              </HoverCardContent>
-            </HoverCard>
+            <div className="group flex gap-2">
+              <Link
+                className={classes.rich_text_anchor}
+                to={entry.slug}
+                prefetch="intent"
+              >
+                {entry.title}
+              </Link>
+              <HoverCard openDelay={300}>
+                <HoverCardTrigger asChild>
+                  <span className="cursor-default opacity-0 group-hover:opacity-100 transition-opacity">
+                    👀
+                  </span>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-[400px] h-[420px] overflow-hidden">
+                  <iframe
+                    width={400}
+                    height={420}
+                    title={entry.title}
+                    src={`/i-dag-lærte-jeg/${entry.slug}?content-only=true`}
+                  />
+                </HoverCardContent>
+              </HoverCard>
+            </div>
           </li>
         ))}
       </ul>
