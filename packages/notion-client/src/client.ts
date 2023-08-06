@@ -46,7 +46,29 @@ export const getDatabasePages =
       database_id: databaseId,
       sorts,
       filter,
+      page_size: 100,
     });
+
+    const results: Awaited<
+      ReturnType<typeof notion.databases.query>
+    >["results"] = [];
+
+    let cursor: string | undefined;
+    const shouldContinue = true;
+    while (shouldContinue) {
+      const response = await notion.databases.query({
+        database_id: databaseId,
+        sorts,
+        filter,
+        page_size: 100,
+        start_cursor: cursor,
+      });
+      results.push(...results);
+      if (!response.next_cursor) {
+        break;
+      }
+      cursor = response.next_cursor;
+    }
 
     return response.results.filter(isPageObjectResponse);
   };

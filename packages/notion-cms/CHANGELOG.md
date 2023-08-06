@@ -1,5 +1,16 @@
 # @julianjark/notion-cms
 
+## 0.12.0
+
+### Minor Changes
+
+- fetch all entries from notion database
+
+### Patch Changes
+
+- Updated dependencies
+  - @julianjark/notion-client@0.9.0
+
 ## 0.11.1
 
 ### Patch Changes
