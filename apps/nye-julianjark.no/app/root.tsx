@@ -20,6 +20,7 @@ import tailwindCss from "~/styles/tailwind.css";
 import manifest from "~/assets/manifest.webmanifest";
 import svgFavicon from "~/assets/favicon.svg";
 import pngFavicon from "~/assets/favicon.png";
+import icoFavicon from "~/assets/favicon.ico";
 import appleTouchIcon from "~/assets/apple-touch-icon.png";
 
 import {
@@ -51,6 +52,11 @@ export const links: LinksFunction = () => [
     rel: "icon",
     href: pngFavicon,
     type: "image/png",
+  },
+  {
+    rel: "icon",
+    href: icoFavicon,
+    sizes: "32x32",
   },
   {
     rel: "apple-touch-icon",
