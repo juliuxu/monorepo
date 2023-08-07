@@ -18,8 +18,10 @@ import {
 import tailwindCss from "~/styles/tailwind.css";
 
 import manifest from "~/assets/manifest.webmanifest";
-import svgLogo from "~/assets/logo.svg";
-import pngLogo from "~/assets/logo.png";
+import svgFavicon from "~/assets/favicon.svg";
+import pngFavicon from "~/assets/favicon.png";
+import appleTouchIcon from "~/assets/apple-touch-icon.png";
+
 import {
   getPreviewModeFromRequest,
   getPreviewModeSetCookieHeader,
@@ -38,19 +40,33 @@ import {
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: tailwindCss },
+
+  // Favicon stuff
   {
     rel: "icon",
-    href: svgLogo,
+    href: svgFavicon,
+    type: "image/svg+xml",
+  },
+  {
+    rel: "icon",
+    href: pngFavicon,
+    type: "image/png",
   },
   {
     rel: "apple-touch-icon",
-    href: pngLogo,
+    href: appleTouchIcon,
+    sizes: "180x180",
   },
   {
     rel: "manifest",
     href: manifest,
   },
 ];
+
+/**
+ <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+ */
 
 export const loader = async ({ request }: LoaderArgs) => {
   const headers = new Headers();
