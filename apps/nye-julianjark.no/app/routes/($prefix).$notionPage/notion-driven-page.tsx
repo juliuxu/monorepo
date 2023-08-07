@@ -49,7 +49,12 @@ export const components: Partial<Components> = {
       />
     );
   },
-  rich_text_code: NotionShikiCodeRichText,
+  rich_text_code: ({ richText }) => (
+    <NotionShikiCodeRichText
+      className="whitespace-nowrap"
+      richText={richText}
+    />
+  ),
 
   callout: CustomBlockOrCallout,
 
