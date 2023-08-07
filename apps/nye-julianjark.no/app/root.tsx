@@ -17,11 +17,11 @@ import {
 } from "@remix-run/react";
 import tailwindCss from "~/styles/tailwind.css";
 
-import manifest from "~/assets/manifest.webmanifest";
-import svgFavicon from "~/assets/favicon.svg";
-import pngFavicon from "~/assets/favicon.png";
-import icoFavicon from "~/assets/favicon.ico";
-import appleTouchIcon from "~/assets/apple-touch-icon.png";
+import manifest from "~/assets/favicon/manifest.webmanifest";
+import svgFavicon from "~/assets/favicon/favicon.svg";
+import pngFavicon from "~/assets/favicon/favicon.png";
+import icoFavicon from "~/assets/favicon/favicon.ico";
+import appleTouchIcon from "~/assets/favicon/apple-touch-icon.png";
 
 import {
   getPreviewModeFromRequest,
