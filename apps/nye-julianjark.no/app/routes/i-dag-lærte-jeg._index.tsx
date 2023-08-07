@@ -74,7 +74,7 @@ export default function Component() {
               </Link>
               <HoverCard openDelay={300}>
                 <HoverCardTrigger asChild>
-                  <span className="ml-2 cursor-default opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="hidden sm:block ml-2 cursor-default opacity-0 group-hover:opacity-100 transition-opacity">
                     👀
                   </span>
                 </HoverCardTrigger>
