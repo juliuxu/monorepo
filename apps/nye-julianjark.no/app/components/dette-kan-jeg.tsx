@@ -74,7 +74,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                 <PopoverContent
                   side="top"
                   sideOffset={14}
-                  className="p-6 w-96 flex space-x-6"
+                  className="p-6 w-screen sm:w-96 flex space-x-6"
                 >
                   <RegisterEditNotionPage pageId={item.id} />
                   {item.logo && (
