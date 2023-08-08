@@ -15,39 +15,49 @@ export const notionClient = getClientCached({
   saveToDisk: process.env.NODE_ENV !== "production",
 });
 
+let isWarmingUpCache = false;
+
 /**
  * Warm up the cache
  * Since the cache is in-memory it needs to be repopulated on restarts and redeploys
  */
 export async function warmUpCache() {
-  // The landing page
-  await Promise.all([
-    notionClient.getPage(config.landingPageId),
-    notionClient.getBlocksWithChildren(config.landingPageId),
-  ]);
-  await getFeaturedProject();
-  await getLatestTodayILearnedEntries(false);
-  console.log("◈ warmed up cache for landing page");
+  if (isWarmingUpCache) return;
+  isWarmingUpCache = true;
+  try {
+    // The landing page
+    await Promise.all([
+      notionClient.getPage(config.landingPageId),
+      notionClient.getBlocksWithChildren(config.landingPageId),
+    ]);
+    await getFeaturedProject();
+    await getLatestTodayILearnedEntries(false);
+    console.log("◈ warmed up cache for landing page");
 
-  // The notion driven pages
-  const notionDrivenPages = await getNotionDrivenPages(false);
-  for (const page of notionDrivenPages) {
-    await notionClient.getBlocksWithChildren(page.id);
+    // The notion driven pages
+    const notionDrivenPages = await getNotionDrivenPages(false);
+    for (const page of notionDrivenPages) {
+      await notionClient.getBlocksWithChildren(page.id);
+    }
+    console.log("◈ warmed up cache for notion driven pages");
+
+    // The project pages
+    await getAllTodayILearnedEntriesAndMetainfo(false);
+    await getAllProjectsAndMetainfo(false);
+    console.log("◈ warmed up cache for project pages");
+
+    // Hit the most important pages to rebuild the cdn/nginx http response cache
+    await Promise.all([
+      fetch("https://nye.julianjark.no"),
+      fetch("https://nye.julianjark.no/i-dag-lærte-jeg"),
+      fetch("https://nye.julianjark.no/prosjekter"),
+      fetch("https://nye.julianjark.no/om-julian"),
+    ]);
+  } catch (e) {
+    console.error(`Failed warming up cache ${e}`);
+  } finally {
+    isWarmingUpCache = false;
   }
-  console.log("◈ warmed up cache for notion driven pages");
-
-  // The project pages
-  await getAllTodayILearnedEntriesAndMetainfo(false);
-  await getAllProjectsAndMetainfo(false);
-  console.log("◈ warmed up cache for project pages");
-
-  // Hit the most important pages to rebuild the cdn/nginx http response cache
-  await Promise.all([
-    fetch("https://nye.julianjark.no"),
-    fetch("https://nye.julianjark.no/i-dag-lærte-jeg"),
-    fetch("https://nye.julianjark.no/prosjekter"),
-    fetch("https://nye.julianjark.no/om-julian"),
-  ]);
 }
 
 // Warm the cache on startup

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ActionFunction } from "@remix-run/node";
-import { notionClient } from "~/clients.server";
+import { notionClient, warmUpCache } from "~/clients.server";
 
 import julianFace from "~/assets/julian-face.svg";
 import { useShortcut } from "@julianjark/dev-tools";
@@ -9,6 +9,11 @@ import { createPortal } from "react-dom";
 export const action: ActionFunction = async ({ request }) => {
   if (request.method !== "DELETE") throw new Error("only DELETE allowed");
   notionClient.clearCache();
+
+  setTimeout(() => {
+    warmUpCache();
+  }, 15 * 1000);
+
   return new Response("", { status: 204 });
 };
 
