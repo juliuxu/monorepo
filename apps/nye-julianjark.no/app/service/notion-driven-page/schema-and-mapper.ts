@@ -22,7 +22,7 @@ export const notionDrivenPageSchema = z.object({
   title: z.string().nonempty(),
   slug: z.string().nonempty(),
   prefix: z.string().optional(),
-  preamble: richTextSchema.nonempty(),
+  preamble: richTextSchema,
   published: publishedStateSchema("DRAFT"),
   options: z.array(z.string()),
 });

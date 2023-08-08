@@ -139,7 +139,12 @@ export function NotionPage({ page }: NotionPageProps) {
       <PageHeader
         title={page.title}
         description={
-          <RichTextListRender richTextList={page.preamble} classes={classes} />
+          page.preamble.length > 0 ? (
+            <RichTextListRender
+              richTextList={page.preamble}
+              classes={classes}
+            />
+          ) : undefined
         }
       />
       <div

@@ -13,19 +13,15 @@ export function PageHeader({
   className,
   addDivderUnderneath,
 }: HeaderProps) {
-  // const location = useLocation();
-  // const isLandingPage = location.pathname === "/";
-  // const landingPageMessage = isLandingPage ? (
-  //   <>&nbsp;{"🚧 Under utvikling 🚧"}</>
-  // ) : null;
   return (
     <>
       <header className={`${className ? className : ""}`}>
         <h1 className="text-h1 lg:text-h1-lg">{title}</h1>
-        <p className="mt-4 max-w-4xl text-lead lg:text-lead-lg">
-          {description}
-          {/* {landingPageMessage} */}
-        </p>
+        {description && (
+          <p className="mt-4 max-w-4xl text-lead lg:text-lead-lg">
+            {description}
+          </p>
+        )}
       </header>
       {addDivderUnderneath && <hr className={classes.divider.root} />}
     </>
