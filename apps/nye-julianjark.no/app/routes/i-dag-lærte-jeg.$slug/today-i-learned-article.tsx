@@ -10,7 +10,7 @@ import {
 } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { classNames } from "~/utils/misc";
-import { dateFormatter } from "~/routes/($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { dateFormatter } from "./date-formatter";
 import { useContentOnlyMode } from "~/content-only-mode";
 import { PhotoSwipeImage } from "~/components/photoswipe-image";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";

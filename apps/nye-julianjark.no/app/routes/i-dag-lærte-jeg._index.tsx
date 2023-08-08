@@ -8,7 +8,7 @@ import { pick } from "~/utils/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
-import { dateFormatterShort } from "./($prefix).$notionPage/custom-blocks/latest-today-i-learned-entries";
+import { dateFormatterShort } from "./i-dag-lærte-jeg.$slug/date-formatter";
 import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import {
   HoverCard,

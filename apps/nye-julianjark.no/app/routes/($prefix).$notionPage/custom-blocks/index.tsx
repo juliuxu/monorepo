@@ -5,7 +5,7 @@ import {
   DetteKanJegWantToLearnMoreBlock,
 } from "~/components/dette-kan-jeg";
 import { FeaturedProject } from "~/routes/($prefix).$notionPage/custom-blocks/featured-project";
-import { LatestTodayILearnedEntries } from "./latest-today-i-learned-entries";
+import { LatestTodayILearnedEntries } from "../../i-dag-lærte-jeg.$slug/latest-today-i-learned-entries";
 import { Spacer } from "./spacer";
 
 export const customBlocksToComponents = {
