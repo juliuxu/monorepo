@@ -4,7 +4,10 @@ import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapp
 import { classNames, shuffled } from "~/utils/misc";
 import { RichTextListRender } from "@julianjark/notion-render";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
-import { RegisterEditNotionPage } from "~/routes/($prefix).$notionPage/use-edit-notion-page";
+import {
+  RegisterEditNotionPage,
+  registerEditNotionPage,
+} from "~/routes/($prefix).$notionPage/use-edit-notion-page";
 import { optimzedImageTransformer } from "./unpic-notion-image";
 
 export const getDetteKanJegData = async (request: Request) => {
@@ -119,7 +122,9 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                 </PopoverContent>
               </Popover>
             ) : (
-              element
+              <span onClick={() => registerEditNotionPage({ pageId: item.id })}>
+                {element}
+              </span>
             )}
           </li>
         );

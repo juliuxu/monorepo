@@ -12,11 +12,19 @@ export function openCurrentNotionPage() {
   );
 }
 
+interface EditNotionPage {
+  pageId: string;
+}
+
+export function registerEditNotionPage({ pageId }: EditNotionPage) {
+  currentNotionPageId = pageId;
+}
+
 /**
  * Let's editors quickly edit the page in Notion
  * Requires that somewhere else in the app calls `openCurrentNotionPage`
  */
-export function useEditNotionPage({ pageId }: { pageId: string }) {
+export function useEditNotionPage({ pageId }: EditNotionPage) {
   useEffect(() => {
     const previousNotionPageId = currentNotionPageId;
     currentNotionPageId = pageId;
@@ -31,7 +39,7 @@ export function useEditNotionPage({ pageId }: { pageId: string }) {
   }, [pageId]);
 }
 
-export function RegisterEditNotionPage({ pageId }: { pageId: string }) {
+export function RegisterEditNotionPage({ pageId }: EditNotionPage) {
   useEditNotionPage({ pageId });
   return null;
 }
