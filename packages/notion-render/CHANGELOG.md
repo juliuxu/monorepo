@@ -1,5 +1,11 @@
 # @julianjark/notion-render
 
+## 0.9.0
+
+### Minor Changes
+
+- apply classes to ul and ol
+
 ## 0.8.0
 
 ### Minor Changes

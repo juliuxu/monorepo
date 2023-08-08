@@ -1,6 +1,7 @@
-import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { BlockComponentProps } from "./components";
 import { DefaultComponents } from "./components";
+import { useNotionRenderContext as ctx } from "./context";
 
 // Pseudo blocks
 export interface ListBlock {
@@ -14,7 +15,7 @@ export type ListBlockType = ListBlock["type"];
 export const BulletedList = ({ block }: BlockComponentProps) => {
   if (block.type !== "bulleted_list") return null;
   return (
-    <ul>
+    <ul className={ctx().classes.bulleted_list.root}>
       {block.children.map((block) => {
         const Component = DefaultComponents[block.type];
         if (Component === undefined) return undefined;
@@ -26,7 +27,7 @@ export const BulletedList = ({ block }: BlockComponentProps) => {
 export const NumberedList = ({ block }: BlockComponentProps) => {
   if (block.type !== "numbered_list") return null;
   return (
-    <ol>
+    <ol className={ctx().classes.numbered_list.root}>
       {block.children.map((block) => {
         const Component = DefaultComponents[block.type];
         if (Component === undefined) return undefined;
