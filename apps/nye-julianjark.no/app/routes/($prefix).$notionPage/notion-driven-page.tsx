@@ -120,7 +120,7 @@ export const classes /*tw*/ = {
 
       // Full bleed on mobile
       "rounded-none sm:rounded-lg",
-      "pt-4 pb-6 sm:pb-4 px-[7.5vw] sm:px-4",
+      "pt-4 pb-6 sm:pb-4 px-container sm:px-4",
       "relative left-[50%] mx-[-50vw] right-[50%] w-screen sm:left-0 sm:mx-0 sm:right-0 sm:w-full"
     ),
     icon: "text-h2",

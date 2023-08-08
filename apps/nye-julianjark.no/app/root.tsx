@@ -37,6 +37,7 @@ import {
   getDevModeFromRequest,
   getDevModeSetCookieHeader,
 } from "./routes/api.dev-mode/dev-mode.server";
+import { classNames } from "./utils/misc";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -107,11 +108,6 @@ export function useDevMode() {
 
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
-// TODO: This might belong in the tailwind config
-export const sharedClasses /*tw*/ = {
-  container: "pl-[7.5vw] pr-[7.5vw]",
-  typography: "antialiased text-h2 lg:text-h2-lg",
-};
 export default function App() {
   const { previewMode, devMode } = useLoaderData();
   const scrollBehaviorSmooth = useScrollBehaviorSmooth();
@@ -126,7 +122,10 @@ export default function App() {
         <Links />
       </head>
       <body
-        className={`${sharedClasses.container} ${sharedClasses.typography} flex min-h-screen flex-col bg-base-100`}
+        className={classNames(
+          `px-container flex min-h-screen flex-col bg-base-100`,
+          "antialiased text-h2 lg:text-h2-lg "
+        )}
       >
         {!isContentOnlyMode && <SiteHeader />}
         <div className={isContentOnlyMode ? "py-8" : ""}>

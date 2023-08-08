@@ -4,6 +4,9 @@ export default {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      spacing: {
+        container: "7.5vw",
+      },
       fontSize: {
         body: ["18px", "1.4"],
         "body-lg": "1.6vw",
