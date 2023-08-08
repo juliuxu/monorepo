@@ -124,7 +124,7 @@ export default function App() {
       <body
         className={classNames(
           `px-container flex min-h-screen flex-col bg-base-100`,
-          "antialiased text-h2 lg:text-h2-lg "
+          "antialiased text-body lg:text-body-lg "
         )}
       >
         {!isContentOnlyMode && <SiteHeader />}
