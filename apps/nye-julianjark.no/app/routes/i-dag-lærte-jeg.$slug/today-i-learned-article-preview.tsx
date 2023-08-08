@@ -2,6 +2,8 @@ import { Link } from "@remix-run/react";
 import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import { dateFormatter } from "./date-formatter";
 import { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
+import { notionSelectColorMap } from "~/styles/notion-select-colors";
+import { classNames } from "~/utils/misc";
 
 interface TodayILearnedArticlePreviewProps {
   titleAs: "h2" | "h3" | "h4";
@@ -27,11 +29,30 @@ export function TodayILearnedArticlePreview({
           {entry.title}
         </Link>
       </TitleComponent>
+
       {!hideSummary && (
         <p className="break-words mt-3 text-body lg:text-body-lg">
           {entry.summary}
         </p>
       )}
+
+      <div className="mt-4">
+        <ul className="flex gap-2">
+          {entry.tags.map((tag) => (
+            <li
+              key={tag.id}
+              className={classNames(
+                "px-2 py-1",
+                "text-sm lg:text-body",
+                notionSelectColorMap[tag.color],
+                "rounded"
+              )}
+            >
+              {tag.title}
+            </li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }

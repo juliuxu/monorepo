@@ -14,6 +14,8 @@ import { dateFormatter } from "./date-formatter";
 import { useContentOnlyMode } from "~/content-only-mode";
 import { PhotoSwipeImage } from "~/components/photoswipe-image";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
+import { Fragment } from "react";
+import { notionSelectColorMap } from "~/styles/notion-select-colors";
 
 const todayILearnedComponents: Partial<Components> = {
   ...components,
@@ -85,6 +87,25 @@ export function TodayILearnedArticle({
           </time>
         </>
       )}
+
+      <div className="mt-4 md:mt-6">
+        <ul className="flex gap-2">
+          {entry.tags.map((tag) => (
+            <li
+              key={tag.id}
+              className={classNames(
+                "px-2 py-1",
+                "text-body lg:text-body",
+                notionSelectColorMap[tag.color],
+                "rounded"
+              )}
+            >
+              {tag.title}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div
         className={classNames(
           !isContentOnlyMode && "mt-6",
