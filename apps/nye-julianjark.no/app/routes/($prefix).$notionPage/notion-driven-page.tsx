@@ -81,8 +81,12 @@ export const classes /*tw*/ = {
   heading_1: { root: "text-h1 lg:text-h1-lg" },
   heading_2: { root: "text-h2 lg:text-h2-lg" },
   heading_3: { root: "text-h3 lg:text-h3-lg" },
-  rich_text_anchor:
+  rich_text_anchor: classNames(
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
+    "[&:has(*.text-secondary)]:decoration-secondary",
+    "[&:has(*.text-primary)]:decoration-primary"
+  ),
+  color_orange: "text-secondary",
   column_list: {
     root: classNames(
       "mt-6 gap-x-[5vw] gap-y-[5vw] grid grid-cols-1 sm:grid-cols-12",
@@ -105,7 +109,6 @@ export const classes /*tw*/ = {
     root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-lg",
   },
   divider: { root: "mt-[6vw] mb-[6vw] border-t-2 border-black" },
-  color_orange: "text-secondary",
   paragraph: { root: "max-w-4xl whitespace-pre-wrap" },
   toggle: { root: "bg-primary" },
   callout: {
