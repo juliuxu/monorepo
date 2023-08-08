@@ -23,7 +23,7 @@ export function LatestTodayILearnedEntries() {
             <time className="text-body lg:text-body-lg">
               {dateFormatter.format(new Date(entry.publishedDate))}
             </time>
-            <h3 className="text-h2 lg:text-h2-lg">
+            <h3 className="text-h2 lg:text-h2-lg mt-1">
               <Link
                 className={classes.rich_text_anchor}
                 prefetch="viewport"
