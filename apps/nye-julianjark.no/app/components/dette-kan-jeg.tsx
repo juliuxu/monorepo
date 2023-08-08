@@ -78,7 +78,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                 >
                   <RegisterEditNotionPage pageId={item.id} />
                   {item.logo && (
-                    <span className="relative flex h-12 w-12 shrink-0 overflow-hidden">
+                    <span className="relative flex h-12 w-12 shrink-0 overflow-hidden object-contain">
                       <img
                         className="aspect-square h-full w-full"
                         src={optimzedImageTransformer({ url: item.logo })}
