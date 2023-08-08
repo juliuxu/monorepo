@@ -126,6 +126,10 @@ export const classes /*tw*/ = {
     icon: "text-h2",
     content: "w-full",
   },
+  bulleted_list: { root: "list-disc pl-[1em] mt-4 md:mt-6" },
+  bulleted_list_item: {
+    root: classNames("my-1 sm:my-2"),
+  },
 } satisfies Partial<Classes>;
 
 interface NotionPageProps {
