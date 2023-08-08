@@ -68,9 +68,11 @@ export function ProjectCard({ project, index }: ProjectComponentProps) {
           even ? "sm:order-1" : "sm:order-2"
         } flex flex-col`}
       >
-        <h2 className="text-[1.1em] font-semibold break-words">
-          {project.title}
-        </h2>
+        <div className="contents text-h2 lg:text-h2-lg">
+          <h2 className="text-[1.1em] font-semibold break-words">
+            {project.title}
+          </h2>
+        </div>
         <p className="mt-2 text-h2 lg:text-h2-lg">
           <RichTextListRender
             richTextList={project.description}
