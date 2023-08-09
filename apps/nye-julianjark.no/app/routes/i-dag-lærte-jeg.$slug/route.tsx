@@ -88,7 +88,7 @@ export default function Component() {
         {relatedEntries.length > 0 && (
           <>
             <hr className={classes.divider.root} />
-            <h2 className=" text-h2 lg:text-h2-lg mb-8 lg:mb-12">
+            <h2 className=" text-h2 lg:text-h2-lg mb-6 lg:mb-12">
               Annet jeg har lært
             </h2>
             <TodayILearnedArticlePreviewList
