@@ -14,7 +14,6 @@ import { dateFormatter } from "./date-formatter";
 import { useContentOnlyMode } from "~/content-only-mode";
 import { PhotoSwipeImage } from "~/components/photoswipe-image";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
-import { Fragment } from "react";
 import { notionSelectColorMap } from "~/styles/notion-select-colors";
 
 const todayILearnedComponents: Partial<Components> = {
