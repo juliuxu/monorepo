@@ -1,4 +1,8 @@
-import type { Components, Classes } from "@julianjark/notion-render";
+import type {
+  Components,
+  Classes,
+  BlockComponentProps,
+} from "@julianjark/notion-render";
 import {
   useNotionRenderContext,
   RichTextAnchor,
@@ -16,9 +20,32 @@ import { classNames } from "~/utils/misc";
 import { CustomBlockOrCallout } from "./custom-blocks";
 import { demotedHeadings } from "./demoted-headings";
 import { PageHeader } from "~/components/page-header";
+import { PhotoSwipeImage } from "~/components/photoswipe-image";
+import { getTextFromRichText } from "@julianjark/notion-utils";
 
 export const components: Partial<Components> = {
-  image: UnpicNotionImage,
+  image: ({ block }: BlockComponentProps) => {
+    if (block.type !== "image") return null;
+    const captionOptions = Object.fromEntries(
+      new URLSearchParams(getTextFromRichText(block.image.caption))
+    );
+    if (captionOptions.clickable === "true") {
+      return (
+        <PhotoSwipeImage>
+          {({ ref, onClick }) => (
+            <UnpicNotionImage
+              block={block}
+              ref={ref}
+              onClick={onClick}
+              className="cursor-pointer"
+            />
+          )}
+        </PhotoSwipeImage>
+      );
+    } else {
+      return <UnpicNotionImage block={block} />;
+    }
+  },
 
   code: ({ block }) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
