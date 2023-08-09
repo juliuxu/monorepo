@@ -108,6 +108,9 @@ export const classes /*tw*/ = {
   column: {
     root: "gap-1 md:gap-2 flex flex-col justify-center md:justify-start sm:[&_img]:max-w-lg",
   },
+  image: {
+    root: "",
+  },
   divider: { root: "mt-[6vw] mb-[6vw] border-t-2 border-black" },
   paragraph: { root: "max-w-4xl whitespace-pre-wrap" },
   toggle: { root: "bg-primary" },

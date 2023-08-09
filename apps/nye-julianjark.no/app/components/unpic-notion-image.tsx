@@ -48,19 +48,18 @@ export const UnpicNotionImage = forwardRef<
       ? Number(captionOptions.aspectRatio)
       : undefined;
   return (
-    <>
-      <figure>
-        <img
-          onClick={onClick}
-          alt={captionOptions.alt ?? ""}
-          src={optimzedImageTransformer({ url })}
-          ref={ref}
-          className={classNames(ctx.classes.image.root, className)}
-          style={{ objectFit: "cover", width: "100%", aspectRatio }}
-          role="presentation"
-        />
-        {/* Unpic disabled for now... */}
-        {/* <Image
+    <figure className={ctx.classes.image.root}>
+      <img
+        onClick={onClick}
+        alt={captionOptions.alt ?? ""}
+        src={optimzedImageTransformer({ url })}
+        ref={ref}
+        className={classNames(className)}
+        style={{ objectFit: "cover", width: "100%", aspectRatio }}
+        role="presentation"
+      />
+      {/* Unpic disabled for now... */}
+      {/* <Image
           ref={ref}
           layout="fullWidth"
           className={ctx.classes.image.root}
@@ -70,10 +69,9 @@ export const UnpicNotionImage = forwardRef<
           priority
           transformer={optimzedImageTransformer}
         /> */}
-        {captionOptions.caption && (
-          <figcaption>{captionOptions.caption}</figcaption>
-        )}
-      </figure>
-    </>
+      {captionOptions.caption && (
+        <figcaption>{captionOptions.caption}</figcaption>
+      )}
+    </figure>
   );
 });
