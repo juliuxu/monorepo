@@ -8,6 +8,7 @@ import {
   RichTextAnchor,
   RichTextListRender,
   NotionRender,
+  Video,
 } from "@julianjark/notion-render";
 import { Link } from "@remix-run/react";
 import { UnpicNotionImage } from "~/components/unpic-notion-image";
@@ -24,6 +25,32 @@ import { PhotoSwipeImage } from "~/components/photoswipe-image";
 import { getTextFromRichText } from "@julianjark/notion-utils";
 
 export const components: Partial<Components> = {
+  video: ({ block }: BlockComponentProps) => {
+    if (block.type !== "video") return null;
+    if (block.video.type !== "external") return null;
+
+    const captionOptions = Object.fromEntries(
+      new URLSearchParams(getTextFromRichText(block.video.caption))
+    );
+
+    if (captionOptions.type === "yt-shorts") {
+      return (
+        <iframe
+          width="315"
+          height="560"
+          src={block.video.external.url}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+gyroscope; picture-in-picture;
+web-share"
+          allowFullScreen
+          style={{ border: 0 }}
+        />
+      );
+    }
+
+    return <Video block={block} />;
+  },
   image: ({ block }: BlockComponentProps) => {
     if (block.type !== "image") return null;
     const captionOptions = Object.fromEntries(
