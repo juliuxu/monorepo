@@ -166,7 +166,7 @@ export const classes /*tw*/ = {
     root: "",
   },
   divider: { root: "mt-[6vw] mb-[6vw] border-t-2 border-black" },
-  paragraph: { root: "max-w-4xl whitespace-pre-wrap" },
+  paragraph: { root: "max-w-3xl whitespace-pre-wrap" },
   toggle: { root: "bg-primary" },
   callout: {
     root: classNames(

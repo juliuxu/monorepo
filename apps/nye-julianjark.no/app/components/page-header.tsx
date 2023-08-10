@@ -18,7 +18,7 @@ export function PageHeader({
       <header className={`${className ? className : ""}`}>
         <h1 className="text-h1 lg:text-h1-lg">{title}</h1>
         {description && (
-          <p className="mt-4 max-w-4xl text-lead lg:text-lead-lg">
+          <p className="mt-4 max-w-3xl text-lead lg:text-lead-lg">
             {description}
           </p>
         )}
