@@ -84,18 +84,18 @@ export function TodayILearnedArticle({
           <time className="block mt-2 text-body lg:text-body">
             {dateFormatter.format(new Date(entry.publishedDate))}
           </time>
+
+          <div className="mt-4 md:mt-6">
+            <ul className="flex gap-2">
+              {entry.tags.map((tag) => (
+                <Badge as="li" key={tag.id} color={tag.color}>
+                  {tag.title}
+                </Badge>
+              ))}
+            </ul>
+          </div>
         </>
       )}
-
-      <div className="mt-4 md:mt-6">
-        <ul className="flex gap-2">
-          {entry.tags.map((tag) => (
-            <Badge as="li" key={tag.id} color={tag.color}>
-              {tag.title}
-            </Badge>
-          ))}
-        </ul>
-      </div>
 
       <div
         className={classNames(
