@@ -77,7 +77,7 @@ export default function Component() {
         }
         return prev;
       },
-      { replace: true }
+      { replace: true, preventScrollReset: true }
     );
   };
 
