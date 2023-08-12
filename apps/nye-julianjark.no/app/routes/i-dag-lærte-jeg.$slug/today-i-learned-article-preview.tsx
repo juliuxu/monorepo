@@ -2,8 +2,7 @@ import { Link } from "@remix-run/react";
 import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import { dateFormatter } from "./date-formatter";
 import { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
-import { notionSelectColorMap } from "~/styles/notion-select-colors";
-import { classNames } from "~/utils/misc";
+import { Badge } from "./badge";
 
 interface TodayILearnedArticlePreviewProps {
   titleAs: "h2" | "h3" | "h4";
@@ -39,17 +38,9 @@ export function TodayILearnedArticlePreview({
       <div className="mt-4">
         <ul className="flex gap-2">
           {entry.tags.map((tag) => (
-            <li
-              key={tag.id}
-              className={classNames(
-                "px-2 py-1",
-                "text-sm lg:text-body",
-                notionSelectColorMap[tag.color],
-                "rounded"
-              )}
-            >
+            <Badge as="li" key={tag.id} color={tag.color}>
               {tag.title}
-            </li>
+            </Badge>
           ))}
         </ul>
       </div>
