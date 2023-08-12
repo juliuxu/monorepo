@@ -15,6 +15,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "~/components/hover-card";
+import { Badge } from "./i-dag-lærte-jeg.$slug/badge";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -88,6 +89,13 @@ export default function Component() {
                 </HoverCardContent>
               </HoverCard>
             </div>
+            <ul className="sr-only md:not-sr-only mt-2 md:mt-0 md:ml-auto flex gap-2">
+              {entry.tags.map((tag) => (
+                <Badge as="li" key={tag.id} color={tag.color}>
+                  {tag.title}
+                </Badge>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>

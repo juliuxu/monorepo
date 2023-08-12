@@ -11,6 +11,7 @@ export function Badge({ as: Component, children, color }: BadgeProps) {
     <Component
       className={classNames(
         "px-2 py-1",
+        "h-fit",
         "text-body lg:text-body",
 
         "border-2",
