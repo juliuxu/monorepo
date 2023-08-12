@@ -2,7 +2,7 @@ import { classNames } from "~/utils/misc";
 import { notionSelectColorMap } from "~/styles/notion-select-colors";
 
 interface BadgeProps {
-  as: "li" | "span";
+  as: "li" | "span" | "div";
   children: React.ReactNode;
   color: keyof typeof notionSelectColorMap;
 }

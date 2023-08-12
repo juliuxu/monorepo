@@ -1,10 +1,10 @@
 import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import { config } from "~/config.server";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
 import { getTextFromRichText } from "@julianjark/notion-utils";
-import { pick } from "~/utils/misc";
+import { pick, uniqueBy } from "~/utils/misc";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
@@ -36,10 +36,16 @@ export const loader = async ({ request }: LoaderArgs) => {
     pick(entry, ["id", "title", "tags", "summary", "publishedDate", "slug"])
   );
 
+  const tags = uniqueBy(
+    entries.flatMap((entry) => entry.tags),
+    (tag) => tag.id
+  );
+
   return json(
     {
       metainfo,
       entries: shallowEntries,
+      tags,
       todayILearnedDatabaseId: config.todayILearnedDatabaseId,
     },
     { headers: config.loaderCacheControlHeaders }
@@ -49,6 +55,36 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function Component() {
   const data = useLoaderData<typeof loader>();
   useEditNotionPage({ pageId: data.todayILearnedDatabaseId });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  let activeTags = data.tags.map((tag) => tag.title);
+  if (searchParams.has("tags")) {
+    activeTags = activeTags.filter((tag) =>
+      searchParams.getAll("tags").includes(tag)
+    );
+  }
+  const toggleTag = (tag: string) => {
+    setSearchParams(
+      (prev) => {
+        const currentTags = prev.getAll("tags");
+        if (prev.getAll("tags").includes(tag)) {
+          prev.delete("tags");
+          currentTags
+            .filter((t) => t !== tag)
+            .forEach((t) => prev.append("tags", t));
+        } else {
+          prev.append("tags", tag);
+        }
+        return prev;
+      },
+      { replace: true }
+    );
+  };
+
+  const filteredEntries = data.entries.filter((entry) =>
+    entry.tags.some((tag) => activeTags.includes(tag.title))
+  );
+
   return (
     <main>
       <PageHeader
@@ -58,8 +94,28 @@ export default function Component() {
 
       <hr className={classes.divider.root} />
 
+      <aside className="mb-12 lg:mb-16">
+        <h2 className="text-h2 lg:text-h2-lg font-semibold lg:font-normal">
+          Filtrer på kategori
+        </h2>
+        <ul className="mt-4 flex flex-wrap gap-2 lg:gap-4">
+          {data.tags.map((tag) => (
+            <li>
+              <button
+                className={activeTags.includes(tag.title) ? "" : "opacity-40"}
+                onClick={() => toggleTag(tag.title)}
+              >
+                <Badge as="div" key={tag.id} color={tag.color}>
+                  {tag.title}
+                </Badge>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
       <ul className="space-y-8 text-h2">
-        {data.entries.map((entry) => (
+        {filteredEntries.map((entry) => (
           <li className="flex flex-col md:flex-row" key={entry.id}>
             <time className="text-body md:text-h2 md:shrink-0 md:basis-1/4 xl:basis-1/5">
               {dateFormatterShort.format(new Date(entry.publishedDate))}
