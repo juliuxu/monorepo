@@ -1,6 +1,8 @@
 import { useMemo } from "react";
-import { useHydrated } from "./use-hydrated";
+
 import { slugify } from "@julianjark/notion-utils";
+
+import { useHydrated } from "./use-hydrated";
 
 interface Heading {
   id: string;
@@ -27,7 +29,7 @@ export function TableOfConents() {
   const isHydrated = useHydrated();
   const headingsTree = useMemo(
     () => (isHydrated ? getHeadingsTreeInPage() : []),
-    [isHydrated]
+    [isHydrated],
   );
 
   return (

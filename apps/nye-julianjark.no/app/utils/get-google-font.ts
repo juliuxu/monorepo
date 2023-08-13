@@ -3,11 +3,11 @@ import type { SatoriOptions } from "satori";
 export async function getGoogleFont(
   font: string,
   weights = [400, 500, 600, 700],
-  text = "abcdefghijklmnopqrstuvwxyzøæåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ0123456789/\\!@#$%^&*()_+-=<>?[]{}|;:,.`'’\"–—"
+  text = "abcdefghijklmnopqrstuvwxyzøæåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ0123456789/\\!@#$%^&*()_+-=<>?[]{}|;:,.`'’\"–—",
 ) {
   const css = await fetch(
     `https://fonts.googleapis.com/css2?family=${font}:wght@${weights.join(
-      ";"
+      ";",
     )}&text=${encodeURIComponent(text)}`,
     {
       headers: {
@@ -15,10 +15,10 @@ export async function getGoogleFont(
         "User-Agent":
           "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
       },
-    }
+    },
   ).then((response) => response.text());
   const resource = css.matchAll(
-    /src: url\((.+)\) format\('(opentype|truetype)'\)/g
+    /src: url\((.+)\) format\('(opentype|truetype)'\)/g,
   );
   return Promise.all(
     [...resource]
@@ -29,6 +29,6 @@ export async function getGoogleFont(
         style: "normal",
         weight: weights[i],
         data: await buffer,
-      }))
+      })),
   ) as Promise<SatoriOptions["fonts"]>;
 }

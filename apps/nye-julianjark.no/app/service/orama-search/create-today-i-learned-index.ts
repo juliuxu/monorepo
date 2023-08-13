@@ -1,6 +1,7 @@
 import type { Orama } from "@orama/orama";
 import { create, insertMultiple } from "@orama/orama";
 import { afterInsert as highlightAfterInsertHook } from "@orama/plugin-match-highlight";
+
 import type { TodayILearnedEntry } from "../notion-today-i-learned/schema-and-mapper";
 
 type OramaDoc = {
@@ -11,7 +12,7 @@ type OramaDoc = {
 };
 
 export async function createTodayILearnedOramaIndex(
-  entries: TodayILearnedEntry[]
+  entries: TodayILearnedEntry[],
 ): Promise<Orama> {
   const index = await create({
     schema: {
@@ -36,7 +37,7 @@ export async function createTodayILearnedOramaIndex(
     // The index is built after render, meaning the browser already has the text content
     // So, instead of parsing the blocks, we can just grab the text content from the DOM
     const contentElement = document.querySelector(
-      `#${entry.slug} + div`
+      `#${entry.slug} + div`,
     ) as HTMLElement | null;
     const content = contentElement?.innerText ?? "";
 

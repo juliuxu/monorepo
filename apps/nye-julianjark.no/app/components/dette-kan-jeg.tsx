@@ -1,15 +1,17 @@
 import { useLoaderData } from "@remix-run/react";
-import { getAllDetteKanJeg } from "~/service/notion-dette-kan-jeg/client";
-import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapper";
-import { classNames, shuffled } from "~/utils/misc";
+
 import { RichTextListRender } from "@julianjark/notion-render";
+
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
 import {
   RegisterEditNotionPage,
   registerEditNotionPage,
 } from "~/routes/($prefix).$notionPage/use-edit-notion-page";
-import { optimzedImageTransformer } from "./unpic-notion-image";
+import { getAllDetteKanJeg } from "~/service/notion-dette-kan-jeg/client";
+import type { DetteKanJeg } from "~/service/notion-dette-kan-jeg/schema-and-mapper";
+import { classNames, shuffled } from "~/utils/misc";
 import { trackEvent } from "./analytics";
+import { optimzedImageTransformer } from "./unpic-notion-image";
 
 export const getDetteKanJegData = async (request: Request) => {
   const { success } = await getAllDetteKanJeg();
@@ -34,7 +36,7 @@ export function DetteKanJegWantToLearnMoreBlock() {
   return (
     <KnowledgeList
       knowledge={detteKanJeg.filter(
-        (item) => item.competence === "want-to-learn-more"
+        (item) => item.competence === "want-to-learn-more",
       )}
     />
   );
@@ -47,7 +49,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
         let element = (
           <span
             className={classNames(
-              "text-h2"
+              "text-h2",
               // "hover:underline focus:underline"
               // "badge badge-lg group-hover:badge-info",
               // "transition-all duration-500 ease-out",
@@ -79,7 +81,7 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
                   className={classNames(
                     "font-bold cursor-pointer",
                     "outline-black outline-2 outline-offset-4",
-                    "data-[state=open]:ring ring-current ring-offset-4 active:ring"
+                    "data-[state=open]:ring ring-current ring-offset-4 active:ring",
                   )}
                 >
                   {element}

@@ -1,27 +1,27 @@
-import {
-  getDate,
-  getUrl,
-  getMultiSelectAndColor,
-  getSelectAndColor,
-  getSelect,
-  getTitle,
-  getFileUrls,
-  getRichText,
-  getDatabasePropertySelectOptions,
-  getTextFromRichText,
-  getDatabasePropertyMultiSelectOptions,
-} from "@julianjark/notion-utils";
-import { z } from "zod";
-
 import type { PublishedState } from "@julianjark/notion-cms";
 import {
-  selectSchema,
+  cmsMetainfo,
+  cmsPage,
   multiSelectSchema,
   publishedStateSchema,
   richTextSchema,
-  cmsPage,
-  cmsMetainfo,
+  selectSchema,
 } from "@julianjark/notion-cms";
+import {
+  getDatabasePropertyMultiSelectOptions,
+  getDatabasePropertySelectOptions,
+  getDate,
+  getFileUrls,
+  getMultiSelectAndColor,
+  getRichText,
+  getSelect,
+  getSelectAndColor,
+  getTextFromRichText,
+  getTitle,
+  getUrl,
+} from "@julianjark/notion-utils";
+import { z } from "zod";
+
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 
 export const projectsMetainfoSchema = z.object({
@@ -40,7 +40,7 @@ export const { getMetainfo } = cmsMetainfo(
       forWhom: getDatabasePropertySelectOptions("For hvem", database),
       tags: getDatabasePropertyMultiSelectOptions("Tags", database),
     };
-  }
+  },
 );
 
 export const projectSchema = z.object({
@@ -69,7 +69,7 @@ export const { getPage, getPages } = cmsPage(projectSchema, (page) => {
         property: "Bilder",
         index,
         lastEditedTime: page.last_edited_time,
-      })
+      }),
     ),
     date: getDate("Dato", page),
     codeLink: getUrl("Kode", page),

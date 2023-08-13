@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import type { ActionFunction } from "@remix-run/node";
-import { notionClient, warmUpCache } from "~/clients.server";
+
+import { useShortcut } from "@julianjark/dev-tools";
 
 import julianFace from "~/assets/julian-face.svg";
-import { useShortcut } from "@julianjark/dev-tools";
-import { createPortal } from "react-dom";
+import { notionClient, warmUpCache } from "~/clients.server";
 
 export const action: ActionFunction = async ({ request }) => {
   if (request.method !== "DELETE") throw new Error("only DELETE allowed");
@@ -79,7 +80,7 @@ export function ClearCacheButton({
               </p>
             </div>
           </div>,
-          document.getElementById("loading-box")!
+          document.getElementById("loading-box")!,
         )}
     </>
   );

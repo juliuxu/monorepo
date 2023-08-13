@@ -1,4 +1,5 @@
-import { useLocation, Link, useMatches } from "@remix-run/react";
+import { Link, useLocation, useMatches } from "@remix-run/react";
+
 import { classNames } from "~/utils/misc";
 
 interface SiteHeaderInfo {
@@ -26,14 +27,14 @@ export function SiteHeader() {
   return (
     <header
       className={classNames(
-        isLandingPage ? "mb-[4vw]" : "mb-[8vw] pt-[4vw] md:mb-[4vw]"
+        isLandingPage ? "mb-[4vw]" : "mb-[8vw] pt-[4vw] md:mb-[4vw]",
       )}
     >
       <nav
         className={classNames(
           isLandingPage && "hidden",
           "grid grid-cols-12 items-center",
-          "text-h2 lg:text-h2-lg"
+          "text-h2 lg:text-h2-lg",
         )}
       >
         <p className="tracking-wider font-semibold max-h-[1.3em]">

@@ -1,26 +1,27 @@
 import {
-  getTitle,
-  getMultiSelectAndColor,
-  getSelect,
-  takeBlocksAfterHeader,
-  getTextFromRichText,
-  getFormulaDate,
-  getDatabasePropertyMultiSelectOptions,
-  slugify,
-} from "@julianjark/notion-utils";
-import { z } from "zod";
-import {
   blocksSchema,
+  cmsBlocks,
   cmsMetainfo,
+  cmsPage,
   multiSelectSchema,
   publishedStateSchema,
   richTextSchema,
-  cmsBlocks,
-  cmsPage,
 } from "@julianjark/notion-cms";
-import { getSummary } from "./get-summary";
-import { config } from "~/config.server";
 import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server.js";
+import {
+  getDatabasePropertyMultiSelectOptions,
+  getFormulaDate,
+  getMultiSelectAndColor,
+  getSelect,
+  getTextFromRichText,
+  getTitle,
+  slugify,
+  takeBlocksAfterHeader,
+} from "@julianjark/notion-utils";
+import { z } from "zod";
+
+import { config } from "~/config.server";
+import { getSummary } from "./get-summary";
 
 export const todayILearnedMetainfoSchema = z.object({
   title: z.string(),
@@ -36,7 +37,7 @@ export const { getMetainfo } = cmsMetainfo(
       description: database.description,
       tags: getDatabasePropertyMultiSelectOptions("Tags", database),
     };
-  }
+  },
 );
 
 export const todayILearnedEntryHeadSchema = z.object({
@@ -74,7 +75,7 @@ export const { getBodyFromHead, getHeadAndBodyListFromHeads } = cmsBlocks(
   async function mapper(blocks) {
     const [referenceBlocks, remainingBlocks] = takeBlocksAfterHeader(
       "Referanser",
-      blocks
+      blocks,
     );
     const references = referenceBlocks
       .map((x) => {
@@ -101,5 +102,5 @@ export const { getBodyFromHead, getHeadAndBodyListFromHeads } = cmsBlocks(
       summary: getSummary(remainingBlocks),
       references,
     };
-  }
+  },
 );

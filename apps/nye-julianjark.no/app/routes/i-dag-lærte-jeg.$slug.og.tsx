@@ -1,10 +1,13 @@
 import type { LoaderArgs } from "@remix-run/node";
-import { ImageResponse } from "@vercel/og";
-import { assertItemFound } from "~/utils/misc";
-import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
-import { getGoogleFont } from "~/utils/get-google-font";
 
+import { ImageResponse } from "@vercel/og";
+
+import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
+import { getGoogleFont } from "~/utils/get-google-font";
+import { assertItemFound } from "~/utils/misc";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const colors = {
   primary: "#FFB4B4",
   secondary: "#E3673A",
@@ -13,7 +16,7 @@ const colors = {
 export async function loader({ request, params }: LoaderArgs) {
   const slug = params.slug ?? "";
   const { entries } = await getAllTodayILearnedEntriesAndMetainfo(
-    isPreviewModeFromRequest(request)
+    isPreviewModeFromRequest(request),
   );
   const entry = entries.find((entry) => entry.slug === slug);
   assertItemFound(entry);
@@ -71,8 +74,8 @@ export async function loader({ request, params }: LoaderArgs) {
       width: 1200,
       height: 630,
       fonts: await Promise.all([getGoogleFont("Inter")]).then((fonts) =>
-        fonts.flat()
+        fonts.flat(),
       ),
-    }
+    },
   );
 }

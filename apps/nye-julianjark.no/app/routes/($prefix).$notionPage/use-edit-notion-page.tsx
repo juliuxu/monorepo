@@ -8,7 +8,7 @@ export function openCurrentNotionPage() {
   // As of 11. july 2023 Notion figures out which page this belongs to and opens it correctly
   window.open(
     `https://notion.so/${currentNotionPageId.replaceAll("-", "")}`,
-    "_blank"
+    "_blank",
   );
 }
 

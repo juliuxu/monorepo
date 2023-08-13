@@ -4,7 +4,7 @@ export type Relaxed<T extends object> = {
 };
 
 export function typedBoolean<T>(
-  value: T
+  value: T,
 ): value is Exclude<T, "" | 0 | false | null | undefined> {
   return Boolean(value);
 }
@@ -114,7 +114,7 @@ export function deSlugify(slug: string) {
 
   // Capitalize every first letter of every word
   text = text.replace(/\w\S*/g, (w) =>
-    w.replace(/^\w/, (c) => c.toUpperCase())
+    w.replace(/^\w/, (c) => c.toUpperCase()),
   );
 
   return text;

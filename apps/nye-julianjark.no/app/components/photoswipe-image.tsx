@@ -1,7 +1,8 @@
+import "photoswipe/photoswipe.css";
+
 import { useEffect } from "react";
 
 import PhotoSwipe from "photoswipe";
-import "photoswipe/photoswipe.css";
 
 interface PhotoSwipeImageProps {
   children: ({

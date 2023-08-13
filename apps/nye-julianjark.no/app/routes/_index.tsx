@@ -1,12 +1,13 @@
 import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+
 import { config } from "~/config.server";
-import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/client";
 import { NotionPage } from "~/routes/($prefix).$notionPage/notion-driven-page";
-import { getNotionDrivenLandingPage } from "../service/notion-driven-page/client";
 import { getFeaturedProject } from "~/service/notion-projects/client";
-import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
+import { getLatestTodayILearnedEntries } from "~/service/notion-today-i-learned/client";
+import { getNotionDrivenLandingPage } from "../service/notion-driven-page/client";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -21,7 +22,7 @@ export const loader = async ({ request }: LoaderArgs) => {
       getNotionDrivenLandingPage(),
       getFeaturedProject(),
       getLatestTodayILearnedEntries(isPreviewModeFromRequest(request)),
-    ]
+    ],
   );
 
   return json(
@@ -30,7 +31,7 @@ export const loader = async ({ request }: LoaderArgs) => {
       featuredProject,
       latestTodayILearnedEntries,
     },
-    { headers: config.loaderCacheControlHeaders }
+    { headers: config.loaderCacheControlHeaders },
   );
 };
 

@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+
 import julianFace from "~/assets/julian-face.svg";
 import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
 

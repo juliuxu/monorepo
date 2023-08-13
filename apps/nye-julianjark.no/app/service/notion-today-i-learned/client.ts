@@ -1,19 +1,19 @@
-import { config } from "~/config.server";
+import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
+import { notionClient } from "~/clients.server";
+import { config } from "~/config.server";
 import {
   getHeadAndBodyListFromHeads,
   getMetainfo,
   getPages,
 } from "./schema-and-mapper";
-import { notionClient } from "~/clients.server";
-import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
 async function getTodayILearnedEntryHeads(isPreview: boolean) {
   const entryHeads = await getPages(notionClient)(
     config.todayILearnedDatabaseId,
     {
       sorts: [{ property: "Published Date", direction: "descending" }],
-    }
+    },
   );
   return entryHeads.success.filter(filterPublishedPredicate(isPreview));
 }
@@ -26,7 +26,7 @@ export async function getLatestTodayILearnedEntries(isPreview: boolean) {
 }
 
 export async function getAllTodayILearnedEntriesAndMetainfo(
-  isPreview: boolean
+  isPreview: boolean,
 ) {
   const [metainfo, entryHeads] = await Promise.all([
     getMetainfo(notionClient)(config.todayILearnedDatabaseId),
@@ -39,8 +39,8 @@ export async function getAllTodayILearnedEntriesAndMetainfo(
   // Would be pretty stupid to show tags that is not visible on the website
   metainfo.tags = metainfo.tags.filter((tag) =>
     entries.some((entry) =>
-      entry.tags.some((entryTag) => entryTag.id === tag.id)
-    )
+      entry.tags.some((entryTag) => entryTag.id === tag.id),
+    ),
   );
 
   return { metainfo, entries };

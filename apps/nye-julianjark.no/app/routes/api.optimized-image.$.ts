@@ -1,4 +1,5 @@
 import type { LoaderArgs } from "@remix-run/node";
+
 import { createIPX, handleRequest } from "ipx";
 
 const domains = ["nye.julianjark.no", "picsum.photos"];
@@ -32,7 +33,7 @@ export const loader = async ({ params }: LoaderArgs) => {
     {
       url: ipxPath,
     },
-    ipx
+    ipx,
   );
 
   return new Response(ipxResponse.body, {

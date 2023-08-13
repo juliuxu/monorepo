@@ -1,8 +1,9 @@
 import { Link } from "@remix-run/react";
+
 import { classes } from "~/routes/($prefix).$notionPage/notion-driven-page";
-import { dateFormatter } from "./date-formatter";
-import { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
+import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { Badge } from "./badge";
+import { dateFormatter } from "./date-formatter";
 
 interface TodayILearnedArticlePreviewProps {
   titleAs: "h2" | "h3" | "h4";

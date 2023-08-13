@@ -1,10 +1,11 @@
 import {
-  getTextFromRichText,
   type BlockObjectResponse,
+  getTextFromRichText,
 } from "@julianjark/notion-utils";
-import type { CustomBlockKeys } from ".";
+
 import { getDetteKanJegData } from "~/components/dette-kan-jeg";
 import { typedBoolean } from "~/utils/misc";
+import type { CustomBlockKeys } from ".";
 
 const dataFunctions: Record<
   CustomBlockKeys,
@@ -31,7 +32,7 @@ const dataFunctions: Record<
  */
 export async function getCustomBlocksData(
   fromBlocks: BlockObjectResponse[],
-  andRequest: Request
+  andRequest: Request,
 ) {
   const dataFunctions = findCustomBlocksDataFunctions(fromBlocks);
   const data = await Promise.all(dataFunctions.map((fn) => fn(andRequest)));
@@ -41,7 +42,7 @@ export async function getCustomBlocksData(
 }
 
 function findCustomBlocksDataFunctions(
-  fromBlocks: BlockObjectResponse[]
+  fromBlocks: BlockObjectResponse[],
 ): Array<(typeof dataFunctions)[CustomBlockKeys]> {
   return [
     ...new Set(
@@ -50,17 +51,17 @@ function findCustomBlocksDataFunctions(
           if (block.type === "callout") {
             const text = getTextFromRichText(block.callout.rich_text);
             return Object.entries(dataFunctions).find(
-              ([key]) => key === text
+              ([key]) => key === text,
             )?.[1];
           }
           if (block.has_children) {
             return findCustomBlocksDataFunctions(
-              (block as any)[block.type]?.children ?? []
+              (block as any)[block.type]?.children ?? [],
             );
           }
           return undefined;
         })
-        .filter(typedBoolean)
+        .filter(typedBoolean),
     ),
   ];
 }

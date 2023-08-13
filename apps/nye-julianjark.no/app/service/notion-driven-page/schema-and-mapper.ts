@@ -1,21 +1,22 @@
-import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server.js";
 import {
-  getTitle,
-  slugify,
-  getRichText,
-  getSelect,
-  getMultiSelect,
-  getText,
-} from "@julianjark/notion-utils";
-import { z } from "zod";
-import { config } from "~/config.server";
-import {
+  blocksSchema,
   cmsBlocks,
   cmsPage,
-  blocksSchema,
   publishedStateSchema,
   richTextSchema,
 } from "@julianjark/notion-cms";
+import { shikifyNotionBlocks } from "@julianjark/notion-shiki-code/dist/index.server.js";
+import {
+  getMultiSelect,
+  getRichText,
+  getSelect,
+  getText,
+  getTitle,
+  slugify,
+} from "@julianjark/notion-utils";
+import { z } from "zod";
+
+import { config } from "~/config.server";
 
 export const notionDrivenPageSchema = z.object({
   id: z.string().nonempty(),
@@ -50,5 +51,5 @@ export const { getBodyFromHead } = cmsBlocks(
   notionDrivenPageBodySchema,
   async (blocks) => ({
     blocks: await shikifyNotionBlocks(blocks, { theme: config.shikiTheme }),
-  })
+  }),
 );

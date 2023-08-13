@@ -4,17 +4,18 @@ import type {
   Components,
 } from "@julianjark/notion-render";
 import { NotionRender } from "@julianjark/notion-render";
+
+import { PhotoSwipeImage } from "~/components/photoswipe-image";
+import { UnpicNotionImage } from "~/components/unpic-notion-image";
+import { useContentOnlyMode } from "~/content-only-mode";
 import {
   classes,
   components,
 } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import type { TodayILearnedEntry } from "~/service/notion-today-i-learned/schema-and-mapper";
 import { classNames } from "~/utils/misc";
-import { dateFormatter } from "./date-formatter";
-import { useContentOnlyMode } from "~/content-only-mode";
-import { PhotoSwipeImage } from "~/components/photoswipe-image";
-import { UnpicNotionImage } from "~/components/unpic-notion-image";
 import { Badge } from "./badge";
+import { dateFormatter } from "./date-formatter";
 
 const todayILearnedComponents: Partial<Components> = {
   ...components,
@@ -42,7 +43,7 @@ const todayILearnedClasses /*tw*/ = {
       "[&>div:first-child>*:first-child]:mt-0 [&>div>*:last-child]:mb-0",
       "sm:[&>div>*:first-child]:mt-0 sm:[&>div>*:last-child]:mb-0",
       "sm:[&>div>*_pre]:mb-0",
-      "[&_figure_pre]:mt-0 [&_figure_pre]:mb-0"
+      "[&_figure_pre]:mt-0 [&_figure_pre]:mb-0",
     ),
   },
   column: {
@@ -55,7 +56,7 @@ const todayILearnedClasses /*tw*/ = {
       "[&_pre]:px-container sm:[&_pre]:px-5",
       "[&_pre]:py-6",
       "[&_pre]:rounded-none sm:[&_pre]:rounded-lg",
-      "[&_figcaption]:px-container sm:[&_figcaption]:px-0"
+      "[&_figcaption]:px-container sm:[&_figcaption]:px-0",
     ),
   },
 } satisfies Partial<Classes>;
@@ -115,7 +116,7 @@ export function TodayILearnedArticle({
           "[&_figure_pre]:mb-0",
           "prose-figcaption:text-black/70",
           "prose-figcaption:mt-[0.8em]",
-          "prose-figcaption:text-[0.9rem]"
+          "prose-figcaption:text-[0.9rem]",
         )}
       >
         <NotionRender

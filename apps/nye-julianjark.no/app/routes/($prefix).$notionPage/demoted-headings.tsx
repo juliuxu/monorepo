@@ -1,6 +1,6 @@
 import type { Components } from "@julianjark/notion-render";
 import { H1, H2, H3 } from "@julianjark/notion-render";
-import { slugify, getTextFromRichText } from "@julianjark/notion-utils";
+import { getTextFromRichText, slugify } from "@julianjark/notion-utils";
 
 export const demotedHeadings: Partial<Components> = {
   heading_1: (props) => (

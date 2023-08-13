@@ -1,10 +1,12 @@
+// import { Image } from "@unpic/react";
+import { forwardRef } from "react";
+
 import type { BlockComponentProps } from "@julianjark/notion-render";
 import { useNotionRenderContext } from "@julianjark/notion-render";
 import { getTextFromRichText } from "@julianjark/notion-utils";
-// import { Image } from "@unpic/react";
-import { forwardRef } from "react";
-import { classNames } from "~/utils/misc";
+
 import { imageUrlBuilder } from "~/routes/api.notion-image";
+import { classNames } from "~/utils/misc";
 
 const optimizedImageBaseUrl = "https://nye.julianjark.no/api/optimized-image";
 export const optimzedImageTransformer = ({
@@ -20,7 +22,7 @@ export const optimzedImageTransformer = ({
   if (width) options += `,w_${width}`;
   if (height) options += `,h_${height}`;
   return `${optimizedImageBaseUrl}/${options}/${encodeURIComponent(
-    new URL(url).toString()
+    new URL(url).toString(),
   )}`;
 };
 
@@ -41,7 +43,7 @@ export const UnpicNotionImage = forwardRef<
   });
 
   const captionOptions = Object.fromEntries(
-    new URLSearchParams(getTextFromRichText(block.image.caption))
+    new URLSearchParams(getTextFromRichText(block.image.caption)),
   );
   const aspectRatio =
     Number(captionOptions.aspectRatio) > 0
@@ -75,3 +77,4 @@ export const UnpicNotionImage = forwardRef<
     </figure>
   );
 });
+UnpicNotionImage.displayName = "UnpicNotionImage";

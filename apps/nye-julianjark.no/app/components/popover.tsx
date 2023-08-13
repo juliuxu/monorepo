@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+
 import { classNames } from "~/utils/misc";
 
 const Popover = PopoverPrimitive.Root;
@@ -17,7 +19,7 @@ const PopoverContent = React.forwardRef<
       sideOffset={sideOffset}
       className={classNames(
         "z-50 rounded-md border-2 shadow-lg bg-white outline-none border-current",
-        className
+        className,
       )}
       {...props}
     />

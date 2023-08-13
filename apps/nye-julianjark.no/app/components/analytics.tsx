@@ -1,5 +1,5 @@
-import { useLocation } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import { useLocation } from "@remix-run/react";
 
 declare global {
   interface Window {

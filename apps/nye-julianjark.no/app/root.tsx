@@ -1,10 +1,10 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { json } from "@remix-run/node";
 import type {
   HeadersFunction,
-  LoaderArgs,
   LinksFunction,
+  LoaderArgs,
 } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -15,30 +15,29 @@ import {
   useLoaderData,
   useRouteLoaderData,
 } from "@remix-run/react";
-import tailwindCss from "~/styles/tailwind.css";
 
-import manifest from "~/assets/favicon/manifest.webmanifest";
-import svgFavicon from "~/assets/favicon/favicon.svg";
-import pngFavicon from "~/assets/favicon/favicon.png";
-import icoFavicon from "~/assets/favicon/favicon.ico";
 import appleTouchIcon from "~/assets/favicon/apple-touch-icon.png";
-
+import icoFavicon from "~/assets/favicon/favicon.ico";
+import pngFavicon from "~/assets/favicon/favicon.png";
+import svgFavicon from "~/assets/favicon/favicon.svg";
+import manifest from "~/assets/favicon/manifest.webmanifest";
 import {
   getPreviewModeFromRequest,
   getPreviewModeSetCookieHeader,
 } from "~/routes/api.preview-mode/preview-mode.server";
-import { config } from "./config.server";
-import { useScrollBehaviorSmooth } from "./handle";
+import tailwindCss from "~/styles/tailwind.css";
+import { MatomoAnalytics } from "./components/analytics";
 import { Footer } from "./components/footer";
-import { DevTools } from "./routes/api.dev-mode/dev-tools";
 import { SiteHeader } from "./components/site-header";
+import { config } from "./config.server";
 import { useContentOnlyMode } from "./content-only-mode";
+import { useScrollBehaviorSmooth } from "./handle";
 import {
   getDevModeFromRequest,
   getDevModeSetCookieHeader,
 } from "./routes/api.dev-mode/dev-mode.server";
+import { DevTools } from "./routes/api.dev-mode/dev-tools";
 import { classNames } from "./utils/misc";
-import { MatomoAnalytics } from "./components/analytics";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -84,12 +83,12 @@ export const loader = async ({ request }: LoaderArgs) => {
   previewMode &&
     headers.append(
       "Set-Cookie",
-      getPreviewModeSetCookieHeader(previewMode)["Set-Cookie"]
+      getPreviewModeSetCookieHeader(previewMode)["Set-Cookie"],
     );
   devMode &&
     headers.append(
       "Set-Cookie",
-      getDevModeSetCookieHeader(devMode)["Set-Cookie"]
+      getDevModeSetCookieHeader(devMode)["Set-Cookie"],
     );
 
   return json(
@@ -99,7 +98,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     },
     {
       headers,
-    }
+    },
   );
 };
 
@@ -125,7 +124,7 @@ export default function App() {
       <body
         className={classNames(
           `px-container flex min-h-screen flex-col bg-base-100`,
-          "antialiased text-body lg:text-body-lg "
+          "antialiased text-body lg:text-body-lg ",
         )}
       >
         {!isContentOnlyMode && <SiteHeader />}

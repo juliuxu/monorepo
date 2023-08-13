@@ -1,5 +1,5 @@
+import type { notionSelectColorMap } from "~/styles/notion-select-colors";
 import { classNames } from "~/utils/misc";
-import { notionSelectColorMap } from "~/styles/notion-select-colors";
 
 interface BadgeProps {
   as: "li" | "span" | "div";
@@ -20,7 +20,7 @@ export function Badge({ as: Component, children, color }: BadgeProps) {
         // "text-transparent bg-clip-text bg-gradient-to-r from-j-pink-400 via-j-pink-500 to-j-pink-600",
         // notionSelectColorMap[color],
 
-        "rounded"
+        "rounded",
       )}
     >
       {children}

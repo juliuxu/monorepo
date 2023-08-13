@@ -1,28 +1,30 @@
+import { Link } from "@remix-run/react";
+
 import type {
-  Components,
-  Classes,
   BlockComponentProps,
+  Classes,
+  Components,
 } from "@julianjark/notion-render";
 import {
-  useNotionRenderContext,
+  NotionRender,
   RichTextAnchor,
   RichTextListRender,
-  NotionRender,
+  useNotionRenderContext,
   Video,
 } from "@julianjark/notion-render";
-import { Link } from "@remix-run/react";
-import { UnpicNotionImage } from "~/components/unpic-notion-image";
-import type { NotionDrivenPage } from "../../service/notion-driven-page/schema-and-mapper";
 import {
   NotionShikiCode,
   NotionShikiCodeRichText,
 } from "@julianjark/notion-shiki-code";
-import { classNames } from "~/utils/misc";
-import { CustomBlockOrCallout } from "./custom-blocks";
-import { demotedHeadings } from "./demoted-headings";
+import { getTextFromRichText } from "@julianjark/notion-utils";
+
 import { PageHeader } from "~/components/page-header";
 import { PhotoSwipeImage } from "~/components/photoswipe-image";
-import { getTextFromRichText } from "@julianjark/notion-utils";
+import { UnpicNotionImage } from "~/components/unpic-notion-image";
+import { classNames } from "~/utils/misc";
+import type { NotionDrivenPage } from "../../service/notion-driven-page/schema-and-mapper";
+import { CustomBlockOrCallout } from "./custom-blocks";
+import { demotedHeadings } from "./demoted-headings";
 
 export const components: Partial<Components> = {
   video: ({ block }: BlockComponentProps) => {
@@ -30,7 +32,7 @@ export const components: Partial<Components> = {
     if (block.video.type !== "external") return null;
 
     const captionOptions = Object.fromEntries(
-      new URLSearchParams(getTextFromRichText(block.video.caption))
+      new URLSearchParams(getTextFromRichText(block.video.caption)),
     );
 
     if (captionOptions.type === "yt-shorts") {
@@ -54,7 +56,7 @@ web-share"
   image: ({ block }: BlockComponentProps) => {
     if (block.type !== "image") return null;
     const captionOptions = Object.fromEntries(
-      new URLSearchParams(getTextFromRichText(block.image.caption))
+      new URLSearchParams(getTextFromRichText(block.image.caption)),
     );
     if (captionOptions.clickable === "true") {
       return (
@@ -90,7 +92,7 @@ web-share"
 
           // Line highlightning
           "[&_.highlight]:after:absolute [&_.highlight]:after:left-0 [&_.highlight]:after:h-[1.5rem] [&_.highlight]:after:w-full [&_.highlight]:after:bg-teal-500 [&_.highlight]:after:opacity-20 [&_.highlight]:after:content-['_']",
-          "[&_.highlight]:after:pointer-events-none"
+          "[&_.highlight]:after:pointer-events-none",
         )}
         // Tab size
         // Notion adds tabs instead of spaces with tab key
@@ -138,7 +140,7 @@ export const classes /*tw*/ = {
   rich_text_anchor: classNames(
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
     "[&:has(*.text-secondary)]:decoration-secondary",
-    "[&:has(*.text-primary)]:decoration-primary"
+    "[&:has(*.text-primary)]:decoration-primary",
   ),
   color_orange: "text-secondary",
   column_list: {
@@ -156,7 +158,7 @@ export const classes /*tw*/ = {
       "[.column-layout-reverse-even_&:nth-child(odd_of_.ndp-column-list)>*:first-child]:order-2",
       "[.column-layout-reverse-even_&:nth-child(odd_of_.ndp-column-list)>*:nth-child(2)]:order-1",
       "sm:[.column-layout-reverse-even_&:nth-child(odd_of_.ndp-column-list)>*:first-child]:order-1",
-      "sm:[.column-layout-reverse-even_&:nth-child(odd_of_.ndp-column-list)>*:nth-child(2)]:order-2"
+      "sm:[.column-layout-reverse-even_&:nth-child(odd_of_.ndp-column-list)>*:nth-child(2)]:order-2",
     ),
   },
   column: {
@@ -178,7 +180,7 @@ export const classes /*tw*/ = {
       // Full bleed on mobile
       "rounded-none sm:rounded-lg",
       "pt-4 pb-6 sm:pb-4 px-container sm:px-4",
-      "relative left-[50%] mx-[-50vw] right-[50%] w-screen sm:left-0 sm:mx-0 sm:right-0 sm:w-full"
+      "relative left-[50%] mx-[-50vw] right-[50%] w-screen sm:left-0 sm:mx-0 sm:right-0 sm:w-full",
     ),
     icon: "text-h2",
     content: "w-full",
@@ -214,7 +216,7 @@ export function NotionPage({ page }: NotionPageProps) {
           "[&_figcaption]:mt-2",
           "[&_figcaption]:text-body",
           "[&_p]:mt-4 md:[&_p]:mt-6",
-          ...page.options
+          ...page.options,
         )}
       >
         <NotionRender

@@ -1,21 +1,23 @@
 import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
-import { config } from "~/config.server";
-import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
+
 import { getTextFromRichText } from "@julianjark/notion-utils";
-import { pick, uniqueBy } from "~/utils/misc";
-import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
-import { PageHeader } from "~/components/page-header";
-import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
-import { dateFormatterShort } from "./i-dag-lærte-jeg.$slug/date-formatter";
-import { classes } from "./($prefix).$notionPage/notion-driven-page";
+
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "~/components/hover-card";
+import { PageHeader } from "~/components/page-header";
+import { config } from "~/config.server";
+import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
+import { pick, uniqueBy } from "~/utils/misc";
+import { classes } from "./($prefix).$notionPage/notion-driven-page";
+import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { Badge } from "./i-dag-lærte-jeg.$slug/badge";
+import { dateFormatterShort } from "./i-dag-lærte-jeg.$slug/date-formatter";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -29,16 +31,16 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, entries } = await getAllTodayILearnedEntriesAndMetainfo(
-    isPreviewModeFromRequest(request)
+    isPreviewModeFromRequest(request),
   );
 
   const shallowEntries = entries.map((entry) =>
-    pick(entry, ["id", "title", "tags", "summary", "publishedDate", "slug"])
+    pick(entry, ["id", "title", "tags", "summary", "publishedDate", "slug"]),
   );
 
   const tags = uniqueBy(
     entries.flatMap((entry) => entry.tags),
-    (tag) => tag.id
+    (tag) => tag.id,
   );
 
   return json(
@@ -48,7 +50,7 @@ export const loader = async ({ request }: LoaderArgs) => {
       tags,
       todayILearnedDatabaseId: config.todayILearnedDatabaseId,
     },
-    { headers: config.loaderCacheControlHeaders }
+    { headers: config.loaderCacheControlHeaders },
   );
 };
 
@@ -60,7 +62,7 @@ export default function Component() {
   let activeTags = data.tags.map((tag) => tag.title);
   if (searchParams.has("tags")) {
     activeTags = activeTags.filter((tag) =>
-      searchParams.getAll("tags").includes(tag)
+      searchParams.getAll("tags").includes(tag),
     );
   }
   const toggleTag = (tag: string) => {
@@ -77,12 +79,12 @@ export default function Component() {
         }
         return prev;
       },
-      { replace: true, preventScrollReset: true }
+      { replace: true, preventScrollReset: true },
     );
   };
 
   const filteredEntries = data.entries.filter((entry) =>
-    entry.tags.some((tag) => activeTags.includes(tag.title))
+    entry.tags.some((tag) => activeTags.includes(tag.title)),
   );
 
   return (
@@ -100,7 +102,7 @@ export default function Component() {
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2 lg:gap-4">
           {data.tags.map((tag) => (
-            <li>
+            <li key={tag.id}>
               <button
                 className={activeTags.includes(tag.title) ? "" : "opacity-40"}
                 onClick={() => toggleTag(tag.title)}

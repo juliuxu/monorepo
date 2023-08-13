@@ -1,7 +1,8 @@
+import { filterPublishedPredicate } from "@julianjark/notion-cms";
+
+import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
 import { getBodyFromHead, getPage, getPages } from "./schema-and-mapper";
-import { notionClient } from "~/clients.server";
-import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
 export async function getNotionDrivenLandingPage() {
   const page = await getPage(notionClient)(config.landingPageId);
@@ -11,7 +12,7 @@ export async function getNotionDrivenLandingPage() {
 export async function getNotionDrivenPages(isPreview: boolean) {
   const pages = await getPages(notionClient)(
     config.notionDrivenPagesDatabaseId,
-    {}
+    {},
   );
   return pages.success.filter(filterPublishedPredicate(isPreview));
 }
@@ -29,7 +30,7 @@ export async function getNotionDrivenPageWithBlocks({
   const page = pages.find(
     (page) =>
       page.prefix?.toLowerCase() === prefix?.toLowerCase() &&
-      page.slug.toLowerCase() === slug.toLowerCase()
+      page.slug.toLowerCase() === slug.toLowerCase(),
   );
   if (!page) return undefined;
 

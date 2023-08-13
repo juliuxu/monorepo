@@ -46,14 +46,14 @@ export function HighlightedDocument({
         const positionsArray = Object.values(hit.positions[property]).flat();
         highlightedDocument[property] = getHighlightedText(
           highlightedDocument[property] as string,
-          positionsArray
+          positionsArray,
         );
       }
     }
 
     highlightedDocument.content = trimContent(
       highlightedDocument.content as string,
-      trim
+      trim,
     );
 
     return highlightedDocument;

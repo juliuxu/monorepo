@@ -1,5 +1,6 @@
-import { Callout, type BlockComponentProps } from "@julianjark/notion-render";
+import { type BlockComponentProps, Callout } from "@julianjark/notion-render";
 import { getTextFromRichText } from "@julianjark/notion-utils";
+
 import {
   DetteKanJegBlock,
   DetteKanJegWantToLearnMoreBlock,
@@ -25,7 +26,7 @@ export function CustomBlock({ block }: BlockComponentProps) {
 
   return (
     Object.entries(customBlocksToComponents).find(
-      ([key]) => key === text
+      ([key]) => key === text,
     )?.[1] ?? null
   );
 }

@@ -1,7 +1,8 @@
+import { filterPublishedPredicate } from "@julianjark/notion-cms";
+
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
 import { getMetainfo, getPage, getPages } from "./schema-and-mapper";
-import { filterPublishedPredicate } from "@julianjark/notion-cms";
 
 async function getAllProjects(isPreview: boolean) {
   const pages = await getPages(notionClient)(config.projectsDatabaseId, {

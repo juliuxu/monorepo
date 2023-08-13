@@ -1,19 +1,21 @@
 import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { config } from "~/config.server";
-import { getAllProjectsAndMetainfo } from "~/service/notion-projects/client";
-import { classes } from "./($prefix).$notionPage/notion-driven-page";
-import type { Project } from "~/service/notion-projects/schema-and-mapper";
+
 import { RichTextListRender } from "@julianjark/notion-render";
-import { Image } from "@unpic/react";
-import { classNames } from "~/utils/misc";
 import { getTextFromRichText } from "@julianjark/notion-utils";
+import { Image } from "@unpic/react";
+
 import githubIcon from "~/assets/github-mark.svg";
-import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 import { PageHeader } from "~/components/page-header";
 import { optimzedImageTransformer } from "~/components/unpic-notion-image";
+import { config } from "~/config.server";
+import { getAllProjectsAndMetainfo } from "~/service/notion-projects/client";
+import type { Project } from "~/service/notion-projects/schema-and-mapper";
+import { classNames } from "~/utils/misc";
+import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
+import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -27,11 +29,11 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { metainfo, projects } = await getAllProjectsAndMetainfo(
-    isPreviewModeFromRequest(request)
+    isPreviewModeFromRequest(request),
   );
   return json(
     { metainfo, projects, projectsDatabaseId: config.projectsDatabaseId },
-    { headers: config.loaderCacheControlHeaders }
+    { headers: config.loaderCacheControlHeaders },
   );
 };
 

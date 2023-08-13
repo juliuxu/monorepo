@@ -1,7 +1,7 @@
 import { notionClient } from "~/clients.server";
 import { config } from "~/config.server";
-import { getMetainfo, getPages } from "./schema-and-mapper";
 import type { DetteKanJeg } from "./schema-and-mapper";
+import { getMetainfo, getPages } from "./schema-and-mapper";
 
 export async function getAllDetteKanJeg() {
   const pages = await getPages(notionClient)(config.detteKanJegDatabaseId, {
@@ -34,16 +34,19 @@ export async function getFeaturedDetteKanJeg() {
 }
 
 export async function getDetteKanJegByTitles<Title extends string>(
-  titles: Title[]
+  titles: Title[],
 ) {
   const { success } = await getAllDetteKanJeg();
 
-  const result = success.reduce((acc, item) => {
-    if (titles.includes(item.title as any)) {
-      acc[item.title] = item;
-    }
-    return acc;
-  }, {} as Record<string, DetteKanJeg>);
+  const result = success.reduce(
+    (acc, item) => {
+      if (titles.includes(item.title as any)) {
+        acc[item.title] = item;
+      }
+      return acc;
+    },
+    {} as Record<string, DetteKanJeg>,
+  );
 
   return result as Record<Title, DetteKanJeg>;
 }

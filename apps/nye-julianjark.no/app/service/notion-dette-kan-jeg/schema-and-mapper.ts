@@ -1,4 +1,11 @@
 import {
+  cmsMetainfo,
+  cmsPage,
+  multiSelectSchema,
+  richTextSchema,
+  selectSchema,
+} from "@julianjark/notion-cms";
+import {
   getFileUrls,
   getMultiSelectAndColor,
   getRichText,
@@ -10,13 +17,6 @@ import {
 } from "@julianjark/notion-utils";
 import { z } from "zod";
 
-import {
-  selectSchema,
-  multiSelectSchema,
-  richTextSchema,
-  cmsMetainfo,
-  cmsPage,
-} from "@julianjark/notion-cms";
 import { imageUrlBuilder } from "~/routes/api.notion-image";
 
 export const detteKanJegMetainfoSchema = z.object({
@@ -31,7 +31,7 @@ export const { getMetainfo } = cmsMetainfo(
       title: getTextFromRichText(database.title),
       description: database.description,
     };
-  }
+  },
 );
 
 export const detteKanJegSchema = z
@@ -52,13 +52,13 @@ export const detteKanJegSchema = z
       .default("known")
       .transform(
         (v) =>
-          ((
-            {
+          (
+            ({
               known: "known",
               "Kan men ønsker ikke å jobbe med": "known",
               "Ønsker å lære mer om": "want-to-learn-more",
-            } as const
-          )[v])
+            }) as const
+          )[v],
       ),
   })
   .transform((v) => ({
@@ -82,7 +82,7 @@ export const { getPages } = cmsPage(detteKanJegSchema, (page) => {
         property: "Logo",
         index,
         lastEditedTime: page.last_edited_time,
-      })
+      }),
     )[0],
     competence: getSelect("Ferdighet og Motivasjon", page) as any,
 

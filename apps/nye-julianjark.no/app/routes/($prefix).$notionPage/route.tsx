@@ -1,14 +1,15 @@
-import { json, type V2_MetaFunction, type LoaderArgs } from "@remix-run/node";
+import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { NotionPage } from "~/routes/($prefix).$notionPage/notion-driven-page";
-import { getNotionDrivenPageWithBlocks } from "../../service/notion-driven-page/client";
-import { config } from "~/config.server";
-import { getCustomBlocksData } from "./custom-blocks/index.server";
-import { TableOfConents } from "~/components/table-of-contents";
-import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
-import { useEditNotionPage } from "./use-edit-notion-page";
+
 import { buildSiteHeaderMetaInfo } from "~/components/site-header";
+import { TableOfConents } from "~/components/table-of-contents";
+import { config } from "~/config.server";
+import { NotionPage } from "~/routes/($prefix).$notionPage/notion-driven-page";
 import { deSlugify } from "~/utils/misc";
+import { getNotionDrivenPageWithBlocks } from "../../service/notion-driven-page/client";
+import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
+import { getCustomBlocksData } from "./custom-blocks/index.server";
+import { useEditNotionPage } from "./use-edit-notion-page";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -49,7 +50,7 @@ export const loader = async ({
       // @deprecated
       featureTableOfContents: false,
     },
-    { headers: config.loaderCacheControlHeaders }
+    { headers: config.loaderCacheControlHeaders },
   );
 };
 

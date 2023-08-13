@@ -1,15 +1,18 @@
+/* eslint-disable */
+import { useEffect, useRef, useState } from "react";
+import { Link, useLoaderData, useLocation } from "@remix-run/react";
+
 import type { Orama, Result } from "@orama/orama";
 import type {
   Position,
   SearchResultWithHighlight,
 } from "@orama/plugin-match-highlight";
 import { searchWithHighlight } from "@orama/plugin-match-highlight";
-import { useEffect, useRef, useState } from "react";
+
+import type { loader } from "~/routes/i-dag-lærte-jeg._index";
+import { createTodayILearnedOramaIndex } from "./create-today-i-learned-index";
 import { HighlightedDocument } from "./highlighted-document";
 import { groupDocumentsBy } from "./utils";
-import { createTodayILearnedOramaIndex } from "./create-today-i-learned-index";
-import { Link, useLoaderData, useLocation } from "@remix-run/react";
-import type { loader } from "~/routes/i-dag-lærte-jeg._index";
 
 export type OramaSearchProps = {
   limitResults: number;

@@ -1,14 +1,15 @@
-import { config } from "~/config.server";
 import { getClientCached } from "@julianjark/notion-client";
+
+import { config } from "~/config.server";
+import {
+  getAllProjectsAndMetainfo,
+  getFeaturedProject,
+} from "~/service/notion-projects/client";
 import {
   getAllTodayILearnedEntriesAndMetainfo,
   getLatestTodayILearnedEntries,
 } from "~/service/notion-today-i-learned/client";
 import { getNotionDrivenPages } from "./service/notion-driven-page/client";
-import {
-  getAllProjectsAndMetainfo,
-  getFeaturedProject,
-} from "~/service/notion-projects/client";
 
 export const notionClient = getClientCached({
   tokenOrClient: config.notionToken,
