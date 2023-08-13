@@ -1,5 +1,11 @@
 import { useLocation } from "@remix-run/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+
+declare global {
+  interface Window {
+    _paq?: string[][];
+  }
+}
 
 interface MatomoAnalyticsProps {
   hostname: string;
@@ -18,35 +24,40 @@ export function MatomoAnalytics({
   trackerPath,
 }: MatomoAnalyticsProps) {
   const location = useLocation();
+  const previousPath = useRef<string>();
 
   // Track all page views, including the initial one
   useEffect(() => {
-    (window as any)._paq?.push([
-      "setCustomUrl",
-      location.pathname + location.search,
-    ]);
-    (window as any)._paq?.push(["setDocumentTitle", document.title]);
-    (window as any)._paq?.push(["trackPageView"]);
+    const currentPath = location.pathname + location.search;
+    if (currentPath === previousPath.current) return;
+
+    if (previousPath.current) {
+      window._paq?.push(["setReferrerUrl", previousPath.current]);
+    }
+    window._paq?.push(["setCustomUrl", currentPath]);
+    window._paq?.push(["setDocumentTitle", document.title]);
+    window._paq?.push(["trackPageView"]);
+
+    previousPath.current = currentPath;
   }, [location]);
 
+  const trackerBasePath = `//${hostname}/`;
   return (
     <>
+      {/* Initialise tracking config so it's ready as soon as possible */}
       <script
         dangerouslySetInnerHTML={{
           __html: `
           var _paq = window._paq = window._paq || [];
-          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
           _paq.push(['enableLinkTracking']);
           (function() {
-            var u="//${hostname}/";
-            _paq.push(['setTrackerUrl', u+'${trackerPath}']);
+            _paq.push(['setTrackerUrl', '${trackerBasePath + trackerPath}']);
             _paq.push(['setSiteId', '${siteId}']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src=u+'${scriptPath}'; s.parentNode.insertBefore(g,s);
           })();
           `,
         }}
       />
+      <script src={trackerBasePath + scriptPath} async />
     </>
   );
 }
