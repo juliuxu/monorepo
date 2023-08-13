@@ -142,6 +142,7 @@ export const classes /*tw*/ = {
     "[&:has(*.text-secondary)]:decoration-secondary",
     "[&:has(*.text-primary)]:decoration-primary",
   ),
+  annotation_bold: "font-semibold",
   color_orange: "text-secondary",
   column_list: {
     root: classNames(
