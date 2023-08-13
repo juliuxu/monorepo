@@ -41,7 +41,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   const tags = uniqueBy(
     entries.flatMap((entry) => entry.tags),
     (tag) => tag.id,
-  );
+  ).sort((a, b) => a.title.localeCompare(b.title));
 
   return json(
     {
