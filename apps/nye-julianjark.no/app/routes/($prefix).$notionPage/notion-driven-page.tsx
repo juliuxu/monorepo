@@ -134,9 +134,9 @@ web-share"
 };
 
 export const classes /*tw*/ = {
-  heading_1: { root: "text-h1 lg:text-h1-lg" },
-  heading_2: { root: "text-h2 lg:text-h2-lg" },
-  heading_3: { root: "text-h3 lg:text-h3-lg" },
+  heading_1: { root: "text-h1 lg:text-h1-lg max-w-3xl" },
+  heading_2: { root: "text-h2 lg:text-h2-lg max-w-3xl" },
+  heading_3: { root: "text-h3 lg:text-h3-lg max-w-3xl" },
   rich_text_anchor: classNames(
     "underline focus:text-primary-focus hover:text-primary-focus break-words",
     "[&:has(*.text-secondary)]:decoration-secondary",
