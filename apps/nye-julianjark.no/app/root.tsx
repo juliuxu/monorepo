@@ -38,6 +38,7 @@ import {
   getDevModeSetCookieHeader,
 } from "./routes/api.dev-mode/dev-mode.server";
 import { classNames } from "./utils/misc";
+import { MatomoAnalytics } from "./components/analytics";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -141,6 +142,15 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+
+        {process.env.NODE_ENV === "production" && (
+          <MatomoAnalytics
+            hostname="analytics.julianjark.no"
+            siteId="2"
+            scriptPath="icecream.js"
+            trackerPath="popcorn"
+          />
+        )}
       </body>
     </html>
   );
