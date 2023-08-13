@@ -114,9 +114,9 @@ export function TodayILearnedArticle({
           "prose-code:font-medium",
           "prose-code:py-1",
 
-          "prose-h1:font-medium",
-          "prose-h2:font-medium",
-          "prose-h3:font-medium",
+          "prose-h1:font-medium prose-h1:text-[1.6em]",
+          "prose-h2:font-medium prose-h2:text-[1.4em]",
+          "prose-h3:font-medium prose-h3:text-[1.3em]",
 
           "[&_figure:has(pre)]:mt-0",
           "[&_figure:has(pre)]:mb-0",
