@@ -154,10 +154,15 @@ export default {
           "18px",
           {
             lineHeight: "1.4",
-            fontWeight: "700",
+            fontWeight: "600",
           },
         ],
-        "h3-lg": "1.6vw",
+        "h3-lg": [
+          "1.6vw",
+          {
+            fontWeight: "500",
+          },
+        ],
       },
     },
   },

@@ -105,9 +105,7 @@ export default function Component() {
       <hr className={classes.divider.root} />
 
       <aside className="mb-12 lg:mb-16">
-        <h2 className="text-h2 lg:text-h2-lg font-semibold lg:font-normal">
-          Filtrer på kategori
-        </h2>
+        <h2 className="text-h3 lg:text-h3-lg">Filtrer på kategori</h2>
         <ul className="mt-4 flex flex-wrap gap-2 lg:gap-x-4 max-w-3xl">
           {data.tags.map((tag) => (
             <li key={tag.id}>
