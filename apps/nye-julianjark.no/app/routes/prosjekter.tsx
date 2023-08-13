@@ -120,7 +120,7 @@ export function ProjectCard({ project, index }: ProjectComponentProps) {
       </div>
       <div className={`order-1 ${even ? "sm:order-2" : "sm:order-1"}`}>
         <Image
-          aspectRatio={1200 / 800}
+          aspectRatio={1920 / 1200}
           layout="fullWidth"
           alt=""
           src={coverImage}
