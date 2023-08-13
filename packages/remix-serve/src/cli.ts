@@ -36,7 +36,7 @@ let onListen = () => {
     console.log(`Remix App Server started at http://localhost:${port}`);
   } else {
     console.log(
-      `Remix App Server started at http://localhost:${port} (http://${address}:${port})`
+      `Remix App Server started at http://localhost:${port} (http://${address}:${port})`,
     );
   }
   if (
@@ -51,7 +51,7 @@ let app = createApp(
   buildPath,
   process.env.NODE_ENV,
   build.publicPath,
-  build.assetsBuildDirectory
+  build.assetsBuildDirectory,
 );
 let server = process.env.HOST
   ? app.listen(port, process.env.HOST, onListen)

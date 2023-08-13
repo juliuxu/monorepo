@@ -9,8 +9,8 @@ export async function safeParseList<
   Element,
   Schema extends z.Schema,
   Mapper extends (
-    element: Element
-  ) => Relaxed<z.infer<Schema>> | Promise<Relaxed<z.infer<Schema>>>
+    element: Element,
+  ) => Relaxed<z.infer<Schema>> | Promise<Relaxed<z.infer<Schema>>>,
 >(list: Element[], schema: Schema, mapper: Mapper) {
   const success: z.infer<Schema>[] = [];
   const failed: {

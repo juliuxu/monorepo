@@ -40,7 +40,7 @@ export const getDatabasePages =
   (notion: NotionClient) =>
   async (
     databaseId: string,
-    { sorts, filter }: GetDatabasePagesOptions = {}
+    { sorts, filter }: GetDatabasePagesOptions = {},
   ) => {
     const results: Awaited<
       ReturnType<typeof notion.databases.query>
@@ -114,7 +114,7 @@ export const getBlocksWithChildren =
             id: block.id,
             children: await getBlocksWithChildren(notion)(block.id),
           };
-        })
+        }),
     );
 
     // Merge
@@ -123,7 +123,7 @@ export const getBlocksWithChildren =
       // Add child blocks if the block should contain children but none exists
       if (innerBlock.has_children && !innerBlock[innerBlock.type].children) {
         innerBlock[innerBlock.type]["children"] = childBlocks.find(
-          (x) => x.id === innerBlock.id
+          (x) => x.id === innerBlock.id,
         )?.children;
       }
       return innerBlock;
@@ -133,7 +133,7 @@ export const getBlocksWithChildren =
   };
 
 const isBlockObjectResponse = (
-  block: PartialBlockObjectResponse | BlockObjectResponse
+  block: PartialBlockObjectResponse | BlockObjectResponse,
 ): block is BlockObjectResponse => "type" in block;
 
 export type BlockWithChildren = BlockObjectResponse & {
@@ -145,18 +145,18 @@ const isPageObjectResponse = (
     | PageObjectResponse
     | PartialPageObjectResponse
     | DatabaseObjectResponse
-    | PartialDatabaseObjectResponse
+    | PartialDatabaseObjectResponse,
 ): page is PageObjectResponse => "properties" in page;
 
 const assertPageObjectResponse = (
-  page: PartialPageObjectResponse | PageObjectResponse
+  page: PartialPageObjectResponse | PageObjectResponse,
 ) => {
   if ("properties" in page) return page;
   throw new Error("passed page is not a PageResponse");
 };
 
 const assertDatabaseObjectResponse = (
-  database: PartialDatabaseObjectResponse | DatabaseObjectResponse
+  database: PartialDatabaseObjectResponse | DatabaseObjectResponse,
 ) => {
   if ("title" in database) return database;
   throw new Error("passed database is not a DatabaseResponse");

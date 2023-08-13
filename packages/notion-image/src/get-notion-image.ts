@@ -66,7 +66,7 @@ export const getNotionImage =
   async (maybeImageRequest: {}) => {
     const imageRequest = imageRequestSchema.parse(maybeImageRequest);
     const imageUrl = await getNotionImageUrl(notionTokenOrNotionClient)(
-      imageRequest
+      imageRequest,
     );
     // @ts-ignore
     return await fetch(imageUrl);

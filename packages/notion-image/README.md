@@ -9,7 +9,7 @@ export const imageUrlBuilder = createImageUrlBuilder("/api/notion-image");
 
 export const loader = async ({ request }: { request: Request }) => {
   return getNotionImage("YOUR NOTION TOKEN")(
-    Object.fromEntries(new URL(request.url).searchParams)
+    Object.fromEntries(new URL(request.url).searchParams),
   );
 };
 ```

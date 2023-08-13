@@ -9,7 +9,7 @@ export { BlockObjectResponse, DatabaseObjectResponse, PageObjectResponse };
 
 export const getTitle = (fromPage: PageObjectResponse) => {
   const title = Object.values(fromPage.properties).find(
-    (property) => property.type === "title"
+    (property) => property.type === "title",
   );
   if (title?.type !== "title")
     throw new Error("Could not get title from passed notion page");
@@ -142,7 +142,7 @@ export const getCheckbox = (name: string, fromPage: PageObjectResponse) => {
 
 export const getSelectAndColor = (
   name: string,
-  fromPage: PageObjectResponse
+  fromPage: PageObjectResponse,
 ) => {
   const property = fromPage.properties[name];
   if (
@@ -164,7 +164,7 @@ export const getSelect = (name: string, fromPage: PageObjectResponse) =>
 
 export const getMultiSelectAndColor = (
   name: string,
-  fromPage: PageObjectResponse
+  fromPage: PageObjectResponse,
 ) => {
   const property = fromPage.properties[name];
   if (property?.type === "multi_select") {
@@ -185,7 +185,7 @@ export const getTextFromRichText = (richText: RichTextItem[]) =>
 
 export const getDatabasePropertySelectOptions = (
   name: string,
-  fromDatabase: DatabaseObjectResponse
+  fromDatabase: DatabaseObjectResponse,
 ) => {
   const property = fromDatabase.properties[name];
   if (property?.type === "select") {
@@ -201,7 +201,7 @@ export const getDatabasePropertySelectOptions = (
 
 export const getDatabasePropertyMultiSelectOptions = (
   name: string,
-  fromDatabase: DatabaseObjectResponse
+  fromDatabase: DatabaseObjectResponse,
 ) => {
   const property = fromDatabase.properties[name];
   if (property?.type === "multi_select") {

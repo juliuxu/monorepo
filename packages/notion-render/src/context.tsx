@@ -8,7 +8,7 @@ interface NotionRenderContext {
   classes: Classes;
 }
 export const Context = createContext<NotionRenderContext | undefined>(
-  undefined
+  undefined,
 );
 
 export const useNotionRenderContext = () => {

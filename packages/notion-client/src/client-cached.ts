@@ -87,35 +87,35 @@ export const getClientCached = ({
     },
     getBlocks: async (...args) =>
       (await cache.fetch(
-        JSON.stringify({ method: "getBlocks", args } satisfies CacheArgs)
+        JSON.stringify({ method: "getBlocks", args } satisfies CacheArgs),
       ))!,
     getBlocksWithChildren: async (...args) =>
       (await cache.fetch(
         JSON.stringify({
           method: "getBlocksWithChildren",
           args,
-        } satisfies CacheArgs)
+        } satisfies CacheArgs),
       ))!,
     getDatabase: async (...args) =>
       (await cache.fetch(
         JSON.stringify({
           method: "getDatabase",
           args,
-        } satisfies CacheArgs)
+        } satisfies CacheArgs),
       ))!,
     getDatabasePages: async (...args) =>
       (await cache.fetch(
         JSON.stringify({
           method: "getDatabasePages",
           args,
-        } satisfies CacheArgs)
+        } satisfies CacheArgs),
       ))!,
     getPage: async (...args) =>
       (await cache.fetch(
         JSON.stringify({
           method: "getPage",
           args,
-        } satisfies CacheArgs)
+        } satisfies CacheArgs),
       ))!,
   };
 };

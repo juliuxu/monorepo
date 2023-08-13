@@ -10,7 +10,7 @@ import type {
 import { useState } from "react";
 
 function isShikifiedCodeBlock(
-  block: BlockObjectResponse
+  block: BlockObjectResponse,
 ): block is ShikifiedCodeBlock {
   if (block.type !== "code") return false;
   if ("codeHtml" in block.code) return true;
@@ -39,7 +39,7 @@ export function NotionShikiCode({
     if (!isShikifiedCodeBlock(block)) return;
     if (isCopied) return;
     await navigator.clipboard.writeText(
-      getTextFromRichText(block.code.rich_text)
+      getTextFromRichText(block.code.rich_text),
     );
     setIsCopied(true);
     await new Promise((r) => setTimeout(r, 1500));
@@ -107,7 +107,7 @@ export function NotionShikiCode({
 }
 
 function isShikifiedRichTextItem(
-  richText: RichTextItem
+  richText: RichTextItem,
 ): richText is ShikifiedRichTextItem {
   if ("codeHtml" in richText) return true;
   return false;
@@ -123,7 +123,7 @@ export function NotionShikiCodeRichText({
 }: NotionShikiCodeRichTextProps) {
   if (!isShikifiedRichTextItem(richText)) {
     console.warn(
-      "non-sikiified rich text item passed to NotionShikiCodeRichText"
+      "non-sikiified rich text item passed to NotionShikiCodeRichText",
     );
     return null;
   }

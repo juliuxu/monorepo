@@ -7,7 +7,7 @@ import type { ListBlock } from "./pseudo-components";
 
 const filterUnsupportedBlocks = (
   components: Components,
-  blocks: BlockObjectResponse[]
+  blocks: BlockObjectResponse[],
 ) => blocks.filter((block) => components[block.type] !== undefined);
 
 export const renderBlock = (components: Components, block: ExtendedBlock) => {
@@ -78,7 +78,7 @@ export function NotionRenderInner({
   const supportedBlocks = filterUnsupportedBlocks(ctx.components, blocks);
   const extendedBlocks = extendBlocks(supportedBlocks);
   const renderBlocks = extendedBlocks.map((block) =>
-    renderBlock(ctx.components, block)
+    renderBlock(ctx.components, block),
   );
   return <>{renderBlocks}</>;
 }

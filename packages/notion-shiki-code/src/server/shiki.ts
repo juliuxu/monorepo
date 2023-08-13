@@ -23,7 +23,7 @@ const defaultTheme: Theme = "nord";
 export async function shikiTransform(
   codeText: string,
   options: Options,
-  type: "block" | "inlined" = "block"
+  type: "block" | "inlined" = "block",
 ) {
   if (!highlighter) {
     highlighter = await shiki.getHighlighter({ theme: defaultTheme });
@@ -49,7 +49,7 @@ export async function shikiTransform(
     // Handle race conditions
     if (!loaderPromises[options.language]) {
       loaderPromises[options.language] = highlighter.loadLanguage(
-        options.language as Lang
+        options.language as Lang,
       );
     }
     await loaderPromises[options.language];
@@ -75,7 +75,7 @@ export async function shikiTransform(
   if (options.filename) {
     codeHtml = codeHtml.replace(
       `<pre`,
-      `<pre data-filename="${options.filename}"`
+      `<pre data-filename="${options.filename}"`,
     );
   }
 
@@ -93,7 +93,7 @@ export async function shikiTransform(
   if (options.caption) {
     codeHtml = codeHtml.replace(
       `<pre`,
-      `<pre data-caption="${options.caption}"`
+      `<pre data-caption="${options.caption}"`,
     );
   }
 
@@ -101,7 +101,7 @@ export async function shikiTransform(
   if (type === "inlined") {
     codeHtml = codeHtml.replace(
       /<pre.+<code>/g,
-      `<code style="background-color: ${backgroundColor}">`
+      `<code style="background-color: ${backgroundColor}">`,
     );
     codeHtml = codeHtml.replace(/<\/code><\/pre>/g, `</code>`);
   }

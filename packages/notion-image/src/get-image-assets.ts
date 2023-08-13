@@ -37,10 +37,10 @@ export const createGetImageAssets =
   }) =>
   async <ImageName extends string>(
     names: ImageName[],
-    config: GetImageAssetsConfig
+    config: GetImageAssetsConfig,
   ) => {
     const assets = await getDatabasePages(
-      tokenOrClientToClient(notionTokenOrClient)
+      tokenOrClientToClient(notionTokenOrClient),
     )(config.databaseId, {
       filter: {
         or: names.map((name) => ({
@@ -52,33 +52,36 @@ export const createGetImageAssets =
       },
     });
 
-    const images = assets.reduce((acc, asset) => {
-      const name = getTitle(asset) as ImageName;
+    const images = assets.reduce(
+      (acc, asset) => {
+        const name = getTitle(asset) as ImageName;
 
-      acc[name] = imageAssetSchema.parse({
-        src:
-          // Make sure the property is set
-          getFileUrl(config.srcProperty, asset) &&
-          // Then create the proxied url
-          imageUrlBuilder({
-            type: "page-property",
-            pageId: asset.id,
-            property: config.srcProperty,
-          }),
+        acc[name] = imageAssetSchema.parse({
+          src:
+            // Make sure the property is set
+            getFileUrl(config.srcProperty, asset) &&
+            // Then create the proxied url
+            imageUrlBuilder({
+              type: "page-property",
+              pageId: asset.id,
+              property: config.srcProperty,
+            }),
 
-        alt: getText(config.altProperty, asset),
-        width: config.widthProperty
-          ? getText(config.widthProperty, asset)
-          : undefined,
-        height: config.heightProperty
-          ? getText(config.heightProperty, asset)
-          : undefined,
-        aspectRatio: config.aspectRatioProperty
-          ? getText(config.aspectRatioProperty, asset)
-          : undefined,
-      });
-      return acc;
-    }, {} as Record<ImageName, ImageAsset>);
+          alt: getText(config.altProperty, asset),
+          width: config.widthProperty
+            ? getText(config.widthProperty, asset)
+            : undefined,
+          height: config.heightProperty
+            ? getText(config.heightProperty, asset)
+            : undefined,
+          aspectRatio: config.aspectRatioProperty
+            ? getText(config.aspectRatioProperty, asset)
+            : undefined,
+        });
+        return acc;
+      },
+      {} as Record<ImageName, ImageAsset>,
+    );
     assertContainsItems(names, images);
 
     return images;
@@ -86,7 +89,7 @@ export const createGetImageAssets =
 
 function assertContainsItems<K extends string, V, T extends K>(
   properties: readonly T[],
-  record: Record<K, V> | Record<T, V>
+  record: Record<K, V> | Record<T, V>,
 ): asserts record is Record<T, V> {
   const s = new Set(properties);
   Object.keys(record).forEach((key) => {

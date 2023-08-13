@@ -272,7 +272,7 @@ export const Video = ({ block }: BlockComponentProps) => {
       <iframe
         className={ctx().classes.embed.root}
         src={`https://www.youtube-nocookie.com/embed/${YouTubeGetID(
-          block.video.external.url
+          block.video.external.url,
         )}`}
         title={getTextFromRichText(block.video.caption)}
         width="560"

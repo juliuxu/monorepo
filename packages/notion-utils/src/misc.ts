@@ -38,18 +38,18 @@ export function takeWhile<T>(list: T[], predicate: (element: T) => boolean) {
 export function takeItemsIfHeaderMatches(
   headerToMatch: string,
   currentBlock: BlockObjectResponse,
-  blocksUnderneath: BlockObjectResponse[]
+  blocksUnderneath: BlockObjectResponse[],
 ) {
   if (!headingBlockTypes.includes(currentBlock.type)) return undefined;
 
   const headingText = getTextFromRichText(
-    (currentBlock as any)[currentBlock.type].rich_text
+    (currentBlock as any)[currentBlock.type].rich_text,
   );
   if (!headingText.includes(headerToMatch)) return undefined;
 
   return takeWhile(
     blocksUnderneath,
-    (x) => !headingBlockTypes.includes(x.type)
+    (x) => !headingBlockTypes.includes(x.type),
   );
 }
 
@@ -58,7 +58,7 @@ export function takeItemsIfHeaderMatches(
  */
 export const takeBlocksAfterHeader = (
   header: string,
-  blocks: BlockObjectResponse[]
+  blocks: BlockObjectResponse[],
 ) => {
   const blocksCopy = blocks.slice();
   const remainingBlocks: BlockObjectResponse[] = [];
@@ -71,7 +71,7 @@ export const takeBlocksAfterHeader = (
     ) {
       takenBlocks = takeWhile(
         blocksCopy,
-        (x) => !headingBlockTypes.includes(x.type)
+        (x) => !headingBlockTypes.includes(x.type),
       );
     } else {
       remainingBlocks.push(block);

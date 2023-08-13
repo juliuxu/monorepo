@@ -18,7 +18,7 @@ export const selectColors: Record<SelectColor, true> = {
   red: true,
 };
 export const selectColorSchema = z.custom<SelectColor>(
-  (val) => selectColors[val as SelectColor]
+  (val) => selectColors[val as SelectColor],
 );
 export const selectSchema = z.object({
   id: z.string(),
@@ -46,7 +46,7 @@ export const publishedStateValues = [
   "DRAFT",
 ] as const;
 export const publishedStateSchema = (
-  defaultValue: (typeof publishedStateValues)[number] = "DRAFT"
+  defaultValue: (typeof publishedStateValues)[number] = "DRAFT",
 ) => z.preprocess((val) => val || defaultValue, z.enum(publishedStateValues));
 export type PublishedState = z.infer<ReturnType<typeof publishedStateSchema>>;
 

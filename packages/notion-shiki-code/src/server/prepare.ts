@@ -72,12 +72,12 @@ export type ShikifiedRichTextItem = RichTextItem & {
  */
 export async function shikifyNotionBlock(
   block: BlockObjectResponse,
-  providedOptions: Partial<Options>
+  providedOptions: Partial<Options>,
 ) {
   if (block.type !== "code") return;
 
   const captionOptions = Object.fromEntries(
-    new URLSearchParams(getTextFromRichText(block.code.caption))
+    new URLSearchParams(getTextFromRichText(block.code.caption)),
   );
   const blockOptions = optionsSchema.parse({
     ...captionOptions,
@@ -94,14 +94,14 @@ export async function shikifyNotionBlock(
   let language = options.language ?? (block.code.language as Lang);
   if (
     !BUNDLED_LANGUAGES.some(
-      (bundledLanguage) => bundledLanguage.id === language
+      (bundledLanguage) => bundledLanguage.id === language,
     )
   )
     (language as string) = "";
 
   const { codeHtml, foregroundColor, backgroundColor } = await shikiTransform(
     getTextFromRichText(block.code.rich_text),
-    { ...options, language }
+    { ...options, language },
   );
 
   // Mutate the block to include our new properties
@@ -121,7 +121,7 @@ export async function shikifyNotionBlock(
 export async function shikifyNotionBlocks(
   blocks: BlockObjectResponse[],
   providedOptions: Partial<Options>,
-  includeRichText = true
+  includeRichText = true,
 ) {
   for (const block of blocks) {
     await shikifyNotionBlock(block, providedOptions);
@@ -130,14 +130,14 @@ export async function shikifyNotionBlocks(
     if (includeRichText && "rich_text" in (block as any)[block.type]) {
       await shikifyRichTextList(
         (block as any)[block.type].rich_text,
-        providedOptions
+        providedOptions,
       );
     }
 
     if (block.has_children) {
       await shikifyNotionBlocks(
         (block as any)[block.type]?.children ?? [],
-        providedOptions
+        providedOptions,
       );
     }
   }
@@ -146,7 +146,7 @@ export async function shikifyNotionBlocks(
 
 export async function shikifyRichTextList(
   richTextList: RichTextItem[],
-  providedOptions: Options
+  providedOptions: Options,
 ) {
   for (const richText of richTextList) {
     if (richText.type === "equation") continue;

@@ -16,8 +16,8 @@ import { safeParseList } from "./safe-parse";
 export function cmsMetainfo<Metainfo extends z.Schema>(
   metainfoSchema: Metainfo,
   metainfoMapper: (
-    fromDatabase: DatabaseObjectResponse
-  ) => Relaxed<z.infer<Metainfo>>
+    fromDatabase: DatabaseObjectResponse,
+  ) => Relaxed<z.infer<Metainfo>>,
 ) {
   return {
     getMetainfo:
@@ -32,8 +32,8 @@ export function cmsMetainfo<Metainfo extends z.Schema>(
 export function cmsPage<HeadSchema extends z.Schema>(
   pageSchema: HeadSchema,
   pageToHeadMapper: (
-    fromPage: PageObjectResponse
-  ) => Relaxed<z.infer<HeadSchema>>
+    fromPage: PageObjectResponse,
+  ) => Relaxed<z.infer<HeadSchema>>,
 ) {
   return {
     getPage:
@@ -54,14 +54,14 @@ export function cmsPage<HeadSchema extends z.Schema>(
 export function cmsBlocks<BodySchema extends z.Schema>(
   bodySchema: BodySchema,
   blocksToBodyMapper: (
-    fromBlocks: BlockObjectResponse[]
-  ) => Relaxed<z.infer<BodySchema>> | Promise<Relaxed<z.infer<BodySchema>>>
+    fromBlocks: BlockObjectResponse[],
+  ) => Relaxed<z.infer<BodySchema>> | Promise<Relaxed<z.infer<BodySchema>>>,
 ) {
   return {
     getBodyFromHead:
       (client: Client) =>
       async <Head extends { id: string }>(
-        head: Head
+        head: Head,
       ): Promise<Head & z.infer<BodySchema>> => {
         const blocks = await client.getBlocksWithChildren(head.id);
         return {
@@ -88,7 +88,7 @@ export function cmsBlocks<BodySchema extends z.Schema>(
             chunk.map(async (head) => ({
               head,
               blocks: await client.getBlocksWithChildren(head.id),
-            }))
+            })),
           );
           blocksWithHead.push(...fetchedBlocksWithHead);
         }
@@ -99,7 +99,7 @@ export function cmsBlocks<BodySchema extends z.Schema>(
           async ({ head, blocks }) => ({
             ...head,
             ...(await blocksToBodyMapper(blocks)),
-          })
+          }),
         );
       },
   };
