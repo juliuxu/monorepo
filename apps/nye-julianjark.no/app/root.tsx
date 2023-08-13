@@ -150,6 +150,7 @@ export default function App() {
             scriptPath="icecream.js"
             trackerPath="popcorn"
             enableHeartBeatTimer
+            userId={devMode ? "dev" : undefined}
           />
         )}
       </body>

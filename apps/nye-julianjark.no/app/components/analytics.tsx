@@ -48,6 +48,7 @@ interface MatomoAnalyticsProps {
   siteId: string;
   scriptPath: string;
   trackerPath: string;
+  userId?: string;
 
   /**
    * https://developer.matomo.org/guides/tracking-javascript-guide#accurately-measure-the-time-spent-on-each-page
@@ -64,6 +65,7 @@ export function MatomoAnalytics({
   scriptPath,
   trackerPath,
   enableHeartBeatTimer = false,
+  userId,
 }: MatomoAnalyticsProps) {
   const trackerBasePath = `//${hostname}/`;
   return (
@@ -77,6 +79,7 @@ export function MatomoAnalytics({
           _paq.push(['setTrackerUrl', '${trackerBasePath + trackerPath}']);
           _paq.push(['setSiteId', '${siteId}']);
           ${enableHeartBeatTimer ? "_paq.push(['enableHeartBeatTimer']);" : ""}
+          ${userId ? `_paq.push(['setUserId', '${userId}']);` : ""}
           `,
         }}
       />
