@@ -90,7 +90,7 @@ export default function Component() {
       {!isContentOnlyMode && relatedEntries.length > 0 && (
         <aside>
           <hr className={classes.divider.root} />
-          <h2 className=" text-h2 lg:text-h2-lg mb-6 lg:mb-12">
+          <h2 className="text-h2 lg:text-h2-lg mb-6 lg:mb-12 font-semibold lg:font-medium">
             Andre ting jeg har lært
           </h2>
           <TodayILearnedArticlePreviewList

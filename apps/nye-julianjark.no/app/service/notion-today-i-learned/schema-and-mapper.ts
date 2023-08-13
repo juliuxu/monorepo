@@ -47,6 +47,7 @@ export const todayILearnedEntryHeadSchema = z.object({
   published: publishedStateSchema("PUBLISHED"),
   publishedDate: z.string(),
   tags: multiSelectSchema,
+  lang: z.union([z.literal("en"), z.literal("no")]),
 });
 type TodayILearnedEntryHead = z.infer<typeof todayILearnedEntryHeadSchema>;
 
@@ -58,6 +59,7 @@ export const { getPages } = cmsPage(todayILearnedEntryHeadSchema, (page) => {
     slug: slugify(getTitle(page) ?? ""),
     tags: getMultiSelectAndColor("Tags", page),
     published: getSelect("Published", page) as any,
+    lang: (getSelect("lang", page) as "en" | "no" | undefined) ?? "no",
   };
 });
 

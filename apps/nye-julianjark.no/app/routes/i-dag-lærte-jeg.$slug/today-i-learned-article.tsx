@@ -36,6 +36,9 @@ const todayILearnedComponents: Partial<Components> = {
 };
 const todayILearnedClasses /*tw*/ = {
   ...classes,
+  heading_1: { root: "" },
+  heading_2: { root: "" },
+  heading_3: { root: "" },
   column_list: {
     root: classNames(
       "mt-[2em]",
@@ -73,7 +76,7 @@ export function TodayILearnedArticle({
   const ReferencesTitleCompnent =
     TitleComponent === "h1" ? "h2" : TitleComponent === "h2" ? "h3" : "h4";
   return (
-    <article key={entry.id}>
+    <article key={entry.id} lang={entry.lang}>
       {!isContentOnlyMode && (
         <>
           <TitleComponent
@@ -100,7 +103,7 @@ export function TodayILearnedArticle({
 
       <div
         className={classNames(
-          !isContentOnlyMode && "mt-6",
+          !isContentOnlyMode && "mt-8 lg:mt-12",
           "text-black/90",
           `prose-xl prose max-w-6xl`,
           "prose-pre:text-base",
@@ -110,6 +113,10 @@ export function TodayILearnedArticle({
           "prose-code:rounded",
           "prose-code:font-medium",
           "prose-code:py-1",
+
+          "prose-h1:font-medium",
+          "prose-h2:font-medium",
+          "prose-h3:font-medium",
 
           "[&_figure:has(pre)]:mt-0",
           "[&_figure:has(pre)]:mb-0",

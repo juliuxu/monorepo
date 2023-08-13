@@ -35,7 +35,15 @@ export const loader = async ({ request }: LoaderArgs) => {
   );
 
   const shallowEntries = entries.map((entry) =>
-    pick(entry, ["id", "title", "tags", "summary", "publishedDate", "slug"]),
+    pick(entry, [
+      "id",
+      "title",
+      "tags",
+      "summary",
+      "publishedDate",
+      "slug",
+      "lang",
+    ]),
   );
 
   const tags = uniqueBy(
@@ -128,6 +136,7 @@ export default function Component() {
                 className={classes.rich_text_anchor}
                 to={entry.slug}
                 prefetch="intent"
+                lang={entry.lang}
               >
                 {entry.title}
               </Link>

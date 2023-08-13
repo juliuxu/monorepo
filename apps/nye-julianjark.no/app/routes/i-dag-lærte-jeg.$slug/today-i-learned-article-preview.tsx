@@ -16,7 +16,7 @@ export function TodayILearnedArticlePreview({
   hideSummary,
 }: TodayILearnedArticlePreviewProps) {
   return (
-    <article>
+    <article lang={entry.lang}>
       <time className="text-body lg:text-body-lg">
         {dateFormatter.format(new Date(entry.publishedDate))}
       </time>
