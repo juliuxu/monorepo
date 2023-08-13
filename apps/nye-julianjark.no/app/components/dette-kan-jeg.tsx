@@ -9,6 +9,7 @@ import {
   registerEditNotionPage,
 } from "~/routes/($prefix).$notionPage/use-edit-notion-page";
 import { optimzedImageTransformer } from "./unpic-notion-image";
+import { trackEvent } from "./analytics";
 
 export const getDetteKanJegData = async (request: Request) => {
   const { success } = await getAllDetteKanJeg();
@@ -64,7 +65,16 @@ function KnowledgeList({ knowledge }: { knowledge: DetteKanJeg[] }) {
         return (
           <li key={item.id} className="group text-base">
             {item.link ? (
-              <Popover>
+              <Popover
+                onOpenChange={(open) => {
+                  open &&
+                    trackEvent({
+                      category: "dette-kan-jeg",
+                      action: "open",
+                      name: item.title,
+                    });
+                }}
+              >
                 <PopoverTrigger
                   className={classNames(
                     "font-bold cursor-pointer",

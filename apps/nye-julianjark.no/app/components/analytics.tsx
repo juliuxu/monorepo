@@ -7,6 +7,42 @@ declare global {
   }
 }
 
+interface Event {
+  category: string;
+  action: string;
+  name?: string;
+  value?: string;
+}
+
+/**
+ * Track a custom event
+ */
+export function trackEvent({ category, action, name, value }: Event) {
+  window._paq?.push(["trackEvent", category, action, name ?? "", value ?? ""]);
+}
+
+function MatomoTrackPageView() {
+  const location = useLocation();
+  const previousPath = useRef<string>();
+
+  // Track all page views, including the initial one
+  useEffect(() => {
+    const currentPath = location.pathname + location.search;
+    if (currentPath === previousPath.current) return;
+
+    if (previousPath.current) {
+      window._paq?.push(["setReferrerUrl", previousPath.current]);
+    }
+    window._paq?.push(["setCustomUrl", currentPath]);
+    window._paq?.push(["setDocumentTitle", document.title]);
+    window._paq?.push(["trackPageView"]);
+
+    previousPath.current = currentPath;
+  }, [location]);
+
+  return null;
+}
+
 interface MatomoAnalyticsProps {
   hostname: string;
   siteId: string;
@@ -29,24 +65,6 @@ export function MatomoAnalytics({
   trackerPath,
   enableHeartBeatTimer = false,
 }: MatomoAnalyticsProps) {
-  const location = useLocation();
-  const previousPath = useRef<string>();
-
-  // Track all page views, including the initial one
-  useEffect(() => {
-    const currentPath = location.pathname + location.search;
-    if (currentPath === previousPath.current) return;
-
-    if (previousPath.current) {
-      window._paq?.push(["setReferrerUrl", previousPath.current]);
-    }
-    window._paq?.push(["setCustomUrl", currentPath]);
-    window._paq?.push(["setDocumentTitle", document.title]);
-    window._paq?.push(["trackPageView"]);
-
-    previousPath.current = currentPath;
-  }, [location]);
-
   const trackerBasePath = `//${hostname}/`;
   return (
     <>
@@ -62,7 +80,12 @@ export function MatomoAnalytics({
           `,
         }}
       />
+
+      {/* Load matomo script */}
       <script src={trackerBasePath + scriptPath} async />
+
+      {/* Track page views */}
+      <MatomoTrackPageView />
     </>
   );
 }
