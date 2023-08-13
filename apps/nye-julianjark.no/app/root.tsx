@@ -110,7 +110,7 @@ export function useDevMode() {
 export const headers: HeadersFunction = () => config.htmlCacheControlHeaders;
 
 export default function App() {
-  const { previewMode, devMode } = useLoaderData();
+  const { previewMode, devMode } = useLoaderData<typeof loader>();
   const scrollBehaviorSmooth = useScrollBehaviorSmooth();
   const isContentOnlyMode = useContentOnlyMode();
 
