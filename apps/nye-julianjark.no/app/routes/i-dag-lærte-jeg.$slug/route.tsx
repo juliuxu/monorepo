@@ -57,7 +57,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
       entry,
       ...buildSiteHeaderMetaInfo({
         headerMenu: {
-          title: "I dag lærte jeg",
+          title: entry.lang === "en" ? "Today I learned" : "I dag lærte jeg",
           href: "/i-dag-lærte-jeg",
         },
       }),

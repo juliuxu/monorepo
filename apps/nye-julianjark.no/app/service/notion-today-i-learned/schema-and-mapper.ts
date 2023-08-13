@@ -59,7 +59,7 @@ export const { getPages } = cmsPage(todayILearnedEntryHeadSchema, (page) => {
     slug: slugify(getTitle(page) ?? ""),
     tags: getMultiSelectAndColor("Tags", page),
     published: getSelect("Published", page) as any,
-    lang: (getSelect("lang", page) as "en" | "no" | undefined) ?? "no",
+    lang: (getSelect("Lang", page) as "en" | "no" | undefined) ?? "no",
   };
 });
 
