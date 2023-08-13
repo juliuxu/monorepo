@@ -149,6 +149,7 @@ export default function App() {
             siteId="2"
             scriptPath="icecream.js"
             trackerPath="popcorn"
+            enableHeartBeatTimer
           />
         )}
       </body>

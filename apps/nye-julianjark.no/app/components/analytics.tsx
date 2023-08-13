@@ -12,6 +12,11 @@ interface MatomoAnalyticsProps {
   siteId: string;
   scriptPath: string;
   trackerPath: string;
+
+  /**
+   * https://developer.matomo.org/guides/tracking-javascript-guide#accurately-measure-the-time-spent-on-each-page
+   */
+  enableHeartBeatTimer?: boolean;
 }
 
 /**
@@ -22,6 +27,7 @@ export function MatomoAnalytics({
   siteId,
   scriptPath,
   trackerPath,
+  enableHeartBeatTimer = false,
 }: MatomoAnalyticsProps) {
   const location = useLocation();
   const previousPath = useRef<string>();
@@ -50,10 +56,9 @@ export function MatomoAnalytics({
           __html: `
           var _paq = window._paq = window._paq || [];
           _paq.push(['enableLinkTracking']);
-          (function() {
-            _paq.push(['setTrackerUrl', '${trackerBasePath + trackerPath}']);
-            _paq.push(['setSiteId', '${siteId}']);
-          })();
+          _paq.push(['setTrackerUrl', '${trackerBasePath + trackerPath}']);
+          _paq.push(['setSiteId', '${siteId}']);
+          ${enableHeartBeatTimer ? "_paq.push(['enableHeartBeatTimer']);" : ""}
           `,
         }}
       />
