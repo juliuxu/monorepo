@@ -145,7 +145,7 @@ export default function App() {
         {process.env.NODE_ENV === "production" && (
           <MatomoAnalytics
             hostname="analytics.julianjark.no"
-            siteId="2"
+            siteId="1"
             scriptPath="icecream.js"
             trackerPath="popcorn"
             enableHeartBeatTimer
