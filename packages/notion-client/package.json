@@ -16,11 +16,11 @@
     "dev": "tsup src/index.ts --watch --format cjs,esm"
   },
   "devDependencies": {
-    "tsup": "6.7.0"
+    "tsup": "7.2.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5",
-    "lru-cache": "9.1.2",
-    "memoize-fs": "2.2.0"
+    "@notionhq/client": "^2.2.11",
+    "lru-cache": "10.0.1",
+    "memoize-fs": "3.0.0"
   }
 }

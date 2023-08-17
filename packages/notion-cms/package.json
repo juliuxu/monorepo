@@ -16,7 +16,7 @@
     "dev": "tsup src/index.ts --watch --format cjs,esm"
   },
   "devDependencies": {
-    "tsup": "6.7.0"
+    "tsup": "7.2.0"
   },
   "dependencies": {
     "@julianjark/notion-client": "*",

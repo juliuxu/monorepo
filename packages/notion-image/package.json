@@ -16,10 +16,10 @@
     "dev": "tsup src/index.ts --watch --format cjs,esm"
   },
   "devDependencies": {
-    "tsup": "6.7.0"
+    "tsup": "7.2.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5",
-    "zod": "^3.21.4"
+    "@notionhq/client": "^2.2.11",
+    "zod": "^3.22.1"
   }
 }

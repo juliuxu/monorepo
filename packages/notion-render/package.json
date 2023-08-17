@@ -16,13 +16,13 @@
     "dev": "tsup src/index.tsx --watch --format cjs,esm"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
     "react": "^18.2.0",
-    "tsup": "6.7.0"
+    "tsup": "7.2.0"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5",
+    "@notionhq/client": "^2.2.11",
     "@julianjark/notion-utils": "*"
   },
   "peerDependencies": {

@@ -16,15 +16,15 @@
     "dev": "tsup --entry src/index.ts --entry src/index.server.ts --watch --format cjs,esm"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
     "react": "^18.2.0",
-    "tsup": "6.7.0"
+    "tsup": "7.2.0"
   },
   "dependencies": {
     "@julianjark/notion-utils": "*",
-    "shiki": "0.14.2",
-    "zod": "3.21.4"
+    "shiki": "0.14.3",
+    "zod": "3.22.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",
