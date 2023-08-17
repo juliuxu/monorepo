@@ -49,10 +49,10 @@ export async function warmUpCache() {
 
     // Hit the most important pages to rebuild the cdn/nginx http response cache
     await Promise.all([
-      fetch("https://nye.julianjark.no"),
-      fetch("https://nye.julianjark.no/i-dag-lærte-jeg"),
-      fetch("https://nye.julianjark.no/prosjekter"),
-      fetch("https://nye.julianjark.no/om-julian"),
+      fetch("https://julianjark.no"),
+      fetch("https://julianjark.no/i-dag-lærte-jeg"),
+      fetch("https://julianjark.no/prosjekter"),
+      fetch("https://julianjark.no/om-julian"),
     ]);
   } catch (e) {
     console.error(`Failed warming up cache ${e}`);

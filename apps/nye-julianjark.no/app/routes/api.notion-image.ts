@@ -8,7 +8,7 @@ import {
 import { config } from "~/config.server";
 
 const apiPath = "/api/notion-image";
-const basePath = "https://nye.julianjark.no";
+const basePath = "https://julianjark.no";
 
 export const imageUrlBuilder = createImageUrlBuilder(
   new URL(apiPath, basePath).toString(),

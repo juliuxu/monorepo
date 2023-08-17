@@ -2,7 +2,7 @@ import type { LoaderArgs } from "@remix-run/node";
 
 import { createIPX, handleRequest } from "ipx";
 
-const domains = ["nye.julianjark.no", "picsum.photos"];
+const domains = ["julianjark.no", "picsum.photos"];
 const ipx = createIPX({
   domains,
 });

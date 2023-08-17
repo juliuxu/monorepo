@@ -27,7 +27,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
     { property: "twitter:title", content: data?.entry.title },
     {
       property: "og:image",
-      content: `https://nye.julianjark.no/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.0.1`,
+      content: `https://julianjark.no/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.0.1`,
     },
     { property: "og:type", content: "summary_large_image" },
     { property: "twitter:card", content: "summary_large_image" },
