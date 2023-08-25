@@ -31,7 +31,7 @@ export async function loader({ request, params }: LoaderArgs) {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          backgroundImage: "linear-gradient(to bottom, #dbf4ff, #fff1f1)",
+          backgroundImage: "linear-gradient(to right, #fafafa, #fef2f2)",
           fontSize: 80,
           letterSpacing: -2,
           fontWeight: 700,
@@ -46,7 +46,7 @@ export async function loader({ request, params }: LoaderArgs) {
             color: "transparent",
           }}
         >
-          {/*  */}
+          I dag lærte jeg
         </div>
         <div
           style={{
@@ -66,7 +66,7 @@ export async function loader({ request, params }: LoaderArgs) {
             color: "transparent",
           }}
         >
-          {/*  */}
+          julianjark.no
         </div>
       </div>
     ),
