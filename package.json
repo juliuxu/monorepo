@@ -10,13 +10,13 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@turbo/gen": "1.10.12",
-    "eslint": "8.47.0",
+    "@turbo/gen": "1.10.13",
+    "eslint": "8.48.0",
     "eslint-config-custom": "*",
     "husky": "8.0.3",
-    "lint-staged": "14.0.0",
+    "lint-staged": "14.0.1",
     "prettier": "3.0.2",
-    "turbo": "1.10.12"
+    "turbo": "1.10.13"
   },
   "name": "julianjark-shared-packages",
   "packageManager": "npm@9.5.1",
