@@ -6,7 +6,8 @@
   "scripts": {
     "build": "NODE_ENV=production remix build",
     "dev": "remix dev --manual",
-    "start": "remix-serve build",
+    "start": "julian-remix-serve build",
+    "test": "npx playwright test",
     "typecheck": "tsc",
     "postinstall": "./copy-vercel-og-files-to-build.sh",
     "lint": "eslint \"./app/**/*.{ts,tsx,js,jsx}\"",
@@ -20,6 +21,7 @@
     "@julianjark/notion-render": "*",
     "@julianjark/notion-shiki-code": "*",
     "@julianjark/notion-utils": "*",
+    "@julianjark/remix-serve": "*",
     "@orama/orama": "1.2.1",
     "@orama/plugin-match-highlight": "1.2.1",
     "@radix-ui/react-hover-card": "1.0.6",
@@ -38,6 +40,7 @@
     "zod": "3.22.2"
   },
   "devDependencies": {
+    "@playwright/test": "1.37.1",
     "@remix-run/dev": "2.0.0-pre.6",
     "@remix-run/eslint-config": "2.0.0-pre.6",
     "@tailwindcss/typography": "0.5.9",
