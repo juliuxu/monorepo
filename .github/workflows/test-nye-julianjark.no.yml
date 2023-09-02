@@ -1,9 +1,7 @@
 name: Playwright Tests
 on:
   push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+    branches: "*"
 defaults:
   run:
     working-directory: apps/nye-julianjark.no
@@ -11,17 +9,22 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.37.1-jammy
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: Delete root package.json
+        run: rm ../../package.json
       - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npm install
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          PREVIEW_SECRET: ${{ secrets.PREVIEW_SECRET }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
