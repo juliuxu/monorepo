@@ -17,8 +17,8 @@ test("i dag lærte jeg", async ({ page }) => {
 
   await entryLink.click();
 
-  await expect(page).toHaveTitle(new RegExp(entryTitle));
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     entryTitle,
   );
+  await expect(page).toHaveTitle(new RegExp(entryTitle));
 });
