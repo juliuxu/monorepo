@@ -33,6 +33,8 @@ export async function loader({ request, params }: LoaderArgs) {
           justifyContent: "flex-start",
           flexDirection: "column",
           letterSpacing: -1,
+
+          backgroundColor: "#FFFFFF",
         }}
       >
         <div

@@ -26,7 +26,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     { property: "twitter:title", content: data?.entry.title },
     {
       property: "og:image",
-      content: `${data?.basePath}/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.1.0`,
+      content: `${data?.basePath}/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.1.1`,
     },
     { property: "og:type", content: "summary_large_image" },
     { property: "twitter:card", content: "summary_large_image" },
