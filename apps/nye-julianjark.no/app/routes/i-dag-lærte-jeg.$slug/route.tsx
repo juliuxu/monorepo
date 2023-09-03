@@ -1,20 +1,19 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { buildSiteHeaderMetaInfo } from "~/components/site-header";
 import { config } from "~/config.server";
 import { useContentOnlyMode } from "~/content-only-mode";
-import { useDevMode } from "~/root";
 import { getAllTodayILearnedEntriesAndMetainfo } from "~/service/notion-today-i-learned/client";
-import { assertItemFound, classNames } from "~/utils/misc";
+import { assertItemFound } from "~/utils/misc";
 import { classes } from "../($prefix).$notionPage/notion-driven-page";
 import { useEditNotionPage } from "../($prefix).$notionPage/use-edit-notion-page";
 import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.server";
 import { TodayILearnedArticle } from "./today-i-learned-article";
 import { TodayILearnedArticlePreviewList } from "./today-i-learned-article-preview";
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     { title: data?.entry.title },
     {
@@ -27,7 +26,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
     { property: "twitter:title", content: data?.entry.title },
     {
       property: "og:image",
-      content: `https://julianjark.no/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.0.1`,
+      content: `${data?.basePath}/i-dag-lærte-jeg/${data?.entry.slug}/og?v=0.0.1`,
     },
     { property: "og:type", content: "summary_large_image" },
     { property: "twitter:card", content: "summary_large_image" },
@@ -51,8 +50,14 @@ export const loader = async ({ request, params }: LoaderArgs) => {
     )
     .slice(0, 3);
 
+  const basePath =
+    config.nodeEnv === "development"
+      ? `http://localhost:3000`
+      : `https://julianjark.no`;
+
   return json(
     {
+      basePath,
       metainfo,
       entry,
       ...buildSiteHeaderMetaInfo({
@@ -70,21 +75,10 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 export default function Component() {
   const { entry, relatedEntries } = useLoaderData<typeof loader>();
   useEditNotionPage({ pageId: entry.id });
-  const devMode = useDevMode();
   const isContentOnlyMode = useContentOnlyMode();
   return (
     <>
       <main className="max-w-3xl mx-auto">
-        {devMode?.enabled && (
-          <img
-            className={classNames(
-              "mb-8 lg:mb-12",
-              "relative left-[50%] mx-[-50vw] right-[50%] w-screen max-w-fit sm:left-0 sm:mx-0 sm:right-0 sm:w-full",
-            )}
-            src={entry.slug + "/og"}
-            alt=""
-          />
-        )}
         <TodayILearnedArticle entry={entry} titleAs="h1" />
       </main>
       {!isContentOnlyMode && relatedEntries.length > 0 && (

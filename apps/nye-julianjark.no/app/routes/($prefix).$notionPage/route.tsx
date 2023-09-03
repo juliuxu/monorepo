@@ -1,5 +1,7 @@
-import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
+import { json, type LoaderArgs, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+
+import { getTextFromRichText } from "@julianjark/notion-utils";
 
 import { buildSiteHeaderMetaInfo } from "~/components/site-header";
 import { TableOfConents } from "~/components/table-of-contents";
@@ -11,10 +13,10 @@ import { isPreviewModeFromRequest } from "../api.preview-mode/preview-mode.serve
 import { getCustomBlocksData } from "./custom-blocks/index.server";
 import { useEditNotionPage } from "./use-edit-notion-page";
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     { title: data?.page.title },
-    { name: "description", content: data?.page.preamble },
+    { name: "description", content: getTextFromRichText(data!.page.preamble) },
   ];
 };
 

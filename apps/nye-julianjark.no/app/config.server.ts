@@ -34,9 +34,9 @@ export const config = {
    * but don't use stale-while-revalidate, this can cause inconsistensies when new code is deployed
    * If the response errors, say if the server has crashed, then it does not hurt to use stale data
    *
-   * For html responses stale-while-revalidate is fine, we want really first initial loads
+   * For html responses stale-while-revalidate for a long time is fine, we want really fast initial loads,
    * for more control we could choose to only cache the most common pages
-   * Having a week as stale-while-revalidate time I think is a good tradeoff for this app.
+   * Having a year as stale-while-revalidate time I think is a good tradeoff for this app.
    */
   loaderCacheControlHeaders: {
     "Cache-Control": `public, max-age=${60}, s-maxage=${1}, stale-if-error=${WEEK_IN_SECONDS}`,
