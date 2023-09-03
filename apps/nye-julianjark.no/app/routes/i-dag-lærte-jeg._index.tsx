@@ -1,4 +1,4 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 
@@ -19,7 +19,7 @@ import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server
 import { Badge } from "./i-dag-lærte-jeg.$slug/badge";
 import { dateFormatterShort } from "./i-dag-lærte-jeg.$slug/date-formatter";
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     { title: data?.metainfo.title },
     {
@@ -122,7 +122,7 @@ export default function Component() {
         </ul>
       </aside>
 
-      <ul className="space-y-8 text-h2">
+      <ul data-testid="i-dag-lærte-jeg-entries" className="space-y-8 text-h2">
         {filteredEntries.map((entry) => (
           <li className="flex flex-col md:flex-row" key={entry.id}>
             <time className="text-body md:text-h2 md:shrink-0 md:basis-1/4 xl:basis-1/5">
