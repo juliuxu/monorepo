@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production remix build",
     "dev": "remix dev --manual",
-    "start": "julian-remix-serve build",
+    "start": "remix-serve ./build/index.js",
     "test": "npx playwright test",
     "typecheck": "tsc",
     "postinstall": "./copy-vercel-og-files-to-build.sh",
@@ -21,7 +21,6 @@
     "@julianjark/notion-render": "*",
     "@julianjark/notion-shiki-code": "*",
     "@julianjark/notion-utils": "*",
-    "@julianjark/remix-serve": "*",
     "@orama/orama": "1.2.1",
     "@orama/plugin-match-highlight": "1.2.1",
     "@radix-ui/react-hover-card": "1.0.6",
