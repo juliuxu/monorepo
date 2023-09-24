@@ -2,7 +2,7 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import type {
   HeadersFunction,
   LinksFunction,
-  LoaderArgs,
+  LoaderFunctionArgs,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -75,7 +75,7 @@ export const links: LinksFunction = () => [
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
  */
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const headers = new Headers();
   const previewMode = getPreviewModeFromRequest(request);
   const devMode = getDevModeFromRequest(request);

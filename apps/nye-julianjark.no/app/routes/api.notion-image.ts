@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 import {
   createImageUrlBuilder,
@@ -14,7 +14,7 @@ export const imageUrlBuilder = createImageUrlBuilder(
   new URL(apiPath, basePath).toString(),
 );
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const imageResponse = await getNotionImage(config.notionToken)(
     Object.fromEntries(new URL(request.url).searchParams),
   );

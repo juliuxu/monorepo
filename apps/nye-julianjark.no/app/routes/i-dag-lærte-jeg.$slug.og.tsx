@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 import { ImageResponse } from "@vercel/og";
 
@@ -13,7 +13,7 @@ const colors = {
   secondary: "#E3673A",
 } as const;
 
-export async function loader({ request, params }: LoaderArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   const slug = params.slug ?? "";
   const { entries } = await getAllTodayILearnedEntriesAndMetainfo(
     isPreviewModeFromRequest(request),

@@ -1,4 +1,8 @@
-import { json, type LoaderArgs, type MetaFunction } from "@remix-run/node";
+import {
+  json,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { getTextFromRichText } from "@julianjark/notion-utils";
@@ -23,7 +27,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export const loader = async ({
   params: { prefix, notionPage },
   request,
-}: LoaderArgs) => {
+}: LoaderFunctionArgs) => {
   if (!notionPage) throw new Response("param not given", { status: 500 });
 
   const page = await getNotionDrivenPageWithBlocks({

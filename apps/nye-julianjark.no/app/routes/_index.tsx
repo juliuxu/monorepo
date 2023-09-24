@@ -1,4 +1,8 @@
-import { json, type LoaderArgs, type MetaFunction } from "@remix-run/node";
+import {
+  json,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { getTextFromRichText } from "@julianjark/notion-utils";
@@ -18,7 +22,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const [page, featuredProject, latestTodayILearnedEntries] = await Promise.all(
     [
       getNotionDrivenLandingPage(),

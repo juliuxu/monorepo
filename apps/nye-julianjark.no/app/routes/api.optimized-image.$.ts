@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 import { createIPX, handleRequest } from "ipx";
 
@@ -7,7 +7,7 @@ const ipx = createIPX({
   domains,
 });
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   let ipxPath = params["*"];
   if (!ipxPath) throw new Error("No path provided");
   ipxPath = "/" + ipxPath;

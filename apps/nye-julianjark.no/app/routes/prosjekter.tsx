@@ -1,4 +1,4 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
@@ -17,7 +17,7 @@ import { classes } from "./($prefix).$notionPage/notion-driven-page";
 import { useEditNotionPage } from "./($prefix).$notionPage/use-edit-notion-page";
 import { isPreviewModeFromRequest } from "./api.preview-mode/preview-mode.server";
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     { title: data?.metainfo.title },
     {
@@ -27,7 +27,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { metainfo, projects } = await getAllProjectsAndMetainfo(
     isPreviewModeFromRequest(request),
   );
