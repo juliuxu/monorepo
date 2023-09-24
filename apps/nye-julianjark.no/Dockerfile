@@ -51,4 +51,4 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 EXPOSE 3000
-CMD [ "/app/node_modules/.bin/julian-remix-serve", "/app/build" ]
+CMD [ "/app/node_modules/.bin/remix-serve", "/app/build/index.js" ]
