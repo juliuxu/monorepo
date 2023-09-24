@@ -15,7 +15,7 @@ export function buildSiteHeaderMetaInfo(siteHeaderInfo: SiteHeaderInfo) {
 export function useHeaderMenu() {
   const matches = useMatches();
   return matches
-    .map((it) => it.data?.siteHeaderInfo as SiteHeaderInfo)
+    .map((it) => (it.data as any)?.siteHeaderInfo as SiteHeaderInfo)
     .filter((it) => it?.headerMenu)[0]?.headerMenu;
 }
 

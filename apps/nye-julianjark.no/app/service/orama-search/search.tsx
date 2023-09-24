@@ -53,6 +53,7 @@ export function OramaSearch(props: Partial<OramaSearchProps> = defaultProps) {
   useEffect(() => {
     setIndexing(true);
 
+    // @ts-ignore
     createTodayILearnedOramaIndex(data.entries).then((index) => {
       oramaIndex = index;
       setIndexing(false);

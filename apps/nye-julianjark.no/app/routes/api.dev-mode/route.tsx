@@ -1,11 +1,11 @@
-import type { ActionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "@remix-run/node";
 
 import {
   getDevModeFromJson,
   getDevModeSetCookieHeader,
 } from "./dev-mode.server";
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const devMode = getDevModeFromJson(await request.json());
   if (!devMode) {
     return new Response("Unauthorized", { status: 401 });

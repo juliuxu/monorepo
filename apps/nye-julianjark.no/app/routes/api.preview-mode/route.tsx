@@ -1,11 +1,11 @@
-import type { ActionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "@remix-run/node";
 
 import {
   getPreviewModeFromJson,
   getPreviewModeSetCookieHeader,
 } from "./preview-mode.server";
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const preivewMode = getPreviewModeFromJson(await request.json());
   if (!preivewMode) {
     return new Response("Unauthorized", { status: 401 });
