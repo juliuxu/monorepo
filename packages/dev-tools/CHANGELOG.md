@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.21.0
+
+### Minor Changes
+
+- eb1a45e: added a test comment
+
 ## 0.20.0
 
 ### Minor Changes
