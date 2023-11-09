@@ -1,5 +1,11 @@
 # @julianjark/dev-tools
 
+## 0.22.0
+
+### Minor Changes
+
+- 9005c6f: added a comment for demo purposes
+
 ## 0.21.0
 
 ### Minor Changes
